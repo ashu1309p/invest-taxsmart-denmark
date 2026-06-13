@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Money Router - where should each krone go first?</title>
+<meta name="description" content="Set a target amount and see the typical tax-efficient order for filling Danish investment accounts, with the reasoning. Educational only.">
+<meta name="theme-color" content="#FAF6EF">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<style>
+  :root{
+    --bg:#FAF6EF; --card:#FFFFFF; --ink:#27272E; --muted:#6B6B76;
+    --line:#E8E2D6; --accent:#0F766E; --accent-soft:#E0F0EE;
+    --c-bo:#2A9D8F; --c-fri:#7BA05B; --c-ask:#4361EE; --c-on:#C0427C; --c-kap:#E08A00;
+    --tax-red:#D64545;
+    --radius:16px; --shadow:0 1px 3px rgba(40,35,25,.08),0 8px 24px rgba(40,35,25,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:64px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+  header.site{position:sticky;top:0;z-index:40;background:rgba(250,246,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent)}
+  .navlink{font-size:.8rem;font-weight:700;color:var(--accent);text-decoration:none;border:1.5px solid var(--accent);border-radius:999px;padding:6px 12px;white-space:nowrap}
+  .tabs{display:flex;background:#F1ECE1;border-radius:999px;padding:3px;gap:2px}
+  .tabs .tab{padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .tabs .tab.active{background:var(--accent);color:#fff}
+  @media(max-width:600px){.brand>span:last-child{display:none}}
+  .asset .homes .home.h-warn{border-left:4px solid #D64545;background:#FBEAEA}
+  .atag{display:inline-block;padding:1px 7px;border-radius:6px;color:#fff;font-weight:800;font-size:.7rem;line-height:1.5;font-style:normal}
+  .atag.t-bo{background:var(--c-bo)} .atag.t-fri{background:var(--c-fri)} .atag.t-ask{background:var(--c-ask)} .atag.t-on{background:var(--c-on)}
+  .rectags{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+  .ftwarn{background:#FDF1E7;border:1px solid #E8A968;border-radius:12px;padding:11px 13px;font-size:.84rem;margin-top:10px}
+  .lang-toggle{display:flex;border:1.5px solid var(--accent);border-radius:999px;overflow:hidden}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  .lang-toggle button.active{background:var(--accent);color:#fff}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:26px 0 0}
+  h1{font-size:1.65rem;line-height:1.2;letter-spacing:-.02em;margin:26px 0 8px}
+  @media(min-width:560px){h1{font-size:2.05rem}}
+  .tagline{color:var(--muted);font-size:1rem;margin-bottom:18px}
+  .yeartag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:1px 6px;white-space:nowrap}
+  section{margin:24px 0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  h2.sec{font-size:1.2rem;margin-bottom:4px}
+  p.sub{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+  /* tax chips */
+  .chip{display:inline-flex;align-items:center;font-weight:800;font-size:.78rem;border-radius:8px;padding:3px 9px;color:#fff;white-space:nowrap;letter-spacing:.01em}
+  .chip.c0{background:var(--c-bo)} .chip.cF{background:var(--c-fri)}
+  .chip.c17{background:var(--c-ask)} .chip.c27{background:var(--c-on)} .chip.c37{background:var(--c-kap)}
+  .chip.big{font-size:.95rem;padding:5px 12px;border-radius:10px}
+  /* primer cards */
+  .primer{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:560px){.primer{grid-template-columns:repeat(4,1fr)}}
+  details.acct{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+  details.acct summary{list-style:none;cursor:pointer;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:96px}
+  details.acct summary::-webkit-details-marker{display:none}
+  details.acct summary b{font-size:.85rem;line-height:1.25}
+  details.acct summary .one{font-size:.74rem;color:var(--muted);line-height:1.35}
+  details.acct .more{padding:0 12px 12px;font-size:.8rem;color:var(--ink);border-top:1px dashed var(--line);padding-top:10px}
+  details.acct .more p{margin:6px 0}
+  details.acct[open]{border-color:var(--accent)}
+  details.acct .ftex{margin:0 12px 12px;font-size:.77rem;color:#5a564e;background:#FBF7EF;border:1px solid var(--line);border-radius:8px;padding:8px 10px;line-height:1.45}
+  .tapnote{font-size:.75rem;color:var(--muted);margin-top:8px;text-align:center}
+  /* controls */
+  .mode{display:flex;background:#F1ECE1;border-radius:14px;padding:4px;margin:6px 0 14px}
+  .mode button{flex:1;border:0;border-radius:11px;background:transparent;font-size:.95rem;font-weight:700;padding:11px 8px;color:var(--muted);cursor:pointer}
+  .mode button.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .ctl{margin:14px 0}
+  .ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem;font-weight:600;margin-bottom:6px;gap:8px}
+  .ctl label .lab{flex:1}
+  .ctl output{font-variant-numeric:tabular-nums;font-weight:800;color:var(--accent);font-size:1.02rem;white-space:nowrap}
+  .ctl .equiv{font-size:.76rem;color:var(--muted);text-align:right;margin-top:2px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;touch-action:pan-y}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--accent) var(--fill,50%),#E4DDCE var(--fill,50%))}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--accent);margin-top:-10px;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:grab}
+  input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#E4DDCE}
+  input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--accent)}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .riskrow{display:flex;gap:8px;margin:10px 0 4px;flex-wrap:wrap}
+  .riskrow button{flex:1;min-width:100px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px;cursor:pointer;font-weight:700;font-size:.84rem;color:var(--muted);line-height:1.3}
+  .riskrow button small{display:block;font-weight:600;font-size:.72rem;color:var(--muted)}
+  .riskrow button.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  /* waterfall */
+  .falls{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .fall{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;border-left:5px solid var(--bc,#999)}
+  .fall .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .fall .rank{width:24px;height:24px;border-radius:50%;background:var(--bc,#999);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex:none}
+  .fall .nm{font-weight:700;font-size:.92rem;flex:1;min-width:120px}
+  .fall .amts{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-top:8px;gap:8px;flex-wrap:wrap}
+  .fall .amts b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .fall .bar{height:10px;border-radius:5px;background:#F1ECE1;margin-top:8px;overflow:hidden}
+  .fall .bar i{display:block;height:100%;border-radius:5px;background:var(--bc,#999);width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .fall .note{font-size:.76rem;color:var(--muted);margin-top:6px;font-style:italic}
+  .fall details.why{margin-top:8px;border:0;background:transparent}
+  .fall details.why summary{list-style:none;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--accent);padding:2px 0}
+  .fall details.why summary::-webkit-details-marker{display:none}
+  .fall details.why .body{font-size:.82rem;color:var(--ink);padding:6px 0 2px}
+  .fall.empty{opacity:.45}
+  /* year-by-year chart */
+  .yearchart{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
+  .yc-title{font-weight:800;font-size:1.02rem}
+  .yc-sub{font-size:.8rem;color:var(--muted);margin:2px 0 10px}
+  .yc-toggle{display:flex;background:#F1ECE1;border-radius:12px;padding:3px;margin-bottom:12px}
+  .yc-toggle button{flex:1;border:0;border-radius:9px;background:transparent;font-size:.8rem;font-weight:700;padding:9px 6px;color:var(--muted);cursor:pointer;line-height:1.2}
+  .yc-toggle button.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .yc-chart{width:100%}
+  .yc-chart svg{width:100%;height:auto;display:block;touch-action:manipulation}
+  .yc-chart rect.col-seg{transition:y .5s ease,height .5s ease}
+  .yc-chart rect.col-hit{cursor:pointer;fill:transparent}
+  .yc-chart rect.col-sel{fill:rgba(15,118,110,.09)}
+  .yc-readout{font-size:.82rem;margin:10px 0 2px;padding:9px 11px;background:var(--accent-soft);border-radius:10px;line-height:1.55}
+  .yc-readout b{font-variant-numeric:tabular-nums;color:var(--ink)}
+  .yc-legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.74rem;color:var(--muted);margin-top:9px}
+  .yc-legend span{display:inline-flex;align-items:center;gap:5px}
+  .yc-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+  /* smart vs naive */
+  .versus{margin-top:20px;border-top:1px dashed var(--line);padding-top:16px}
+  .headline{font-size:1.02rem;font-weight:800;margin-bottom:2px}
+  .headline .pos{color:#19603A}
+  .vsub{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+  .vrow{margin:10px 0}
+  .vrow .vlab{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;margin-bottom:4px}
+  .vrow .vlab span:last-child{color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+  .vbar{display:flex;height:26px;border-radius:8px;overflow:hidden;background:#F1ECE1}
+  .vbar .keep{background:#2A9D8F;transition:width .8s}
+  .vbar .tax{background:var(--tax-red);transition:width .8s}
+  .vlegend{display:flex;gap:14px;font-size:.74rem;color:var(--muted);margin-top:6px}
+  .vlegend i{width:12px;height:12px;border-radius:3px;display:inline-block;vertical-align:-2px;margin-right:4px}
+  /* asset map */
+  .assets{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+  .asset{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px}
+  .asset .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .asset .nm{font-weight:700;font-size:.92rem;flex:1;min-width:140px}
+  .asset .fit{font-size:.7rem;font-weight:800;color:#19603A;background:#E7F4EC;border:1px solid #9CC9AB;border-radius:999px;padding:2px 9px;display:none}
+  .asset.featured .fit{display:inline-block}
+  .asset .homes{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;font-size:.76rem}
+  .asset .homes span.home{background:#F4F0E7;border:1px solid var(--line);border-radius:8px;padding:3px 8px;font-weight:600}
+  .asset .why{font-size:.8rem;color:var(--muted);margin-top:8px}
+  .asset .warn{font-size:.78rem;color:#8C5A1E;background:#FDF1E7;border:1px solid #E8A968;border-radius:8px;padding:6px 9px;margin-top:8px}
+  /* concept explainers */
+  details.concepts{border:1px dashed var(--accent);border-radius:14px;background:var(--accent-soft);overflow:hidden;margin-bottom:12px}
+  details.concepts>summary{list-style:none;cursor:pointer;padding:11px 13px;font-size:.86rem;font-weight:700;color:var(--accent)}
+  details.concepts>summary::-webkit-details-marker{display:none}
+  .concept-grid{display:grid;grid-template-columns:1fr;gap:8px;padding:0 11px 12px}
+  @media(min-width:560px){.concept-grid{grid-template-columns:1fr 1fr}}
+  .concept{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .concept .defhead{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px}
+  .concept .defhead b{font-size:.9rem}
+  .concept .one{font-size:.8rem;color:var(--ink);margin-bottom:5px}
+  .concept .ex{font-size:.78rem;color:var(--muted);line-height:1.45}
+  .rbadge{font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap;flex:none}
+  .rbadge.r-low{background:#E7F4EC;color:#19603A}
+  .rbadge.r-med{background:#FBF0DA;color:#8C5A1E}
+  .rbadge.r-high{background:#FBE4E4;color:#A2231F}
+  /* link card, sources, footer */
+  .linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px;font-weight:700}
+  .linkcard small{display:block;font-weight:600;color:var(--muted);margin-top:2px}
+  .linkcard.fb{background:#FBF7EF}
+  .sources ul{margin:8px 0 0 18px;font-size:.88rem}
+  .sources li{margin:6px 0}
+  .sources a{color:var(--accent)}
+  .verified{font-size:.8rem;color:var(--muted);margin-top:10px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:10px}
+  .testbadge.fail{color:#B4231F;font-weight:700}
+  footer.big{margin:34px 0 18px;font-size:.84rem;color:var(--muted)}
+  .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#2B2B33;color:#EDE9DF;font-size:.76rem;line-height:1.35;padding:9px 14px;text-align:center}
+  .stickybar a{color:#8FD3CB}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-inner">
+    <div class="brand"><span class="dot"></span><span data-i18n="brand">The Money Router</span></div>
+    <nav class="tabs"><a class="tab active" href="index.html" data-i18n="tabPlan">Plan</a><a class="tab" href="play.html" data-i18n="tabPlay">Play</a></nav>
+    <div class="lang-toggle"><button id="lang-en" class="active">EN</button><button id="lang-da">DA</button></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="kicker" data-i18n="heroKicker">Every krone counts</p>
+  <h1 data-i18n="heroTitle" style="margin-top:5px">Where should each krone go first?</h1>
+  <p class="tagline" id="heroTag"></p>
+
+  <!-- ====== PRIMER ====== -->
+  <section>
+    <h2 class="sec" data-i18n="primTitle">Meet the four tax homes</h2>
+    <p class="sub" data-i18n="primSub">A 20-second skim. Tap any card for the detail.</p>
+    <div class="primer" id="primer"></div>
+    <a class="tapnote" style="display:block;text-decoration:none" href="#router" data-i18n="tapNote">Already know them? Jump to the router ↓</a>
+  </section>
+
+  <!-- ====== ROUTER ====== -->
+  <section class="panel" id="router">
+    <h2 class="sec" data-i18n="routTitle">The Money Router</h2>
+    <p class="sub" data-i18n="routSub">Set your target. The router fills the cheapest tax home first and shows why, bucket by bucket.</p>
+
+    <div class="mode">
+      <button id="mode-child" class="active" data-i18n="modeChild">Investing for a child</button>
+      <button id="mode-adult" data-i18n="modeAdult">For myself (adult)</button>
+    </div>
+
+    <div class="ctl">
+      <label><span class="lab" data-i18n="ctlBudget">Target per year</span><output id="out-budget">24,000 kr</output></label>
+      <input type="range" id="in-budget" min="3000" max="600000" step="3000" value="24000" aria-label="Yearly amount">
+      <div class="equiv" id="equivMonthly"></div>
+    </div>
+    <div class="ctl">
+      <label><span class="lab" data-i18n="ctlYears">Horizon</span><output id="out-years">15</output></label>
+      <input type="range" id="in-years" min="5" max="30" step="1" value="15" aria-label="Years">
+    </div>
+
+    <p style="font-size:.92rem;font-weight:600;margin-top:14px" data-i18n="riskLabel">Risk appetite (sets the assumed average return)</p>
+    <div class="riskrow">
+      <button id="risk-cautious"><span data-i18n="riskC">Cautious</span><small>~4%/yr</small></button>
+      <button id="risk-balanced" class="active"><span data-i18n="riskB">Balanced</span><small>~6.5%/yr</small></button>
+      <button id="risk-adventurous"><span data-i18n="riskA">Adventurous</span><small>~8.5%/yr</small></button>
+    </div>
+
+    <div class="falls" id="falls"></div>
+
+    <div class="yearchart" id="yearchart">
+      <p class="yc-title" data-i18n="ycTitle">Year by year: where your money lands</p>
+      <p class="yc-sub" data-i18n="ycSub">Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.</p>
+      <div class="yc-toggle">
+        <button id="yc-contrib" class="active" data-i18n="ycViewContrib">Where each year's money goes</button>
+        <button id="yc-value" data-i18n="ycViewValue">Total pot value</button>
+      </div>
+      <div class="yc-chart" id="yc-svg"></div>
+      <div class="yc-readout" id="yc-readout"></div>
+      <div class="yc-legend" id="yc-legend"></div>
+    </div>
+
+    <div class="versus">
+      <p class="headline" id="vsHeadline"></p>
+      <p class="vsub" id="vsSub"></p>
+      <div class="vrow">
+        <div class="vlab"><span data-i18n="vsSmart">Routed in this order</span><span id="vsSmartNum"></span></div>
+        <div class="vbar" id="vbarSmart"><div class="keep"></div><div class="tax"></div></div>
+      </div>
+      <div class="vrow">
+        <div class="vlab"><span data-i18n="vsNaive">Everything in one on-list depot</span><span id="vsNaiveNum"></span></div>
+        <div class="vbar" id="vbarNaive"><div class="keep"></div><div class="tax"></div></div>
+      </div>
+      <div class="vlegend">
+        <span><i style="background:#2A9D8F"></i><span data-i18n="legKeep">You keep</span></span>
+        <span><i style="background:#D64545"></i><span data-i18n="legTax">Tax paid</span></span>
+      </div>
+    </div>
+    <p class="testbadge" id="testbadge"></p>
+    <p class="verified" data-i18n="simDisclaimer">Generic, simplified model: flat average return, yearly tax paid from each account, no fees or inflation, no other income. A typical ordering for a generic situation, never personal advice.</p>
+  </section>
+
+  <!-- ====== ASSET MAP ====== -->
+  <section class="panel" id="assetmap">
+    <h2 class="sec" data-i18n="amTitle">What goes where? Core, satellite, stocks</h2>
+    <p class="sub" data-i18n="amSub">The account decides the tax. The asset decides the risk. Your risk choice above highlights what typically fits.</p>
+    <p class="sub" id="amLegend" style="margin-top:-6px"></p>
+    <details class="concepts" id="conceptsBox">
+      <summary data-i18n="defTitle">New to these words? Core, satellite, bond, single stocks ▾</summary>
+      <div class="concept-grid" id="concepts"></div>
+    </details>
+    <div class="assets" id="assets"></div>
+  </section>
+
+  <!-- ====== FUND NAME TERMS ====== -->
+  <section class="panel" id="fundterms">
+    <h2 class="sec" data-i18n="ftTitle">Reading a fund's name: ACC vs DIST, hedged vs unhedged</h2>
+    <p class="sub" data-i18n="ftSub">Every ETF name carries these switches. In Denmark one of them changes the tax story, the other mostly doesn't.</p>
+    <div class="primer" style="grid-template-columns:1fr 1fr">
+      <details class="acct">
+        <summary><b data-i18n="ft_accT">ACC [accumulating]</b><span class="one" data-i18n="ft_acc1">Dividends stay inside the fund and compound automatically.</span></summary>
+        <div class="more" data-i18n="ft_accM">Nothing is paid out, so there is no dividend to tax separately: everything lands in the yearly value gain (lager). For children this is the safe construction: no payout means nothing for the parent-attribution rule to catch.</div>
+        <div class="ftex" data-i18n="ft_accEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_distT">DIST [distributing, udloddende]</b><span class="one" data-i18n="ft_dist1">Dividends are paid out in cash, typically 1-4 times a year.</span></summary>
+        <div class="more" data-i18n="ft_distM">For adults the dividend is just part of the same income type, but you must reinvest it yourself. For children, dividends on parent-gifted money are taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2). Special case: Danish distributing equity funds (IMB) are realisation-taxed aktieindkomst [share income], a different regime from ETFs.</div>
+        <div class="ftex" data-i18n="ft_distEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_unhT">Unhedged</b><span class="one" data-i18n="ft_unh1">You hold the fund's currencies as they are; exchange rates move your return.</span></summary>
+        <div class="more" data-i18n="ft_unhM">For long equity horizons many investors accept currency swings: they tend to even out over decades, and DKK is pegged to EUR, so EUR exposure behaves almost like DKK. Hedging or not has no effect on the Danish tax regime.</div>
+        <div class="ftex" data-i18n="ft_unhEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_hedT">Hedged [valutaafdækket]</b><span class="one" data-i18n="ft_hed1">Built-in currency insurance smooths exchange-rate swings, for a small ongoing cost.</span></summary>
+        <div class="more" data-i18n="ft_hedM">Mostly relevant for bond funds, where currency noise can swamp the modest return. Hedging costs roughly 0.1-0.3% per year on top of the ÅOP. It does NOT change the tax regime, but see the ISIN warning below.</div>
+        <div class="ftex" data-i18n="ft_hedEx"></div>
+      </details>
+    </div>
+    <div class="ftwarn" data-i18n="ftTrap1">⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.</div>
+    <div class="ftwarn" data-i18n="ftTrap2">⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.</div>
+  </section>
+
+  <!-- ====== GIFT LINK ====== -->
+  <section>
+    <a class="linkcard" href="play.html#gifts">
+      <span data-i18n="giftLink">🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page</span>
+      <small data-i18n="giftLinkSub">Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.</small>
+    </a>
+  </section>
+
+  <!-- ====== FEEDBACK ====== -->
+  <section>
+    <a class="linkcard fb" href="https://tally.so/r/7RPVv0" target="_blank" rel="noopener">
+      <span data-i18n="feedbackTitle">💬 Found a mistake or have feedback? Tell me</span>
+      <small data-i18n="feedbackSub">A 1-minute form. This is a personal project and your input shapes it.</small>
+    </a>
+  </section>
+
+  <!-- ====== SOURCES ====== -->
+  <section class="panel sources" id="sources">
+    <h2 class="sec" data-i18n="srcTitle">Sources & legal references</h2>
+    <ul>
+      <li><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener">Positivliste (ABIS list) - skat.dk</a></li>
+      <li><a href="https://info.skat.dk/data.aspx?oid=2234529" target="_blank" rel="noopener">Parent attribution - Den juridiske vejledning C.A.9.3 (kildeskatteloven § 5, stk. 2)</a></li>
+      <li><a href="https://info.skat.dk/data.aspx?oid=2234739" target="_blank" rel="noopener">Børneopsparing - Den juridiske vejledning C.A.10.4.1.4</a></li>
+      <li><a href="https://skat.dk/borger/aktier-og-andre-vaerdipapirer/aktiesparekonto" target="_blank" rel="noopener">Aktiesparekonto - skat.dk (aktiesparekontoloven)</a></li>
+      <li><a href="https://www.retsinformation.dk/eli/lta/2021/11" target="_blank" rel="noopener">Gift caps - boafgiftsloven § 22</a></li>
+      <li><a href="https://skm.dk/tal-og-metode/satser" target="_blank" rel="noopener">Annual indexed amounts - Skatteministeriet satser</a></li>
+    </ul>
+    <p class="verified" id="verifiedLine"></p>
+  </section>
+
+  <footer class="big">
+    <p data-i18n="bigDisclaimer">This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT\u2019s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.</p>
+    <p style="margin-top:8px" data-i18n="privacyNote">Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data, no cross-site tracking). Your slider and language choices stay in your browser only.</p>
+  </footer>
+</div>
+
+<div class="stickybar">
+  <span data-i18n="stickyBar">Educational only, not tax, legal or investment advice.</span>
+  <a href="#sources" data-i18n="stickyLink">Sources</a>
+</div>
+
+<script>
+/* ============================================================
+   TAX_YEAR_CONFIG: the ONLY place annual amounts live.
+   Verified 2026-06-12 against skat.dk / skm.dk via web search.
+   ============================================================ */
+const TAX_YEAR_CONFIG = {
+  taxYear: 2026, verifiedDate: "2026-06-12",
+  giftCapPerGiver: 80600, giftTaxRate: 0.15,
+  personfradrag: 54100,
+  askCeiling: 174200, askRate: 0.17,
+  aktieThreshold: 79400, aktieThresholdMarried: 158800, aktieRateLow: 0.27, aktieRateHigh: 0.42,
+  kapThresholdApprox: 55000, kapThresholdMarriedApprox: 110000, kapRateLowApprox: 0.37, kapRateHighApprox: 0.42,
+  boYearlyCap: 6000, boLifetimeCap: 72000,
+};
+
+/* ============ PURE ROUTER MATH (node-tested) ============ */
+function aktieTax(gain, cfg) {
+  if (gain <= 0) return 0;
+  return Math.min(gain, cfg.aktieThreshold) * cfg.aktieRateLow
+       + Math.max(0, gain - cfg.aktieThreshold) * cfg.aktieRateHigh;
+}
+function kapTaxChild(gain, frikortAvailable, cfg) {
+  if (gain <= 0) return { tax: 0, frikortUsed: 0 };
+  const used = Math.min(gain, frikortAvailable);
+  return { tax: (gain - used) * cfg.kapRateLowApprox, frikortUsed: used };
+}
+function askTax(gain, cfg) { return gain > 0 ? gain * cfg.askRate : 0; }
+
+const RISK_PRESETS = { cautious: 0.04, balanced: 0.065, adventurous: 0.085 };
+
+function simulateRouted(params, cfg) {
+  const { annualBudget, years, returnRate, isChild } = params;
+  const order = isChild ? ['bo', 'frikort', 'ask', 'onlist'] : ['ask', 'onlist'];
+  const B = {}; order.forEach(id => B[id] = { value: 0, deposited: 0, tax: 0, lastDepYear: 0 });
+  let boLifetime = 0, totalTax = 0;
+  const Vstar = returnRate > 0 ? cfg.personfradrag / returnRate : Infinity;
+  const series = [{ year: 0, total: 0, tax: 0 }];
+  let firstYearRoute = null;
+
+  for (let y = 1; y <= years; y++) {
+    let rem = annualBudget;
+    const route = [];
+    for (const id of order) {
+      let dep = 0;
+      if (id === 'bo') {
+        dep = Math.max(0, Math.min(rem, cfg.boYearlyCap, cfg.boLifetimeCap - boLifetime));
+        boLifetime += dep;
+      } else if (id === 'frikort') {
+        dep = Math.max(0, Math.min(rem, Vstar - B.frikort.value));
+      } else if (id === 'ask') {
+        dep = Math.max(0, Math.min(rem, cfg.askCeiling - B.ask.value));
+      } else { dep = rem; }
+      B[id].value += dep; B[id].deposited += dep; rem -= dep;
+      if (dep > 0) B[id].lastDepYear = y;
+      route.push({ id, amount: dep });
+    }
+    if (y === 1) firstYearRoute = route;
+
+    let frikortLeft = isChild ? cfg.personfradrag : 0;
+    for (const id of order) {
+      const gain = B[id].value * returnRate;
+      let tax = 0;
+      if (id === 'ask') tax = askTax(gain, cfg);
+      else if (id === 'onlist') tax = aktieTax(gain, cfg);
+      else if (id === 'frikort') {
+        const r = kapTaxChild(gain, frikortLeft, cfg);
+        tax = r.tax; frikortLeft -= r.frikortUsed;
+      }
+      B[id].value += gain - tax;
+      B[id].tax += tax; totalTax += tax;
+    }
+    const depMap = { bo:0, frikort:0, ask:0, onlist:0 };
+    route.forEach(r => { depMap[r.id] = r.amount; });
+    const valMap = { bo:0, frikort:0, ask:0, onlist:0 };
+    order.forEach(id => { valMap[id] = B[id].value; });
+    series.push({ year: y, total: order.reduce((s, id) => s + B[id].value, 0), tax: totalTax, dep: depMap, val: valMap });
+  }
+  return { buckets: B, series, totalTax,
+    endValue: order.reduce((s, id) => s + B[id].value, 0),
+    firstYearRoute, Vstar, order };
+}
+
+function simulateNaive(params, cfg) {
+  let value = 0, totalTax = 0;
+  for (let y = 1; y <= params.years; y++) {
+    value += params.annualBudget;
+    const gain = value * params.returnRate;
+    const tax = aktieTax(gain, cfg);
+    value += gain - tax; totalTax += tax;
+  }
+  return { endValue: value, totalTax };
+}
+
+function compareSmartVsNaive(params, cfg) {
+  const smart = simulateRouted(params, cfg);
+  const naive = simulateNaive(params, cfg);
+  return { smart, naive, taxSaved: naive.totalTax - smart.totalTax, endDiff: smart.endValue - naive.endValue };
+}
+
+/* ============ SELF-TESTS (hand-computed) ============ */
+function approx(a,b,eps=0.01){return Math.abs(a-b)<eps}
+function runRouterTests(cfg){
+  const t=[]; const ok=(n,c)=>t.push({name:n,pass:!!c});
+  const r1=simulateRouted({annualBudget:20000,years:1,returnRate:.05,isChild:true},cfg);
+  ok('R1 child route y1', r1.firstYearRoute[0].amount===6000 && r1.firstYearRoute[1].amount===14000
+    && r1.firstYearRoute[2].amount===0 && approx(r1.endValue,21000) && approx(r1.totalTax,0));
+  const r2=simulateRouted({annualBudget:200000,years:1,returnRate:0,isChild:false},cfg);
+  ok('R2 adult ceiling split', r2.buckets.ask.value===174200 && r2.buckets.onlist.value===25800 && r2.totalTax===0);
+  const r3=simulateRouted({annualBudget:200000,years:1,returnRate:.10,isChild:false},cfg);
+  ok('R3 adult tax math', approx(r3.totalTax,3658) && approx(r3.endValue,216342));
+  const r4=simulateRouted({annualBudget:6000,years:13,returnRate:0,isChild:true},cfg);
+  ok('R4 BO lifetime stop', r4.buckets.bo.value===72000 && r4.buckets.frikort.value===6000);
+  const r5=simulateRouted({annualBudget:2000000,years:1,returnRate:.05,isChild:true},cfg);
+  ok('R5 full waterfall', approx(r5.buckets.frikort.deposited,1082000)
+    && approx(r5.buckets.ask.deposited,174200) && approx(r5.buckets.onlist.deposited,737800)
+    && approx(r5.totalTax,11441));
+  const r6=simulateNaive({annualBudget:100000,years:1,returnRate:.10},cfg);
+  ok('R6 naive', approx(r6.endValue,107300) && approx(r6.totalTax,2700));
+  const r7=compareSmartVsNaive({annualBudget:20000,years:15,returnRate:.065,isChild:true},cfg);
+  ok('R7 smart beats naive (child)', r7.taxSaved>0 && r7.endDiff>0);
+  const r8=compareSmartVsNaive({annualBudget:50000,years:15,returnRate:.065,isChild:false},cfg);
+  ok('R8 smart beats naive (adult)', r8.taxSaved>0 && r8.endDiff>0);
+  const r9=simulateRouted({annualBudget:10000,years:5,returnRate:0,isChild:true},cfg);
+  ok('R9 zero return', r9.totalTax===0 && approx(r9.endValue,50000));
+  return {tests:t, failed:t.filter(x=>!x.pass)};
+}
+
+/* ============ I18N ============ */
+const I18N = {
+en: {
+  brand:"Tax-smart investing in Denmark", tabPlan:"Plan", tabPlay:"Play",
+  heroKicker:"Every krone counts",
+  heroTitle:"Where should each krone go first?",
+  heroTag:"In Denmark, the very same savings are taxed completely differently depending on which account holds them. Beginners almost always pick the costliest one by accident and quietly lose money to tax, year after year. Tell this page your yearly target and it maps the cheapest-tax order to fill your accounts, with the plain-English reason behind every step.",
+  primTitle:"Meet the four tax homes", primSub:"Start here: each account is taxed differently. Tap a card to learn it before you plan.",
+  tapNote:"Already know them? Jump to the router ↓",
+  routTitle:"The Money Router",
+  routSub:"Set your target. The router fills the cheapest tax home first and shows why, bucket by bucket.",
+  modeChild:"Investing for a child", modeAdult:"For myself (adult)",
+  ctlBudget:"Target per year", ctlYears:"Horizon",
+  equivMonthly:"≈ {m} kr per month",
+  riskLabel:"Risk appetite (sets the assumed average return)",
+  riskC:"Cautious", riskB:"Balanced", riskA:"Adventurous",
+  yearsUnit:"years",
+  /* year-by-year chart */
+  ycTitle:"Year by year: where your money lands",
+  ycSub:"Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.",
+  ycViewContrib:"Where each year's money goes",
+  ycViewValue:"Total pot value",
+  ycReadout:"Year {y} - {kind}",
+  ycKindDep:"new money this year",
+  ycKindVal:"total value",
+  ycNm_bo:"Børneopsparing", ycNm_frikort:"frikort depot", ycNm_ask:"ASK", ycNm_onlist:"depot (AKT)",
+  /* buckets */
+  nm_bo:"Børneopsparing [child savings]", nm_frikort:"Depot (AKT): off-list fund + frikort [tax-free allowance]",
+  nm_ask:"Aktiesparekonto (ASK)", nm_onlist:"Depot (AKT): fund ON the positivliste",
+  chip_bo:"0% TAX", chip_frikort:"0% → ~37-42%", chip_ask:"17% FLAT", chip_onlist:"27 / 42%",
+  why_bo:"0% on every krone of return, forever. The catch: max {boY} kr per year and {boL} kr in total. Cheapest tax home in Denmark, so it fills first.",
+  why_frikort:"An accumulating fund OFF the positivliste [SKAT\u2019s approved-fund list] is kapitalindkomst [capital income], and a child's personfradrag [tax-free personal allowance] ({pf} kr, {yr}) absorbs that yearly gain. Effectively 0% until the depot is so big that the gain outgrows the allowance: at this return roughly {vstar} kr. New money stops here before that point; gains above it would cost ~37-42%.",
+  why_ask:"Flat {askR}% of each year's gain. Pricier than the buckets above, cheaper than every unlimited alternative (27/42% or ~37/42%). Deposit ceiling {askC} kr ({yr}).",
+  why_onlist:"A fund ON the positivliste [SKAT\u2019s approved-fund list] in a normal depot (AKT): 27% up to {aktieT} kr of yearly aktieindkomst [share income], 42% above; married couples share a doubled band of {aktieTM} kr combined. No ceiling, so it takes everything that is left.",
+  why_onlist_child:"A fund ON the positivliste [SKAT\u2019s approved-fund list] in the child's depot (AKT): taxed as aktieindkomst [share income], 27% up to {aktieT} kr of yearly gain, 42% above. The personfradrag [tax-free allowance] does NOT offset this, so the child pays 27% from the very first krone, which is why this bucket fills only after the cheaper ones. No ceiling, so it absorbs whatever is left.",
+  why_ask_adult:"Flat {askR}% of each year's gain, the cheapest tax an adult can get on stock funds. That is why it fills before the depot. Ceiling {askC} kr ({yr}).",
+  adultNote:"Why no børneopsparing [child savings] or frikort bucket here? Both are child-only tricks: BO is per child, and an adult's personfradrag [tax-free personal allowance] is normally consumed by salary. Off-list funds are also skipped: ~37-42% kapitalindkomst [capital income] loses to 27/42% aktieindkomst [share income].",
+  whyBtn:"Why this bucket, why now?",
+  y1:"Year 1", depTotal:"Total deposited", endsAt:"Ends at", taxPaid:"tax",
+  fullNote:"Full after year {n}: new money flows to the next bucket.",
+  emptyNote:"Not needed at this amount. It would fill only after the buckets above.",
+  vsHeadline:"This order keeps ≈ {diff} kr more after {n} years",
+  vsSub:"Total tax: {st} kr routed vs {nt} kr if everything had gone into one on-list fund in a normal depot ({yr} rules, generic assumptions).",
+  vsSmart:"Routed in this order", vsNaive:"Everything in one on-list depot",
+  legKeep:"You keep", legTax:"Tax paid",
+  simDisclaimer:"Generic, simplified model: flat average return, yearly tax paid from each account, no fees or inflation, no other income, single person. A typical ordering for a generic situation, never personal advice.",
+  /* primer */
+  p_bo_one:"0% tax on all returns. Tiny caps. One per child.",
+  p_bo_more:"<p>Deposit max {boY} kr/yr, {boL} kr lifetime. Opened before age 14, paid out between 14 and 21. Can hold funds and stocks at some banks; the positivliste [SKAT\u2019s approved-fund list] does not matter inside it.</p><p><i>Ref: C.A.10.4.1.4</i></p>",
+  p_ask_one:"17% flat on each year's gain. Ceiling {askC} kr.",
+  p_ask_more:"<p>Lager [mark-to-market]: taxed on the value increase each year, sold or not, paid from the account. Only stocks and funds on the positivliste [SKAT\u2019s approved-fund list] are allowed. Children can have one too. Internal trades do not consume the ceiling.</p><p><i>Ref: aktiesparekontoloven</i></p>",
+  p_off_one:"Depot (AKT), fund OFF the positivliste [SKAT\u2019s approved-fund list]: kapitalindkomst [capital income].",
+  p_off_one_adult:"Depot (AKT), fund OFF the list: kapitalindkomst [capital income] ~37-42% - adults usually skip it.",
+  chip_offAdult:"~37-42%",
+  p_off_more_child:"<p>An ordinary brokerage account (aktiedepot, AKT): the fund you pick decides the tax.</p><p>An off-list accumulating fund is taxed yearly (lager [mark-to-market]) as kapitalindkomst [capital income]. The child superpower: the personfradrag [tax-free personal allowance] ({pf} kr) absorbs that gain, so the child pays 0% until the yearly gain outgrows it. The core of most children's setups.</p><p><i>Ref: personskatteloven (kapitalindkomst).</i></p>",
+  p_off_more_adult:"<p>An ordinary brokerage account (aktiedepot, AKT): the fund you pick decides the tax.</p><p>An off-list fund is taxed yearly (lager [mark-to-market]) as kapitalindkomst [capital income] at ~37-42% for an adult. That loses to the 27/42% aktieindkomst [share income] of an on-list fund, so for an adult this account is usually the wrong choice.</p><p><i>Ref: personskatteloven (kapitalindkomst). Approx. rates; depend on municipality and total capital income.</i></p>",
+  p_on_one:"Depot (AKT), fund ON the positivliste [SKAT\u2019s approved-fund list]: aktieindkomst [share income].",
+  p_on_more_child:"<p>An ordinary depot (aktiedepot, AKT): the fund decides the tax.</p><p>An on-list fund is taxed yearly (lager) as aktieindkomst [share income]: 27% up to {aktieT} kr, 42% above. The personfradrag [tax-free allowance] does NOT offset it, so the child pays 27% from the first krone - fine once the cheaper buckets are full, but not where a child starts.</p><p><i>Ref: ABIS list on skat.dk</i></p>",
+  p_on_more_adult:"<p>An ordinary depot (aktiedepot, AKT): the fund decides the tax.</p><p>Taxed yearly (lager) as aktieindkomst [share income]: 27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples). The personfradrag does NOT offset it. This is the adult workhorse beyond the ASK ceiling.</p><p><i>Ref: ABIS list on skat.dk</i></p>",
+  /* asset map */
+  amTitle:"What goes where? Core, satellite, stocks",
+  amSub:"The account decides the tax. The asset decides the risk. Your risk choice above highlights what typically fits.",
+  amLegend_child:"Colour = account: {BO} børneopsparing, {FRI} the child frikort strategy inside a depot, {ASK} aktiesparekonto, {AKT} ordinary depot. Red = avoid or take care.",
+  amLegend_adult:"Colour = account: {ASK} aktiesparekonto, {AKT} ordinary depot. Red = avoid or take care.",
+  fit:"fits your risk profile",
+  defTitle:"New to these words? Core, satellite, bond, single stocks ▾",
+  risk_low:"Lower risk", risk_med:"Medium risk", risk_high:"Higher risk",
+  def_core_t:"Core - the foundation",
+  def_core_one:"One broad fund that owns a little of everything.",
+  def_core_more:"Example: a single global index fund holding ~1,500+ companies across many countries (a “world” or “all-country” ETF). Spread so wide that no single company or country can sink it. Still 100% shares, so it rises and falls with the whole market. Most people's 80-90%.",
+  def_sat_t:"Satellite - the spice",
+  def_sat_one:"A small, focused bet on one theme or sector.",
+  def_sat_more:"Example: a technology, clean-energy, robotics or single-country fund. Swings far more than the core, up AND down, because it is concentrated. Keep it a small slice (often 5-15%) so a bad year can't dominate.",
+  def_bond_t:"Bond / defensive - the ballast",
+  def_bond_one:"Lends money instead of owning companies; steadier, smaller returns.",
+  def_bond_more:"Example: a global bond fund or a money-market fund. Cushions the portfolio when shares fall, in exchange for lower long-run growth. Calmer than shares but not risk-free - long bonds can drop when interest rates rise. Steadies cautious profiles or money you'll need soon.",
+  def_stk_t:"Single stocks - one company",
+  def_stk_one:"Owning shares in one specific company.",
+  def_stk_more:"Example: holding Novo Nordisk or Apple directly. One company can soar or crash on its own news, so it is undiversified and higher risk. For most beginners a broad fund beats picking single names.",
+  a_coreOff:"Core: world ETF, accumulating, OFF the list",
+  a_coreOff_homes_child:["→ {FRI}: 0% in the early years - the personfradrag [tax-free allowance] covers the gain"],
+  a_coreOff_homes_adult:["warn|Usually skip: an off-list fund is kapitalindkomst [capital income] ~37-42%, worse than an on-list fund's 27/42%"],
+  a_coreOff_why_child:"Broad, smooth, boring on purpose. Off-list (typical Vanguard-style) means kapitalindkomst [capital income] - perfect against a child's frikort [tax-free allowance] in the early years.",
+  a_coreOff_why_adult:"Broad, smooth, boring on purpose. But off-list means kapitalindkomst [capital income] at ~37-42% for you; the same index ON the list is cheaper, so adults pick the on-list version instead.",
+  a_coreOn:"Core: world ETF ON the list",
+  a_coreOn_homes_child:["→ {AKT} only after the frikort [allowance] capacity is used (27% from the first krone)"],
+  a_coreOn_homes_adult:["→ {ASK} first (17%), then {AKT} 27/42% beyond the ceiling"],
+  a_coreOn_why_child:"On-list (typical iShares-style) means aktieindkomst [share income] 27/42%, with no personfradrag relief - so for a child it comes after the 0% and frikort buckets.",
+  a_coreOn_why_adult:"On-list (typical iShares-style) means aktieindkomst [share income] 27/42%. The adult workhorse: cheapest inside ASK, then a normal depot beyond the ceiling.",
+  a_sat:"Satellite: thematic / sector ETF (high volatility)",
+  a_sat_homes_child:["Best → {BO} or {ASK}","warn|Avoid the frikort depot: a loss year wastes that year's allowance"],
+  a_sat_homes_adult:["Best → {ASK}: the 17% flat wrapper absorbs the big swings","Or {AKT} if the ASK ceiling is full"],
+  a_sat_why_child:"Volatile assets and the frikort [tax-free allowance] mix badly: a loss year wastes that year's allowance forever, and a spike year overflows at ~37%. The 0% (BO) and 17% (ASK) wrappers absorb the swings symmetrically.",
+  a_sat_why_adult:"A small, spicy slice. Its big swings are best held where tax is symmetric: the 17% flat ASK absorbs up and down years evenly. Keep it a minority of the portfolio.",
+  a_stk:"Single stocks",
+  a_stk_homes_child:["warn|Caution → dividends on parent-gifted shares are taxed at the parent (see below)","If used → {ASK} keeps it simple"],
+  a_stk_homes_adult:["→ {AKT}: realisation-taxed, you control when to sell","Or {ASK} for the flat 17%"],
+  a_stk_why_child:"Single stocks in a depot are realisation-taxed aktieindkomst [share income] - but for a child the dividend trap below usually makes funds the simpler choice.",
+  a_stk_why_adult:"Unlike funds, single stocks in a depot are realisation-taxed aktieindkomst [share income]: no yearly lager [mark-to-market] bill, you choose when to sell.",
+  a_stk_warn:"Child trap: dividends on shares gifted by a parent are taxed at the PARENT until 18 (kildeskatteloven § 5, stk. 2). Accumulating funds avoid this entirely.",
+  a_bond:"Bond / money-market funds",
+  a_bond_homes_child:["→ {FRI}: the frikort [allowance] absorbs the modest gains"],
+  a_bond_homes_adult:["→ {AKT} as kapitalindkomst [capital income] ~37-42% (never on the list, not ASK-eligible)"],
+  a_bond_why_child:"Never on the positivliste [SKAT\u2019s approved-fund list] and not ASK-eligible. The classic ballast for cautious profiles; for a child the frikort [tax-free allowance] covers the modest gains.",
+  a_bond_why_adult:"Never on the positivliste [SKAT\u2019s approved-fund list] and not ASK-eligible, so bonds sit in a normal depot as kapitalindkomst [capital income] ~37-42%. The classic ballast for cautious profiles and near your goal date.",
+  ftTitle:"Reading a fund's name: ACC vs DIST, hedged vs unhedged",
+  ftSub:"Every ETF name carries these switches. In Denmark one of them changes the tax story, the other mostly doesn't.",
+  ft_accT:"ACC [accumulating]",
+  ft_acc1:"Dividends stay inside the fund and compound automatically.",
+  ft_accM:"Nothing is paid out, so there is no dividend to tax separately: everything lands in the yearly value gain (lager [mark-to-market]). For children this is the safe construction: no payout means nothing for the parent-attribution rule to catch.",
+  ft_distT:"DIST [distributing, udloddende]",
+  ft_dist1:"Dividends are paid out in cash, typically 1-4 times a year.",
+  ft_distM:"For adults the dividend is just part of the same income type, but you must reinvest it yourself. For children, dividends on parent-gifted money are taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2). Special case: Danish distributing equity funds (IMB) are realisation-taxed aktieindkomst [share income], a different regime from ETFs.",
+  ft_unhT:"Unhedged",
+  ft_unh1:"You hold the fund's currencies as they are; exchange rates move your return.",
+  ft_unhM:"For long equity horizons many investors accept currency swings: they tend to even out over decades, and DKK is pegged to EUR, so EUR exposure behaves almost like DKK. Hedging or not has no effect on the Danish tax regime.",
+  ft_hedT:"Hedged [valutaafdækket]",
+  ft_hed1:"Built-in currency insurance smooths exchange-rate swings, for a small ongoing cost.",
+  ft_hedM:"Mostly relevant for bond funds, where currency noise can swamp the modest return. Hedging costs roughly 0.1-0.3% per year on top of the ÅOP. It does NOT change the tax regime, but see the ISIN warning below.",
+  ft_accEx:"Real example: “iShares Core MSCI World UCITS ETF (Acc)”, ISIN IE00B4L5Y983. The “Acc / (Acc)” in the name tells you dividends are reinvested automatically - for a child's account the safe default, because there is no payout for parent-attribution to catch. Illustration only: always verify the exact ISIN and its current list status yourself.",
+  ft_distEx:"Real example: the SAME index often exists as two classes - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, pays cash dividends about quarterly, while the “(Acc)” class IE00BK5BQT80 reinvests them. Note the different ISINs. An adult who wants income can use Dist; for a child it leaks parent-taxed dividends, so choose the Acc class. Illustration only - verify the ISIN yourself.",
+  ft_unhEx:"Real example: a plain “USD” world ETF held in your DKK depot moves with the USD/DKK rate. Over a 15-20 year equity horizon most investors accept this, and because DKK is pegged to the euro a EUR-denominated class barely moves versus DKK. Cheaper than hedged, and the Danish tax treatment is identical.",
+  ft_hedEx:"Real example: a bond ETF named “… EUR Hedged” or “… DKK Hedged” removes the currency swings that would otherwise swamp a bond's small return - handy for the defensive sleeve. It costs about 0.1-0.3%/yr more, and crucially the hedged class has its OWN ISIN: it can be OFF the positivliste even when the unhedged class is ON it. Check the exact ISIN before buying.",
+  ftTrap1:"⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.",
+  ftTrap2:"⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.",
+  giftLink:"🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
+  giftLinkSub:"Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.",
+  feedbackTitle:"💬 What worked, what didn't? Tell me",
+  feedbackSub:"A 1-minute form: what helped, what confused you, anything wrong or missing. This is a personal project and your input shapes it.",
+  privacyNote:"Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data, no cross-site tracking). Your slider and language choices stay in your browser only.",
+  srcTitle:"Sources & legal references",
+  verifiedLine:"All amounts are for tax year {yr}, verified {date} against skat.dk / skm.dk. Indexed amounts change every January; the positivliste [SKAT\u2019s approved-fund list] every December.",
+  bigDisclaimer:"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT\u2019s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
+  stickyBar:"Educational only, not tax, legal or investment advice.", stickyLink:"Sources",
+  tests:"self-checks passed", testsFail:"SELF-CHECKS FAILING, do not trust the numbers",
+  kr:"kr",
+},
+da: {
+  brand:"Skattesmart investering i Danmark", tabPlan:"Planlæg", tabPlay:"Leg",
+  heroKicker:"Hver krone tæller",
+  heroTitle:"Hvor skal hver krone hen først?",
+  heroTag:"I Danmark beskattes de helt samme opsparingspenge vidt forskelligt alt efter, hvilken konto de ligger på. Nybegyndere vælger næsten altid den dyreste ved et tilfælde og taber stille og roligt penge til skat år efter år. Fortæl siden dit årlige mål, så kortlægger den den billigste skatterækkefølge at fylde dine konti i, med den jævne forklaring bag hvert skridt.",
+  primTitle:"Mød de fire skattemiljøer", primSub:"Start her: hver konto beskattes forskelligt. Tryk på et kort og lær den at kende, før du planlægger.",
+  tapNote:"Kender du dem allerede? Hop til routeren ↓",
+  routTitle:"Pengerouteren",
+  routSub:"Sæt dit mål. Routeren fylder det billigste skattemiljø først og viser hvorfor, spand for spand.",
+  modeChild:"Investerer for et barn", modeAdult:"Til mig selv (voksen)",
+  ctlBudget:"Mål pr. år", ctlYears:"Horisont",
+  equivMonthly:"≈ {m} kr pr. måned",
+  riskLabel:"Risikovillighed (sætter det antagne gennemsnitsafkast)",
+  riskC:"Forsigtig", riskB:"Balanceret", riskA:"Eventyrlysten",
+  yearsUnit:"år",
+  ycTitle:"År for år: hvor dine penge lander",
+  ycSub:"Hver søjle er ét år. Farven viser, hvilken konto pengene ligger på. Tryk på en søjle for den præcise fordeling.",
+  ycViewContrib:"Hvor årets penge går hen",
+  ycViewValue:"Samlet værdi",
+  ycReadout:"År {y} - {kind}",
+  ycKindDep:"nye penge i år",
+  ycKindVal:"samlet værdi",
+  ycNm_bo:"Børneopsparing", ycNm_frikort:"frikort-depot", ycNm_ask:"ASK", ycNm_onlist:"depot (AKT)",
+  nm_bo:"Børneopsparing", nm_frikort:"Depot (AKT): fond uden for listen + frikort",
+  nm_ask:"Aktiesparekonto (ASK)", nm_onlist:"Depot (AKT): fond PÅ positivlisten",
+  chip_bo:"0% SKAT", chip_frikort:"0% → ~37-42%", chip_ask:"17% FLAD", chip_onlist:"27 / 42%",
+  why_bo:"0% skat af alt afkast, altid. Hagen: maks {boY} kr pr. år og {boL} kr i alt. Danmarks billigste skattemiljø, så det fyldes først.",
+  why_frikort:"En akkumulerende fond UDEN FOR positivlisten er kapitalindkomst, og barnets personfradrag ({pf} kr, {yr}) opsuger årets gevinst. Reelt 0%, indtil depotet er så stort, at gevinsten overstiger fradraget: ved dette afkast cirka {vstar} kr. Nye penge stopper her inden da; gevinster derover ville koste ~37-42%.",
+  why_ask:"Flad {askR}% af årets gevinst. Dyrere end spandene ovenfor, billigere end alle ubegrænsede alternativer (27/42% eller ~37/42%). Indskudsloft {askC} kr ({yr}).",
+  why_onlist:"En fond PÅ positivlisten i et almindeligt depot (AKT): 27% op til {aktieT} kr årlig aktieindkomst, 42% derover; ægtefæller deler en fordoblet grænse på {aktieTM} kr samlet. Intet loft, så den tager resten.",
+  why_onlist_child:"En fond PÅ positivlisten i barnets depot (AKT): beskattes som aktieindkomst, 27% op til {aktieT} kr af årets gevinst, 42% derover. Personfradraget modregnes IKKE, så barnet betaler 27% fra første krone, derfor fyldes denne spand først efter de billigere. Intet loft, så den opsuger resten.",
+  why_ask_adult:"Flad {askR}% af årets gevinst, den billigste skat en voksen kan få på aktiefonde. Derfor fyldes den før depotet. Loft {askC} kr ({yr}).",
+  adultNote:"Hvorfor ingen børneopsparing eller frikort-spand her? Begge er barne-tricks: BO er pr. barn, og en voksens personfradrag bruges normalt af lønnen. Fonde uden for listen springes også over: ~37-42% kapitalindkomst taber til 27/42% aktieindkomst.",
+  whyBtn:"Hvorfor denne spand, hvorfor nu?",
+  y1:"År 1", depTotal:"Indbetalt i alt", endsAt:"Ender på", taxPaid:"skat",
+  fullNote:"Fuld efter år {n}: nye penge løber videre til næste spand.",
+  emptyNote:"Ikke nødvendig ved dette beløb. Den ville først fyldes efter spandene ovenfor.",
+  vsHeadline:"Denne rækkefølge beholder ≈ {diff} kr mere efter {n} år",
+  vsSub:"Samlet skat: {st} kr routet mod {nt} kr, hvis alt var gået i én fond på listen i et almindeligt depot ({yr}-regler, generiske antagelser).",
+  vsSmart:"Routet i denne rækkefølge", vsNaive:"Alt i ét depot på listen",
+  legKeep:"Du beholder", legTax:"Betalt skat",
+  simDisclaimer:"Generisk, forenklet model: fast gennemsnitsafkast, årlig skat betalt fra hver konto, ingen gebyrer eller inflation, ingen anden indkomst, enlig person. En typisk rækkefølge for en generisk situation, aldrig personlig rådgivning.",
+  p_bo_one:"0% skat af alt afkast. Små lofter. Én pr. barn.",
+  p_bo_more:"<p>Indskud maks {boY} kr/år, {boL} kr i alt. Oprettes før 14 år, udbetales mellem 14 og 21. Kan holde fonde og aktier i nogle banker; positivlisten er ligegyldig indeni.</p><p><i>Ref: C.A.10.4.1.4</i></p>",
+  p_ask_one:"17% flad af årets gevinst. Loft {askC} kr.",
+  p_ask_more:"<p>Lagerbeskatning: skat af årets værdistigning, solgt eller ej, betalt fra kontoen. Kun aktier og positivliste-fonde. Børn kan også have en. Interne handler bruger ikke loftet.</p><p><i>Ref: aktiesparekontoloven</i></p>",
+  p_off_one:"Depot (AKT), fond UDEN FOR positivlisten: kapitalindkomst.",
+  p_off_one_adult:"Depot (AKT), fond uden for listen: kapitalindkomst ~37-42% - voksne springer den oftest over.",
+  chip_offAdult:"~37-42%",
+  p_off_more_child:"<p>En almindelig depotkonto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p><p>En akkumulerende fond uden for listen beskattes årligt (lager) som kapitalindkomst. Barnets superkraft: personfradraget ({pf} kr) opsuger gevinsten, så barnet betaler 0%, indtil årets gevinst overstiger det. Kernen i de fleste børneopsætninger.</p><p><i>Ref: personskatteloven (kapitalindkomst).</i></p>",
+  p_off_more_adult:"<p>En almindelig depotkonto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p><p>En fond uden for listen beskattes årligt (lager) som kapitalindkomst på ~37-42% for en voksen. Det taber til de 27/42% aktieindkomst i en fond på listen, så for en voksen er denne konto oftest det forkerte valg.</p><p><i>Ref: personskatteloven (kapitalindkomst). Ca.-satser; afhænger af kommune og samlet kapitalindkomst.</i></p>",
+  p_on_one:"Depot (AKT), fond PÅ positivlisten: aktieindkomst.",
+  p_on_more_child:"<p>Et almindeligt depot (aktiedepot, AKT): fonden afgør skatten.</p><p>En fond på listen beskattes årligt (lager) som aktieindkomst: 27% op til {aktieT} kr, 42% derover. Personfradraget modregnes IKKE, så barnet betaler 27% fra første krone - fint, når de billigere spande er fyldt, men ikke der, et barn starter.</p><p><i>Ref: ABIS-listen på skat.dk</i></p>",
+  p_on_more_adult:"<p>Et almindeligt depot (aktiedepot, AKT): fonden afgør skatten.</p><p>Beskattes årligt (lager) som aktieindkomst: 27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller). Personfradraget modregnes IKKE. Det er voksnes arbejdshest ud over ASK-loftet.</p><p><i>Ref: ABIS-listen på skat.dk</i></p>",
+  amTitle:"Hvad skal hvorhen? Kerne, satellit, aktier",
+  amSub:"Kontoen bestemmer skatten. Aktivet bestemmer risikoen. Dit risikovalg ovenfor fremhæver, hvad der typisk passer.",
+  amLegend_child:"Farve = konto: {BO} børneopsparing, {FRI} barnets frikort-strategi i et depot, {ASK} aktiesparekonto, {AKT} almindeligt depot. Rød = undgå eller pas på.",
+  amLegend_adult:"Farve = konto: {ASK} aktiesparekonto, {AKT} almindeligt depot. Rød = undgå eller pas på.",
+  fit:"passer til din risikoprofil",
+  defTitle:"Ny i ordene? Kerne, satellit, obligation, enkeltaktier ▾",
+  risk_low:"Lavere risiko", risk_med:"Mellem risiko", risk_high:"Højere risiko",
+  def_core_t:"Kerne - fundamentet",
+  def_core_one:"Én bred fond, der ejer lidt af det hele.",
+  def_core_more:"Eksempel: én global indeksfond med ~1.500+ selskaber på tværs af mange lande (en “world”- eller “all-country”-ETF). Så bredt spredt, at intet enkelt selskab eller land kan vælte den. Stadig 100% aktier, så den stiger og falder med hele markedet. De fleste folks 80-90%.",
+  def_sat_t:"Satellit - krydderiet",
+  def_sat_one:"Et lille, fokuseret væddemål på ét tema eller én sektor.",
+  def_sat_more:"Eksempel: en teknologi-, grøn energi-, robot- eller enkeltlandsfond. Svinger meget mere end kernen, både op OG ned, fordi den er koncentreret. Hold den til en lille skive (ofte 5-15%), så et dårligt år ikke dominerer.",
+  def_bond_t:"Obligation / defensiv - ballasten",
+  def_bond_one:"Låner penge ud i stedet for at eje selskaber; mere rolig, mindre afkast.",
+  def_bond_more:"Eksempel: en global obligationsfond eller en pengemarkedsfond. Dæmper porteføljen, når aktier falder, mod lavere langsigtet vækst. Roligere end aktier, men ikke risikofri - lange obligationer kan falde, når renten stiger. Stabiliserer forsigtige profiler eller penge, du snart skal bruge.",
+  def_stk_t:"Enkeltaktier - ét selskab",
+  def_stk_one:"At eje aktier i ét bestemt selskab.",
+  def_stk_more:"Eksempel: at eje Novo Nordisk eller Apple direkte. Ét selskab kan stige eller styrte på egne nyheder, så det er uspredt og højere risiko. For de fleste begyndere slår en bred fond det at vælge enkeltaktier.",
+  a_coreOff:"Kerne: verdens-ETF, akkumulerende, UDEN FOR listen",
+  a_coreOff_homes_child:["→ {FRI}: 0% de første år, personfradraget opsuger gevinsten"],
+  a_coreOff_homes_adult:["warn|Spring oftest over: en fond uden for listen er kapitalindkomst ~37-42%, dårligere end en listefonds 27/42%"],
+  a_coreOff_why_child:"Bred, rolig, kedelig med vilje. Uden for listen (typisk Vanguard-stil) betyder kapitalindkomst - perfekt mod barnets frikort de første år.",
+  a_coreOff_why_adult:"Bred, rolig, kedelig med vilje. Men uden for listen betyder kapitalindkomst ~37-42% for dig; det samme indeks PÅ listen er billigere, så voksne vælger liste-versionen.",
+  a_coreOn:"Kerne: verdens-ETF PÅ listen",
+  a_coreOn_homes_child:["→ {AKT} først når frikort-kapaciteten er brugt (27% fra første krone)"],
+  a_coreOn_homes_adult:["→ {ASK} først (17%), så {AKT} 27/42% ud over loftet"],
+  a_coreOn_why_child:"På listen (typisk iShares-stil) betyder aktieindkomst 27/42% uden personfradrag - så for et barn kommer den efter 0%- og frikort-spandene.",
+  a_coreOn_why_adult:"På listen (typisk iShares-stil) betyder aktieindkomst 27/42%. Voksnes arbejdshest: billigst i ASK, derefter et almindeligt depot ud over loftet.",
+  a_sat:"Satellit: tema- / sektor-ETF (høj volatilitet)",
+  a_sat_homes_child:["Bedst → {BO} eller {ASK}","warn|Undgå frikort-depotet: et tabsår spilder årets fradrag"],
+  a_sat_homes_adult:["Bedst → {ASK}: den flade 17% opsuger de store udsving","Eller {AKT}, hvis ASK-loftet er fyldt"],
+  a_sat_why_child:"Volatile aktiver og frikortet er et dårligt mix: et tabsår spilder årets fradrag for altid, og et spike-år flyder over til ~37%. 0%- (BO) og 17%- (ASK) miljøerne opsuger udsving symmetrisk.",
+  a_sat_why_adult:"En lille, krydret skive. De store udsving holdes bedst, hvor skatten er symmetrisk: den flade 17% ASK opsuger op- og nedår lige. Hold den til et mindretal af porteføljen.",
+  a_stk:"Enkeltaktier",
+  a_stk_homes_child:["warn|Forsigtig → udbytte af forældre-givne aktier beskattes hos forælderen (se nedenfor)","Hvis brugt → {ASK} holder det enkelt"],
+  a_stk_homes_adult:["→ {AKT}: realisationsbeskattet, du styrer salgstidspunktet","Eller {ASK} for de flade 17%"],
+  a_stk_why_child:"Enkeltaktier i et depot er realisationsbeskattet aktieindkomst - men for et barn gør udbyttefælden nedenfor oftest fonde til det enklere valg.",
+  a_stk_why_adult:"I modsætning til fonde er enkeltaktier i et depot realisationsbeskattet aktieindkomst: ingen årlig lagerregning, du vælger selv salgstidspunktet.",
+  a_stk_warn:"Barnefælde: udbytte af aktier givet af en forælder beskattes hos FORÆLDEREN indtil 18 år (kildeskatteloven § 5, stk. 2). Akkumulerende fonde undgår det helt.",
+  a_bond:"Obligations- / pengemarkedsfonde",
+  a_bond_homes_child:["→ {FRI}: frikortet opsuger de beskedne gevinster"],
+  a_bond_homes_adult:["→ {AKT} som kapitalindkomst ~37-42% (aldrig på listen, ikke ASK-egnet)"],
+  a_bond_why_child:"Aldrig på positivlisten og ikke ASK-egnede. Klassisk ballast for forsigtige profiler; for et barn dækker frikortet de beskedne gevinster.",
+  a_bond_why_adult:"Aldrig på positivlisten og ikke ASK-egnede, så obligationer ligger i et almindeligt depot som kapitalindkomst ~37-42%. Klassisk ballast for forsigtige profiler og tæt på måldatoen.",
+  ftTitle:"Læs fondens navn: ACC vs DIST, hedged vs unhedged",
+  ftSub:"Alle ETF-navne har disse kontakter. I Danmark ændrer den ene skattehistorien, den anden gør stort set ikke.",
+  ft_accT:"ACC (akkumulerende)",
+  ft_acc1:"Udbytter bliver inde i fonden og forrentes automatisk.",
+  ft_accM:"Intet udbetales, så der er intet udbytte at beskatte særskilt: alt lander i årets værdistigning (lager). For børn er det den sikre konstruktion: ingen udbetaling betyder, at forældrebeskatningsreglen ikke har noget at fange.",
+  ft_distT:"DIST (udloddende)",
+  ft_dist1:"Udbytter udbetales kontant, typisk 1-4 gange om året.",
+  ft_distM:"For voksne er udbyttet blot en del af samme indkomsttype, men du skal selv geninvestere det. For børn beskattes udbytte af forældre-givne penge hos FORÆLDEREN indtil 18 år (kildeskatteloven § 5, stk. 2). Særtilfælde: danske udloddende aktiefonde (IMB) er realisationsbeskattet aktieindkomst, et andet regime end ETF'er.",
+  ft_unhT:"Unhedged (uafdækket)",
+  ft_unh1:"Du holder fondens valutaer, som de er; valutakurser påvirker dit afkast.",
+  ft_unhM:"Ved lange aktiehorisonter accepterer mange valutaudsving: de udligner sig ofte over årtier, og kronen er bundet til euroen, så EUR-eksponering opfører sig næsten som DKK. Afdækning eller ej ændrer ikke det danske skatteregime.",
+  ft_hedT:"Hedged (valutaafdækket)",
+  ft_hed1:"Indbygget valutaforsikring udjævner kursudsving, mod en lille løbende omkostning.",
+  ft_hedM:"Mest relevant for obligationsfonde, hvor valutastøj kan overdøve det beskedne afkast. Afdækning koster cirka 0,1-0,3% om året oven i ÅOP. Det ændrer IKKE skatteregimet, men se ISIN-advarslen nedenfor.",
+  ft_accEx:"Eksempel fra virkeligheden: “iShares Core MSCI World UCITS ETF (Acc)”, ISIN IE00B4L5Y983. “Acc / (Acc)” i navnet betyder, at udbytter geninvesteres automatisk - for en børnekonto den sikre standard, fordi der ikke er nogen udbetaling, forældrebeskatning kan ramme. Kun til illustration: tjek altid den præcise ISIN og dens aktuelle listestatus selv.",
+  ft_distEx:"Eksempel: det SAMME indeks findes ofte i to klasser - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, udbetaler kontant udbytte cirka kvartalsvis, mens “(Acc)”-klassen IE00BK5BQT80 geninvesterer. Bemærk de forskellige ISIN'er. En voksen, der vil have udbytte, kan bruge Dist; for et barn lækker den forældrebeskattet udbytte, så vælg Acc-klassen. Kun illustration - tjek ISIN selv.",
+  ft_unhEx:"Eksempel: en almindelig “USD”-verdens-ETF i dit DKK-depot følger USD/DKK-kursen. Over en aktiehorisont på 15-20 år accepterer de fleste det, og fordi kronen er bundet til euroen, bevæger en EUR-noteret klasse sig knap nok mod DKK. Billigere end hedged, og den danske beskatning er den samme.",
+  ft_hedEx:"Eksempel: en obligations-ETF med “… EUR Hedged” eller “… DKK Hedged” i navnet fjerner de valutaudsving, der ellers ville overdøve obligationens lille afkast - nyttigt til den defensive del. Det koster cirka 0,1-0,3%/år mere, og vigtigst: den hedgede klasse har sin EGEN ISIN: den kan være UDEN FOR positivlisten, selv når den uafdækkede er PÅ. Tjek den præcise ISIN, før du køber.",
+  ftTrap1:"⚠ Barnefælde: en udloddende fond købt for forældre-givne penge lækker forældrebeskattede udbytter, selv små, og banken indberetter det ikke for dig. Børnekonti: kun akkumulerende.",
+  ftTrap2:"⚠ Tjek den præcise ISIN: hver andelsklasse (ACC, DIST, hedged, unhedged) har sin EGEN ISIN, og positivlisten virker pr. ISIN. At den uafdækkede klasse er på listen, siger intet om den afdækkede. Tjek din præcise ISIN, før du køber.",
+  giftLink:"🎁 Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
+  giftLinkSub:"Beløbsgrænser pr. giver, den fordoblede fælleskapacitet, forældrebeskatningsfælden, vidner.",
+  feedbackTitle:"💬 Hvad virkede, hvad gjorde ikke? Sig til",
+  feedbackSub:"Et 1-minuts skema: hvad hjalp, hvad forvirrede dig, og hvad er forkert eller mangler. Dette er et personligt projekt, og din feedback former det.",
+  privacyNote:"Privatliv: anonym besøgstælling via GoatCounter (uden cookies, ingen persondata, ingen sporing på tværs af sider). Dine skyder- og sprogvalg bliver kun i din browser.",
+  srcTitle:"Kilder & juridiske henvisninger",
+  verifiedLine:"Alle beløb gælder skatteåret {yr}, kontrolleret {date} mod skat.dk / skm.dk. Regulerede beløb ændres hver januar; positivlisten hver december.",
+  bigDisclaimer:"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek skat.dk eller spørg en advokat/revisor, før du handler.",
+  stickyBar:"Kun undervisning, ikke skatte-, juridisk eller investeringsrådgivning.", stickyLink:"Kilder",
+  tests:"selvtest bestået", testsFail:"SELVTEST FEJLER, stol ikke på tallene",
+  kr:"kr",
+}
+};
+
+/* ============ STATE ============ */
+const LS_KEY = "dkie_planner_v1";
+const GLOBAL_KEY = "dkie_global_v1";   // lang + mode shared across pages
+let S = { lang:"en", mode:"child", budget:24000, years:15, risk:"balanced", chartView:"contrib" };
+try { Object.assign(S, JSON.parse(localStorage.getItem(LS_KEY) || "{}")); } catch(e){}
+try { const g=JSON.parse(localStorage.getItem(GLOBAL_KEY)||"{}"); if(g.lang)S.lang=g.lang; if(g.mode)S.mode=g.mode; } catch(e){}
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
+function saveGlobal(){ try{ localStorage.setItem(GLOBAL_KEY, JSON.stringify({lang:S.lang,mode:S.mode})); }catch(e){} }
+
+const cfg = TAX_YEAR_CONFIG;
+const $ = id => document.getElementById(id);
+function t(key){ return (I18N[S.lang] && I18N[S.lang][key]) !== undefined ? I18N[S.lang][key] : I18N.en[key]; }
+function fmt(n){ return new Intl.NumberFormat(S.lang==="da"?"da-DK":"en-GB",{maximumFractionDigits:0}).format(Math.round(n)); }
+function kr(n){ return fmt(n)+" "+t("kr"); }
+function fill(str, map){ return String(str).replace(/\{(\w+)\}/g,(_,k)=> map[k]!==undefined?map[k]:"{"+k+"}"); }
+const CFGFILL = ()=>({ boY:fmt(cfg.boYearlyCap), boL:fmt(cfg.boLifetimeCap), pf:fmt(cfg.personfradrag),
+  askR:Math.round(cfg.askRate*100), askC:fmt(cfg.askCeiling), aktieT:fmt(cfg.aktieThreshold), aktieTM:fmt(cfg.aktieThresholdMarried), kapTM:fmt(cfg.kapThresholdMarriedApprox), yr:cfg.taxYear });
+
+/* ============ BUCKET / ASSET METADATA ============ */
+const BUCKET_META = {
+  bo:      { hex:"#2A9D8F", chip:"c0",  chipKey:"chip_bo" },
+  frikort: { hex:"#7BA05B", chip:"cF",  chipKey:"chip_frikort" },
+  ask:     { hex:"#4361EE", chip:"c17", chipKey:"chip_ask" },
+  onlist:  { hex:"#C0427C", chip:"c27", chipKey:"chip_onlist" },
+};
+const ASSETS = [
+  { id:"coreOff", recChild:["FRI"],       recAdult:[],            risks:["cautious","balanced","adventurous"] },
+  { id:"coreOn",  recChild:["AKT"],       recAdult:["ASK","AKT"], risks:["cautious","balanced","adventurous"] },
+  { id:"sat",     recChild:["BO","ASK"],  recAdult:["ASK"],       risks:["adventurous"] },
+  { id:"stk",     recChild:["ASK"],       recAdult:["AKT","ASK"], risks:["adventurous"] },
+  { id:"bond",    recChild:["FRI"],       recAdult:["AKT"],       risks:["cautious"] },
+];
+
+/* ============ RENDER: primer ============ */
+function renderPrimer(){
+  const F = CFGFILL();
+  const isChild = S.mode==="child";
+  const cards = [];
+  if (isChild) cards.push({ meta:BUCKET_META.bo, nameKey:"nm_bo", oneKey:"p_bo_one", moreKey:"p_bo_more" });
+  cards.push({ meta:BUCKET_META.ask, nameKey:"nm_ask", oneKey:"p_ask_one", moreKey:"p_ask_more" });
+  cards.push({ meta:BUCKET_META.frikort, nameKey:"p_off_title",
+    chipKey: isChild?"chip_frikort":"chip_offAdult",
+    oneKey: isChild?"p_off_one":"p_off_one_adult", moreKey: isChild?"p_off_more_child":"p_off_more_adult" });
+  cards.push({ meta:BUCKET_META.onlist, nameKey:"p_on_title", oneKey:"p_on_one",
+    moreKey: isChild?"p_on_more_child":"p_on_more_adult" });
+  const names = { p_off_title:{en:"Depot (AKT), OFF-list fund",da:"Depot (AKT), fond uden for listen"},
+                  p_on_title:{en:"Depot (AKT), ON-list fund",da:"Depot (AKT), fond på listen"} };
+  $("primer").innerHTML = cards.map(c=>{
+    const nm = names[c.nameKey] ? names[c.nameKey][S.lang] : t(c.nameKey);
+    const chipKey = c.chipKey || c.meta.chipKey;
+    return `<details class="acct">
+      <summary><span class="chip ${c.meta.chip}">${chipKey?t(chipKey):""}</span>
+        <b>${nm}</b><span class="one">${fill(t(c.oneKey),F)}</span></summary>
+      <div class="more">${fill(t(c.moreKey),F)}</div>
+    </details>`;
+  }).join("");
+}
+
+/* ============ RENDER: router ============ */
+function renderRouter(){
+  const returnRate = RISK_PRESETS[S.risk];
+  const params = { annualBudget:S.budget, years:S.years, returnRate, isChild:S.mode==="child" };
+  const cmp = compareSmartVsNaive(params, cfg);
+  const sim = cmp.smart;
+  const F = Object.assign(CFGFILL(), { vstar: fmt(sim.Vstar===Infinity?0:sim.Vstar) });
+
+  $("falls").innerHTML = sim.order.map((id,i)=>{
+    const m = BUCKET_META[id], b = sim.buckets[id];
+    const y1 = sim.firstYearRoute.find(r=>r.id===id).amount;
+    const share = sim.order.reduce((s,k)=>s+sim.buckets[k].deposited,0);
+    const pct = share>0 ? b.deposited/share*100 : 0;
+    let whyKey = "why_"+id;
+    if (id==="ask" && S.mode==="adult") whyKey = "why_ask_adult";
+    else if (id==="onlist" && S.mode==="child") whyKey = "why_onlist_child";
+    let note = "";
+    if (b.deposited<=0) note = `<p class="note">${t("emptyNote")}</p>`;
+    else if (b.lastDepYear < S.years) note = `<p class="note">${fill(t("fullNote"),{n:b.lastDepYear})}</p>`;
+    return `<div class="fall ${b.deposited<=0?"empty":""}" style="--bc:${m.hex}">
+      <div class="top"><span class="rank">${i+1}</span><span class="nm">${t("nm_"+id)}</span>
+        <span class="chip ${m.chip}">${t(m.chipKey)}</span></div>
+      <div class="amts">
+        <span>${t("y1")}: <b>${kr(y1)}</b></span>
+        <span>${t("depTotal")}: <b>${kr(b.deposited)}</b></span>
+        <span>${t("endsAt")}: <b>${kr(b.value)}</b> (${t("taxPaid")}: ${kr(b.tax)})</span>
+      </div>
+      <div class="bar"><i data-w="${pct.toFixed(1)}"></i></div>
+      ${note}
+      <details class="why"><summary>${t("whyBtn")} ▸</summary>
+        <div class="body">${fill(t(whyKey),F)}</div></details>
+    </div>`;
+  }).join("") + (S.mode==="adult" ? `<p class="note" style="font-size:.8rem;color:var(--muted);padding:0 4px">${t("adultNote")}</p>` : "");
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll(".fall .bar i").forEach(el=> el.style.width = el.dataset.w+"%");
+  }));
+
+  // smart vs naive
+  $("vsHeadline").innerHTML = fill(t("vsHeadline"),{diff:"<span class='pos'>"+fmt(cmp.endDiff)+"</span>", n:S.years});
+  $("vsSub").textContent = fill(t("vsSub"),{st:fmt(sim.totalTax), nt:fmt(cmp.naive.totalTax), yr:cfg.taxYear});
+  const maxBar = Math.max(sim.endValue+sim.totalTax, cmp.naive.endValue+cmp.naive.totalTax) || 1;
+  const set = (barId,numId,endV,taxV)=>{
+    const bar = $(barId);
+    bar.querySelector(".keep").style.width = (endV/maxBar*100)+"%";
+    bar.querySelector(".tax").style.width = (taxV/maxBar*100)+"%";
+    $(numId).textContent = kr(endV)+" / "+kr(taxV);
+  };
+  set("vbarSmart","vsSmartNum",sim.endValue,sim.totalTax);
+  set("vbarNaive","vsNaiveNum",cmp.naive.endValue,cmp.naive.totalTax);
+
+  renderYearChart(sim);
+}
+
+/* ============ RENDER: year-by-year chart ============ */
+const YC_ORDER = ['bo','frikort','ask','onlist'];
+let lastSim = null, chartSelYear = 1;
+function ycName(id){ return t("ycNm_"+id); }
+function renderYearChart(sim){
+  if(sim) lastSim = sim;
+  sim = lastSim; if(!sim) return;
+  const years = sim.series.length - 1;            // series[0] is year 0
+  chartSelYear = Math.max(1, Math.min(chartSelYear, years));
+  const view = S.chartView==="value" ? "val" : "dep";
+
+  const W=640,H=240, padL=10,padR=10,padT=22,padB=28;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const step=plotW/years, colW=Math.max(3, step*0.66);
+  const maxVal = (view==="dep") ? (S.budget||1)
+               : (Math.max(...sim.series.slice(1).map(s=>s.total)) || 1);
+  const topLabel = (view==="dep") ? kr(S.budget) : kr(maxVal);
+
+  let bars="";
+  for(let y=1;y<=years;y++){
+    const data=sim.series[y][view];
+    const cx=padL+(y-0.5)*step, x=cx-colW/2;
+    if(y===chartSelYear)
+      bars+=`<rect class="col-sel" x="${(cx-step/2).toFixed(1)}" y="${padT}" width="${step.toFixed(1)}" height="${plotH}" rx="2"></rect>`;
+    let acc=0;
+    for(const id of YC_ORDER){
+      const v=data[id]||0; if(v<=0) continue;
+      const h=v/maxVal*plotH, yTop=padT+plotH-acc-h;
+      bars+=`<rect class="col-seg" x="${x.toFixed(1)}" y="${yTop.toFixed(1)}" width="${colW.toFixed(1)}" height="${Math.max(0,h).toFixed(1)}" fill="${BUCKET_META[id].hex}" rx="1"></rect>`;
+      acc+=h;
+    }
+    if(years<=16 || y===1 || y===years || y%5===0)
+      bars+=`<text x="${cx.toFixed(1)}" y="${H-9}" text-anchor="middle" font-size="10" fill="#6B6B76">${y}</text>`;
+    bars+=`<rect class="col-hit" data-year="${y}" x="${(cx-step/2).toFixed(1)}" y="${padT}" width="${step.toFixed(1)}" height="${plotH}"></rect>`;
+  }
+  const axis=`<line x1="${padL}" y1="${padT+plotH}" x2="${W-padR}" y2="${padT+plotH}" stroke="#E4DDCE" stroke-width="1"></line>`+
+    `<text x="${padL}" y="${padT-7}" font-size="10" fill="#6B6B76">${topLabel}</text>`;
+  $("yc-svg").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("ycTitle")}">${axis}${bars}</svg>`;
+
+  $("yc-legend").innerHTML = sim.order.map(id=>
+    `<span><i style="background:${BUCKET_META[id].hex}"></i>${ycName(id)}</span>`).join("");
+
+  updateYcReadout();
+  $("yc-svg").querySelectorAll(".col-hit").forEach(el=>
+    el.addEventListener("click",()=>{ chartSelYear=+el.dataset.year; renderYearChart(); }));
+}
+function updateYcReadout(){
+  if(!lastSim) return;
+  const view=S.chartView==="value"?"val":"dep";
+  const data=lastSim.series[chartSelYear][view];
+  const parts=lastSim.order.map(id=>`${ycName(id)} <b>${kr(data[id]||0)}</b>`).join(" · ");
+  const head=fill(t("ycReadout"),{y:chartSelYear, kind:t(view==="dep"?"ycKindDep":"ycKindVal")});
+  $("yc-readout").innerHTML = `${head}: ${parts}`;
+}
+
+/* ============ RENDER: asset map ============ */
+const TAGS = { BO:'<i class="atag t-bo">BO</i>', FRI:'<i class="atag t-fri">AKT + frikort</i>', ASK:'<i class="atag t-ask">ASK</i>', AKT:'<i class="atag t-on">AKT</i>' };
+function tok(s){ return s.replace(/\{(BO|FRI|ASK|AKT)\}/g, (_,k)=>TAGS[k]); }
+function renderAssets(){
+  const isChild = S.mode==="child";
+  const suf = isChild ? "child" : "adult";
+  $("amLegend").innerHTML = tok(t(isChild?"amLegend_child":"amLegend_adult"));
+  $("assets").innerHTML = ASSETS.map(a=>{
+    const homes = t("a_"+a.id+"_homes_"+suf).map(h=>{
+      const warn = h.indexOf("warn|")===0;
+      const tx = warn ? h.slice(5) : h;
+      return '<span class="home'+(warn?" h-warn":"")+'">'+tok(tx)+"</span>";
+    }).join("");
+    const warn = (isChild && I18N.en["a_"+a.id+"_warn"]) ? `<p class="warn">${t("a_"+a.id+"_warn")}</p>` : "";
+    const rec = (isChild ? a.recChild : a.recAdult) || [];
+    const feat = a.risks.includes(S.risk) ? " featured" : "";
+    return `<div class="asset${feat}">
+      <div class="top"><span class="nm">${t("a_"+a.id)}</span>
+        <span class="rectags">${rec.map(k=>TAGS[k]).join("")}</span><span class="fit">★ ${t("fit")}</span></div>
+      <div class="homes">${homes}</div>
+      <p class="why">${t("a_"+a.id+"_why_"+suf)}</p>${warn}
+    </div>`;
+  }).join("");
+}
+
+/* ============ RENDER: concept explainers ============ */
+const CONCEPTS = [ {id:"core",risk:"med"}, {id:"sat",risk:"high"}, {id:"bond",risk:"low"}, {id:"stk",risk:"high"} ];
+function renderConcepts(){
+  $("concepts").innerHTML = CONCEPTS.map(c=>`
+    <div class="concept">
+      <div class="defhead"><b>${t("def_"+c.id+"_t")}</b><span class="rbadge r-${c.risk}">${t("risk_"+c.risk)}</span></div>
+      <p class="one">${t("def_"+c.id+"_one")}</p>
+      <p class="ex">${t("def_"+c.id+"_more")}</p>
+    </div>`).join("");
+}
+
+/* ============ RENDER: strings ============ */
+function renderStrings(){
+  document.documentElement.lang = S.lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    const v = t(k);
+    if (typeof v === "string") el.textContent = v;
+  });
+  $("heroTag").innerHTML = "";
+  $("heroTag").appendChild(document.createTextNode(t("heroTag")+" "));
+  const tag = document.createElement("span"); tag.className="yeartag";
+  tag.textContent = (S.lang==="da"?"skatteår ":"tax year ")+cfg.taxYear;
+  $("heroTag").appendChild(tag);
+  $("verifiedLine").textContent = fill(t("verifiedLine"),{yr:cfg.taxYear,date:cfg.verifiedDate});
+  $("lang-en").classList.toggle("active",S.lang==="en");
+  $("lang-da").classList.toggle("active",S.lang==="da");
+}
+
+function refreshOutputs(){
+  $("out-budget").textContent = kr(S.budget);
+  $("equivMonthly").textContent = fill(t("equivMonthly"),{m:fmt(S.budget/12)});
+  $("out-years").textContent = S.years+" "+t("yearsUnit");
+}
+function syncSliderFill(el){ el.style.setProperty("--fill",((el.value-el.min)/(el.max-el.min)*100)+"%"); }
+function renderAll(){ renderStrings(); refreshOutputs(); renderPrimer(); renderRouter(); renderConcepts(); renderAssets(); }
+
+/* ============ WIRING ============ */
+let timer=null;
+function onInput(){ refreshOutputs(); save(); clearTimeout(timer); timer=setTimeout(renderRouter,160); }
+$("in-budget").addEventListener("input",e=>{ S.budget=+e.target.value; syncSliderFill(e.target); onInput(); });
+$("in-years").addEventListener("input",e=>{ S.years=+e.target.value; syncSliderFill(e.target); onInput(); });
+$("mode-child").onclick=()=>{ S.mode="child"; setMode(); };
+$("mode-adult").onclick=()=>{ S.mode="adult"; setMode(); };
+function setMode(){
+  $("mode-child").classList.toggle("active",S.mode==="child");
+  $("mode-adult").classList.toggle("active",S.mode==="adult");
+  saveGlobal(); save(); renderPrimer(); renderRouter(); renderAssets();
+}
+["cautious","balanced","adventurous"].forEach(r=>{
+  $("risk-"+r).onclick=()=>{ S.risk=r; ["cautious","balanced","adventurous"].forEach(x=>$("risk-"+x).classList.toggle("active",x===S.risk)); save(); renderRouter(); renderAssets(); };
+});
+function setChartView(v){ S.chartView=v;
+  $("yc-contrib").classList.toggle("active",v==="contrib");
+  $("yc-value").classList.toggle("active",v==="value");
+  saveGlobal(); save(); renderYearChart(); }
+$("yc-contrib").onclick=()=>setChartView("contrib");
+$("yc-value").onclick=()=>setChartView("value");
+$("lang-en").onclick=()=>{ S.lang="en"; saveGlobal(); save(); renderAll(); };
+$("lang-da").onclick=()=>{ S.lang="da"; saveGlobal(); save(); renderAll(); };
+
+/* ============ INIT ============ */
+(function init(){
+  $("in-budget").value=S.budget; $("in-years").value=S.years;
+  ["in-budget","in-years"].forEach(id=>syncSliderFill($(id)));
+  ["cautious","balanced","adventurous"].forEach(x=>$("risk-"+x).classList.toggle("active",x===S.risk));
+  $("mode-child").classList.toggle("active",S.mode==="child");
+  $("mode-adult").classList.toggle("active",S.mode==="adult");
+  $("yc-contrib").classList.toggle("active",S.chartView!=="value");
+  $("yc-value").classList.toggle("active",S.chartView==="value");
+  const res = runRouterTests(cfg);
+  const badge = $("testbadge");
+  if(res.failed.length===0){ badge.textContent="✓ "+res.tests.length+"/"+res.tests.length+" "+t("tests"); }
+  else { badge.textContent="✗ "+t("testsFail"); badge.classList.add("fail"); console.error(res.failed); }
+  console.table(res.tests.map(x=>({test:x.name,pass:x.pass})));
+  renderAll();
+})();
+
+</script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
