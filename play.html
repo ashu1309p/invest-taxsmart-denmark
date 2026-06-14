@@ -336,7 +336,14 @@
 /* ============================================================
    TAX_YEAR_CONFIG - the ONLY place annual amounts live.
    Verified 2026-06-12 against skat.dk / skm.dk via web search.
-   Update every January; refresh positivliste every December.
+
+   >>> UPDATE EACH JANUARY <<<  (see MAINTENANCE.md)
+   New numbers: skm.dk -> "Satser og beloebsgraenser". Edit this SAME
+   block in BOTH index.html and play.html, then re-upload both.
+   Yearly-changing fields: taxYear, verifiedDate, personfradrag,
+   askCeiling, aktieThreshold, aktieThresholdMarried, giftCapPerGiver,
+   kapThresholdApprox, kapThresholdMarriedApprox.
+   Usually unchanged (law-only): the *Rate fields and boYearlyCap/boLifetimeCap.
    ============================================================ */
 const TAX_YEAR_CONFIG = {
   taxYear: 2026,

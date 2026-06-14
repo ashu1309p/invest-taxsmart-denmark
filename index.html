@@ -236,6 +236,16 @@
   .chip.cF{ background:#5E7E3F } .chip.c37{ background:#B26B00 }
   /* keep the account colour as a left rule on demoted homes section cards too */
   .panel.ref details.acct[open]{ border-color:var(--accent) }
+  /* hedged vs unhedged worked example */
+  .fxex{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px; margin-top:14px }
+  .fxex .fxh{ font-weight:700; font-size:.95rem }
+  .fxex .fxs{ font-size:.85rem; color:var(--muted); margin:3px 0 8px }
+  .fxrow{ padding:9px 0; border-top:1px dashed var(--line) }
+  .fxrow .fxcase{ display:block; font-weight:700; font-size:.86rem; margin-bottom:6px }
+  .fxouts{ display:flex; flex-wrap:wrap; gap:8px }
+  .fxouts .fxout{ flex:1; min-width:200px; font-size:.84rem; background:var(--sunken); border-radius:8px; padding:8px 10px }
+  .fxouts .fxout b{ display:block; color:var(--accent); font-size:.78rem; letter-spacing:.02em; margin-bottom:2px }
+  .fxnote{ font-size:.83rem; color:var(--muted); margin-top:10px; line-height:1.5 }
 </style>
 </head>
 <body>
@@ -334,6 +344,34 @@
     <div class="primer" id="primer"></div>
   </section>
 
+  <!-- ====== POSITIVLISTE ====== -->
+  <section class="panel" id="positivliste">
+    <h2 class="sec" data-i18n="plTitle">The positivliste: the list that sets your fund's tax</h2>
+    <p class="sub" data-i18n="plWhat">SKAT keeps an official list of equity-based funds (the ABIS list). Whether your fund is on it or off it decides which tax it gets, and the list is refreshed every year.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 4px">
+      <div style="flex:1;min-width:210px;background:#E7F4EC;border:1px solid #9CC9AB;border-radius:12px;padding:11px 13px">
+        <div style="font-weight:700;color:#19603A;margin-bottom:3px" data-i18n="plOnT">✓ ON the list</div>
+        <div style="font-size:.84rem" data-i18n="plOnD">aktieindkomst [share income], 27% / 42%. Allowed inside an ASK. Usually the win for an adult.</div>
+      </div>
+      <div style="flex:1;min-width:210px;background:#FBF3E6;border:1px solid #E8D2A8;border-radius:12px;padding:11px 13px">
+        <div style="font-weight:700;color:#8C5A1E;margin-bottom:3px" data-i18n="plOffT">OFF the list</div>
+        <div style="font-size:.84rem" data-i18n="plOffD">kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:12px"><b data-i18n="plChangeT">How and when it changes.</b> <span data-i18n="plChange">SKAT publishes the list around 15 December for the coming year, and can amend it mid-year. Funds get added and removed, which flips a fund's tax from one January to the next.</span></p>
+    <details class="adv" style="margin-top:6px">
+      <summary data-i18n="plExTitle">See a worked example: a fund going off, then on</summary>
+      <div class="adv-body">
+        <p style="font-size:.8rem;color:var(--muted);font-style:italic" data-i18n="plExNote">Illustration only. These are real funds, used to show the mechanism, not a claim that they changed status. Always verify the current list yourself.</p>
+        <div class="ftex" style="margin:8px 0 0"><b data-i18n="plEx1T">Case 1, a fund drops OFF the list.</b> <span data-i18n="plEx1">Say the iShares Core MSCI World ETF (Acc), ISIN IE00B4L5Y983, is on the list this year and SKAT drops it next December. From 1 January, in a normal depot its yearly gain switches from aktieindkomst (27/42%) to kapitalindkomst (~37-42%), and it can no longer sit in an ASK. Adjust: an adult holding it inside an ASK would typically sell it there and buy a still-listed world ETF instead (an internal ASK trade does not use up your deposit ceiling); an adult in a normal depot might move future buys to a still-listed equivalent, or accept the higher rate. For a child's frikort depot the drop is often fine, even better, because kapitalindkomst is exactly what the personfradrag absorbs.</span></div>
+        <div class="ftex" style="margin:8px 0 0"><b data-i18n="plEx2T">Case 2, a fund is ADDED to the list.</b> <span data-i18n="plEx2">Now the reverse: an off-list accumulating world ETF that a child holds for the frikort gets added next December. From January its gain becomes aktieindkomst (27/42%) with no personfradrag relief, so the child pays 27% from the first krone and the frikort trick stops working for it. Adjust: point the child's new contributions at a fund that is still off the list. For an adult the same change is good news, the fund is now cheaper and can go inside an ASK.</span></div>
+      </div>
+    </details>
+    <p class="sub" style="margin-top:12px"><b data-i18n="plCheckT">Your yearly habit.</b> <span data-i18n="plCheck">Every December or January, and before any new purchase, look up the exact ISIN of each fund you hold or plan to buy on skat.dk. If a holding has changed status, note its new tax and ask an advokat/revisor before any sizeable move.</span></p>
+    <div class="ftwarn" data-i18n="ftTrap2">⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.</div>
+    <p style="margin-top:10px"><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener" data-i18n="plLink" style="color:var(--accent);font-weight:700;text-decoration:none">Open the current positivliste on skat.dk →</a></p>
+  </section>
+
   <!-- ====== ASSET MAP ====== -->
   <section class="panel ref" id="assetmap">
     <h2 class="sec" data-i18n="amTitle">What goes where? Core, satellite, stocks</h2>
@@ -372,8 +410,26 @@
         <div class="ftex" data-i18n="ft_hedEx"></div>
       </details>
     </div>
+    <div class="fxex">
+      <p class="fxh" data-i18n="fxExH">📈 A worked example: shares flat, the dollar moves 5%</p>
+      <p class="fxs" data-i18n="fxExS">You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.</p>
+      <div class="fxrow">
+        <span class="fxcase" data-i18n="fxCase1">If the dollar rises 5%</span>
+        <div class="fxouts">
+          <div class="fxout"><b>Unhedged</b><span data-i18n="fxU1">+5%, ends at 10,500 kr (you ride the currency up)</span></div>
+          <div class="fxout"><b>Hedged</b><span data-i18n="fxH1">about 0% minus the hedge fee, 9,980 kr</span></div>
+        </div>
+      </div>
+      <div class="fxrow">
+        <span class="fxcase" data-i18n="fxCase2">If the dollar falls 5%</span>
+        <div class="fxouts">
+          <div class="fxout"><b>Unhedged</b><span data-i18n="fxU2">-5%, ends at 9,500 kr (you ride the currency down)</span></div>
+          <div class="fxout"><b>Hedged</b><span data-i18n="fxH2">about 0% minus the hedge fee, 9,980 kr</span></div>
+        </div>
+      </div>
+      <p class="fxnote" data-i18n="fxExNote">Hedged hands you the same result either way: it removes the swing, up and down, for a small certain cost (~0.1-0.3% a year, about 0.2% here). Over a long stock horizon these moves tend to even out, so many investors skip hedging on shares. On bonds, where the return is small, currency noise can swamp it, so hedging is more common there.</p>
+    </div>
     <div class="ftwarn" data-i18n="ftTrap1">⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.</div>
-    <div class="ftwarn" data-i18n="ftTrap2">⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.</div>
   </section>
 
   <!-- ====== GIFT LINK ====== -->
@@ -422,6 +478,14 @@
 /* ============================================================
    TAX_YEAR_CONFIG: the ONLY place annual amounts live.
    Verified 2026-06-12 against skat.dk / skm.dk via web search.
+
+   >>> UPDATE EACH JANUARY <<<  (see MAINTENANCE.md)
+   New numbers: skm.dk -> "Satser og beloebsgraenser". Edit this SAME
+   block in BOTH index.html and play.html, then re-upload both.
+   Yearly-changing fields: taxYear, verifiedDate, personfradrag,
+   askCeiling, aktieThreshold, aktieThresholdMarried, giftCapPerGiver,
+   kapThresholdApprox, kapThresholdMarriedApprox.
+   Usually unchanged (law-only): the *Rate fields and boYearlyCap/boLifetimeCap.
    ============================================================ */
 const TAX_YEAR_CONFIG = {
   taxYear: 2026, verifiedDate: "2026-06-12",
@@ -671,8 +735,34 @@ en: {
   ft_distEx:"Real example: the SAME index often exists as two classes - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, pays cash dividends about quarterly, while the “(Acc)” class IE00BK5BQT80 reinvests them. Note the different ISINs. An adult who wants income can use Dist; for a child it leaks parent-taxed dividends, so choose the Acc class. Illustration only - verify the ISIN yourself.",
   ft_unhEx:"Real example: a plain “USD” world ETF held in your DKK depot moves with the USD/DKK rate. Over a 15-20 year equity horizon most investors accept this, and because DKK is pegged to the euro a EUR-denominated class barely moves versus DKK. Cheaper than hedged, and the Danish tax treatment is identical.",
   ft_hedEx:"Real example: a bond ETF named “… EUR Hedged” or “… DKK Hedged” removes the currency swings that would otherwise swamp a bond's small return - handy for the defensive sleeve. It costs about 0.1-0.3%/yr more, and crucially the hedged class has its OWN ISIN: it can be OFF the positivliste even when the unhedged class is ON it. Check the exact ISIN before buying.",
+  fxExH:"📈 A worked example: shares flat, the dollar moves 5%",
+  fxExS:"You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.",
+  fxCase1:"If the dollar rises 5%",
+  fxU1:"+5%, ends at 10,500 kr (you ride the currency up)",
+  fxH1:"about 0% minus the hedge fee, 9,980 kr",
+  fxCase2:"If the dollar falls 5%",
+  fxU2:"-5%, ends at 9,500 kr (you ride the currency down)",
+  fxH2:"about 0% minus the hedge fee, 9,980 kr",
+  fxExNote:"Hedged hands you the same result either way: it removes the swing, up and down, for a small certain cost (~0.1-0.3% a year, about 0.2% here). Over a long stock horizon these moves tend to even out, so many investors skip hedging on shares. On bonds, where the return is small, currency noise can swamp it, so hedging is more common there.",
   ftTrap1:"⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.",
   ftTrap2:"⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.",
+  plTitle:"The positivliste: the list that sets your fund's tax",
+  plWhat:"SKAT keeps an official list of equity-based funds (the ABIS list). Whether your fund is on it or off it decides which tax it gets, and the list is refreshed every year.",
+  plOnT:"✓ ON the list",
+  plOnD:"aktieindkomst [share income], 27% / 42%. Allowed inside an ASK. Usually the win for an adult.",
+  plOffT:"OFF the list",
+  plOffD:"kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.",
+  plChangeT:"How and when it changes.",
+  plChange:"SKAT publishes the list around 15 December for the coming year, and can amend it mid-year. Funds get added and removed, which flips a fund's tax from one January to the next.",
+  plExTitle:"See a worked example: a fund going off, then on",
+  plExNote:"Illustration only. These are real funds, used to show the mechanism, not a claim that they changed status. Always verify the current list yourself.",
+  plEx1T:"Case 1, a fund drops OFF the list.",
+  plEx1:"Say the iShares Core MSCI World ETF (Acc), ISIN IE00B4L5Y983, is on the list this year and SKAT drops it next December. From 1 January, in a normal depot its yearly gain switches from aktieindkomst (27/42%) to kapitalindkomst (~37-42%), and it can no longer sit in an ASK. Adjust: an adult holding it inside an ASK would typically sell it there and buy a still-listed world ETF instead (an internal ASK trade does not use up your deposit ceiling); an adult in a normal depot might move future buys to a still-listed equivalent, or accept the higher rate. For a child's frikort depot the drop is often fine, even better, because kapitalindkomst is exactly what the personfradrag absorbs.",
+  plEx2T:"Case 2, a fund is ADDED to the list.",
+  plEx2:"Now the reverse: an off-list accumulating world ETF that a child holds for the frikort gets added next December. From January its gain becomes aktieindkomst (27/42%) with no personfradrag relief, so the child pays 27% from the first krone and the frikort trick stops working for it. Adjust: point the child's new contributions at a fund that is still off the list. For an adult the same change is good news, the fund is now cheaper and can go inside an ASK.",
+  plCheckT:"Your yearly habit.",
+  plCheck:"Every December or January, and before any new purchase, look up the exact ISIN of each fund you hold or plan to buy on skat.dk. If a holding has changed status, note its new tax and ask an advokat/revisor before any sizeable move.",
+  plLink:"Open the current positivliste on skat.dk →",
   giftLink:"🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
   giftLinkSub:"Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.",
   feedbackTitle:"💬 What worked, what didn't? Tell me",
@@ -805,8 +895,34 @@ da: {
   ft_distEx:"Eksempel: det SAMME indeks findes ofte i to klasser - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, udbetaler kontant udbytte cirka kvartalsvis, mens “(Acc)”-klassen IE00BK5BQT80 geninvesterer. Bemærk de forskellige ISIN'er. En voksen, der vil have udbytte, kan bruge Dist; for et barn lækker den forældrebeskattet udbytte, så vælg Acc-klassen. Kun illustration - tjek ISIN selv.",
   ft_unhEx:"Eksempel: en almindelig “USD”-verdens-ETF i dit DKK-depot følger USD/DKK-kursen. Over en aktiehorisont på 15-20 år accepterer de fleste det, og fordi kronen er bundet til euroen, bevæger en EUR-noteret klasse sig knap nok mod DKK. Billigere end hedged, og den danske beskatning er den samme.",
   ft_hedEx:"Eksempel: en obligations-ETF med “… EUR Hedged” eller “… DKK Hedged” i navnet fjerner de valutaudsving, der ellers ville overdøve obligationens lille afkast - nyttigt til den defensive del. Det koster cirka 0,1-0,3%/år mere, og vigtigst: den hedgede klasse har sin EGEN ISIN: den kan være UDEN FOR positivlisten, selv når den uafdækkede er PÅ. Tjek den præcise ISIN, før du køber.",
+  fxExH:"📈 Et regneeksempel: aktier flade, dollaren bevæger sig 5%",
+  fxExS:"Du lægger 10.000 kr i en verdensfond, og i løbet af året står aktierne selv stille (0%). Kun dollaren bevæger sig mod kronen.",
+  fxCase1:"Hvis dollaren stiger 5%",
+  fxU1:"+5%, ender på 10.500 kr (du følger valutaen op)",
+  fxH1:"cirka 0% minus afdækningsgebyret, 9.980 kr",
+  fxCase2:"Hvis dollaren falder 5%",
+  fxU2:"-5%, ender på 9.500 kr (du følger valutaen ned)",
+  fxH2:"cirka 0% minus afdækningsgebyret, 9.980 kr",
+  fxExNote:"Hedged giver dig det samme resultat begge veje: den fjerner udsvinget, både op og ned, mod en lille fast omkostning (~0,1-0,3% om året, cirka 0,2% her). Over en lang aktiehorisont udligner disse bevægelser sig ofte, så mange springer afdækning over på aktier. På obligationer, hvor afkastet er lille, kan valutastøj overdøve det, så afdækning er mere udbredt der.",
   ftTrap1:"⚠ Barnefælde: en udloddende fond købt for forældre-givne penge lækker forældrebeskattede udbytter, selv små, og banken indberetter det ikke for dig. Børnekonti: kun akkumulerende.",
   ftTrap2:"⚠ Tjek den præcise ISIN: hver andelsklasse (ACC, DIST, hedged, unhedged) har sin EGEN ISIN, og positivlisten virker pr. ISIN. At den uafdækkede klasse er på listen, siger intet om den afdækkede. Tjek din præcise ISIN, før du køber.",
+  plTitle:"Positivlisten: listen, der bestemmer din fonds skat",
+  plWhat:"SKAT fører en officiel liste over aktiebaserede fonde (ABIS-listen). Om din fond er på eller uden for den afgør, hvilken skat den får, og listen opdateres hvert år.",
+  plOnT:"✓ PÅ listen",
+  plOnD:"aktieindkomst, 27% / 42%. Tilladt i en ASK. Som regel det bedste for en voksen.",
+  plOffT:"UDEN FOR listen",
+  plOffD:"kapitalindkomst, ~37-42%, beskattet årligt (lager). Ikke tilladt i en ASK. Som regel det bedste for et barns frikort.",
+  plChangeT:"Hvornår og hvordan den ændres.",
+  plChange:"SKAT offentliggør listen omkring 15. december for det kommende år og kan ændre den i løbet af året. Fonde kommer på og ryger af, hvilket vender en fonds skat fra én januar til den næste.",
+  plExTitle:"Se et gennemregnet eksempel: en fond, der ryger af, så på",
+  plExNote:"Kun til illustration. Det er rigtige fonde, brugt til at vise mekanikken, ikke en påstand om, at de har skiftet status. Tjek altid den aktuelle liste selv.",
+  plEx1T:"Tilfælde 1, en fond ryger AF listen.",
+  plEx1:"Sig, at iShares Core MSCI World ETF (Acc), ISIN IE00B4L5Y983, er på listen i år, og SKAT fjerner den næste december. Fra 1. januar skifter årets gevinst i et almindeligt depot fra aktieindkomst (27/42%) til kapitalindkomst (~37-42%), og den kan ikke længere ligge i en ASK. Justér: en voksen, der har den i en ASK, ville typisk sælge den der og købe en stadig-listet verdens-ETF i stedet (en intern ASK-handel bruger ikke af loftet); en voksen i et almindeligt depot kan flytte fremtidige køb til en stadig-listet tilsvarende eller acceptere den højere sats. For et barns frikort-depot er det ofte fint, endda bedre, fordi kapitalindkomst er præcis det, personfradraget opsuger.",
+  plEx2T:"Tilfælde 2, en fond kommer PÅ listen.",
+  plEx2:"Nu det omvendte: en akkumulerende verdens-ETF uden for listen, som et barn har til frikortet, kommer på næste december. Fra januar bliver gevinsten aktieindkomst (27/42%) uden personfradrag, så barnet betaler 27% fra første krone, og frikort-tricket holder op med at virke for den. Justér: ret barnets nye indbetalinger mod en fond, der stadig er uden for listen. For en voksen er samme ændring en god nyhed, fonden er nu billigere og kan ligge i en ASK.",
+  plCheckT:"Din årlige vane.",
+  plCheck:"Hver december eller januar, og før ethvert nyt køb, slå den præcise ISIN op for hver fond, du ejer eller planlægger at købe, på skat.dk. Hvis en beholdning har skiftet status, noter dens nye skat og spørg en advokat/revisor før større ændringer.",
+  plLink:"Åbn den aktuelle positivliste på skat.dk →",
   giftLink:"🎁 Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
   giftLinkSub:"Beløbsgrænser pr. giver, den fordoblede fælleskapacitet, forældrebeskatningsfælden, vidner.",
   feedbackTitle:"💬 Hvad virkede, hvad gjorde ikke? Sig til",
