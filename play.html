@@ -151,6 +151,39 @@
   }
   .stickybar a{color:#8FD3CB}
   @media(min-width:560px){h1{font-size:2.1rem}}
+
+  /* ============================================================
+     REDESIGN v1 - shared design system (matches Plan page).
+     ============================================================ */
+  :root{ --sunken:#F2ECE0; --space-sec:56px; --shadow:0 1px 2px rgba(40,35,25,.05),0 10px 30px rgba(40,35,25,.07); }
+  html{ color-scheme:light }
+  body{ line-height:1.62 }
+  .wrap{ max-width:716px }
+  h1{ font-size:clamp(2.05rem,6vw,2.6rem)!important; font-weight:700; line-height:1.08; letter-spacing:-.02em; text-wrap:balance }
+  .tagline{ font-size:1.07rem; line-height:1.55; color:var(--ink); max-width:33em }
+  h2.sec,#gifts h2,#race h2{ font-size:clamp(1.32rem,3.6vw,1.5rem); font-weight:700; line-height:1.2; letter-spacing:-.01em; text-wrap:balance }
+  section{ margin:var(--space-sec) 0; scroll-margin-top:84px }
+  :target{ scroll-margin-top:84px }
+  .panel{ padding:22px; border-radius:18px }
+  @media(min-width:560px){ .panel{ padding:26px } }
+  .panel.ref{ box-shadow:none; background:var(--sunken); border-color:transparent }
+  .panel.tool{ border-color:#DBD2C1; box-shadow:0 2px 8px rgba(40,35,25,.09),0 22px 50px rgba(40,35,25,.11) }
+  /* hover + focus (a11y) */
+  .mode button,.tabs .tab,.lang-toggle button,.chips button,details.why>summary{ transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s }
+  .mode button:hover,.tabs .tab:hover{ color:var(--ink) }
+  .linkcard:hover{ background:#D5ECE7 }
+  .sources a:hover{ text-decoration:underline }
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
+  input[type=range]:focus-visible{ outline-offset:4px }
+  /* one rotating chevron on the disclosure */
+  details.why>summary{ position:relative; padding-right:28px; list-style:none }
+  details.why>summary::-webkit-details-marker{ display:none }
+  details.why>summary::after{ content:""; position:absolute; right:4px; top:calc(50% - 5px); width:8px; height:8px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); transition:transform .2s; opacity:.7 }
+  details.why[open]>summary::after{ transform:rotate(-135deg) }
+  /* sticky bar: safe area + dismiss */
+  .stickybar{ padding-bottom:calc(9px + env(safe-area-inset-bottom)) }
+  .stickybar .sb-x{ position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:0; color:#9FB7B2; font-size:1rem; cursor:pointer; padding:4px 8px; line-height:1 }
+  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 </style>
 </head>
 <body>
@@ -172,7 +205,7 @@
   <p class="tagline" data-i18n="heroTag">Denmark taxes the same investment completely differently depending on the “wrapper” it sits in. Drag the sliders - the race below replays instantly. <span class="yeartag" data-yeartag></span></p>
 
   <!-- ====== M1: WRAPPER RACE ====== -->
-  <section class="panel" id="race">
+  <section class="panel tool" id="race">
     <div class="mode" role="group">
       <button id="mode-child" class="active" data-i18n="modeChild">For a child</button>
       <button id="mode-adult" data-i18n="modeAdult">For an adult</button>
@@ -273,7 +306,7 @@
   </section>
 
   <!-- ====== SOURCES ====== -->
-  <section class="panel sources" id="sources">
+  <section class="panel ref sources" id="sources">
     <h2 style="font-size:1.1rem" data-i18n="srcTitle">Sources & legal references</h2>
     <ul>
       <li><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener">Positivliste (ABIS list) - skat.dk</a></li>
@@ -296,6 +329,7 @@
 <div class="stickybar">
   <span data-i18n="stickyBar">Educational only - not tax, legal or investment advice.</span>
   <a href="#sources" data-i18n="stickyLink">Sources</a>
+  <button class="sb-x" onclick="this.closest('.stickybar').remove()" aria-label="Dismiss">&times;</button>
 </div>
 
 <script>
@@ -473,7 +507,7 @@ const I18N = {
     verdictOver:"⚠ {excess} kr above the combined caps → 15% gift tax ≈ {tax} kr. Fix: split across more givers or across calendar years.",
     trapTitle:"⚠ The interest trap (parent attribution)",
     trapBody:"Interest and dividends on money gifted by a parent are taxed at the PARENT until the year the child turns 18 - and banks do not report this automatically; you must self-declare. Annual value gains on accumulating fund units are taxed at the child instead. That is why children's gifted savings go into accumulating funds, never idle cash or distributing funds.",
-    gpTitle:"🎁 The grandparent exception",
+    gpTitle:"The grandparent exception",
     gpBody:"Gifts from grandparents are NOT covered by parent attribution: all returns are taxed at the child immediately. Same annual cap per giver applies.",
     gavebrevTitle:"Gavebrev [gift letter] checklist",
     gavebrevTag:"No notary or special form is required, but conditions only count if they exist at or before the gift - never retroactively.",
@@ -488,7 +522,7 @@ const I18N = {
     verifiedLine:"All amounts are for tax year {yr}, verified {date} against skat.dk / skm.dk. Indexed amounts change every January; the positivliste [SKAT\u2019s approved-fund list] every December.",
     bigDisclaimer:"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts shown are for the tagged tax year and are adjusted every January; the positivliste [SKAT\u2019s fund list] changes every December. Always verify against skat.dk or ask an advokat/revisor before acting.",
     stickyBar:"Educational only - not tax, legal or investment advice.", stickyLink:"Sources",
-    feedbackTitle:"💬 What worked, what didn't? Tell me",
+    feedbackTitle:"What worked, what didn't? Tell me",
     feedbackSub:"A 1-minute form: what helped, what confused you, anything wrong or missing. This is a personal project and your input shapes it.",
     privacyNote:"Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data, no cross-site tracking). Your slider and language choices stay in your browser only.",
     tests:"self-checks passed", testsFail:"SELF-CHECKS FAILING - do not trust the numbers",
@@ -522,7 +556,7 @@ const I18N = {
     verdictOver:"⚠ {excess} kr over de samlede grænser → 15% gaveafgift ≈ {tax} kr. Løsning: fordel på flere givere eller over flere kalenderår.",
     trapTitle:"⚠ Rentefælden (forældrebeskatning)",
     trapBody:"Renter og udbytter af penge, som en forælder har givet, beskattes hos FORÆLDEREN indtil det år, barnet fylder 18 - og banken indberetter det ikke automatisk; du skal selv oplyse det. Årlige kursgevinster på akkumulerende fondsandele beskattes derimod hos barnet. Derfor: akkumulerende fonde til børns gavemidler, aldrig kontanter eller udloddende fonde.",
-    gpTitle:"🎁 Bedsteforældre-undtagelsen",
+    gpTitle:"Bedsteforældre-undtagelsen",
     gpBody:"Gaver fra bedsteforældre er IKKE omfattet af forældrebeskatning: alt afkast beskattes hos barnet med det samme. Samme årlige beløbsgrænse pr. giver gælder.",
     gavebrevTitle:"Gavebrev-tjekliste",
     gavebrevTag:"Intet krav om notar eller særlig form, men betingelser gælder kun, hvis de findes ved eller før gaven - aldrig med tilbagevirkende kraft.",
@@ -537,7 +571,7 @@ const I18N = {
     verifiedLine:"Alle beløb gælder skatteåret {yr}, kontrolleret {date} mod skat.dk / skm.dk. Regulerede beløb ændres hver januar; positivlisten hver december.",
     bigDisclaimer:"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek altid skat.dk eller spørg en advokat/revisor, før du handler.",
     stickyBar:"Kun undervisning - ikke skatte-, juridisk eller investeringsrådgivning.", stickyLink:"Kilder",
-    feedbackTitle:"💬 Hvad virkede, hvad gjorde ikke? Sig til",
+    feedbackTitle:"Hvad virkede, hvad gjorde ikke? Sig til",
     feedbackSub:"Et 1-minuts skema: hvad hjalp, hvad forvirrede dig, og hvad er forkert eller mangler. Dette er et personligt projekt, og din feedback former det.",
     privacyNote:"Privatliv: anonym besøgstælling via GoatCounter (uden cookies, ingen persondata, ingen sporing på tværs af sider). Dine skyder- og sprogvalg bliver kun i din browser.",
     tests:"selvtest bestået", testsFail:"SELVTEST FEJLER - stol ikke på tallene",

@@ -168,6 +168,74 @@
   footer.big{margin:34px 0 18px;font-size:.84rem;color:var(--muted)}
   .stickybar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#2B2B33;color:#EDE9DF;font-size:.76rem;line-height:1.35;padding:9px 14px;text-align:center}
   .stickybar a{color:#8FD3CB}
+
+  /* ============================================================
+     REDESIGN v1 - overrides (cascade wins by source order).
+     Direction: quiet editorial fintech. Stronger type ramp,
+     tiered spacing, 3 surfaces, account colour = data only,
+     one dominant tool panel, payoff-first, progressive disclosure.
+     ============================================================ */
+  :root{ --sunken:#F2ECE0; --space-sec:56px; --shadow:0 1px 2px rgba(40,35,25,.05),0 10px 30px rgba(40,35,25,.07); }
+  html{ color-scheme:light }
+  body{ line-height:1.62 }
+  .wrap{ max-width:716px }
+  /* type ramp */
+  .kicker{ font-size:.8rem; font-weight:700; letter-spacing:.09em; margin:var(--space-sec) 0 6px }
+  h1{ font-size:clamp(2.05rem,6vw,2.6rem); font-weight:700; line-height:1.08; letter-spacing:-.02em; margin:0 0 14px!important; text-wrap:balance }
+  .tagline{ font-size:1.07rem; line-height:1.55; color:var(--ink); max-width:33em; margin-bottom:16px }
+  h2.sec{ font-size:clamp(1.32rem,3.6vw,1.55rem); font-weight:700; line-height:1.2; letter-spacing:-.01em; text-wrap:balance; margin-bottom:6px }
+  p.sub{ font-size:.96rem; line-height:1.5 }
+  /* spacing + surfaces */
+  section{ margin:var(--space-sec) 0; scroll-margin-top:84px }
+  :target{ scroll-margin-top:84px }
+  .panel{ padding:22px; border-radius:18px }
+  @media(min-width:560px){ .panel{ padding:26px } }
+  .panel.ref{ box-shadow:none; background:var(--sunken); border-color:transparent }
+  .panel.ref h2.sec{ font-size:1.28rem }
+  /* the one dominant tool */
+  .panel.tool{ border-color:#DBD2C1; box-shadow:0 2px 8px rgba(40,35,25,.09),0 22px 50px rgba(40,35,25,.11) }
+  .tool-head{ margin:-22px -22px 20px; padding:16px 22px; background:var(--accent); color:#fff; border-radius:18px 18px 0 0 }
+  @media(min-width:560px){ .tool-head{ margin:-26px -26px 22px; padding:18px 26px } }
+  .tool-head .h{ font-size:1.28rem; font-weight:700; line-height:1.2 }
+  .tool-head .s{ font-size:.86rem; color:#D7EFEA; margin-top:3px }
+  /* payoff-first result block */
+  .versus{ margin:0 0 20px; border-top:0; padding:16px 16px 14px; background:var(--sunken); border-radius:14px }
+  .headline{ font-size:1.22rem; font-weight:700; line-height:1.25 }
+  .headline .pos{ color:var(--accent); font-weight:800 }
+  /* zone labels inside the tool */
+  .zone{ font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:24px 0 10px }
+  /* progressive-disclosure blocks */
+  details.adv,details.ycwrap{ border:1px solid var(--line); border-radius:12px; background:var(--card); margin-top:16px; overflow:hidden }
+  details.adv>summary,details.ycwrap>summary{ list-style:none; cursor:pointer; padding:12px 14px; font-size:.88rem; font-weight:700; color:var(--accent) }
+  details.adv>summary::-webkit-details-marker,details.ycwrap>summary::-webkit-details-marker{ display:none }
+  details.adv[open]>summary,details.ycwrap[open]>summary{ border-bottom:1px solid var(--line) }
+  .adv-body{ padding:8px 14px 14px }
+  .yearchart{ margin-top:0; border-top:0; padding-top:8px }
+  /* dial back the 800-weight everywhere */
+  .chip,.ctl output,.yc-title,.atag,.rbadge,.fall .rank{ font-weight:700 }
+  /* hover + focus states (a11y) */
+  .mode button,.riskrow button,.yc-toggle button,.tabs .tab,.lang-toggle button{ transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s }
+  .mode button:hover,.riskrow button:hover,.yc-toggle button:hover,.tabs .tab:hover{ color:var(--ink) }
+  .riskrow button:hover{ border-color:#C9BFA9 }
+  .linkcard:hover{ background:#D5ECE7 }
+  .sources a:hover{ text-decoration:underline }
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
+  input[type=range]:focus-visible{ outline-offset:4px }
+  /* sticky bar: safe area + dismiss */
+  .stickybar{ padding-bottom:calc(9px + env(safe-area-inset-bottom)) }
+  .stickybar .sb-x{ position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:0; color:#9FB7B2; font-size:1rem; cursor:pointer; padding:4px 8px; line-height:1 }
+  /* reduced motion */
+  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
+  /* one rotating chevron for every disclosure (replaces text arrows) */
+  details.concepts>summary,details.adv>summary,details.ycwrap>summary,.fall details.why>summary{ position:relative; padding-right:28px }
+  details.concepts>summary::after,details.adv>summary::after,details.ycwrap>summary::after,.fall details.why>summary::after{ content:""; position:absolute; right:13px; top:calc(50% - 5px); width:8px; height:8px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); transition:transform .2s; opacity:.7 }
+  details.concepts[open]>summary::after,details.adv[open]>summary::after,details.ycwrap[open]>summary::after,.fall details.why[open]>summary::after{ transform:rotate(-135deg) }
+  /* subtler waterfall meter (amounts already carry the number) */
+  .fall .bar{ height:6px; opacity:.65 }
+  /* chip legibility: darken the light account colours for white text */
+  .chip.cF{ background:#5E7E3F } .chip.c37{ background:#B26B00 }
+  /* keep the account colour as a left rule on demoted homes section cards too */
+  .panel.ref details.acct[open]{ border-color:var(--accent) }
 </style>
 </head>
 <body>
@@ -182,21 +250,15 @@
 
 <div class="wrap">
   <p class="kicker" data-i18n="heroKicker">Every krone counts</p>
-  <h1 data-i18n="heroTitle" style="margin-top:5px">Where should each krone go first?</h1>
+  <h1 data-i18n="heroTitle">Where should each krone go first?</h1>
   <p class="tagline" id="heroTag"></p>
 
-  <!-- ====== PRIMER ====== -->
-  <section>
-    <h2 class="sec" data-i18n="primTitle">Meet the four tax homes</h2>
-    <p class="sub" data-i18n="primSub">A 20-second skim. Tap any card for the detail.</p>
-    <div class="primer" id="primer"></div>
-    <a class="tapnote" style="display:block;text-decoration:none" href="#router" data-i18n="tapNote">Already know them? Jump to the router ↓</a>
-  </section>
-
-  <!-- ====== ROUTER ====== -->
-  <section class="panel" id="router">
-    <h2 class="sec" data-i18n="routTitle">The Money Router</h2>
-    <p class="sub" data-i18n="routSub">Set your target. The router fills the cheapest tax home first and shows why, bucket by bucket.</p>
+  <!-- ====== THE TOOL: Money Router (payoff-first) ====== -->
+  <section class="panel tool" id="router">
+    <div class="tool-head">
+      <div class="h" data-i18n="routTitle">The Money Router</div>
+      <div class="s" data-i18n="routSub">Set a target. See the cheapest-tax order to fill your accounts, and why.</div>
+    </div>
 
     <div class="mode">
       <button id="mode-child" class="active" data-i18n="modeChild">Investing for a child</button>
@@ -208,32 +270,8 @@
       <input type="range" id="in-budget" min="3000" max="600000" step="3000" value="24000" aria-label="Yearly amount">
       <div class="equiv" id="equivMonthly"></div>
     </div>
-    <div class="ctl">
-      <label><span class="lab" data-i18n="ctlYears">Horizon</span><output id="out-years">15</output></label>
-      <input type="range" id="in-years" min="5" max="30" step="1" value="15" aria-label="Years">
-    </div>
 
-    <p style="font-size:.92rem;font-weight:600;margin-top:14px" data-i18n="riskLabel">Risk appetite (sets the assumed average return)</p>
-    <div class="riskrow">
-      <button id="risk-cautious"><span data-i18n="riskC">Cautious</span><small>~4%/yr</small></button>
-      <button id="risk-balanced" class="active"><span data-i18n="riskB">Balanced</span><small>~6.5%/yr</small></button>
-      <button id="risk-adventurous"><span data-i18n="riskA">Adventurous</span><small>~8.5%/yr</small></button>
-    </div>
-
-    <div class="falls" id="falls"></div>
-
-    <div class="yearchart" id="yearchart">
-      <p class="yc-title" data-i18n="ycTitle">Year by year: where your money lands</p>
-      <p class="yc-sub" data-i18n="ycSub">Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.</p>
-      <div class="yc-toggle">
-        <button id="yc-contrib" class="active" data-i18n="ycViewContrib">Where each year's money goes</button>
-        <button id="yc-value" data-i18n="ycViewValue">Total pot value</button>
-      </div>
-      <div class="yc-chart" id="yc-svg"></div>
-      <div class="yc-readout" id="yc-readout"></div>
-      <div class="yc-legend" id="yc-legend"></div>
-    </div>
-
+    <!-- the reward, up top -->
     <div class="versus">
       <p class="headline" id="vsHeadline"></p>
       <p class="vsub" id="vsSub"></p>
@@ -250,12 +288,54 @@
         <span><i style="background:#D64545"></i><span data-i18n="legTax">Tax paid</span></span>
       </div>
     </div>
+
+    <details class="adv">
+      <summary data-i18n="advTitle">Adjust assumptions: horizon &amp; risk</summary>
+      <div class="adv-body">
+        <div class="ctl">
+          <label><span class="lab" data-i18n="ctlYears">Horizon</span><output id="out-years">15</output></label>
+          <input type="range" id="in-years" min="5" max="30" step="1" value="15" aria-label="Years">
+        </div>
+        <p style="font-size:.9rem;font-weight:600;margin-top:12px" data-i18n="riskLabel">Risk appetite (sets the assumed average return)</p>
+        <div class="riskrow">
+          <button id="risk-cautious"><span data-i18n="riskC">Steady</span><small>~4%/yr</small></button>
+          <button id="risk-balanced" class="active"><span data-i18n="riskB">Mixed</span><small>~6.5%/yr</small></button>
+          <button id="risk-adventurous"><span data-i18n="riskA">Mostly stocks</span><small>~8.5%/yr</small></button>
+        </div>
+      </div>
+    </details>
+
+    <p class="zone" data-i18n="zoneOrder">The order, cheapest tax first</p>
+    <div class="falls" id="falls"></div>
+
+    <details class="ycwrap">
+      <summary data-i18n="ycWrapTitle">See it year by year</summary>
+      <div class="yearchart" id="yearchart">
+        <p class="yc-title" data-i18n="ycTitle">Year by year: where your money lands</p>
+        <p class="yc-sub" data-i18n="ycSub">Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.</p>
+        <div class="yc-toggle">
+          <button id="yc-contrib" class="active" data-i18n="ycViewContrib">Where each year's money goes</button>
+          <button id="yc-value" data-i18n="ycViewValue">Total pot value</button>
+        </div>
+        <div class="yc-chart" id="yc-svg"></div>
+        <div class="yc-readout" id="yc-readout"></div>
+        <div class="yc-legend" id="yc-legend"></div>
+      </div>
+    </details>
+
     <p class="testbadge" id="testbadge"></p>
     <p class="verified" data-i18n="simDisclaimer">Generic, simplified model: flat average return, yearly tax paid from each account, no fees or inflation, no other income. A typical ordering for a generic situation, never personal advice.</p>
   </section>
 
+  <!-- ====== UNDERSTAND THE ACCOUNTS (demoted reference) ====== -->
+  <section class="panel ref" id="homes">
+    <h2 class="sec" data-i18n="primTitle">Meet the four tax homes</h2>
+    <p class="sub" data-i18n="primSub">A 20-second skim. Tap any card for the detail.</p>
+    <div class="primer" id="primer"></div>
+  </section>
+
   <!-- ====== ASSET MAP ====== -->
-  <section class="panel" id="assetmap">
+  <section class="panel ref" id="assetmap">
     <h2 class="sec" data-i18n="amTitle">What goes where? Core, satellite, stocks</h2>
     <p class="sub" data-i18n="amSub">The account decides the tax. The asset decides the risk. Your risk choice above highlights what typically fits.</p>
     <p class="sub" id="amLegend" style="margin-top:-6px"></p>
@@ -267,7 +347,7 @@
   </section>
 
   <!-- ====== FUND NAME TERMS ====== -->
-  <section class="panel" id="fundterms">
+  <section class="panel ref" id="fundterms">
     <h2 class="sec" data-i18n="ftTitle">Reading a fund's name: ACC vs DIST, hedged vs unhedged</h2>
     <p class="sub" data-i18n="ftSub">Every ETF name carries these switches. In Denmark one of them changes the tax story, the other mostly doesn't.</p>
     <div class="primer" style="grid-template-columns:1fr 1fr">
@@ -313,7 +393,7 @@
   </section>
 
   <!-- ====== SOURCES ====== -->
-  <section class="panel sources" id="sources">
+  <section class="panel ref sources" id="sources">
     <h2 class="sec" data-i18n="srcTitle">Sources & legal references</h2>
     <ul>
       <li><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener">Positivliste (ABIS list) - skat.dk</a></li>
@@ -335,6 +415,7 @@
 <div class="stickybar">
   <span data-i18n="stickyBar">Educational only, not tax, legal or investment advice.</span>
   <a href="#sources" data-i18n="stickyLink">Sources</a>
+  <button class="sb-x" onclick="this.closest('.stickybar').remove()" aria-label="Dismiss">&times;</button>
 </div>
 
 <script>
@@ -470,16 +551,19 @@ en: {
   brand:"Tax-smart investing in Denmark", tabPlan:"Plan", tabPlay:"Play",
   heroKicker:"Every krone counts",
   heroTitle:"Where should each krone go first?",
-  heroTag:"In Denmark, the very same investment is taxed completely differently depending on which account you hold it in. Most beginners pick the costliest account by accident and hand a chunk of every year's returns to tax without realising. Tell this page your yearly target and it maps the cheapest-tax order to fill your accounts, with the plain-English reason behind every step.",
+  heroTag:"Same investment, different tax - the account you choose decides how much you keep. Slide to see what to fill first and why.",
   primTitle:"Meet the four tax homes", primSub:"Start here: each account is taxed differently. Tap a card to learn it before you plan.",
   tapNote:"Already know them? Jump to the router ↓",
   routTitle:"The Money Router",
-  routSub:"Set your target. The router fills the cheapest tax home first and shows why, bucket by bucket.",
+  routSub:"Set a target. See the cheapest-tax order to fill your accounts, and why.",
   modeChild:"Investing for a child", modeAdult:"For myself (adult)",
   ctlBudget:"Target per year", ctlYears:"Horizon",
   equivMonthly:"≈ {m} kr per month",
   riskLabel:"Risk appetite (sets the assumed average return)",
-  riskC:"Cautious", riskB:"Balanced", riskA:"Adventurous",
+  riskC:"Steady", riskB:"Mixed", riskA:"Mostly stocks",
+  advTitle:"Adjust assumptions: horizon & risk",
+  zoneOrder:"The order, cheapest tax first",
+  ycWrapTitle:"See it year by year",
   yearsUnit:"years",
   /* year-by-year chart */
   ycTitle:"Year by year: where your money lands",
@@ -529,7 +613,7 @@ en: {
   amLegend_child:"Colour = account: {BO} børneopsparing, {FRI} the child frikort strategy inside a depot, {ASK} aktiesparekonto, {AKT} ordinary depot. Red = avoid or take care.",
   amLegend_adult:"Colour = account: {ASK} aktiesparekonto, {AKT} ordinary depot. Red = avoid or take care.",
   fit:"fits your risk profile",
-  defTitle:"New to these words? Core, satellite, bond, single stocks ▾",
+  defTitle:"New to these words? Core, satellite, bond, single stocks",
   risk_low:"Lower risk", risk_med:"Medium risk", risk_high:"Higher risk",
   def_core_t:"Core - the foundation",
   def_core_one:"One broad fund that owns a little of everything.",
@@ -589,9 +673,9 @@ en: {
   ft_hedEx:"Real example: a bond ETF named “… EUR Hedged” or “… DKK Hedged” removes the currency swings that would otherwise swamp a bond's small return - handy for the defensive sleeve. It costs about 0.1-0.3%/yr more, and crucially the hedged class has its OWN ISIN: it can be OFF the positivliste even when the unhedged class is ON it. Check the exact ISIN before buying.",
   ftTrap1:"⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.",
   ftTrap2:"⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.",
-  giftLink:"🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
+  giftLink:"Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
   giftLinkSub:"Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.",
-  feedbackTitle:"💬 What worked, what didn't? Tell me",
+  feedbackTitle:"What worked, what didn't? Tell me",
   feedbackSub:"A 1-minute form: what helped, what confused you, anything wrong or missing. This is a personal project and your input shapes it.",
   privacyNote:"Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data, no cross-site tracking). Your slider and language choices stay in your browser only.",
   srcTitle:"Sources & legal references",
@@ -605,16 +689,19 @@ da: {
   brand:"Skattesmart investering i Danmark", tabPlan:"Planlæg", tabPlay:"Leg",
   heroKicker:"Hver krone tæller",
   heroTitle:"Hvor skal hver krone hen først?",
-  heroTag:"I Danmark beskattes præcis den samme investering vidt forskelligt alt efter, hvilken konto du har den på. De fleste nybegyndere vælger den dyreste konto ved et tilfælde og giver hvert år en bid af afkastet til skat uden at opdage det. Fortæl siden dit årlige mål, så kortlægger den den billigste skatterækkefølge at fylde dine konti i, med den jævne forklaring bag hvert skridt.",
+  heroTag:"Samme investering, forskellig skat - kontoen du vælger afgør, hvor meget du beholder. Træk i skyderen for at se, hvad du skal fylde først, og hvorfor.",
   primTitle:"Mød de fire skattemiljøer", primSub:"Start her: hver konto beskattes forskelligt. Tryk på et kort og lær den at kende, før du planlægger.",
   tapNote:"Kender du dem allerede? Hop til routeren ↓",
   routTitle:"Pengerouteren",
-  routSub:"Sæt dit mål. Routeren fylder det billigste skattemiljø først og viser hvorfor, spand for spand.",
+  routSub:"Sæt et mål. Se den billigste skatterækkefølge at fylde dine konti i, og hvorfor.",
   modeChild:"Investerer for et barn", modeAdult:"Til mig selv (voksen)",
   ctlBudget:"Mål pr. år", ctlYears:"Horisont",
   equivMonthly:"≈ {m} kr pr. måned",
   riskLabel:"Risikovillighed (sætter det antagne gennemsnitsafkast)",
-  riskC:"Forsigtig", riskB:"Balanceret", riskA:"Eventyrlysten",
+  riskC:"Rolig", riskB:"Blandet", riskA:"Mest aktier",
+  advTitle:"Justér antagelser: horisont & risiko",
+  zoneOrder:"Rækkefølgen, billigste skat først",
+  ycWrapTitle:"Se det år for år",
   yearsUnit:"år",
   ycTitle:"År for år: hvor dine penge lander",
   ycSub:"Hver søjle er ét år. Farven viser, hvilken konto pengene ligger på. Tryk på en søjle for den præcise fordeling.",
@@ -660,7 +747,7 @@ da: {
   amLegend_child:"Farve = konto: {BO} børneopsparing, {FRI} barnets frikort-strategi i et depot, {ASK} aktiesparekonto, {AKT} almindeligt depot. Rød = undgå eller pas på.",
   amLegend_adult:"Farve = konto: {ASK} aktiesparekonto, {AKT} almindeligt depot. Rød = undgå eller pas på.",
   fit:"passer til din risikoprofil",
-  defTitle:"Ny i ordene? Kerne, satellit, obligation, enkeltaktier ▾",
+  defTitle:"Ny i ordene? Kerne, satellit, obligation, enkeltaktier",
   risk_low:"Lavere risiko", risk_med:"Mellem risiko", risk_high:"Højere risiko",
   def_core_t:"Kerne - fundamentet",
   def_core_one:"Én bred fond, der ejer lidt af det hele.",
@@ -720,9 +807,9 @@ da: {
   ft_hedEx:"Eksempel: en obligations-ETF med “… EUR Hedged” eller “… DKK Hedged” i navnet fjerner de valutaudsving, der ellers ville overdøve obligationens lille afkast - nyttigt til den defensive del. Det koster cirka 0,1-0,3%/år mere, og vigtigst: den hedgede klasse har sin EGEN ISIN: den kan være UDEN FOR positivlisten, selv når den uafdækkede er PÅ. Tjek den præcise ISIN, før du køber.",
   ftTrap1:"⚠ Barnefælde: en udloddende fond købt for forældre-givne penge lækker forældrebeskattede udbytter, selv små, og banken indberetter det ikke for dig. Børnekonti: kun akkumulerende.",
   ftTrap2:"⚠ Tjek den præcise ISIN: hver andelsklasse (ACC, DIST, hedged, unhedged) har sin EGEN ISIN, og positivlisten virker pr. ISIN. At den uafdækkede klasse er på listen, siger intet om den afdækkede. Tjek din præcise ISIN, før du køber.",
-  giftLink:"🎁 Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
+  giftLink:"Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
   giftLinkSub:"Beløbsgrænser pr. giver, den fordoblede fælleskapacitet, forældrebeskatningsfælden, vidner.",
-  feedbackTitle:"💬 Hvad virkede, hvad gjorde ikke? Sig til",
+  feedbackTitle:"Hvad virkede, hvad gjorde ikke? Sig til",
   feedbackSub:"Et 1-minuts skema: hvad hjalp, hvad forvirrede dig, og hvad er forkert eller mangler. Dette er et personligt projekt, og din feedback former det.",
   privacyNote:"Privatliv: anonym besøgstælling via GoatCounter (uden cookies, ingen persondata, ingen sporing på tværs af sider). Dine skyder- og sprogvalg bliver kun i din browser.",
   srcTitle:"Kilder & juridiske henvisninger",
@@ -821,7 +908,7 @@ function renderRouter(){
       </div>
       <div class="bar"><i data-w="${pct.toFixed(1)}"></i></div>
       ${note}
-      <details class="why"><summary>${t("whyBtn")} ▸</summary>
+      <details class="why"><summary>${t("whyBtn")}</summary>
         <div class="body">${fill(t(whyKey),F)}</div></details>
     </div>`;
   }).join("") + (S.mode==="adult" ? `<p class="note" style="font-size:.8rem;color:var(--muted);padding:0 4px">${t("adultNote")}</p>` : "");
@@ -919,7 +1006,7 @@ function renderAssets(){
     const feat = a.risks.includes(S.risk) ? " featured" : "";
     return `<div class="asset${feat}">
       <div class="top"><span class="nm">${t("a_"+a.id)}</span>
-        <span class="rectags">${rec.map(k=>TAGS[k]).join("")}</span><span class="fit">★ ${t("fit")}</span></div>
+        <span class="rectags">${rec.map(k=>TAGS[k]).join("")}</span><span class="fit">${t("fit")}</span></div>
       <div class="homes">${homes}</div>
       <p class="why">${t("a_"+a.id+"_why_"+suf)}</p>${warn}
     </div>`;
