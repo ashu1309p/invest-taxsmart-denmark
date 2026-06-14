@@ -237,9 +237,7 @@
   /* keep the account colour as a left rule on demoted homes section cards too */
   .panel.ref details.acct[open]{ border-color:var(--accent) }
   /* hedged vs unhedged worked example */
-  .fxex{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px; margin-top:14px }
-  .fxex .fxh{ font-weight:700; font-size:.95rem }
-  .fxex .fxs{ font-size:.85rem; color:var(--muted); margin:3px 0 8px }
+  .fxex .fxs{ font-size:.85rem; color:var(--muted); margin:0 0 8px }
   .fxrow{ padding:9px 0; border-top:1px dashed var(--line) }
   .fxrow .fxcase{ display:block; font-weight:700; font-size:.86rem; margin-bottom:6px }
   .fxouts{ display:flex; flex-wrap:wrap; gap:8px }
@@ -410,25 +408,38 @@
         <div class="ftex" data-i18n="ft_hedEx"></div>
       </details>
     </div>
-    <div class="fxex">
-      <p class="fxh" data-i18n="fxExH">📈 A worked example: shares flat, the dollar moves 5%</p>
-      <p class="fxs" data-i18n="fxExS">You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.</p>
-      <div class="fxrow">
-        <span class="fxcase" data-i18n="fxCase1">If the dollar rises 5%</span>
+    <details class="adv" style="margin-top:14px">
+      <summary data-i18n="adExH">📈 Worked example: ACC vs DIST on the same fund</summary>
+      <div class="adv-body fxex">
+        <p class="fxs" data-i18n="adExS">A world fund returns about 7% in a year: roughly 5% price growth and 2% dividends. Say you hold 100,000 kr.</p>
         <div class="fxouts">
-          <div class="fxout"><b>Unhedged</b><span data-i18n="fxU1">+5%, ends at 10,500 kr (you ride the currency up)</span></div>
-          <div class="fxout"><b>Hedged</b><span data-i18n="fxH1">about 0% minus the hedge fee, 9,980 kr</span></div>
+          <div class="fxout"><b>ACC (accumulating)</b><span data-i18n="adAcc">Nothing is paid out. The full ~7,000 kr (5,000 growth + 2,000 dividends) stays in the fund and compounds. A child is taxed on the yearly gain as the child, so the frikort can absorb it; nothing to reinvest, nothing to self-declare.</span></div>
+          <div class="fxout"><b>DIST (distributing)</b><span data-i18n="adDist">About 2,000 kr is paid to you as cash. For an adult it is the same tax, but you must reinvest the 2,000 kr yourself or it sits idle. For a child whose money was gifted by a parent, that 2,000 kr is taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2), and the bank does not report it, so you must self-declare.</span></div>
         </div>
+        <p class="fxnote" data-i18n="adExNote">For a child, accumulating avoids a parent tax bill and the paperwork; for an adult it saves the manual reinvesting. That is why children's accounts use accumulating funds only.</p>
       </div>
-      <div class="fxrow">
-        <span class="fxcase" data-i18n="fxCase2">If the dollar falls 5%</span>
-        <div class="fxouts">
-          <div class="fxout"><b>Unhedged</b><span data-i18n="fxU2">-5%, ends at 9,500 kr (you ride the currency down)</span></div>
-          <div class="fxout"><b>Hedged</b><span data-i18n="fxH2">about 0% minus the hedge fee, 9,980 kr</span></div>
+    </details>
+    <details class="adv" style="margin-top:10px">
+      <summary data-i18n="fxExH">📈 Worked example: shares flat, the dollar moves 5%</summary>
+      <div class="adv-body fxex">
+        <p class="fxs" data-i18n="fxExS">You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.</p>
+        <div class="fxrow">
+          <span class="fxcase" data-i18n="fxCase1">If the dollar rises 5%</span>
+          <div class="fxouts">
+            <div class="fxout"><b>Unhedged</b><span data-i18n="fxU1">+5%, ends at 10,500 kr (you ride the currency up)</span></div>
+            <div class="fxout"><b>Hedged</b><span data-i18n="fxH1">about 0% minus the hedge fee, 9,980 kr</span></div>
+          </div>
         </div>
+        <div class="fxrow">
+          <span class="fxcase" data-i18n="fxCase2">If the dollar falls 5%</span>
+          <div class="fxouts">
+            <div class="fxout"><b>Unhedged</b><span data-i18n="fxU2">-5%, ends at 9,500 kr (you ride the currency down)</span></div>
+            <div class="fxout"><b>Hedged</b><span data-i18n="fxH2">about 0% minus the hedge fee, 9,980 kr</span></div>
+          </div>
+        </div>
+        <p class="fxnote" data-i18n="fxExNote">Hedged hands you the same result either way: it removes the swing, up and down, for a small certain cost (~0.1-0.3% a year, about 0.2% here). Over a long stock horizon these moves tend to even out, so many investors skip hedging on shares. On bonds, where the return is small, currency noise can swamp it, so hedging is more common there.</p>
       </div>
-      <p class="fxnote" data-i18n="fxExNote">Hedged hands you the same result either way: it removes the swing, up and down, for a small certain cost (~0.1-0.3% a year, about 0.2% here). Over a long stock horizon these moves tend to even out, so many investors skip hedging on shares. On bonds, where the return is small, currency noise can swamp it, so hedging is more common there.</p>
-    </div>
+    </details>
     <div class="ftwarn" data-i18n="ftTrap1">⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.</div>
   </section>
 
@@ -735,7 +746,12 @@ en: {
   ft_distEx:"Real example: the SAME index often exists as two classes - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, pays cash dividends about quarterly, while the “(Acc)” class IE00BK5BQT80 reinvests them. Note the different ISINs. An adult who wants income can use Dist; for a child it leaks parent-taxed dividends, so choose the Acc class. Illustration only - verify the ISIN yourself.",
   ft_unhEx:"Real example: a plain “USD” world ETF held in your DKK depot moves with the USD/DKK rate. Over a 15-20 year equity horizon most investors accept this, and because DKK is pegged to the euro a EUR-denominated class barely moves versus DKK. Cheaper than hedged, and the Danish tax treatment is identical.",
   ft_hedEx:"Real example: a bond ETF named “… EUR Hedged” or “… DKK Hedged” removes the currency swings that would otherwise swamp a bond's small return - handy for the defensive sleeve. It costs about 0.1-0.3%/yr more, and crucially the hedged class has its OWN ISIN: it can be OFF the positivliste even when the unhedged class is ON it. Check the exact ISIN before buying.",
-  fxExH:"📈 A worked example: shares flat, the dollar moves 5%",
+  adExH:"📈 Worked example: ACC vs DIST on the same fund",
+  adExS:"A world fund returns about 7% in a year: roughly 5% price growth and 2% dividends. Say you hold 100,000 kr.",
+  adAcc:"Nothing is paid out. The full ~7,000 kr (5,000 growth + 2,000 dividends) stays in the fund and compounds. A child is taxed on the yearly gain as the child, so the frikort can absorb it; nothing to reinvest, nothing to self-declare.",
+  adDist:"About 2,000 kr is paid to you as cash. For an adult it is the same tax, but you must reinvest the 2,000 kr yourself or it sits idle. For a child whose money was gifted by a parent, that 2,000 kr is taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2), and the bank does not report it, so you must self-declare.",
+  adExNote:"For a child, accumulating avoids a parent tax bill and the paperwork; for an adult it saves the manual reinvesting. That is why children's accounts use accumulating funds only.",
+  fxExH:"📈 Worked example: shares flat, the dollar moves 5%",
   fxExS:"You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.",
   fxCase1:"If the dollar rises 5%",
   fxU1:"+5%, ends at 10,500 kr (you ride the currency up)",
@@ -895,7 +911,12 @@ da: {
   ft_distEx:"Eksempel: det SAMME indeks findes ofte i to klasser - “Vanguard FTSE All-World UCITS ETF (Dist)”, ISIN IE00B3RBWM25, udbetaler kontant udbytte cirka kvartalsvis, mens “(Acc)”-klassen IE00BK5BQT80 geninvesterer. Bemærk de forskellige ISIN'er. En voksen, der vil have udbytte, kan bruge Dist; for et barn lækker den forældrebeskattet udbytte, så vælg Acc-klassen. Kun illustration - tjek ISIN selv.",
   ft_unhEx:"Eksempel: en almindelig “USD”-verdens-ETF i dit DKK-depot følger USD/DKK-kursen. Over en aktiehorisont på 15-20 år accepterer de fleste det, og fordi kronen er bundet til euroen, bevæger en EUR-noteret klasse sig knap nok mod DKK. Billigere end hedged, og den danske beskatning er den samme.",
   ft_hedEx:"Eksempel: en obligations-ETF med “… EUR Hedged” eller “… DKK Hedged” i navnet fjerner de valutaudsving, der ellers ville overdøve obligationens lille afkast - nyttigt til den defensive del. Det koster cirka 0,1-0,3%/år mere, og vigtigst: den hedgede klasse har sin EGEN ISIN: den kan være UDEN FOR positivlisten, selv når den uafdækkede er PÅ. Tjek den præcise ISIN, før du køber.",
-  fxExH:"📈 Et regneeksempel: aktier flade, dollaren bevæger sig 5%",
+  adExH:"📈 Regneeksempel: ACC vs DIST på samme fond",
+  adExS:"En verdensfond giver cirka 7% på et år: omtrent 5% kursvækst og 2% udbytte. Sig, du har 100.000 kr.",
+  adAcc:"Intet udbetales. Hele ~7.000 kr (5.000 vækst + 2.000 udbytte) bliver i fonden og forrentes. Et barn beskattes af årets gevinst som barnet, så frikortet kan opsuge det; intet at geninvestere, intet at selvangive.",
+  adDist:"Cirka 2.000 kr udbetales kontant. For en voksen er det samme skat, men du skal selv geninvestere de 2.000 kr, ellers ligger de stille. For et barn, hvis penge er givet af en forælder, beskattes de 2.000 kr hos FORÆLDEREN indtil 18 år (kildeskatteloven § 5, stk. 2), og banken indberetter det ikke, så du skal selvangive det.",
+  adExNote:"For et barn undgår akkumulerende en forældreskat og papirarbejdet; for en voksen sparer det den manuelle geninvestering. Derfor bruger børnekonti kun akkumulerende fonde.",
+  fxExH:"📈 Regneeksempel: aktier flade, dollaren bevæger sig 5%",
   fxExS:"Du lægger 10.000 kr i en verdensfond, og i løbet af året står aktierne selv stille (0%). Kun dollaren bevæger sig mod kronen.",
   fxCase1:"Hvis dollaren stiger 5%",
   fxU1:"+5%, ender på 10.500 kr (du følger valutaen op)",
