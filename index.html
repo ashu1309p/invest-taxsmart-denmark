@@ -377,6 +377,9 @@
   details.acct:hover{ border-color:#C4CFDC; box-shadow:var(--shadow-sm) }
   details.acct[open]{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent) }
   details.acct .ftex{ background:var(--sunken); border:1px solid var(--line); color:var(--ink-2) }
+  /* default size for .ftex used OUTSIDE details.acct (e.g. the positivliste "Case 1/2" worked examples),
+     which otherwise fall back to the 16px body size. details.acct .ftex stays .77rem (more specific). */
+  .ftex{ font-size:.85rem; line-height:1.5; color:var(--ink-2) }
   .panel.ref details.acct{ background:#fff }
 
   /* ---------- payoff module (smart vs naive) ---------- */
