@@ -501,6 +501,14 @@
   .brand:hover{ opacity:.92 }
   .brand .dot{ transition:transform .18s var(--ease) }
   .brand:hover .dot,.brand:focus-visible .dot{ transform:scale(1.2) }
+
+  /* ---------- mobile fix: tax chip must not collide with a long bucket name ---------- */
+  @media(max-width:600px){
+    .fall .top{ display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:9px; row-gap:8px; flex-wrap:initial }
+    .fall .top .rank{ grid-column:1; grid-row:1 }
+    .fall .top .nm{ grid-column:2; grid-row:1; min-width:0 }
+    .fall .top .chip{ grid-column:2; grid-row:2; justify-self:start }
+  }
 </style>
 </head>
 <body>
