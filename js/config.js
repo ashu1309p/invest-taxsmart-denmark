@@ -4,7 +4,7 @@
    so the two pages can never drift apart.
    Verified 2026-06-12 against skat.dk / skm.dk.
 
-   >>> UPDATE EACH JANUARY <<< (see MAINTENANCE):
+   >>> UPDATE EACH JANUARY <<< (see MAINTENANCE.md):
    taxYear, verifiedDate, personfradrag, askCeiling, aktieThreshold,
    aktieThresholdMarried, giftCapPerGiver, kapThresholdApprox, kapThresholdMarriedApprox.
    Usually law-only (rarely change): the *Rate fields and boYearlyCap / boLifetimeCap.
