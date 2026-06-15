@@ -815,28 +815,10 @@
   <button class="sb-x" onclick="this.closest('.stickybar').remove()" aria-label="Dismiss">&times;</button>
 </div>
 
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with play.html). Update it there each January. -->
+<script src="js/config.js"></script>
 <script>
-/* ============================================================
-   TAX_YEAR_CONFIG: the ONLY place annual amounts live.
-   Verified 2026-06-12 against skat.dk / skm.dk via web search.
-
-   >>> UPDATE EACH JANUARY <<<  (see MAINTENANCE.md)
-   New numbers: skm.dk -> "Satser og beloebsgraenser". Edit this SAME
-   block in BOTH index.html and play.html, then re-upload both.
-   Yearly-changing fields: taxYear, verifiedDate, personfradrag,
-   askCeiling, aktieThreshold, aktieThresholdMarried, giftCapPerGiver,
-   kapThresholdApprox, kapThresholdMarriedApprox.
-   Usually unchanged (law-only): the *Rate fields and boYearlyCap/boLifetimeCap.
-   ============================================================ */
-const TAX_YEAR_CONFIG = {
-  taxYear: 2026, verifiedDate: "2026-06-12",
-  giftCapPerGiver: 80600, giftTaxRate: 0.15,
-  personfradrag: 54100,
-  askCeiling: 174200, askRate: 0.17,
-  aktieThreshold: 79400, aktieThresholdMarried: 158800, aktieRateLow: 0.27, aktieRateHigh: 0.42,
-  kapThresholdApprox: 55000, kapThresholdMarriedApprox: 110000, kapRateLowApprox: 0.37, kapRateHighApprox: 0.42,
-  boYearlyCap: 6000, boLifetimeCap: 72000,
-};
+/* TAX_YEAR_CONFIG now lives in js/config.js (loaded above) so the two pages cannot drift. */
 
 /* ============ PURE ROUTER MATH (node-tested) ============ */
 function aktieTax(gain, cfg) {
