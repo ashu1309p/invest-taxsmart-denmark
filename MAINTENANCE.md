@@ -33,19 +33,31 @@ green on both, and redeploy. Every visible amount is year-tagged, so a stale num
 ## (b) Around December/January: refresh the positivliste snapshot
 
 The ISIN checker reads `data/positivliste.json`. SKAT has no live API and the file is CORS-blocked in
-the browser, so a GitHub Action snapshots it. To make it real / refresh it:
+the browser, so a GitHub Action snapshots it weekly (Mondays) and on manual dispatch. The committed
+snapshot is the real ABIS list (~5,200 ISINs), not sample data.
 
-1. Open SKAT's page: https://skat.dk/erhverv/ekapital/vaerdipapirer and copy the current
-   "Liste over aktiebaserede investeringsselskaber" **.xlsx** direct link.
-2. In the repo: **Settings → Secrets and variables → Actions → Variables → New variable**
-   `POSITIVLISTE_URL` = that link. (Also ensure **Settings → Actions → General → Workflow permissions =
-   Read and write**, so the job can commit the refreshed JSON.)
-3. **Actions → "Refresh positivliste snapshot" → Run workflow** (manual trigger). It also runs weekly.
+To refresh it:
+
+1. Find the current "Liste over aktiebaserede investeringsselskaber" **.xlsx** direct link. It lives on
+   SKAT's IFPA page (linked from https://skat.dk/erhverv/ekapital/vaerdipapirer ):
+   https://skat.dk/erhverv/ekapital/vaerdipapirer/beviser-og-aktier-i-investeringsforeninger-og-selskaber-ifpa
+   — the link looks like `https://skat.dk/media/<id>/...-abis-liste-...xlsx`. SKAT renames the file (and
+   its `/media/` id) roughly monthly, so re-copy the current link each time. *(Confirmed 2026-06-15:
+   `.../media/r1dn5su0/maj-2026-abis-liste-til-offentliggoerelse-2021-2026.xlsx`.)*
+2. In the repo: **Settings → Secrets and variables → Actions → Variables →** set `POSITIVLISTE_URL` to that
+   link. (Ensure **Settings → Actions → General → Workflow permissions = Read and write** so the job can
+   commit the refreshed JSON.)
+3. **Actions → "Refresh positivliste snapshot" → Run workflow.** The build script
+   (`scripts/build_positivliste.py`) picks the sheet for the current year, finds the ISIN column by a
+   case-insensitive substring (so SKAT's `ISIN-kode/-Code` header is matched), and logs an **AUDIT**
+   trail (source URL, byte size, chosen sheet, header row, matched ISIN/name columns, final count) so
+   each run is checkable in the Action log.
 4. Confirm `data/positivliste.json` now shows `"sample": false` and a realistic `count` (thousands of
    ISINs). The checker then drops the "sample data" warning and shows the real `listDate`.
 
-The job has a guard: a failed, empty, or >25%-smaller download fails loudly and does **not** overwrite
-the known-good file.
+Guards (fail loudly, keep the good JSON): download failure, unparseable workbook, no ISIN column, zero
+ISINs, or a new count >25% below the committed file. If `POSITIVLISTE_URL` is unset the job fails loudly
+and does **not** overwrite the committed snapshot.
 
 ## (c) Regenerate the social preview image
 

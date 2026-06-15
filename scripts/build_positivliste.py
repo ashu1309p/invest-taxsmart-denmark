@@ -52,29 +52,39 @@ def pick_sheet(wb):
     return wb[wb.sheetnames[-1]]
 
 def find_columns(ws):
-    """Locate the ISIN column (and a name column if present) from the header row."""
+    """Locate the ISIN column (and a name column if present) from the header row.
+
+    ISIN match is a case-insensitive SUBSTRING so headers like "ISIN-kode" or
+    "Fondskode (ISIN)" are found, not just an exact "isin". Returns the matched
+    header texts too, so the run is auditable.
+    """
     isin_col = name_col = None
+    isin_hdr = name_hdr = ""
     for row in ws.iter_rows(min_row=1, max_row=8):
         for cell in row:
-            v = str(cell.value or "").strip().lower()
-            if isin_col is None and v == "isin":
-                isin_col = cell.column
+            raw = str(cell.value or "").strip()
+            v = raw.lower()
+            if isin_col is None and "isin" in v:
+                isin_col, isin_hdr = cell.column, raw
             if name_col is None and ("navn" in v or "name" in v or "fond" in v):
-                name_col = cell.column
+                name_col, name_hdr = cell.column, raw
         if isin_col:
-            return isin_col, name_col, row[0].row
-    return None, None, None
+            return isin_col, name_col, row[0].row, isin_hdr, name_hdr
+    return None, None, None, "", ""
 
 def main():
     url = os.environ.get("POSITIVLISTE_URL", DEFAULT_URL).strip()
     if not url:
         fail("No POSITIVLISTE_URL set and DEFAULT_URL is empty. Provide SKAT's .xlsx link.")
 
+    print(f"AUDIT source URL: {url}")
     try:
         resp = requests.get(url, timeout=60)
         resp.raise_for_status()
     except Exception as e:
         fail(f"Download failed: {e}")
+    print(f"AUDIT HTTP {resp.status_code}, {len(resp.content)} bytes, "
+          f"content-type {resp.headers.get('Content-Type','?')!r}")
 
     try:
         wb = load_workbook(io.BytesIO(resp.content), read_only=True, data_only=True)
@@ -82,9 +92,15 @@ def main():
         fail(f"Could not parse workbook (truncated or not an xlsx?): {e}")
 
     ws = pick_sheet(wb)
-    isin_col, name_col, header_row = find_columns(ws)
+    print(f"AUDIT sheets available: {wb.sheetnames}")
+    print(f"AUDIT chosen sheet: {ws.title!r}")
+
+    isin_col, name_col, header_row, isin_hdr, name_hdr = find_columns(ws)
     if not isin_col:
         fail("Could not find an 'ISIN' column header in the sheet. Layout may have changed.")
+    print(f"AUDIT header row: {header_row}")
+    print(f"AUDIT ISIN column: {isin_col} (header {isin_hdr!r})")
+    print(f"AUDIT name column: {name_col} (header {name_hdr!r})")
 
     isins = {}
     for row in ws.iter_rows(min_row=header_row + 1):
@@ -99,6 +115,7 @@ def main():
         isins[code] = {"name": name, "status": "on"}
 
     count = len(isins)
+    print(f"AUDIT extracted ISIN count: {count}")
     if count == 0:
         fail("Extracted 0 ISINs — refusing to overwrite the committed snapshot.")
 
