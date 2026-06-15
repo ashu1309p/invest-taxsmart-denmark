@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Wrapper Race - Danish investment tax, explained by playing</title>
 <meta name="description" content="Interactive, plain-language explainer of Danish retail investment taxation for new parents, expats and first-time investors. Educational only.">
-<meta name="theme-color" content="#FAF6EF">
+<meta name="theme-color" content="#EEF2F6">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <style>
   :root{
     --bg:#FAF6EF; --card:#FFFFFF; --ink:#27272E; --muted:#6B6B76;
@@ -184,13 +187,200 @@
   .stickybar{ padding-bottom:calc(9px + env(safe-area-inset-bottom)) }
   .stickybar .sb-x{ position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:0; color:#9FB7B2; font-size:1rem; cursor:pointer; padding:4px 8px; line-height:1 }
   @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
+
+  /* ============================================================
+     REDESIGN v2 — NORDIC FINTECH DASHBOARD (matches Plan page)
+     Pure visual layer. Redefines tokens + elevates each component.
+     No class/id renamed, no logic touched.
+     ============================================================ */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#94A3B8;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08; --warn-bg:#FFFBEB;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --info:#3B5BDB; --info-soft:#EEF3FC; --info-line:#C6D4EE; --info-ink:#27324D;
+    --c-bo:#2A9D8F; --c-ask:#4361EE; --c-off:#E08A00; --c-on:#C0427C;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px; --ease:cubic-bezier(.4,0,.2,1);
+  }
+  html{ color-scheme:light }
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{ max-width:744px }
+  .ctl output,.rcard .end,.rcard .tax,output,.yeartag,.stepper b,.capbar{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1 }
+
+  /* ---------- top bar (glass) ---------- */
+  header.site{ background:rgba(248,250,252,.78); backdrop-filter:saturate(180%) blur(14px); -webkit-backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--line) }
+  .brand{ color:var(--ink); letter-spacing:-.01em }
+  .brand .dot{ width:11px; height:11px; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft) }
+  .tabs{ background:#E7ECF3; padding:4px; gap:3px; border:1px solid var(--line) }
+  .tabs .tab{ color:var(--muted); border-radius:999px }
+  .tabs .tab.active{ background:#fff; color:var(--accent); box-shadow:0 1px 2px rgba(15,23,42,.14),0 1px 1px rgba(15,23,42,.06) }
+  .lang-toggle{ border-color:var(--accent-line); background:#fff; overflow:hidden }
+  .lang-toggle button{ color:var(--muted) }
+  .lang-toggle button.active{ background:var(--accent); color:#fff }
+
+  /* ---------- hero ---------- */
+  h1{ font-size:clamp(2.1rem,6vw,2.75rem)!important; font-weight:800; line-height:1.06; letter-spacing:-.028em; color:var(--ink) }
+  .tagline{ color:var(--muted); font-size:1.08rem }
+  .yeartag{ background:var(--accent-soft); color:var(--accent-ink); border:1px solid var(--accent-line); font-weight:700; padding:1px 8px; border-radius:7px }
+
+  /* ---------- cards / surfaces ---------- */
+  section{ scroll-margin-top:88px }
+  .panel{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px }
+  @media(min-width:560px){ .panel{ padding:30px } }
+  .panel.ref{ background:var(--sunken); border:1px solid #E7ECF2; box-shadow:none }
+  .panel.tool{ border-color:#D9E1EB; box-shadow:var(--shadow-lg) }
+  h1,h2,h3{ color:var(--ink) }
+  h2,h2.sec,#gifts h2,#race h2{ font-weight:800; letter-spacing:-.015em }
+  h3{ font-weight:700 }
+
+  /* ---------- segmented control (mode) ---------- */
+  .mode{ background:#E7ECF3; border:1px solid var(--line); border-radius:14px }
+  .mode button{ color:var(--muted); transition:color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease) }
+  .mode button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.16),0 1px 1px rgba(15,23,42,.06) }
+
+  /* ---------- inputs / sliders ---------- */
+  .ctl label{ color:var(--ink-2) }
+  .ctl output{ color:var(--accent); font-weight:800 }
+  .ctl .equiv{ color:var(--muted) }
+  input[type=range]::-webkit-slider-runnable-track{ background:linear-gradient(to right,var(--accent) var(--fill,50%),#DBE2EB var(--fill,50%)); height:8px; border-radius:6px }
+  input[type=range]::-webkit-slider-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28),0 0 0 6px rgba(15,118,110,.10); transition:box-shadow .18s var(--ease),transform .1s var(--ease) }
+  input[type=range]:hover::-webkit-slider-thumb{ box-shadow:0 2px 6px rgba(15,23,42,.30),0 0 0 9px rgba(15,118,110,.14) }
+  input[type=range]:active::-webkit-slider-thumb{ transform:scale(1.06) }
+  input[type=range]::-moz-range-track{ background:#DBE2EB; height:8px; border-radius:6px }
+  input[type=range]::-moz-range-progress{ background:var(--accent); height:8px; border-radius:6px }
+  input[type=range]::-moz-range-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28) }
+
+  /* ---------- race chart + legend ---------- */
+  .legend{ color:var(--ink-2) }
+  .legend i{ border-radius:99px; height:5px }
+
+  /* ---------- result metric cards ---------- */
+  .rcard{ border:1px solid var(--line); border-top:4px solid var(--cc,#999); border-radius:14px; background:#fff; box-shadow:var(--shadow-sm); transition:box-shadow .2s var(--ease),transform .2s var(--ease) }
+  .rcard:hover{ box-shadow:var(--shadow); transform:translateY(-2px) }
+  .rcard.dim{ opacity:.5; box-shadow:none; transform:none }
+  .rcard h3{ color:var(--ink-2) }
+  .rcard .end{ color:var(--ink); font-weight:800; font-size:1.12rem; letter-spacing:-.01em }
+  .rcard .tax{ color:var(--muted) }
+  .rcard .tax b{ color:var(--danger) }
+  .rcard .spill{ color:var(--muted) }
+
+  /* ---------- explainer accordion ---------- */
+  details.why{ background:#fff; border:1px solid var(--line); border-radius:var(--radius-sm); transition:border-color .18s var(--ease),box-shadow .18s var(--ease) }
+  details.why:hover{ border-color:#CDD7E2 }
+  details.why>summary{ color:var(--accent); font-weight:700 }
+
+  /* ---------- gift planner ---------- */
+  .chips button{ border:1.5px solid var(--line); background:#fff; color:var(--muted); transition:border-color .18s var(--ease),background .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease) }
+  .chips button:hover{ border-color:#C4CFDC; background:#FAFCFE }
+  .chips button.active{ border-color:var(--accent); background:var(--accent-soft); color:var(--accent-ink); box-shadow:inset 0 0 0 1px var(--accent) }
+  .stepper b{ color:var(--ink) }
+  .stepper button{ border:1.5px solid var(--accent-line); color:var(--accent); background:#fff; transition:background .18s var(--ease),border-color .18s var(--ease) }
+  .stepper button:hover{ background:var(--accent-soft); border-color:var(--accent) }
+  .capbar{ border:1px solid var(--line); border-radius:9px; box-shadow:inset 0 1px 2px rgba(15,23,42,.06) }
+  .capbar .seg-ok{ background:var(--c-bo) }
+  .capbar .seg-ok:nth-child(2n){ background:#23897C }
+  .capbar .seg-over{ background:var(--danger) }
+  .caplegend{ color:var(--muted) }
+  .verdict{ border-radius:12px }
+  .verdict.ok{ background:var(--success-soft); border:1px solid var(--success-line); border-left:4px solid var(--success); color:var(--success-ink) }
+  .verdict.over{ background:var(--danger-soft); border:1px solid var(--danger-line); border-left:4px solid var(--danger); color:var(--danger-ink) }
+  ul.checklist li{ color:var(--ink-2); border-bottom-color:var(--line) }
+  ul.checklist li::before{ color:var(--accent) }
+
+  /* ---------- callouts: trap (warn) / pro (info) ---------- */
+  .trapcard{ background:var(--warn-soft); border:1px solid var(--warn-line); border-left:4px solid var(--warn); border-radius:12px; color:var(--warn-ink) }
+  .trapcard b.t{ color:var(--warn-ink) }
+  .pro{ background:var(--info-soft); border:1px solid var(--info-line); border-left:4px solid var(--info); border-radius:12px; color:var(--info-ink) }
+
+  /* ---------- tooltips ---------- */
+  .term{ border-bottom:1.5px dotted var(--accent) }
+  button.info{ border:1.5px solid var(--accent); color:var(--accent); background:#fff; transition:background .18s var(--ease) }
+  button.info:hover{ background:var(--accent-soft) }
+  .tipbox{ background:#0F172A; color:#E2E8F0; border-radius:10px; box-shadow:var(--shadow-lg) }
+  .tipbox .ref{ color:#94A3B8 }
+
+  /* ---------- sources / footer / sticky ---------- */
+  .sources a{ color:var(--accent); font-weight:600 }
+  .verified,.testbadge{ color:var(--muted) }
+  .testbadge.fail{ color:var(--danger) }
+  .stickybar{ background:rgba(15,23,42,.96); color:#CBD5E1; backdrop-filter:blur(6px); border-top:1px solid rgba(255,255,255,.06) }
+  .stickybar a{ color:#5EEAD4; font-weight:600 }
+  .stickybar .sb-x{ color:#94A3B8 }
+
+  /* ---------- focus / motion ---------- */
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
+  a,button,summary,.chips button,.tabs .tab,.lang-toggle button{ transition:color .18s var(--ease),background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease) }
+  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
+
+  /* ============================================================
+     UX POLISH v3 — cause-and-effect flash, tax-home icons,
+     sticky context pill. Visual/feedback only.
+     ============================================================ */
+  /* 1. cause-and-effect data flash */
+  @keyframes flashUpdate{ 0%{ background-color:var(--accent-soft) } 100%{ background-color:transparent } }
+  .flash-update{ animation:flashUpdate .8s var(--ease); border-radius:6px; box-decoration-break:clone; -webkit-box-decoration-break:clone }
+
+  /* 2. tax-home icons (monochromatic, inherit strategy colour) */
+  .ti{ width:18px; height:18px; flex:none; display:inline-block; vertical-align:-3px }
+  .legend .legic,.rcard h3 .legic{ display:inline-flex }
+  .legend .ti{ width:14px; height:14px }
+  .rcard h3 .ti{ width:16px; height:16px }
+
+  /* 3. sticky context pill */
+  .ctx-pill{
+    position:fixed; top:64px; left:50%; transform:translate(-50%,-12px); z-index:60;
+    display:flex; align-items:center; max-width:calc(100vw - 24px); white-space:nowrap;
+    background:rgba(255,255,255,.82); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border:1px solid var(--line); box-shadow:var(--shadow); border-radius:999px;
+    padding:8px 16px; font-size:.82rem; font-weight:700; color:var(--ink);
+    overflow:hidden; text-overflow:ellipsis;
+    opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
+  }
+  .ctx-pill.show{ opacity:1; transform:translate(-50%,0); pointer-events:auto }
+  .ctx-pill b{ color:var(--accent); font-variant-numeric:tabular-nums }
+  .ctx-pill .sep{ color:var(--muted-2); margin:0 9px; font-weight:400 }
+  @media(max-width:600px){ .ctx-pill{ top:96px } }
+
+  /* ============================================================
+     UX POLISH v4 — nav: auto-hiding header, clickable pill, home brand
+     ============================================================ */
+  /* auto-hiding top header */
+  header.site{ transition:transform .28s var(--ease); will-change:transform }
+  header.site.header-hidden{ transform:translateY(-100%) }
+  /* context pill becomes a "back to calculator" button + lifts into recovered space */
+  .ctx-pill{ cursor:pointer; transition:opacity .25s var(--ease), transform .2s var(--ease), top .28s var(--ease) }
+  .ctx-pill .ctx-up{ color:var(--accent); font-weight:800; margin-right:7px; display:inline-block }
+  .ctx-pill.lifted{ top:12px }
+  @media(max-width:600px){ .ctx-pill.lifted{ top:12px } }
+  .ctx-pill.show:hover{ transform:translate(-50%,-1px) scale(1.02); box-shadow:var(--shadow-lg) }
+  .ctx-pill.show:active{ transform:translate(-50%,0) scale(.98) }
+  /* brand acts as a global home link */
+  .brand{ text-decoration:none; color:var(--ink) }
+  .brand:hover{ opacity:.92 }
+  .brand .dot{ transition:transform .18s var(--ease) }
+  .brand:hover .dot,.brand:focus-visible .dot{ transform:scale(1.2) }
 </style>
 </head>
 <body>
 
 <header class="site">
   <div class="site-inner">
-    <div class="brand"><span class="dot"></span><span data-i18n="brand">The Wrapper Race</span></div>
+    <a class="brand" href="index.html"><span class="dot"></span><span data-i18n="brand">The Wrapper Race</span></a>
     <nav class="tabs"><a class="tab" href="index.html" data-i18n="tabPlan">Plan</a><a class="tab active" href="play.html" data-i18n="tabPlay">Play</a></nav>
     <div class="lang-toggle" role="group" aria-label="Language">
       <button id="lang-en" class="active">EN</button>
@@ -198,6 +388,8 @@
     </div>
   </div>
 </header>
+
+<div id="ctxPill" class="ctx-pill" role="button" tabindex="-1" aria-hidden="true"></div>
 
 <div class="wrap">
 
@@ -275,10 +467,10 @@
     <div class="trapcard">
       <b class="t" data-i18n="trapTitle">⚠ The interest trap (parent attribution)</b>
       <span data-i18n="trapBody">Interest and dividends on money gifted by a parent are taxed at the PARENT until the year the child turns 18 - and banks do not report this automatically; you must self-declare. Annual value gains on accumulating fund units are taxed at the child instead. That is why children's gifted savings go into accumulating funds, never idle cash or distributing funds.</span>
-      <span class="ref" style="display:block;margin-top:6px;font-size:.78rem;color:#8a6a45;font-style:italic">kildeskatteloven § 5, stk. 2 · SKM2024.25.SR · info.skat.dk C.A.9.3</span>
+      <span class="ref" style="display:block;margin-top:6px;font-size:.78rem;color:var(--warn-ink);opacity:.8;font-style:italic">kildeskatteloven § 5, stk. 2 · SKM2024.25.SR · info.skat.dk C.A.9.3</span>
     </div>
 
-    <div class="trapcard" style="background:#EDF6F1;border-color:#9CC9AB">
+    <div class="trapcard" style="background:var(--success-soft);border:1px solid var(--success-line);border-left:4px solid var(--success);color:var(--success-ink)">
       <b class="t" data-i18n="gpTitle">🎁 The grandparent exception</b>
       <span data-i18n="gpBody">Gifts from grandparents are NOT covered by parent attribution: all returns are taxed at the child immediately. Same annual cap per giver applies.</span>
     </div>
@@ -299,7 +491,7 @@
 
   <!-- ====== FEEDBACK ====== -->
   <section>
-    <a href="https://tally.so/r/7RPVv0" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:var(--ink);background:#FBF7EF;border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px;font-weight:700">
+    <a href="https://tally.so/r/7RPVv0" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:var(--ink);background:var(--accent-soft);border:1.5px solid var(--accent-line);border-radius:var(--radius);padding:16px;font-weight:700">
       <span data-i18n="feedbackTitle">💬 Found a mistake or have feedback? Tell me</span>
       <small style="display:block;font-weight:600;color:var(--muted);margin-top:2px" data-i18n="feedbackSub">A 1-minute form. This is a personal project and your input shapes it.</small>
     </a>
@@ -630,11 +822,17 @@ function renderStrings(){
 }
 
 /* ============ RENDER: race chart ============ */
+const ICONS = {
+  shield:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.3 12l1.8 1.8 3.7-3.8"/></svg>`,
+  trend:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 8h4v4"/></svg>`,
+  caseCheck:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"/><path d="M9 13.5l2 2 4-4"/></svg>`,
+  folder:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+};
 const STRATS = [
-  {id:"bo",  color:"var(--c-bo)",  hex:"#2A9D8F", nameKey:"wrapBo"},
-  {id:"ask", color:"var(--c-ask)", hex:"#4361EE", nameKey:"wrapAsk"},
-  {id:"offlist", color:"var(--c-off)", hex:"#E08A00", nameKey:"wrapOff"},
-  {id:"onlist",  color:"var(--c-on)",  hex:"#C0427C", nameKey:"wrapOn"},
+  {id:"bo",  color:"var(--c-bo)",  hex:"#2A9D8F", nameKey:"wrapBo",  icon:ICONS.shield},
+  {id:"ask", color:"var(--c-ask)", hex:"#4361EE", nameKey:"wrapAsk", icon:ICONS.trend},
+  {id:"offlist", color:"var(--c-off)", hex:"#E08A00", nameKey:"wrapOff", icon:ICONS.folder},
+  {id:"onlist",  color:"var(--c-on)",  hex:"#C0427C", nameKey:"wrapOn",  icon:ICONS.caseCheck},
 ];
 
 function renderRace(){
@@ -676,14 +874,14 @@ function renderRace(){
     c.style.strokeDashoffset = 0;
   });
   // legend
-  $("legend").innerHTML = active.map(s=>`<span><i style="background:${s.hex}"></i>${t(s.nameKey)}</span>`).join("");
+  $("legend").innerHTML = active.map(s=>`<span><span class="legic" style="color:${s.hex}">${s.icon||""}</span>${t(s.nameKey)}</span>`).join("");
   // cards
   $("cards").innerHTML = STRATS.map(s=>{
-    if(!res[s.id]) return `<div class="rcard dim" style="--cc:${s.hex}"><h3>${t(s.nameKey)}</h3><p class="tax">${t("boAdultNote")}</p></div>`;
+    if(!res[s.id]) return `<div class="rcard dim" style="--cc:${s.hex}"><h3><span class="legic" style="color:${s.hex}">${s.icon||""}</span>${t(s.nameKey)}</h3><p class="tax">${t("boAdultNote")}</p></div>`;
     const r = res[s.id];
     const spill = r.spillEnd > 1 ? `<p class="spill">${t("spillNote")}: ${kr(r.spillEnd)}</p>` : "";
     return `<div class="rcard" style="--cc:${s.hex}">
-      <h3>${t(s.nameKey)}</h3>
+      <h3><span class="legic" style="color:${s.hex}">${s.icon||""}</span>${t(s.nameKey)}</h3>
       <p class="end">${kr(r.endValue)}</p>
       <p class="tax">${t("cardTax")}: <b>${kr(r.totalTax)}</b> <span class="yeartag">${cfg.taxYear}</span></p>${spill}
     </div>`;
@@ -746,14 +944,16 @@ function refreshOutputs(){
   $("netRet").textContent = fill(t("netNote"), {n:(S.lang==="da" ? String(net).replace(".",",") : net)});
   $("out-swing").textContent = "±"+S.swing+"%";
   $("swingNote").textContent = S.swing>0 ? t("swingNote") : "";
+  updateCtxPill();
 }
 function renderAll(){ renderStrings(); refreshOutputs(); renderRace(); renderGifts(); }
 
 let raceTimer=null;
 function onRaceInput(){
-  refreshOutputs(); save();
-  clearTimeout(raceTimer);
-  raceTimer = setTimeout(renderRace, 160);
+  refreshOutputs();
+  flash([$("out-monthly"),$("out-years"),$("out-ret"),$("out-fee"),$("out-swing")]);
+  save(); clearTimeout(raceTimer);
+  raceTimer = setTimeout(()=>{ renderRace(); flash(document.querySelectorAll("#cards .end, #cards .tax b")); }, 160);
 }
 
 $("in-monthly").addEventListener("input", e=>{ S.monthly=+e.target.value; syncSliderFill(e.target); onRaceInput(); });
@@ -761,7 +961,7 @@ $("in-years").addEventListener("input",   e=>{ S.years=+e.target.value;   syncSl
 $("in-ret").addEventListener("input",     e=>{ S.ret=+e.target.value;     syncSliderFill(e.target); onRaceInput(); });
 $("in-fee").addEventListener("input",     e=>{ S.fee=+e.target.value;     syncSliderFill(e.target); onRaceInput(); });
 $("in-swing").addEventListener("input",   e=>{ S.swing=+e.target.value;   syncSliderFill(e.target); onRaceInput(); });
-$("in-plan").addEventListener("input",    e=>{ S.plan=+e.target.value;    syncSliderFill(e.target); save(); renderGifts(); });
+$("in-plan").addEventListener("input",    e=>{ S.plan=+e.target.value;    syncSliderFill(e.target); save(); renderGifts(); flash([$("out-plan"),$("verdict")]); });
 
 $("mode-child").onclick = ()=>{ S.mode="child"; $("mode-child").classList.add("active"); $("mode-adult").classList.remove("active"); saveGlobal(); save(); renderStrings(); renderRace(); };
 $("mode-adult").onclick = ()=>{ S.mode="adult"; $("mode-adult").classList.add("active"); $("mode-child").classList.remove("active"); saveGlobal(); save(); renderStrings(); renderRace(); };
@@ -771,6 +971,47 @@ $("chip-1p").onclick = ()=>{ S.parents=1; save(); renderGifts(); };
 $("chip-2p").onclick = ()=>{ S.parents=2; save(); renderGifts(); };
 $("gp-minus").onclick = ()=>{ S.gp=Math.max(0,S.gp-1); save(); renderGifts(); };
 $("gp-plus").onclick  = ()=>{ S.gp=Math.min(4,S.gp+1); save(); renderGifts(); };
+
+/* ============ UX POLISH: data flash + sticky context pill ============ */
+function flash(els){
+  (els && els.length!==undefined ? els : [els]).forEach(el=>{
+    if(!el) return; el.classList.remove("flash-update"); void el.offsetWidth; el.classList.add("flash-update");
+  });
+}
+function updateCtxPill(){
+  const pill = $("ctxPill"); if(!pill) return;
+  pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlMonthly")}: <b>${kr(S.monthly)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yrShort")==="år"?"år":"yrs"}`;
+}
+(function navAndPill(){
+  const pill = $("ctxPill"),
+        tool = document.querySelector(".panel.tool"),
+        header = document.querySelector("header.site");
+  if(!pill || !tool) return;
+  const sy = ()=> (document.scrollingElement||document.documentElement).scrollTop || 0;
+  let lastY = sy();
+  function check(){
+    const y = sy(), past = tool.getBoundingClientRect().bottom < 72;
+    if(header){
+      if(y <= 90) header.classList.remove("header-hidden");        // always show near the top
+      else if(y > lastY) header.classList.add("header-hidden");    // scrolling down -> hide
+      else if(y < lastY) header.classList.remove("header-hidden"); // scrolling up -> reveal
+    }
+    pill.classList.toggle("show", past);
+    pill.classList.toggle("lifted", !!header && header.classList.contains("header-hidden"));
+    pill.tabIndex = past ? 0 : -1;
+    pill.setAttribute("aria-hidden", past ? "false" : "true");
+    lastY = y;
+  }
+  function toTool(){
+    const top = tool.getBoundingClientRect().top + ((document.scrollingElement||document.documentElement).scrollTop) - 64;
+    window.scrollTo({ top: Math.max(0, top), behavior:"smooth" });
+  }
+  pill.addEventListener("click", toTool);
+  pill.addEventListener("keydown", e=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toTool(); } });
+  addEventListener("scroll", check, {passive:true});
+  addEventListener("resize", check, {passive:true});
+  check();
+})();
 
 /* ============ init ============ */
 (function init(){

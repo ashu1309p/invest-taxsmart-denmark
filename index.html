@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Money Router - where should each krone go first?</title>
 <meta name="description" content="Set a target amount and see the typical tax-efficient order for filling Danish investment accounts, with the reasoning. Educational only.">
-<meta name="theme-color" content="#FAF6EF">
+<meta name="theme-color" content="#EEF2F6">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <style>
   :root{
     --bg:#FAF6EF; --card:#FFFFFF; --ink:#27272E; --muted:#6B6B76;
@@ -244,17 +247,273 @@
   .fxouts .fxout{ flex:1; min-width:200px; font-size:.84rem; background:var(--sunken); border-radius:8px; padding:8px 10px }
   .fxouts .fxout b{ display:block; color:var(--accent); font-size:.78rem; letter-spacing:.02em; margin-bottom:2px }
   .fxnote{ font-size:.83rem; color:var(--muted); margin-top:10px; line-height:1.5 }
+
+  /* ============================================================
+     REDESIGN v2 — NORDIC FINTECH DASHBOARD
+     Pure visual layer. Redefines design tokens (cascades through
+     every var()-based rule) + elevates each component to a clean,
+     trustworthy SaaS-dashboard aesthetic. No class/id renamed,
+     no logic touched. Account colours kept as the data palette.
+     ============================================================ */
+  :root{
+    /* cool, airy page chrome */
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#94A3B8;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    /* trust accent (teal) */
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    /* semantic */
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --tax-red:#DC2626;
+    /* account / data palette (mirrors the JS hex values) */
+    --c-bo:#2A9D8F; --c-fri:#7BA05B; --c-ask:#4361EE; --c-on:#C0427C; --c-kap:#E08A00;
+    /* shape + depth */
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  html{ color-scheme:light }
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{ max-width:744px }
+  /* numerals: tabular everywhere they carry data */
+  .ctl output,.fall .amts b,.headline,.headline .pos,.vrow .vlab span:last-child,.yc-readout b,
+  .yeartag,.vbar,output,.chip,.amts,.testbadge{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1,"cv01" 1 }
+
+  /* ---------- top bar (glass) ---------- */
+  header.site{ background:rgba(248,250,252,.78); backdrop-filter:saturate(180%) blur(14px); -webkit-backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--line) }
+  .brand{ color:var(--ink); letter-spacing:-.01em }
+  .brand .dot{ width:11px; height:11px; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft) }
+  .tabs{ background:#E7ECF3; padding:4px; gap:3px; border:1px solid var(--line) }
+  .tabs .tab{ color:var(--muted); border-radius:999px }
+  .tabs .tab.active{ background:#fff; color:var(--accent); box-shadow:0 1px 2px rgba(15,23,42,.14),0 1px 1px rgba(15,23,42,.06) }
+  .lang-toggle{ border-color:var(--accent-line); background:#fff; overflow:hidden }
+  .lang-toggle button{ color:var(--muted) }
+  .lang-toggle button.active{ background:var(--accent); color:#fff }
+
+  /* ---------- hero ---------- */
+  .kicker{ color:var(--accent); display:inline-flex; align-items:center; gap:9px; font-weight:700; font-size:.76rem; letter-spacing:.12em }
+  .kicker::before{ content:""; width:22px; height:2px; border-radius:2px; background:var(--accent); display:inline-block }
+  h1{ font-size:clamp(2.1rem,6vw,2.75rem); font-weight:800; line-height:1.06; letter-spacing:-.028em; color:var(--ink) }
+  .tagline{ color:var(--muted); font-size:1.08rem }
+  .yeartag{ background:var(--accent-soft); color:var(--accent-ink); border:1px solid var(--accent-line); font-weight:700; padding:1px 8px; border-radius:7px }
+
+  /* ---------- cards / surfaces ---------- */
+  section{ scroll-margin-top:88px }
+  .panel{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px }
+  @media(min-width:560px){ .panel{ padding:30px } }
+  .panel.ref{ background:var(--sunken); border:1px solid #E7ECF2; box-shadow:none }
+  .panel.tool{ border-color:#D9E1EB; box-shadow:var(--shadow-lg); padding-top:0 }
+  .tool-head{ margin:0 -24px 22px; padding:20px 24px; background:linear-gradient(135deg,#127c73 0%,#0F766E 45%,#0B5D56 100%); color:#fff; border-radius:18px 18px 0 0; position:relative; overflow:hidden }
+  .tool-head::after{ content:""; position:absolute; right:-40px; top:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.10),transparent 70%) }
+  @media(min-width:560px){ .tool-head{ margin:0 -30px 24px; padding:22px 30px } }
+  .tool-head .h{ font-size:1.32rem; font-weight:800; letter-spacing:-.01em }
+  .tool-head .s{ color:rgba(233,247,244,.92); margin-top:4px; font-size:.9rem }
+  h2.sec{ color:var(--ink); font-weight:800; letter-spacing:-.015em }
+  p.sub{ color:var(--muted) }
+  .zone{ color:var(--muted-2); font-weight:700; letter-spacing:.1em }
+
+  /* ---------- chips ---------- */
+  .chip{ box-shadow:0 1px 2px rgba(15,23,42,.14); letter-spacing:.02em; border-radius:7px }
+  .chip.c0{ background:var(--c-bo) } .chip.cF{ background:#5E7E3F } .chip.c17{ background:var(--c-ask) }
+  .chip.c27{ background:var(--c-on) } .chip.c37{ background:#B26B00 }
+
+  /* ---------- segmented controls (mode / yc-toggle) ---------- */
+  .mode,.yc-toggle{ background:#E7ECF3; border:1px solid var(--line); border-radius:14px }
+  .mode button,.yc-toggle button{ color:var(--muted); transition:color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease) }
+  .mode button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.16),0 1px 1px rgba(15,23,42,.06) }
+  .yc-toggle button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.14) }
+
+  /* ---------- inputs / sliders ---------- */
+  .ctl label{ color:var(--ink-2) }
+  .ctl output{ color:var(--accent); font-weight:800 }
+  input[type=range]::-webkit-slider-runnable-track{ background:linear-gradient(to right,var(--accent) var(--fill,50%),#DBE2EB var(--fill,50%)); height:8px; border-radius:6px }
+  input[type=range]::-webkit-slider-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28),0 0 0 6px rgba(15,118,110,.10); transition:box-shadow .18s var(--ease),transform .1s var(--ease) }
+  input[type=range]:hover::-webkit-slider-thumb{ box-shadow:0 2px 6px rgba(15,23,42,.30),0 0 0 9px rgba(15,118,110,.14) }
+  input[type=range]:active::-webkit-slider-thumb{ transform:scale(1.06) }
+  input[type=range]::-moz-range-track{ background:#DBE2EB; height:8px; border-radius:6px }
+  input[type=range]::-moz-range-progress{ background:var(--accent); height:8px; border-radius:6px }
+  input[type=range]::-moz-range-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28) }
+  .riskrow button{ border:1.5px solid var(--line); background:#fff; color:var(--muted); border-radius:12px; transition:border-color .18s var(--ease),background .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease) }
+  .riskrow button small{ color:var(--muted-2) }
+  .riskrow button:hover{ border-color:#C4CFDC; background:#FAFCFE }
+  .riskrow button.active{ border-color:var(--accent); background:var(--accent-soft); color:var(--accent-ink); box-shadow:inset 0 0 0 1px var(--accent) }
+  .riskrow button.active small{ color:var(--accent) }
+
+  /* ---------- progressive-disclosure blocks ---------- */
+  details.adv,details.ycwrap{ border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; transition:border-color .18s var(--ease),box-shadow .18s var(--ease) }
+  details.adv:hover,details.ycwrap:hover{ border-color:#CDD7E2 }
+  details.adv>summary,details.ycwrap>summary{ color:var(--accent); font-weight:700 }
+  details.acct{ border:1px solid var(--line); border-radius:14px; transition:border-color .18s var(--ease),box-shadow .18s var(--ease) }
+  details.acct:hover{ border-color:#C4CFDC; box-shadow:var(--shadow-sm) }
+  details.acct[open]{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent) }
+  details.acct .ftex{ background:var(--sunken); border:1px solid var(--line); color:var(--ink-2) }
+  .panel.ref details.acct{ background:#fff }
+
+  /* ---------- payoff module (smart vs naive) ---------- */
+  .versus{ background:linear-gradient(180deg,#FBFEFD,#EFF7F5); border:1px solid var(--accent-line); border-radius:16px; padding:18px 18px 16px }
+  .headline{ font-size:1.18rem; font-weight:800; color:var(--ink); line-height:1.3 }
+  .headline .pos{ color:var(--accent); font-weight:900; font-size:1.34em; letter-spacing:-.01em }
+  .vsub{ color:var(--muted) }
+  .vrow .vlab{ color:var(--ink-2) }
+  .vrow .vlab span:last-child{ color:var(--muted) }
+  .vbar{ height:28px; border-radius:9px; background:#E5EAF1; box-shadow:inset 0 1px 2px rgba(15,23,42,.05) }
+  .vbar .keep{ background:linear-gradient(90deg,#2FA597,#23897C) }
+  .vbar .tax{ background:linear-gradient(90deg,#EF4D4D,#DC2626) }
+  .vlegend{ color:var(--muted) }
+
+  /* ---------- waterfall: dashboard metric modules ---------- */
+  .falls{ gap:12px }
+  .fall{ border:1px solid var(--line); border-left:4px solid var(--bc,#999); border-radius:16px; background:#fff; padding:15px 16px; box-shadow:var(--shadow-sm); transition:box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease) }
+  .fall:hover{ box-shadow:var(--shadow); transform:translateY(-1px) }
+  .fall.empty{ opacity:.55; box-shadow:none }
+  .fall .rank{ width:26px; height:26px; background:var(--bc,#999); box-shadow:0 2px 5px rgba(15,23,42,.16) }
+  .fall .nm{ color:var(--ink); font-weight:700; font-size:.95rem }
+  .fall .amts{ color:var(--muted); margin-top:10px; gap:10px 16px }
+  .fall .amts b{ color:var(--ink); font-weight:700; font-size:.95rem }
+  .fall .bar{ height:6px; background:#E9EEF4; border-radius:99px; opacity:1 }
+  .fall .bar i{ background:linear-gradient(90deg,var(--bc,#999),color-mix(in srgb,var(--bc,#999) 78%,#000)) }
+  .fall details.why summary{ color:var(--accent) }
+  .fall .note{ color:var(--muted) }
+
+  /* ---------- year-by-year chart ---------- */
+  .yearchart{ background:transparent }
+  .yc-title{ color:var(--ink); font-weight:800 }
+  .yc-sub{ color:var(--muted) }
+  .yc-chart svg{ overflow:visible }
+  .yc-chart rect.col-seg{ transition:y .55s var(--ease),height .55s var(--ease) }
+  .yc-chart rect.col-sel{ fill:rgba(15,118,110,.08) }
+  .yc-readout{ background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:10px; color:var(--ink-2) }
+  .yc-readout b{ color:var(--ink) }
+  .yc-legend{ color:var(--muted) }
+  .yc-legend i{ border-radius:4px }
+
+  /* ---------- asset map ---------- */
+  .asset{ border:1px solid var(--line); border-radius:14px; background:#fff; padding:15px 16px; box-shadow:var(--shadow-sm); transition:box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease) }
+  .asset:hover{ box-shadow:var(--shadow); transform:translateY(-1px) }
+  .asset.featured{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent),var(--shadow) }
+  .asset .nm{ color:var(--ink); font-weight:700 }
+  .asset .fit{ background:var(--success-soft); border:1px solid var(--success-line); color:var(--success-ink); font-weight:700; border-radius:999px }
+  .asset .homes span.home{ background:var(--sunken); border:1px solid var(--line); color:var(--ink-2); border-radius:8px; font-weight:600 }
+  .asset .homes .home.h-warn{ background:var(--danger-soft); border:1px solid var(--danger-line); border-left:3px solid var(--danger); color:var(--danger-ink) }
+  .asset .why{ color:var(--muted) }
+  .atag{ border-radius:6px; box-shadow:0 1px 2px rgba(15,23,42,.12) }
+  .atag.t-bo{ background:var(--c-bo) } .atag.t-fri{ background:#5E7E3F } .atag.t-ask{ background:var(--c-ask) } .atag.t-on{ background:var(--c-on) }
+
+  /* ---------- alert banners (warn / danger / success) ---------- */
+  .ftwarn,.asset .warn{
+    background:var(--warn-soft); border:1px solid var(--warn-line); border-left:4px solid var(--warn);
+    border-radius:12px; color:var(--warn-ink); padding:12px 14px; line-height:1.5;
+  }
+  .ftwarn{ font-size:.86rem }
+
+  /* ---------- concepts / risk badges ---------- */
+  details.concepts{ background:var(--accent-soft); border:1px solid var(--accent-line) }
+  details.concepts>summary{ color:var(--accent); font-weight:700 }
+  .concept{ background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow-sm) }
+  .concept .defhead b{ color:var(--ink) }
+  .concept .one{ color:var(--ink-2) }
+  .concept .ex{ color:var(--muted) }
+  .rbadge.r-low{ background:var(--success-soft); color:var(--success-ink); border:1px solid var(--success-line) }
+  .rbadge.r-med{ background:var(--warn-soft); color:var(--warn-ink); border:1px solid var(--warn-line) }
+  .rbadge.r-high{ background:var(--danger-soft); color:var(--danger-ink); border:1px solid var(--danger-line) }
+
+  /* ---------- link cards / sources / footer / sticky ---------- */
+  .linkcard{ background:var(--accent-soft); border:1.5px solid var(--accent-line); color:var(--ink); box-shadow:var(--shadow-sm); transition:background .18s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease) }
+  .linkcard:hover{ background:#D8ECE8; box-shadow:var(--shadow); transform:translateY(-2px) }
+  .linkcard small{ color:var(--muted) }
+  .linkcard.fb{ background:var(--sunken); border-color:var(--line) }
+  .linkcard.fb:hover{ background:#E8EDF3 }
+  .sources a{ color:var(--accent); font-weight:600 }
+  .verified,.testbadge{ color:var(--muted) }
+  .testbadge.fail{ color:var(--danger) }
+  .stickybar{ background:rgba(15,23,42,.96); color:#CBD5E1; backdrop-filter:blur(6px); border-top:1px solid rgba(255,255,255,.06) }
+  .stickybar a{ color:#5EEAD4; font-weight:600 }
+  .stickybar .sb-x{ color:#94A3B8 }
+
+  /* ---------- fx worked-example ---------- */
+  .fxouts .fxout{ background:var(--sunken); border:1px solid var(--line); border-radius:10px }
+  .fxouts .fxout b{ color:var(--accent) }
+  .fxrow{ border-top:1px dashed var(--line) }
+
+  /* ---------- focus / motion ---------- */
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
+  a,button,summary,.linkcard,.tabs .tab,.lang-toggle button{ transition:color .18s var(--ease),background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease) }
+  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
+
+  /* ============================================================
+     UX POLISH v3 — cause-and-effect flash, tax-home icons,
+     sticky context pill. Visual/feedback only.
+     ============================================================ */
+  /* 1. cause-and-effect data flash */
+  @keyframes flashUpdate{ 0%{ background-color:var(--accent-soft) } 100%{ background-color:transparent } }
+  .flash-update{ animation:flashUpdate .8s var(--ease); border-radius:6px; box-decoration-break:clone; -webkit-box-decoration-break:clone }
+
+  /* 2. tax-home icons (monochromatic, inherit account colour) */
+  .ti{ width:18px; height:18px; flex:none; display:inline-block; vertical-align:-3px }
+  .fall .top .nm{ display:inline-flex; align-items:center; gap:8px }
+  .fall .top .nm .ti{ color:var(--bc) }
+  .yc-legend .legic{ display:inline-flex }
+  .yc-legend .ti{ width:14px; height:14px; vertical-align:-2px }
+
+  /* 3. sticky context pill */
+  .ctx-pill{
+    position:fixed; top:64px; left:50%; transform:translate(-50%,-12px); z-index:60;
+    display:flex; align-items:center; max-width:calc(100vw - 24px); white-space:nowrap;
+    background:rgba(255,255,255,.82); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border:1px solid var(--line); box-shadow:var(--shadow); border-radius:999px;
+    padding:8px 16px; font-size:.82rem; font-weight:700; color:var(--ink);
+    overflow:hidden; text-overflow:ellipsis;
+    opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
+  }
+  .ctx-pill.show{ opacity:1; transform:translate(-50%,0); pointer-events:auto }
+  .ctx-pill b{ color:var(--accent); font-variant-numeric:tabular-nums }
+  .ctx-pill .sep{ color:var(--muted-2); margin:0 9px; font-weight:400 }
+  @media(max-width:600px){ .ctx-pill{ top:96px } }
+
+  /* ============================================================
+     UX POLISH v4 — nav: auto-hiding header, clickable pill, home brand
+     ============================================================ */
+  /* auto-hiding top header */
+  header.site{ transition:transform .28s var(--ease); will-change:transform }
+  header.site.header-hidden{ transform:translateY(-100%) }
+  /* context pill becomes a "back to calculator" button + lifts into recovered space */
+  .ctx-pill{ cursor:pointer; transition:opacity .25s var(--ease), transform .2s var(--ease), top .28s var(--ease) }
+  .ctx-pill .ctx-up{ color:var(--accent); font-weight:800; margin-right:7px; display:inline-block }
+  .ctx-pill.lifted{ top:12px }
+  @media(max-width:600px){ .ctx-pill.lifted{ top:12px } }
+  .ctx-pill.show:hover{ transform:translate(-50%,-1px) scale(1.02); box-shadow:var(--shadow-lg) }
+  .ctx-pill.show:active{ transform:translate(-50%,0) scale(.98) }
+  /* brand acts as a global home link */
+  .brand{ text-decoration:none; color:var(--ink) }
+  .brand:hover{ opacity:.92 }
+  .brand .dot{ transition:transform .18s var(--ease) }
+  .brand:hover .dot,.brand:focus-visible .dot{ transform:scale(1.2) }
 </style>
 </head>
 <body>
 
 <header class="site">
   <div class="site-inner">
-    <div class="brand"><span class="dot"></span><span data-i18n="brand">The Money Router</span></div>
+    <a class="brand" href="index.html"><span class="dot"></span><span data-i18n="brand">The Money Router</span></a>
     <nav class="tabs"><a class="tab active" href="index.html" data-i18n="tabPlan">Plan</a><a class="tab" href="play.html" data-i18n="tabPlay">Play</a></nav>
     <div class="lang-toggle"><button id="lang-en" class="active">EN</button><button id="lang-da">DA</button></div>
   </div>
 </header>
+
+<div id="ctxPill" class="ctx-pill" role="button" tabindex="-1" aria-hidden="true"></div>
 
 <div class="wrap">
   <p class="kicker" data-i18n="heroKicker">Every krone counts</p>
@@ -347,12 +606,12 @@
     <h2 class="sec" data-i18n="plTitle">The positivliste: the list that sets your fund's tax</h2>
     <p class="sub" data-i18n="plWhat">SKAT keeps an official list of equity-based funds (the ABIS list). Whether your fund is on it or off it decides which tax it gets, and the list is refreshed every year.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 4px">
-      <div style="flex:1;min-width:210px;background:#E7F4EC;border:1px solid #9CC9AB;border-radius:12px;padding:11px 13px">
-        <div style="font-weight:700;color:#19603A;margin-bottom:3px" data-i18n="plOnT">✓ ON the list</div>
+      <div style="flex:1;min-width:210px;background:var(--success-soft);border:1px solid var(--success-line);border-left:4px solid var(--success);border-radius:12px;padding:12px 14px">
+        <div style="font-weight:700;color:var(--success-ink);margin-bottom:3px" data-i18n="plOnT">✓ ON the list</div>
         <div style="font-size:.84rem" data-i18n="plOnD">aktieindkomst [share income], 27% / 42%. Allowed inside an ASK. Usually the win for an adult.</div>
       </div>
-      <div style="flex:1;min-width:210px;background:#FBF3E6;border:1px solid #E8D2A8;border-radius:12px;padding:11px 13px">
-        <div style="font-weight:700;color:#8C5A1E;margin-bottom:3px" data-i18n="plOffT">OFF the list</div>
+      <div style="flex:1;min-width:210px;background:var(--warn-soft);border:1px solid var(--warn-line);border-left:4px solid var(--warn);border-radius:12px;padding:12px 14px">
+        <div style="font-weight:700;color:var(--warn-ink);margin-bottom:3px" data-i18n="plOffT">OFF the list</div>
         <div style="font-size:.84rem" data-i18n="plOffD">kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.</div>
       </div>
     </div>
@@ -977,11 +1236,17 @@ const CFGFILL = ()=>({ boY:fmt(cfg.boYearlyCap), boL:fmt(cfg.boLifetimeCap), pf:
   askR:Math.round(cfg.askRate*100), askC:fmt(cfg.askCeiling), aktieT:fmt(cfg.aktieThreshold), aktieTM:fmt(cfg.aktieThresholdMarried), kapTM:fmt(cfg.kapThresholdMarriedApprox), yr:cfg.taxYear });
 
 /* ============ BUCKET / ASSET METADATA ============ */
+const ICONS = {
+  shield:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.3 12l1.8 1.8 3.7-3.8"/></svg>`,
+  trend:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 8h4v4"/></svg>`,
+  caseCheck:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"/><path d="M9 13.5l2 2 4-4"/></svg>`,
+  folder:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+};
 const BUCKET_META = {
-  bo:      { hex:"#2A9D8F", chip:"c0",  chipKey:"chip_bo" },
-  frikort: { hex:"#7BA05B", chip:"cF",  chipKey:"chip_frikort" },
-  ask:     { hex:"#4361EE", chip:"c17", chipKey:"chip_ask" },
-  onlist:  { hex:"#C0427C", chip:"c27", chipKey:"chip_onlist" },
+  bo:      { hex:"#2A9D8F", chip:"c0",  chipKey:"chip_bo",      icon:ICONS.shield },
+  frikort: { hex:"#7BA05B", chip:"cF",  chipKey:"chip_frikort", icon:ICONS.folder },
+  ask:     { hex:"#4361EE", chip:"c17", chipKey:"chip_ask",     icon:ICONS.trend },
+  onlist:  { hex:"#C0427C", chip:"c27", chipKey:"chip_onlist",  icon:ICONS.caseCheck },
 };
 const ASSETS = [
   { id:"coreOff", recChild:["FRI"],       recAdult:[],            risks:["cautious","balanced","adventurous"] },
@@ -1036,7 +1301,7 @@ function renderRouter(){
     if (b.deposited<=0) note = `<p class="note">${t("emptyNote")}</p>`;
     else if (b.lastDepYear < S.years) note = `<p class="note">${fill(t("fullNote"),{n:b.lastDepYear})}</p>`;
     return `<div class="fall ${b.deposited<=0?"empty":""}" style="--bc:${m.hex}">
-      <div class="top"><span class="rank">${i+1}</span><span class="nm">${t("nm_"+id)}</span>
+      <div class="top"><span class="rank">${i+1}</span><span class="nm">${m.icon||""}${t("nm_"+id)}</span>
         <span class="chip ${m.chip}">${t(m.chipKey)}</span></div>
       <div class="amts">
         <span>${t("y1")}: <b>${kr(y1)}</b></span>
@@ -1110,7 +1375,7 @@ function renderYearChart(sim){
   $("yc-svg").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("ycTitle")}">${axis}${bars}</svg>`;
 
   $("yc-legend").innerHTML = sim.order.map(id=>
-    `<span><i style="background:${BUCKET_META[id].hex}"></i>${ycName(id)}</span>`).join("");
+    `<span><span class="legic" style="color:${BUCKET_META[id].hex}">${BUCKET_META[id].icon||""}</span>${ycName(id)}</span>`).join("");
 
   updateYcReadout();
   $("yc-svg").querySelectorAll(".col-hit").forEach(el=>
@@ -1183,13 +1448,19 @@ function refreshOutputs(){
   $("out-budget").textContent = kr(S.budget);
   $("equivMonthly").textContent = fill(t("equivMonthly"),{m:fmt(S.budget/12)});
   $("out-years").textContent = S.years+" "+t("yearsUnit");
+  updateCtxPill();
 }
 function syncSliderFill(el){ el.style.setProperty("--fill",((el.value-el.min)/(el.max-el.min)*100)+"%"); }
 function renderAll(){ renderStrings(); refreshOutputs(); renderPrimer(); renderRouter(); renderConcepts(); renderAssets(); }
 
 /* ============ WIRING ============ */
 let timer=null;
-function onInput(){ refreshOutputs(); save(); clearTimeout(timer); timer=setTimeout(renderRouter,160); }
+function onInput(){
+  refreshOutputs();
+  flash([$("out-budget"),$("out-years"),$("equivMonthly")]);
+  save(); clearTimeout(timer);
+  timer=setTimeout(()=>{ renderRouter(); flash(document.querySelectorAll("#falls .amts b, #vsSmartNum, #vsNaiveNum, #vsHeadline .pos")); },160);
+}
 $("in-budget").addEventListener("input",e=>{ S.budget=+e.target.value; syncSliderFill(e.target); onInput(); });
 $("in-years").addEventListener("input",e=>{ S.years=+e.target.value; syncSliderFill(e.target); onInput(); });
 $("mode-child").onclick=()=>{ S.mode="child"; setMode(); };
@@ -1210,6 +1481,47 @@ $("yc-contrib").onclick=()=>setChartView("contrib");
 $("yc-value").onclick=()=>setChartView("value");
 $("lang-en").onclick=()=>{ S.lang="en"; saveGlobal(); save(); renderAll(); };
 $("lang-da").onclick=()=>{ S.lang="da"; saveGlobal(); save(); renderAll(); };
+
+/* ============ UX POLISH: data flash + sticky context pill ============ */
+function flash(els){
+  (els && els.length!==undefined ? els : [els]).forEach(el=>{
+    if(!el) return; el.classList.remove("flash-update"); void el.offsetWidth; el.classList.add("flash-update");
+  });
+}
+function updateCtxPill(){
+  const pill = $("ctxPill"); if(!pill) return;
+  pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlBudget")}: <b>${kr(S.budget)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yearsUnit")}`;
+}
+(function navAndPill(){
+  const pill = $("ctxPill"),
+        tool = document.querySelector(".panel.tool"),
+        header = document.querySelector("header.site");
+  if(!pill || !tool) return;
+  const sy = ()=> (document.scrollingElement||document.documentElement).scrollTop || 0;
+  let lastY = sy();
+  function check(){
+    const y = sy(), past = tool.getBoundingClientRect().bottom < 72;
+    if(header){
+      if(y <= 90) header.classList.remove("header-hidden");        // always show near the top
+      else if(y > lastY) header.classList.add("header-hidden");    // scrolling down -> hide
+      else if(y < lastY) header.classList.remove("header-hidden"); // scrolling up -> reveal
+    }
+    pill.classList.toggle("show", past);
+    pill.classList.toggle("lifted", !!header && header.classList.contains("header-hidden"));
+    pill.tabIndex = past ? 0 : -1;
+    pill.setAttribute("aria-hidden", past ? "false" : "true");
+    lastY = y;
+  }
+  function toTool(){
+    const top = tool.getBoundingClientRect().top + ((document.scrollingElement||document.documentElement).scrollTop) - 64;
+    window.scrollTo({ top: Math.max(0, top), behavior:"smooth" });
+  }
+  pill.addEventListener("click", toTool);
+  pill.addEventListener("keydown", e=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toTool(); } });
+  addEventListener("scroll", check, {passive:true});
+  addEventListener("resize", check, {passive:true});
+  check();
+})();
 
 /* ============ INIT ============ */
 (function init(){
