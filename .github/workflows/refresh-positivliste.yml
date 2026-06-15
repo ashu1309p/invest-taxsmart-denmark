@@ -1,0 +1,48 @@
+name: Refresh positivliste snapshot
+
+# Keeps data/positivliste.json current automatically. SKAT has no live API and the file
+# is CORS-blocked client-side, so we snapshot it here and the static page loads only the JSON.
+on:
+  schedule:
+    - cron: "17 4 * * 1"        # weekly, Mondays 04:17 UTC
+  workflow_dispatch: {}          # manual "Run workflow" button
+
+permissions:
+  contents: write                # allow committing the regenerated JSON
+
+concurrency:
+  group: refresh-positivliste
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install requests openpyxl
+
+      - name: Rebuild snapshot
+        env:
+          # Set this repo/Action secret or variable to SKAT's current .xlsx link.
+          POSITIVLISTE_URL: ${{ vars.POSITIVLISTE_URL }}
+        run: python scripts/build_positivliste.py
+        # If the script exits non-zero (bad/empty/shrunken fetch) the job fails here and
+        # the commit step below is skipped, so a bad fetch never overwrites the good JSON.
+
+      - name: Commit only if changed
+        run: |
+          if git diff --quiet -- data/positivliste.json; then
+            echo "No change in positivliste snapshot."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/positivliste.json
+            git commit -m "chore: refresh positivliste snapshot"
+            git push
+          fi

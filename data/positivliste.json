@@ -1,0 +1,13 @@
+{
+  "listDate": "SAMPLE",
+  "fetchedAt": "2026-06-15T00:00:00Z",
+  "source": "SAMPLE dataset — NOT SKAT's official list. Replace via the GitHub Action (see README).",
+  "sample": true,
+  "count": 4,
+  "isins": {
+    "IE00B4L5Y983": { "name": "iShares Core MSCI World UCITS ETF (Acc)", "status": "on" },
+    "IE00B5BMR087": { "name": "iShares Core S&P 500 UCITS ETF (Acc)", "status": "on" },
+    "IE00BK5BQT80": { "name": "Vanguard FTSE All-World UCITS ETF (Acc)", "status": "off" },
+    "IE00B3RBWM25": { "name": "Vanguard FTSE All-World UCITS ETF (Dist)", "status": "off" }
+  }
+}

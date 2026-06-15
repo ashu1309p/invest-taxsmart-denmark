@@ -10,6 +10,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://ashu1309p.github.io/invest-skattesmart-denmark/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="The Money Router: where should each krone go first?">
+<meta property="og:description" content="A free, no-login tool that shows the cheapest-tax order to fill your Danish investment accounts (ASK, depot, børneopsparing). Educational, not advice.">
+<meta property="og:url" content="https://ashu1309p.github.io/invest-skattesmart-denmark/index.html">
+<meta property="og:image" content="https://ashu1309p.github.io/invest-skattesmart-denmark/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Money Router: where should each krone go first?">
+<meta name="twitter:description" content="Free, no-login tool: the cheapest-tax order to fill your Danish accounts. Educational, not advice.">
+<meta name="twitter:image" content="https://ashu1309p.github.io/invest-skattesmart-denmark/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Tax-smart investing in Denmark","url":"https://ashu1309p.github.io/invest-skattesmart-denmark/","inLanguage":["en","da"],"description":"Free educational tool for Danish retail investment taxation. Not advice."}</script>
 <style>
   :root{
     --bg:#FAF6EF; --card:#FFFFFF; --ink:#27272E; --muted:#6B6B76;
@@ -509,9 +526,41 @@
     .fall .top .nm{ grid-column:2; grid-row:1; min-width:0 }
     .fall .top .chip{ grid-column:2; grid-row:2; justify-self:start }
   }
+
+  /* ---------- P0.1 positivliste ISIN checker ---------- */
+  .plcheck{ margin:14px 0 4px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:var(--shadow-sm) }
+  .plc-lab{ display:block; font-weight:700; color:var(--ink); font-size:.98rem }
+  .plc-sub{ font-size:.82rem; color:var(--muted); margin:3px 0 10px }
+  .plc-row{ display:flex; gap:8px; flex-wrap:wrap }
+  .plc-row input{ flex:1; min-width:170px; font:inherit; font-size:1rem; letter-spacing:.04em; text-transform:uppercase; padding:11px 13px; border:1.5px solid var(--line); border-radius:11px; background:#fff; color:var(--ink) }
+  .plc-row input::placeholder{ text-transform:none; letter-spacing:0; color:var(--muted-2) }
+  .plc-row input:focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-color:var(--accent) }
+  .plc-row button{ flex:none; font:inherit; font-weight:700; font-size:.95rem; padding:11px 22px; border:0; border-radius:11px; background:var(--accent); color:#fff; cursor:pointer; transition:background .18s var(--ease) }
+  .plc-row button:hover{ background:var(--accent-strong) }
+  .plc-result{ margin-top:12px; border-radius:12px; line-height:1.5 }
+  .plc-result:empty{ margin-top:0 }
+  .plc-result.tone-on,.plc-result.tone-off,.plc-result.tone-nf,.plc-result.tone-warn{ padding:12px 14px; border:1px solid; border-left:4px solid }
+  .plc-result.tone-on{ background:var(--success-soft); border-color:var(--success-line); border-left-color:var(--success); color:var(--success-ink) }
+  .plc-result.tone-off{ background:var(--warn-soft); border-color:var(--warn-line); border-left-color:var(--warn); color:var(--warn-ink) }
+  .plc-result.tone-nf{ background:var(--sunken); border-color:var(--line); border-left-color:var(--muted-2); color:var(--ink-2) }
+  .plc-result.tone-warn{ background:var(--danger-soft); border-color:var(--danger-line); border-left-color:var(--danger); color:var(--danger-ink) }
+  .plc-result .plc-msg{ font-size:.88rem; font-weight:600 }
+  .plc-head{ font-size:.9rem } .plc-head b{ letter-spacing:.04em }
+  .plc-nm{ color:var(--muted) }
+  .plc-state{ font-weight:800; font-size:1.02rem; margin:2px 0 4px }
+  .plc-exp{ font-size:.86rem }
+  .plc-fresh{ font-size:.78rem; color:var(--muted); margin-top:9px; line-height:1.5 }
+  .plc-fresh a{ color:var(--accent); font-weight:600 }
+  .plc-flag{ display:inline; font-weight:700; color:var(--warn-ink) }
+
+  /* ---------- P0.2 skip link ---------- */
+  .skip-link{ position:absolute; left:-9999px; top:0; z-index:200; background:var(--accent); color:#fff; padding:10px 16px; border-radius:0 0 10px 0; font-weight:700; text-decoration:none }
+  .skip-link:focus,.skip-link:focus-visible{ left:0 }
+  #main:focus{ outline:none }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
 
 <header class="site">
   <div class="site-inner">
@@ -523,7 +572,7 @@
 
 <div id="ctxPill" class="ctx-pill" role="button" tabindex="-1" aria-hidden="true"></div>
 
-<div class="wrap">
+<div class="wrap" id="main" tabindex="-1">
   <p class="kicker" data-i18n="heroKicker">Every krone counts</p>
   <h1 data-i18n="heroTitle">Where should each krone go first?</h1>
   <p class="tagline" id="heroTag"></p>
@@ -541,14 +590,14 @@
     </div>
 
     <div class="ctl">
-      <label><span class="lab" data-i18n="ctlBudget">Target per year</span><output id="out-budget">24,000 kr</output></label>
+      <label><span class="lab" data-i18n="ctlBudget">Target per year</span><output id="out-budget" aria-live="polite">24,000 kr</output></label>
       <input type="range" id="in-budget" min="3000" max="600000" step="3000" value="24000" aria-label="Yearly amount">
       <div class="equiv" id="equivMonthly"></div>
     </div>
 
     <!-- the reward, up top -->
     <div class="versus">
-      <p class="headline" id="vsHeadline"></p>
+      <p class="headline" id="vsHeadline" aria-live="polite"></p>
       <p class="vsub" id="vsSub"></p>
       <div class="vrow">
         <div class="vlab"><span data-i18n="vsSmart">Routed in this order</span><span id="vsSmartNum"></span></div>
@@ -623,6 +672,20 @@
         <div style="font-size:.84rem" data-i18n="plOffD">kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.</div>
       </div>
     </div>
+
+    <!-- P0.1: interactive ISIN checker -->
+    <div class="plcheck">
+      <label class="plc-lab" for="isin-input" data-i18n="plcLabel">Check a fund by its ISIN</label>
+      <p class="plc-sub" data-i18n="plcSub">Paste the exact ISIN. Each share class (ACC, DIST, hedged) has its own.</p>
+      <div class="plc-row">
+        <input id="isin-input" type="text" autocomplete="off" spellcheck="false" maxlength="14"
+               placeholder="IE00B4L5Y983" aria-label="ISIN" aria-describedby="plcResult plcFresh">
+        <button id="isin-btn" type="button" data-i18n="plcBtn">Check</button>
+      </div>
+      <div class="plc-result" id="plcResult" role="status" aria-live="polite"></div>
+      <p class="plc-fresh" id="plcFresh"></p>
+    </div>
+
     <p class="sub" style="margin-top:12px"><b data-i18n="plChangeT">How and when it changes.</b> <span data-i18n="plChange">SKAT publishes the list around 15 December for the coming year, and can amend it mid-year. Funds get added and removed, which flips a fund's tax from one January to the next.</span></p>
     <details class="adv" style="margin-top:6px">
       <summary data-i18n="plExTitle">See a worked example: a fund going off, then on</summary>
@@ -1046,6 +1109,21 @@ en: {
   plCheckT:"Your yearly habit.",
   plCheck:"Every December or January, and before any new purchase, look up the exact ISIN of each fund you hold or plan to buy on skat.dk. If a holding has changed status, note its new tax and ask an advokat/revisor before any sizeable move.",
   plLink:"Open the current positivliste on skat.dk →",
+  plcLabel:"Check a fund by its ISIN",
+  plcSub:"Paste the exact ISIN. Each share class (ACC, DIST, hedged) has its own.",
+  plcBtn:"Check",
+  plcEmpty:"Type an ISIN, for example IE00B4L5Y983.",
+  plcInvalid:"That does not look like an ISIN (2 letters, then 10 letters or digits).",
+  plcOnT:"ON the positivliste",
+  plcOnD:"Taxed as aktieindkomst [share income]: 27% up to {aktieT} kr of yearly gain, 42% above ({yr}). ASK-eligible. For a child the frikort does NOT help, so it fills after the cheaper buckets.",
+  plcOffT:"OFF the positivliste",
+  plcOffD:"Off-list means kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). NOT ASK-eligible. For a child the frikort absorbs the gain, so it can be the cheapest home.",
+  plcNfT:"Not found in this snapshot",
+  plcNfD:"Most likely it is a foreign fund (investeringsselskab) that simply is not on the list, which means it is kapitalindkomst [capital income], ~37-42%, taxed yearly (lager), and not ASK-eligible. But it could also be a single stock, a bond, a brand-new fund, or a Danish fund taxed differently. Verify the exact ISIN on skat.dk.",
+  plcFresh:"List snapshot: {date}. SKAT can change the list at any time, sometimes mid-year without notice. Always confirm the exact ISIN {link}.",
+  plcFreshLink:"on skat.dk",
+  plcStale:"This snapshot is more than {days} days old and may be out of date.",
+  plcSample:"Sample data for demonstration, not SKAT's official list. Verify every ISIN on skat.dk.",
   giftLink:"🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
   giftLinkSub:"Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.",
   feedbackTitle:"💬 What worked, what didn't? Tell me",
@@ -1056,6 +1134,7 @@ en: {
   bigDisclaimer:"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT\u2019s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
   stickyBar:"Educational only, not tax, legal or investment advice.", stickyLink:"Sources",
   tests:"self-checks passed", testsFail:"SELF-CHECKS FAILING, do not trust the numbers",
+  skipLink:"Skip to content",
   kr:"kr",
 },
 da: {
@@ -1211,6 +1290,21 @@ da: {
   plCheckT:"Din årlige vane.",
   plCheck:"Hver december eller januar, og før ethvert nyt køb, slå den præcise ISIN op for hver fond, du ejer eller planlægger at købe, på skat.dk. Hvis en beholdning har skiftet status, noter dens nye skat og spørg en advokat/revisor før større ændringer.",
   plLink:"Åbn den aktuelle positivliste på skat.dk →",
+  plcLabel:"Tjek en fond på dens ISIN",
+  plcSub:"Indsæt den præcise ISIN. Hver andelsklasse (ACC, DIST, hedged) har sin egen.",
+  plcBtn:"Tjek",
+  plcEmpty:"Skriv en ISIN, for eksempel IE00B4L5Y983.",
+  plcInvalid:"Det ligner ikke en ISIN (2 bogstaver og derefter 10 bogstaver eller tal).",
+  plcOnT:"PÅ positivlisten",
+  plcOnD:"Beskattes som aktieindkomst: 27% op til {aktieT} kr af årets gevinst, 42% derover ({yr}). ASK-egnet. For et barn hjælper frikortet IKKE, så den fyldes efter de billigere spande.",
+  plcOffT:"UDEN FOR positivlisten",
+  plcOffD:"Uden for listen betyder kapitalindkomst, ~37-42%, beskattet årligt (lager). IKKE ASK-egnet. For et barn opsuger frikortet gevinsten, så den kan være det billigste hjem.",
+  plcNfT:"Ikke fundet i dette øjebliksbillede",
+  plcNfD:"Oftest er det en udenlandsk fond (investeringsselskab), der bare ikke er på listen, og så er den kapitalindkomst, ~37-42%, beskattet årligt (lager), og ikke ASK-egnet. Men det kan også være en enkeltaktie, en obligation, en helt ny fond eller en dansk fond med en anden beskatning. Bekræft den præcise ISIN på skat.dk.",
+  plcFresh:"Liste-øjebliksbillede: {date}. SKAT kan ændre listen når som helst, nogle gange midt på året uden varsel. Bekræft altid den præcise ISIN {link}.",
+  plcFreshLink:"på skat.dk",
+  plcStale:"Dette øjebliksbillede er mere end {days} dage gammelt og kan være forældet.",
+  plcSample:"Eksempeldata til demonstration, ikke SKATs officielle liste. Bekræft hver ISIN på skat.dk.",
   giftLink:"🎁 Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
   giftLinkSub:"Beløbsgrænser pr. giver, den fordoblede fælleskapacitet, forældrebeskatningsfælden, vidner.",
   feedbackTitle:"💬 Hvad virkede, hvad gjorde ikke? Sig til",
@@ -1221,6 +1315,7 @@ da: {
   bigDisclaimer:"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek skat.dk eller spørg en advokat/revisor, før du handler.",
   stickyBar:"Kun undervisning, ikke skatte-, juridisk eller investeringsrådgivning.", stickyLink:"Kilder",
   tests:"selvtest bestået", testsFail:"SELVTEST FEJLER, stol ikke på tallene",
+  skipLink:"Spring til indhold",
   kr:"kr",
 }
 };
@@ -1450,6 +1545,7 @@ function renderStrings(){
   $("verifiedLine").textContent = fill(t("verifiedLine"),{yr:cfg.taxYear,date:cfg.verifiedDate});
   $("lang-en").classList.toggle("active",S.lang==="en");
   $("lang-da").classList.toggle("active",S.lang==="da");
+  renderPlCheck();
 }
 
 function refreshOutputs(){
@@ -1529,6 +1625,64 @@ function updateCtxPill(){
   addEventListener("scroll", check, {passive:true});
   addEventListener("resize", check, {passive:true});
   check();
+})();
+
+/* ============ P0.1: positivliste ISIN checker ============ */
+const PL_FALLBACK = { listDate:"SAMPLE", fetchedAt:"2026-06-15T00:00:00Z", sample:true, count:4,
+  isins:{ "IE00B4L5Y983":{name:"iShares Core MSCI World UCITS ETF (Acc)",status:"on"},
+          "IE00B5BMR087":{name:"iShares Core S&P 500 UCITS ETF (Acc)",status:"on"},
+          "IE00BK5BQT80":{name:"Vanguard FTSE All-World UCITS ETF (Acc)",status:"off"},
+          "IE00B3RBWM25":{name:"Vanguard FTSE All-World UCITS ETF (Dist)",status:"off"} } };
+const PL_SKAT = "https://skat.dk/erhverv/ekapital/vaerdipapirer";
+const PL_ISIN_RE = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/;
+let PL_DATA = null, PL_LAST = null;
+
+function plLoad(){
+  fetch("data/positivliste.json",{cache:"no-store"})
+    .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+    .then(d=>{ PL_DATA=d; renderPlCheck(); })
+    .catch(()=>{ PL_DATA=PL_FALLBACK; renderPlCheck(); });
+}
+function plLookup(){
+  const inp=$("isin-input"); if(!inp) return;
+  const raw=(inp.value||"").toUpperCase().replace(/\s+/g,""); inp.value=raw;
+  if(!raw){ PL_LAST={state:"empty"}; return renderPlCheck(); }
+  if(!PL_ISIN_RE.test(raw)){ PL_LAST={state:"invalid"}; return renderPlCheck(); }
+  const data=PL_DATA||PL_FALLBACK; const rec=data.isins?data.isins[raw]:null;
+  let state="nf";
+  if(rec && rec.status==="on") state="on";
+  else if(rec && rec.status==="off") state="off";
+  PL_LAST={state, isin:raw, name:rec?rec.name:""};
+  renderPlCheck();
+}
+function renderPlCheck(){
+  const fresh=$("plcFresh"); if(!fresh) return;
+  const data=PL_DATA||PL_FALLBACK;
+  const link=`<a href="${PL_SKAT}" target="_blank" rel="noopener">${t("plcFreshLink")}</a>`;
+  let fh="";
+  if(data.sample){ fh=`<span class="plc-flag warn">${t("plcSample")}</span>`; }
+  else {
+    const ageDays=(Date.now()-Date.parse(data.fetchedAt||0))/86400000;
+    if(isFinite(ageDays) && ageDays>14) fh=`<span class="plc-flag warn">${fill(t("plcStale"),{days:14})}</span> `;
+    fh+=fill(t("plcFresh"),{date:data.listDate||"?", link});
+  }
+  fresh.innerHTML=fh;
+  const box=$("plcResult"); if(!box) return;
+  const L=PL_LAST;
+  if(!L){ box.className="plc-result"; box.innerHTML=""; return; }
+  if(L.state==="empty"){ box.className="plc-result"; box.innerHTML=`<span class="plc-msg">${t("plcEmpty")}</span>`; return; }
+  if(L.state==="invalid"){ box.className="plc-result tone-warn"; box.innerHTML=`<span class="plc-msg">${t("plcInvalid")}</span>`; return; }
+  const map={ on:["tone-on","plcOnT","plcOnD"], off:["tone-off","plcOffT","plcOffD"], nf:["tone-nf","plcNfT","plcNfD"] };
+  const [cls,tk,dk]=map[L.state]; const F=CFGFILL();
+  const nm=L.name?` <span class="plc-nm">${L.name}</span>`:"";
+  box.className="plc-result "+cls;
+  box.innerHTML=`<div class="plc-head"><b>${L.isin}</b>${nm}</div><div class="plc-state">${t(tk)}</div><div class="plc-exp">${fill(t(dk),F)}</div>`;
+}
+(function plInit(){
+  const btn=$("isin-btn"), inp=$("isin-input");
+  if(btn) btn.addEventListener("click", plLookup);
+  if(inp) inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); plLookup(); } });
+  plLoad();
 })();
 
 /* ============ INIT ============ */
