@@ -543,94 +543,12 @@
 
 <!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with index.html). Update it there each January. -->
 <script src="js/config.js"></script>
+<script src="js/tax.js"></script>
 <script>
-/* TAX_YEAR_CONFIG now lives in js/config.js (loaded above) so the two pages cannot drift. */
+/* TAX_YEAR_CONFIG -> js/config.js, pure tax engine -> js/tax.js (both loaded above, shared with index.html). */
 
-/* ============ PURE TAX MATH (node-tested, no DOM) ============ */
-function aktieTax(gain, cfg) {
-  if (gain <= 0) return 0;
-  const low = Math.min(gain, cfg.aktieThreshold);
-  const high = Math.max(0, gain - cfg.aktieThreshold);
-  return low * cfg.aktieRateLow + high * cfg.aktieRateHigh;
-}
-function kapTaxAdult(gain, cfg) {
-  if (gain <= 0) return 0;
-  const low = Math.min(gain, cfg.kapThresholdApprox);
-  const high = Math.max(0, gain - cfg.kapThresholdApprox);
-  return low * cfg.kapRateLowApprox + high * cfg.kapRateHighApprox;
-}
-function kapTaxChild(gain, frikortAvailable, cfg) {
-  if (gain <= 0) return { tax: 0, frikortUsed: 0 };
-  const frikortUsed = Math.min(gain, frikortAvailable);
-  return { tax: (gain - frikortUsed) * cfg.kapRateLowApprox, frikortUsed };
-}
-function askTax(gain, cfg) { return gain > 0 ? gain * cfg.askRate : 0; }
-
-function simulateWrapper(strategy, params, cfg) {
-  const { annualDeposit, years, returnRate, isChild } = params;
-  const swing = params.swing || 0;
-  let primary = 0, spill = 0, totalTax = 0, boLifetime = 0, lossP = 0, lossS = 0;
-  const series = [{ year: 0, total: 0 }];
-  for (let y = 1; y <= years; y++) {
-    let toPrimary = annualDeposit, toSpill = 0;
-    if (strategy === 'bo') {
-      const room = Math.min(cfg.boYearlyCap, cfg.boLifetimeCap - boLifetime);
-      toPrimary = Math.max(0, Math.min(annualDeposit, room));
-      boLifetime += toPrimary;
-      toSpill = annualDeposit - toPrimary;
-    } else if (strategy === 'ask') {
-      const room = Math.max(0, cfg.askCeiling - primary);
-      toPrimary = Math.min(annualDeposit, room);
-      toSpill = annualDeposit - toPrimary;
-    }
-    primary += toPrimary; spill += toSpill;
-    // alternating good/bad years around the average (deterministic, replayable)
-    const rate = returnRate + (swing ? (y % 2 === 1 ? swing : -swing) : 0);
-    const gP = primary * rate, gS = spill * rate;
-    let frikortLeft = isChild ? cfg.personfradrag : 0;
-    let taxP = 0, taxS = 0;
-    // primary bucket: loss carryforward offsets later gains before tax
-    if (strategy !== 'bo') {
-      if (gP < 0) { lossP += -gP; }
-      else {
-        const off = Math.min(gP, lossP); lossP -= off;
-        const tg = gP - off;
-        if (strategy === 'ask') taxP = askTax(tg, cfg);
-        else if (strategy === 'offlist') {
-          if (isChild) { const r = kapTaxChild(tg, frikortLeft, cfg); taxP = r.tax; frikortLeft -= r.frikortUsed; }
-          else taxP = kapTaxAdult(tg, cfg);
-        }
-        else if (strategy === 'onlist') taxP = aktieTax(tg, cfg);
-      }
-    }
-    // spill bucket (always an off-list depot)
-    if (spill > 0) {
-      if (gS < 0) { lossS += -gS; }
-      else {
-        const off = Math.min(gS, lossS); lossS -= off;
-        const tg = gS - off;
-        taxS = isChild ? kapTaxChild(tg, frikortLeft, cfg).tax : kapTaxAdult(tg, cfg);
-      }
-    }
-    primary += gP - taxP; spill += gS - taxS;
-    totalTax += taxP + taxS;
-    series.push({ year: y, total: primary + spill });
-  }
-  return { series, endValue: primary + spill, totalTax, primaryEnd: primary, spillEnd: spill };
-}
-
-function simulateRace(params, cfg) {
-  const strategies = params.isChild ? ['bo','ask','offlist','onlist'] : ['ask','offlist','onlist'];
-  const out = {};
-  for (const s of strategies) out[s] = simulateWrapper(s, params, cfg);
-  return out;
-}
-
-function giftPlan(plannedTotalPerYear, giverCount, cfg) {
-  const capacity = giverCount * cfg.giftCapPerGiver;
-  const excess = Math.max(0, plannedTotalPerYear - capacity);
-  return { capacity, excess, giftTax: excess * cfg.giftTaxRate, withinCap: excess === 0 };
-}
+/* Pure tax engine (aktieTax, kapTaxAdult, kapTaxChild, askTax,
+   simulateWrapper / simulateRace / giftPlan) is in js/tax.js, loaded above. */
 
 /* ============ SELF-TESTS (hand-computed expectations) ============ */
 function approx(a,b,eps=0.01){return Math.abs(a-b)<eps}
