@@ -206,7 +206,7 @@
   @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 
   /* ============================================================
-     REDESIGN v2 — NORDIC FINTECH DASHBOARD (matches Plan page)
+     REDESIGN v2 - NORDIC FINTECH DASHBOARD (matches Plan page)
      Pure visual layer. Redefines tokens + elevates each component.
      No class/id renamed, no logic touched.
      ============================================================ */
@@ -348,7 +348,7 @@
   @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 
   /* ============================================================
-     UX POLISH v3 — cause-and-effect flash, tax-home icons,
+     UX POLISH v3 - cause-and-effect flash, tax-home icons,
      sticky context pill. Visual/feedback only.
      ============================================================ */
   /* 1. cause-and-effect data flash */
@@ -377,7 +377,7 @@
   @media(max-width:600px){ .ctx-pill{ top:96px } }
 
   /* ============================================================
-     UX POLISH v4 — nav: auto-hiding header, clickable pill, home brand
+     UX POLISH v4 - nav: auto-hiding header, clickable pill, home brand
      ============================================================ */
   /* auto-hiding top header */
   header.site{ transition:transform .28s var(--ease); will-change:transform }
@@ -847,7 +847,7 @@ function flash(els){
 }
 function updateCtxPill(){
   const pill = $("ctxPill"); if(!pill) return;
-  pill.setAttribute("aria-label", `${t("ctxPillLabel")} — ${t("ctlMonthly")}: ${kr(S.monthly)}, ${S.years} ${t("yrShort")==="år"?"år":"yrs"}`);
+  pill.setAttribute("aria-label", `${t("ctxPillLabel")} - ${t("ctlMonthly")}: ${kr(S.monthly)}, ${S.years} ${t("yrShort")==="år"?"år":"yrs"}`);
   pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlMonthly")}: <b>${kr(S.monthly)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yrShort")==="år"?"år":"yrs"}`;
 }
 (function navAndPill(){

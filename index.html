@@ -266,7 +266,7 @@
   .fxnote{ font-size:.83rem; color:var(--muted); margin-top:10px; line-height:1.5 }
 
   /* ============================================================
-     REDESIGN v2 — NORDIC FINTECH DASHBOARD
+     REDESIGN v2 - NORDIC FINTECH DASHBOARD
      Pure visual layer. Redefines design tokens (cascades through
      every var()-based rule) + elevates each component to a clean,
      trustworthy SaaS-dashboard aesthetic. No class/id renamed,
@@ -474,7 +474,7 @@
   @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 
   /* ============================================================
-     UX POLISH v3 — cause-and-effect flash, tax-home icons,
+     UX POLISH v3 - cause-and-effect flash, tax-home icons,
      sticky context pill. Visual/feedback only.
      ============================================================ */
   /* 1. cause-and-effect data flash */
@@ -504,7 +504,7 @@
   @media(max-width:600px){ .ctx-pill{ top:96px } }
 
   /* ============================================================
-     UX POLISH v4 — nav: auto-hiding header, clickable pill, home brand
+     UX POLISH v4 - nav: auto-hiding header, clickable pill, home brand
      ============================================================ */
   /* auto-hiding top header */
   header.site{ transition:transform .28s var(--ease); will-change:transform }
@@ -1052,7 +1052,7 @@ function renderYearChart(sim){
   const finalSplit = sim.series[years][view];
   const leadId = sim.order.slice().sort((a,b)=>(finalSplit[b]||0)-(finalSplit[a]||0))[0];
   const takeaway = fill(t("ycTakeaway"), { n:years, lead:ycName(leadId) });
-  $("yc-svg").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("ycTitle")} — ${takeaway}" aria-describedby="yc-table">${axis}${bars}</svg>`;
+  $("yc-svg").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("ycTitle")} - ${takeaway}" aria-describedby="yc-table">${axis}${bars}</svg>`;
 
   // a11y: visually-hidden data table mirroring the chart, one row per year
   const cols = sim.order;
@@ -1062,7 +1062,7 @@ function renderYearChart(sim){
     const d=sim.series[y][view];
     trows += `<tr><th scope="row">${y}</th>${cols.map(id=>`<td>${kr(d[id]||0)}</td>`).join("")}</tr>`;
   }
-  $("yc-table").innerHTML = `<table><caption>${t("ycTitle")} — ${t(view==="dep"?"ycKindDep":"ycKindVal")}</caption><thead>${thead}</thead><tbody>${trows}</tbody></table>`;
+  $("yc-table").innerHTML = `<table><caption>${t("ycTitle")} - ${t(view==="dep"?"ycKindDep":"ycKindVal")}</caption><thead>${thead}</thead><tbody>${trows}</tbody></table>`;
 
   $("yc-legend").innerHTML = sim.order.map(id=>
     `<span><span class="legic" style="color:${BUCKET_META[id].hex}">${BUCKET_META[id].icon||""}</span>${ycName(id)}</span>`).join("");
@@ -1184,7 +1184,7 @@ function flash(els){
 }
 function updateCtxPill(){
   const pill = $("ctxPill"); if(!pill) return;
-  pill.setAttribute("aria-label", `${t("ctxPillLabel")} — ${t("ctlBudget")}: ${kr(S.budget)}, ${S.years} ${t("yearsUnit")}`);
+  pill.setAttribute("aria-label", `${t("ctxPillLabel")} - ${t("ctlBudget")}: ${kr(S.budget)}, ${S.years} ${t("yearsUnit")}`);
   pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlBudget")}: <b>${kr(S.budget)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yearsUnit")}`;
 }
 (function navAndPill(){

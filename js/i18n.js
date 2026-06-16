@@ -1,5 +1,5 @@
 /* ============================================================
-   I18N — shared BASE (keys identical in both pages) + helpers.
+   I18N - shared BASE (keys identical in both pages) + helpers.
    Each page loads this after js/config.js, defines its own PAGE_I18N
    overrides (page-specific + keys whose wording differs), and builds
    const I18N = mergeI18n(I18N_BASE, PAGE_I18N). Single source for the

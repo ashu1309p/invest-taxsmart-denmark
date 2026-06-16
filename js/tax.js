@@ -1,5 +1,5 @@
 /* ============================================================
-   Pure tax math — SINGLE SOURCE shared by index.html and play.html.
+   Pure tax math - SINGLE SOURCE shared by index.html and play.html.
    No DOM, node/headless testable. Loaded after js/config.js; every
    function takes cfg (TAX_YEAR_CONFIG) as a parameter.
    Verified by runRouterTests() (Plan, 9 cases) and runTests() (Play, 12 cases).

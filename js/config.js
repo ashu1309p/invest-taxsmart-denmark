@@ -1,5 +1,5 @@
 /* ============================================================
-   TAX_YEAR_CONFIG — the ONLY place annual amounts live.
+   TAX_YEAR_CONFIG - the ONLY place annual amounts live.
    SINGLE SOURCE shared by index.html and play.html (loaded by both),
    so the two pages can never drift apart.
    Verified 2026-06-12 against skat.dk / skm.dk.
