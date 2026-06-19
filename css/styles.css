@@ -173,3 +173,11 @@ a.lib-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow); border-c
 /* article footer: disclaimer + back to learn */
 .art-foot{ margin:2em 0 0; padding-top:16px; border-top:1px solid var(--line); font-size:.86rem; color:var(--muted); line-height:1.6 }
 .art-foot .back{ display:inline-block; margin-top:10px; font-weight:700; color:var(--accent); text-decoration:none }
+
+/* comparison table inside an article (horizontal scroll on small screens) */
+.art-table-wrap{ overflow-x:auto; margin:1.2em 0; -webkit-overflow-scrolling:touch }
+.art-table{ width:100%; border-collapse:collapse; font-size:.92rem; min-width:520px }
+.art-table th,.art-table td{ text-align:left; padding:10px 12px; border:1px solid var(--line); vertical-align:top; line-height:1.5; color:var(--ink-2) }
+.art-table thead th{ background:var(--accent-soft); color:var(--accent-ink); font-weight:800 }
+.art-table thead th:first-child{ background:var(--sunken); color:var(--muted) }
+.art-table th[scope=row]{ background:var(--sunken); color:var(--ink); font-weight:700; white-space:nowrap }
