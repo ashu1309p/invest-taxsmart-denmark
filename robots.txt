@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ashu1309p.github.io/invest-taxsmart-denmark/sitemap.xml
