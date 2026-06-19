@@ -35,32 +35,21 @@
     --c-bo:#157F70; --c-ask:#4361EE; --c-off:#A86200; --c-on:#C0427C;
     --radius:16px; --shadow:0 1px 3px rgba(40,35,25,.08),0 8px 24px rgba(40,35,25,.06);
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  /* primitives, top bar, footer, sticky bar, ctx-pill, skip-link, focus + reduced-motion live in css/styles.css (shared, linked last) */
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     background:var(--bg); color:var(--ink); line-height:1.55;
     padding-bottom:64px; /* room for sticky disclaimer */
   }
   .wrap{max-width:680px;margin:0 auto;padding:0 16px}
-  header.site{
-    position:sticky;top:0;z-index:40;background:rgba(250,246,239,.92);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
-  }
   .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto}
   .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1.02rem}
   .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);display:inline-block}
-  .tabs{display:flex;background:#F1ECE1;border-radius:999px;padding:3px;gap:2px}
-  .tabs .tab{padding:6px 14px;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--muted);text-decoration:none;white-space:nowrap}
-  .tabs .tab.active{background:var(--accent);color:#fff}
-  @media(max-width:600px){.site-inner{flex-wrap:wrap;row-gap:9px}.brand{flex-basis:100%;font-size:.95rem}}
   .ctl .equiv{font-size:.76rem;color:var(--muted);text-align:right;margin-top:2px}
-  .lang-toggle{display:flex;border:1.5px solid var(--accent);border-radius:999px;overflow:hidden}
   .lang-toggle button{
     border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;
     padding:7px 14px;cursor:pointer;min-width:46px;
   }
-  .lang-toggle button.active{background:var(--accent);color:#fff}
   h1{font-size:1.7rem;line-height:1.2;letter-spacing:-.02em;margin:26px 0 8px}
   .tagline{color:var(--muted);font-size:1.02rem;margin-bottom:18px}
   .yeartag{
@@ -164,19 +153,12 @@
   .verified{font-size:.8rem;color:var(--muted);margin-top:10px}
   .testbadge{font-size:.75rem;color:var(--muted);margin-top:8px}
   .testbadge.fail{color:#B4231F;font-weight:700}
-  footer.big{margin:34px 0 18px;font-size:.84rem;color:var(--muted)}
-  .stickybar{
-    position:fixed;left:0;right:0;bottom:0;z-index:50;background:#2B2B33;color:#EDE9DF;
-    font-size:.76rem;line-height:1.35;padding:9px 14px;text-align:center;
-  }
-  .stickybar a{color:#8FD3CB}
   @media(min-width:560px){h1{font-size:2.1rem}}
 
   /* ============================================================
      REDESIGN v1 - shared design system (matches Plan page).
      ============================================================ */
   :root{ --sunken:#F2ECE0; --space-sec:56px; --shadow:0 1px 2px rgba(40,35,25,.05),0 10px 30px rgba(40,35,25,.07); }
-  html{ color-scheme:light }
   body{ line-height:1.62 }
   .wrap{ max-width:716px }
   h1{ font-size:clamp(2.05rem,6vw,2.6rem)!important; font-weight:700; line-height:1.08; letter-spacing:-.02em; text-wrap:balance }
@@ -193,17 +175,11 @@
   .mode button:hover,.tabs .tab:hover{ color:var(--ink) }
   .linkcard:hover{ background:#D5ECE7 }
   .sources a:hover{ text-decoration:underline }
-  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
-  input[type=range]:focus-visible{ outline-offset:4px }
   /* one rotating chevron on the disclosure */
   details.why>summary{ position:relative; padding-right:28px; list-style:none }
   details.why>summary::-webkit-details-marker{ display:none }
   details.why>summary::after{ content:""; position:absolute; right:4px; top:calc(50% - 5px); width:8px; height:8px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); transition:transform .2s; opacity:.7 }
   details.why[open]>summary::after{ transform:rotate(-135deg) }
-  /* sticky bar: safe area + dismiss */
-  .stickybar{ padding-bottom:calc(9px + env(safe-area-inset-bottom)) }
-  .stickybar .sb-x{ position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:0; color:#9FB7B2; font-size:1rem; cursor:pointer; padding:4px 8px; line-height:1 }
-  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 
   /* ============================================================
      REDESIGN v2 - NORDIC FINTECH DASHBOARD (matches Plan page)
@@ -227,7 +203,6 @@
     --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
     --space-sec:64px; --ease:cubic-bezier(.4,0,.2,1);
   }
-  html{ color-scheme:light }
   body{
     font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     background:
@@ -238,17 +213,6 @@
   }
   .wrap{ max-width:744px }
   .ctl output,.rcard .end,.rcard .tax,output,.yeartag,.stepper b,.capbar{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1 }
-
-  /* ---------- top bar (glass) ---------- */
-  header.site{ background:rgba(248,250,252,.78); backdrop-filter:saturate(180%) blur(14px); -webkit-backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--line) }
-  .brand{ color:var(--ink); letter-spacing:-.01em }
-  .brand .dot{ width:11px; height:11px; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft) }
-  .tabs{ background:#E7ECF3; padding:4px; gap:3px; border:1px solid var(--line) }
-  .tabs .tab{ color:var(--muted); border-radius:999px }
-  .tabs .tab.active{ background:#fff; color:var(--accent); box-shadow:0 1px 2px rgba(15,23,42,.14),0 1px 1px rgba(15,23,42,.06) }
-  .lang-toggle{ border-color:var(--accent-line); background:#fff; overflow:hidden }
-  .lang-toggle button{ color:var(--muted) }
-  .lang-toggle button.active{ background:var(--accent); color:#fff }
 
   /* ---------- hero ---------- */
   h1{ font-size:clamp(2.1rem,6vw,2.75rem)!important; font-weight:800; line-height:1.06; letter-spacing:-.028em; color:var(--ink) }
@@ -334,75 +298,24 @@
   .tipbox{ background:#0F172A; color:#E2E8F0; border-radius:10px; box-shadow:var(--shadow-lg) }
   .tipbox .ref{ color:#94A3B8 }
 
-  /* ---------- sources / footer / sticky ---------- */
-  .sources a{ color:var(--accent); font-weight:600 }
-  .verified,.testbadge{ color:var(--muted) }
-  .testbadge.fail{ color:var(--danger) }
-  .stickybar{ background:rgba(15,23,42,.96); color:#CBD5E1; backdrop-filter:blur(6px); border-top:1px solid rgba(255,255,255,.06) }
-  .stickybar a{ color:#5EEAD4; font-weight:600 }
-  .stickybar .sb-x{ color:#94A3B8 }
-
   /* ---------- focus / motion ---------- */
-  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-radius:6px }
   a,button,summary,.chips button,.tabs .tab,.lang-toggle button{ transition:color .18s var(--ease),background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease) }
-  @media(prefers-reduced-motion:reduce){ *{ transition-duration:.001ms!important; animation-duration:.001ms!important } html{ scroll-behavior:auto } }
 
   /* ============================================================
      UX POLISH v3 - cause-and-effect flash, tax-home icons,
      sticky context pill. Visual/feedback only.
      ============================================================ */
-  /* 1. cause-and-effect data flash */
-  @keyframes flashUpdate{ 0%{ background-color:var(--accent-soft) } 100%{ background-color:transparent } }
-  .flash-update{ animation:flashUpdate .8s var(--ease); border-radius:6px; box-decoration-break:clone; -webkit-box-decoration-break:clone }
-
   /* 2. tax-home icons (monochromatic, inherit strategy colour) */
-  .ti{ width:18px; height:18px; flex:none; display:inline-block; vertical-align:-3px }
   .legend .legic,.rcard h3 .legic{ display:inline-flex }
   .legend .ti{ width:14px; height:14px }
   .rcard h3 .ti{ width:16px; height:16px }
 
-  /* 3. sticky context pill */
-  .ctx-pill{
-    position:fixed; top:64px; left:50%; transform:translate(-50%,-12px); z-index:60;
-    display:flex; align-items:center; max-width:calc(100vw - 24px); white-space:nowrap;
-    background:rgba(255,255,255,.82); backdrop-filter:saturate(180%) blur(12px); -webkit-backdrop-filter:saturate(180%) blur(12px);
-    border:1px solid var(--line); box-shadow:var(--shadow); border-radius:999px;
-    padding:8px 16px; font-size:.82rem; font-weight:700; color:var(--ink);
-    overflow:hidden; text-overflow:ellipsis;
-    opacity:0; pointer-events:none; transition:opacity .25s var(--ease), transform .25s var(--ease);
-  }
-  .ctx-pill.show{ opacity:1; transform:translate(-50%,0); pointer-events:auto }
-  .ctx-pill b{ color:var(--accent); font-variant-numeric:tabular-nums }
-  .ctx-pill .sep{ color:var(--muted-2); margin:0 9px; font-weight:400 }
-  @media(max-width:600px){ .ctx-pill{ top:96px } }
-
-  /* ============================================================
-     UX POLISH v4 - nav: auto-hiding header, clickable pill, home brand
-     ============================================================ */
-  /* auto-hiding top header */
-  header.site{ transition:transform .28s var(--ease); will-change:transform }
-  header.site.header-hidden{ transform:translateY(-100%) }
-  /* context pill becomes a "back to calculator" button + lifts into recovered space */
-  .ctx-pill{ cursor:pointer; transition:opacity .25s var(--ease), transform .2s var(--ease), top .28s var(--ease) }
-  .ctx-pill .ctx-up{ color:var(--accent); font-weight:800; margin-right:7px; display:inline-block }
-  .ctx-pill.lifted{ top:12px }
-  @media(max-width:600px){ .ctx-pill.lifted{ top:12px } }
-  .ctx-pill.show:hover{ transform:translate(-50%,-1px) scale(1.02); box-shadow:var(--shadow-lg) }
-  .ctx-pill.show:active{ transform:translate(-50%,0) scale(.98) }
-  /* brand acts as a global home link */
-  .brand{ text-decoration:none; color:var(--ink) }
-  .brand:hover{ opacity:.92 }
-  .brand .dot{ transition:transform .18s var(--ease) }
-  .brand:hover .dot,.brand:focus-visible .dot{ transform:scale(1.2) }
-
   /* ---------- P4 accessibility ---------- */
-  .skip-link{ position:absolute; left:-9999px; top:0; z-index:200; background:var(--accent); color:#fff; padding:10px 16px; border-radius:0 0 10px 0; font-weight:700; text-decoration:none }
-  .skip-link:focus,.skip-link:focus-visible{ left:0 }
-  #main:focus{ outline:none }
-  .visually-hidden{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0 }
   /* non-colour cue: the over-cap segment gets diagonal stripes so it reads as "over" without relying on red */
   .capbar .seg-over{ background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 5px,transparent 5px 10px) }
 </style>
+<!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
