@@ -80,3 +80,61 @@ OG_FONT_REGULAR=/path/Inter-Regular.ttf OG_FONT_BOLD=/path/Inter-Bold.ttf python
 
 If you change the site name, tagline, or palette, edit the strings/colours at the top of the script and
 re-run, then redeploy the new `og-image.png`.
+
+## Positivliste auto-refresh (the weekly data update)
+
+The plain-language version of how the fund-status data stays current:
+
+- The site tells you whether a fund is **on** SKAT's positivliste by reading
+  [`data/positivliste.json`](data/positivliste.json).
+- That file is refreshed automatically by the GitHub Action
+  [`.github/workflows/refresh-positivliste.yml`](.github/workflows/refresh-positivliste.yml). It runs
+  **weekly (Mondays)** and can also be run by hand from the **Actions** tab via **"Run workflow"**.
+- The Action reads the SKAT file URL from the repo variable **`POSITIVLISTE_URL`**
+  (**Settings → Secrets and variables → Actions → Variables** tab). It is a plain-text repo
+  **variable, not a secret**.
+- The script has safety guards: if the download fails, the workbook can't be parsed, **zero** ISINs are
+  found, or the new count drops **more than 25%** below the current file, the run **fails and keeps the
+  existing good JSON** rather than overwriting it. So a bad run never breaks the site; it just means the
+  data didn't update that week.
+
+### If the weekly refresh starts failing (the one thing that will eventually break)
+
+> Expect this roughly once or twice a year. It is **not an emergency** — the site keeps showing the last
+> good snapshot until it is fixed.
+
+SKAT does not keep a stable "latest" link. The `.xlsx` URL has a date **and a random path segment** baked
+into it (e.g. `.../media/r1dn5su0/maj-2026-abis-liste-...xlsx`), so when SKAT republishes the list that old
+URL starts returning **404** and the weekly Action begins failing.
+
+The fix (about two minutes):
+
+1. Go to SKAT's page:
+   https://skat.dk/erhverv/ekapital/vaerdipapirer/beviser-og-aktier-i-investeringsforeninger-og-selskaber-ifpa
+2. Find the current **"Liste over aktiebaserede investeringsselskaber"** / ABIS list and copy the
+   **direct link to the `.xlsx` file** (it must end in `.xlsx`, not the page link).
+3. In the repo: **Settings → Secrets and variables → Actions → Variables** tab → edit **`POSITIVLISTE_URL`**
+   and paste the new link.
+4. Go to the **Actions** tab → **"Refresh positivliste snapshot"** → **Run workflow**, and confirm it
+   succeeds and that `data/positivliste.json` shows `"sample": false` with a realistic `count` (a few
+   thousand; it was **5,219** as of June 2026).
+
+Current working value for reference *(as of 2026-06-19)*:
+`https://skat.dk/media/r1dn5su0/maj-2026-abis-liste-til-offentliggoerelse-2021-2026.xlsx`
+
+### How to verify a refresh worked
+
+After any run, open [`data/positivliste.json`](data/positivliste.json) and check:
+
+- `sample` is **`false`**,
+- `count` is in the **thousands**,
+- `listDate` / `fetchedAt` are **recent**.
+
+Optionally spot-check a known ISIN — e.g. `IE00B4L5Y983` (iShares Core MSCI World) should be present /
+**ON** the list.
+
+## Hero video
+
+The hero clip and poster live in [`media/`](media/) (`hero.webm`, `hero.mp4`, `hero-poster.webp`,
+`hero-poster.jpg`). To replace them (e.g. a watermark-free version), **overwrite those four files using the
+same filenames** — no HTML changes are needed.
