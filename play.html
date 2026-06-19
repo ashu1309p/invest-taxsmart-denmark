@@ -316,20 +316,11 @@
 </style>
 <!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
 <link rel="stylesheet" href="css/styles.css">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js"></script>
 </head>
-<body>
-<a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
-
-<header class="site">
-  <div class="site-inner">
-    <a class="brand" href="index.html"><span class="dot"></span><span data-i18n="brand">The Wrapper Race</span></a>
-    <nav class="tabs"><a class="tab" href="index.html" data-i18n="tabPlan">Plan</a><a class="tab active" href="play.html" data-i18n="tabPlay">Play</a></nav>
-    <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="ariaLangGroup">
-      <button id="lang-en" class="active">EN</button>
-      <button id="lang-da">DA</button>
-    </div>
-  </div>
-</header>
+<body data-page="play">
+<div id="site-header"></div><script>Shell.header()</script>
 
 <div id="ctxPill" class="ctx-pill" role="button" tabindex="-1" aria-hidden="true"></div>
 
@@ -457,18 +448,7 @@
   </section>
 </div>
 
-<div class="wrap">
-  <footer class="big">
-    <p data-i18n="bigDisclaimer">This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts shown are for the tagged tax year and are adjusted every January; the positivliste [SKAT\u2019s fund list] changes every December. Always verify against skat.dk or ask an advokat/revisor before acting.</p>
-    <p style="margin-top:8px" data-i18n="privacyNote">Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data, no cross-site tracking). Your slider and language choices stay in your browser only.</p>
-  </footer>
-</div>
-
-<aside class="stickybar" aria-label="Important disclaimer" data-i18n-aria="ariaDisclaimer">
-  <span data-i18n="stickyBar">Educational only - not tax, legal or investment advice.</span>
-  <a href="#sources" data-i18n="stickyLink">Sources</a>
-  <button class="sb-x" type="button" onclick="this.closest('.stickybar').remove()" aria-label="Dismiss" data-i18n-aria="ariaDismiss">&times;</button>
-</aside>
+<div id="site-footer"></div><script>Shell.footer()</script>
 
 <!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with index.html). Update it there each January. -->
 <script src="js/config.js"></script>

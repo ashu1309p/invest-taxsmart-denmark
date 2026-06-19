@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Learn - Tax-smart investing in Denmark</title>
+<meta name="description" content="Short, plain-language guides to Danish retail investment taxation. Educational only, not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://ashu1309p.github.io/invest-taxsmart-denmark/learn.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="Learn: Tax-smart investing in Denmark">
+<meta property="og:description" content="Short, plain-language guides to Danish retail investment taxation. Educational only, not advice.">
+<meta property="og:url" content="https://ashu1309p.github.io/invest-taxsmart-denmark/learn.html">
+<meta property="og:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn: Tax-smart investing in Denmark">
+<meta name="twitter:description" content="Short, plain-language guides to Danish retail investment taxation. Educational only, not advice.">
+<meta name="twitter:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Tax-smart investing in Denmark","url":"https://ashu1309p.github.io/invest-taxsmart-denmark/","inLanguage":["en","da"],"description":"Free educational tool for Danish retail investment taxation. Not advice."}</script>
+<style>
+  /* Page-specific design tokens (same Nordic-fintech token set as index/play, so the
+     shared chrome in css/styles.css resolves to identical values). Shared shell rules
+     (header/footer/sticky/skip-link/focus) live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
+  .lead{color:var(--muted);font-size:1.08rem;line-height:1.55;max-width:33em}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:18px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+  main{min-height:46vh}
+</style>
+<!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+  <p class="kicker" data-i18n="learnKicker">Learn</p>
+  <h1 data-i18n="learnTitle">Learn</h1>
+  <p class="lead" data-i18n="learnSoon">Short, plain-language guides to Danish investment tax are coming soon.</p>
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with index/play). -->
+<script src="js/config.js"></script>
+<script src="js/tax.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+/* Minimal page controller: language (shared with the tools via GLOBAL_KEY), the shared
+   i18n render pass for the injected header/footer + this page's copy, and an i18n
+   completeness self-check. No tax logic on this placeholder page. */
+const GLOBAL_KEY = "dkie_global_v1";   // lang shared across pages
+const PAGE_I18N = {
+  en: {
+    "skipLink":"Skip to content",
+    "ariaLangGroup":"Language",
+    "ariaDisclaimer":"Important disclaimer",
+    "ariaDismiss":"Dismiss",
+    "bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT’s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
+    "stickyBar":"Educational only, not tax, legal or investment advice.",
+    "learnKicker":"Learn",
+    "learnTitle":"Learn",
+    "learnSoon":"Short, plain-language guides to Danish investment tax are on the way. In the meantime, use Plan to map where each krone goes first, and Play to race the four tax wrappers.",
+    "i18nReady":"i18n complete"
+  },
+  da: {
+    "skipLink":"Spring til indhold",
+    "ariaLangGroup":"Sprog",
+    "ariaDisclaimer":"Vigtig ansvarsfraskrivelse",
+    "ariaDismiss":"Afvis",
+    "bigDisclaimer":"Dette site er et undervisningsværktøj lavet af en privatperson. Det er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det angivne skatteår og reguleres hver januar; positivlisten [SKATs godkendte fonde] ændres hver december. Bekræft på skat.dk eller spørg en advokat/revisor før du handler.",
+    "stickyBar":"Kun til undervisning – ikke skatte-, juridisk eller investeringsrådgivning.",
+    "learnKicker":"Lær",
+    "learnTitle":"Lær",
+    "learnSoon":"Korte, letforståelige guides til dansk investeringsskat er på vej. Brug indtil da Planlæg til at se, hvor hver krone skal hen først, og Leg til at lade de fire skatteindpakninger dyste.",
+    "i18nReady":"i18n komplet"
+  }
+};
+const I18N = mergeI18n(I18N_BASE, PAGE_I18N);
+const $ = id => document.getElementById(id);
+let lang = "en";
+try { const g = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "{}"); if (g.lang === "da" || g.lang === "en") lang = g.lang; } catch (e) {}
+
+function t(key){
+  if (I18N[lang] && I18N[lang][key] !== undefined) return I18N[lang][key];
+  if (I18N.en[key] !== undefined) return I18N.en[key];
+  return key;
+}
+function renderStrings(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria"))); });
+  const en = $("lang-en"), da = $("lang-da");
+  if (en) en.classList.toggle("active", lang === "en");
+  if (da) da.classList.toggle("active", lang === "da");
+}
+function setLang(l){
+  lang = l;
+  try { const g = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "{}"); g.lang = l; localStorage.setItem(GLOBAL_KEY, JSON.stringify(g)); } catch (e) {}
+  renderStrings();
+}
+if ($("lang-en")) $("lang-en").onclick = () => setLang("en");
+if ($("lang-da")) $("lang-da").onclick = () => setLang("da");
+renderStrings();
+
+/* i18n completeness self-check (mirrors the tools' badge) */
+(function(){
+  const r = checkI18nComplete(I18N);
+  const b = $("testbadge");
+  if (!b) return;
+  if (r.ok) { b.textContent = "\u2713 " + t("i18nReady"); }
+  else { b.textContent = "\u26A0 i18n: " + r.missingInDa.concat(r.missingInEn).join(", "); b.classList.add("fail"); }
+})();
+</script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
