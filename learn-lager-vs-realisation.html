@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lager vs realisation - Tax-smart investing in Denmark</title>
+<meta name="description" content="The two ways Denmark times investment tax: lagerbeskatning (taxed yearly on the change in value) vs realisationsbeskatning (taxed only when you sell), and which one applies to what. Educational only, not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://ashu1309p.github.io/invest-taxsmart-denmark/learn-lager-vs-realisation.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="Lager vs realisation: when the tax bill lands">
+<meta property="og:description" content="Taxed yearly on paper gains, or only when you sell? The two timing methods Danish investors meet, and what each applies to.">
+<meta property="og:url" content="https://ashu1309p.github.io/invest-taxsmart-denmark/learn-lager-vs-realisation.html">
+<meta property="og:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lager vs realisation: when the tax bill lands">
+<meta name="twitter:description" content="The two ways Denmark times investment tax, and what each applies to.">
+<meta name="twitter:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Lager vs realisation: when the tax bill lands","inLanguage":["en","da"],"isAccessibleForFree":true,"mainEntityOfPage":"https://ashu1309p.github.io/invest-taxsmart-denmark/learn-lager-vs-realisation.html","image":"https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png","author":{"@type":"Person","name":"Tax-smart investing in Denmark"},"publisher":{"@type":"Organization","name":"Tax-smart investing in Denmark"},"description":"Lager (mark-to-market) vs realisation taxation in Denmark and what each applies to. Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens (same Nordic-fintech token set as index/play/learn, so the
+     shared chrome + Learn article styles in css/styles.css resolve to identical values).
+     Shared rules live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:24px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+</style>
+<!-- Shared site-shell chrome + Learn library/article styles. Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+<article class="article">
+  <p class="kicker" data-i18n="art_lvr_kicker">Learn</p>
+  <h1 data-i18n="art_lvr_h1">Lager vs realisation: when the tax bill lands</h1>
+  <p class="art-lead" data-i18n="art_lvr_lead">Two investments can earn exactly the same return and still be taxed at different times. In Denmark the timing is set by the instrument, not by you.</p>
+  <p class="art-verified"><span class="art-yeartag" data-i18n="art_lvr_taxyear">Tax year 2026</span> <span data-i18n="art_lvr_verifiedNote">Every rate and amount below is for this tax year.</span></p>
+
+  <h2 data-i18n="art_lvr_h2_intro">Two ways Denmark times the tax</h2>
+  <p data-i18n="art_lvr_intro_p">Most of this site is about how much tax you pay. This article is about when you pay it. Denmark uses two timing methods: lagerbeskatning, where you are taxed every year on the change in value, and realisationsbeskatning, where you are taxed only when you actually sell. The rate can be the same; what differs is whether the tax bill arrives yearly or waits until you cash out.</p>
+
+  <h2 data-i18n="art_lvr_h2_lager">Lagerbeskatning: taxed every year</h2>
+  <p data-i18n="art_lvr_lager_p1">Lager [mark-to-market] means you are taxed on the increase in value each year, whether you sold anything or not, and the tax is paid from the account. A purely paper gain still counts: if the holding is worth more on 31 December than it was a year earlier, that rise is taxed for the year.</p>
+  <p data-i18n="art_lvr_lager_p2">The practical catch is cash flow. You can owe tax in a year when you sold nothing, so the money to pay it has to come from somewhere. Inside an ASK the tax is simply taken from the account at a flat 17% (2026); in an ordinary depot a lager-taxed fund's yearly gain lands on your tax return.</p>
+  <p data-i18n="art_lvr_lager_p3">Lager is the method for investment funds and investeringsselskaber [investment companies], which is what most ETFs are, and for everything held inside an ASK. The rate then depends on the fund: a positivliste fund is aktieindkomst [share income] at 27% up to 79,400 kr and 42% above; an off-list fund is kapitalindkomst [capital income] at roughly 37-42%.</p>
+  <p data-i18n="art_lvr_lager_p4">For a child, the yearly lager method is the whole point of the frikort setup. An off-list accumulating fund's yearly gain is kapitalindkomst, and the child's personfradrag [tax-free allowance] of 54,100 kr (2026) absorbs it, so the tax is effectively 0% until the yearly gain grows past the allowance.</p>
+
+  <h2 data-i18n="art_lvr_h2_real">Realisationsbeskatning: taxed only when you sell</h2>
+  <p data-i18n="art_lvr_real_p1">Realisation means nothing is due until you actually sell. Until then the whole amount, including the part that is really a gain, keeps compounding untaxed. The deferral is the advantage: tax paid later leaves more invested in the meantime.</p>
+  <p data-i18n="art_lvr_real_p2">Realisation is the method for individual shares: single stocks in a depot are realisation-taxed aktieindkomst [share income], with no yearly lager bill, so you choose when to sell. It also applies to certain Danish equity-based investment funds: Danish distributing equity funds (IMB) are realisation-taxed aktieindkomst, a different regime from the lager-taxed ETFs above.</p>
+
+  <h2 data-i18n="art_lvr_h2_choice">It is the instrument, not a choice</h2>
+  <p data-i18n="art_lvr_choice_p">You do not pick the method; the instrument decides it. An ETF or investeringsselskab is lager, a single stock is realisation, and an ASK is lager by construction. Whether a lager-taxed fund's gain counts as aktieindkomst or kapitalindkomst is in turn set by the positivliste. So before you buy, two separate questions matter: when am I taxed (the instrument), and at what rate (the positivliste status and the wrapper).</p>
+
+  <h2 data-i18n="art_lvr_h2_cmp">At a glance</h2>
+  <div class="art-table-wrap">
+    <table class="art-table">
+      <thead>
+        <tr>
+          <th data-i18n="art_lvr_cmp_corner"></th>
+          <th scope="col" data-i18n="art_lvr_cmp_lager">Lager</th>
+          <th scope="col" data-i18n="art_lvr_cmp_real">Realisation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" data-i18n="art_lvr_cmp_when">When you are taxed</th>
+          <td data-i18n="art_lvr_cmp_lager_when">Every year on the change in value, sold or not.</td>
+          <td data-i18n="art_lvr_cmp_real_when">Only when you actually sell.</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="art_lvr_cmp_what">What it applies to</th>
+          <td data-i18n="art_lvr_cmp_lager_what">Investment funds / ETFs, and everything inside an ASK.</td>
+          <td data-i18n="art_lvr_cmp_real_what">Individual shares; certain Danish equity funds (IMB).</td>
+        </tr>
+        <tr>
+          <th scope="row" data-i18n="art_lvr_cmp_cons">Main practical consequence</th>
+          <td data-i18n="art_lvr_cmp_lager_cons">Tax can be due with no sale; a child's frikort absorbs the yearly gain.</td>
+          <td data-i18n="art_lvr_cmp_real_cons">Gains compound untaxed until you sell; you control the timing.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="takeaways">
+    <h2 data-i18n="art_lvr_ta_h">Key takeaways</h2>
+    <ul>
+      <li data-i18n="art_lvr_ta1">Lager taxes the yearly change in value whether or not you sell, so tax can fall due without a sale.</li>
+      <li data-i18n="art_lvr_ta2">Realisation taxes only when you sell, so gains compound untaxed until then.</li>
+      <li data-i18n="art_lvr_ta3">Funds and ETFs (and everything in an ASK) are lager; single stocks and Danish IMB equity funds are realisation.</li>
+      <li data-i18n="art_lvr_ta4">The method is fixed by the instrument; the rate (27/42% vs ~37-42%) is set by the positivliste and the wrapper.</li>
+    </ul>
+  </div>
+
+  <div class="art-cta">
+    <a class="primary" href="play.html" data-i18n="art_lvr_cta_play">See it compound: the Wrapper Race</a>
+    <a href="learn-positivliste.html" data-i18n="art_lvr_cta_pos">Read: the positivliste</a>
+    <a href="learn-ask-depot-bo.html" data-i18n="art_lvr_cta_adb">Read: ASK vs depot vs børneopsparing</a>
+  </div>
+
+  <p style="margin:1.2em 0 0"><a href="https://skat.dk/borger/aktier-og-andre-vaerdipapirer/aktiesparekonto" target="_blank" rel="noopener" data-i18n="art_lvr_skat">Aktiesparekonto (a lager example) on skat.dk -&gt;</a></p>
+
+  <div class="art-foot">
+    <span data-i18n="art_lvr_disc">This is an educational explainer written by a private individual, not tax, legal or investment advice. Amounts are for tax year 2026 and change as the law changes. Verify on skat.dk, and ask an advokat or revisor before acting on anything here.</span>
+    <a class="back" href="learn.html" data-i18n="art_lvr_back">&larr; Back to Learn</a>
+  </div>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</article>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js; the article interpolates its
+     year-tagged numbers. No tax engine (js/tax.js) is needed on this page. -->
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/article-lager-vs-realisation.js"></script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
