@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The positivliste explained - Tax-smart investing in Denmark</title>
+<meta name="description" content="What Denmark's positivliste (ABIS list) is, why on-list vs off-list flips a fund's tax between share income and capital income, and the yearly habit of checking the ISIN. Educational only, not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://ashu1309p.github.io/invest-taxsmart-denmark/learn-positivliste.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="The positivliste: the list that sets your fund's tax">
+<meta property="og:description" content="Why one ETF is taxed as share income and an almost identical one as capital income - and the yearly habit that keeps you on the right side of it.">
+<meta property="og:url" content="https://ashu1309p.github.io/invest-taxsmart-denmark/learn-positivliste.html">
+<meta property="og:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The positivliste: the list that sets your fund's tax">
+<meta name="twitter:description" content="Why one ETF is taxed as share income and an almost identical one as capital income.">
+<meta name="twitter:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The positivliste: the list that sets your fund's tax","inLanguage":["en","da"],"isAccessibleForFree":true,"mainEntityOfPage":"https://ashu1309p.github.io/invest-taxsmart-denmark/learn-positivliste.html","image":"https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png","author":{"@type":"Person","name":"Tax-smart investing in Denmark"},"publisher":{"@type":"Organization","name":"Tax-smart investing in Denmark"},"description":"What Denmark's positivliste (ABIS list) is and why on-list vs off-list changes a fund's tax. Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens (same Nordic-fintech token set as index/play/learn, so the
+     shared chrome + Learn article styles in css/styles.css resolve to identical values).
+     Shared rules live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:24px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+</style>
+<!-- Shared site-shell chrome + Learn library/article styles. Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+<article class="article">
+  <p class="kicker" data-i18n="art_pos_kicker">Learn</p>
+  <h1 data-i18n="art_pos_h1">The positivliste: the list that sets your fund's tax</h1>
+  <p class="art-lead" data-i18n="art_pos_lead">Two almost identical world ETFs can be taxed in completely different ways in Denmark. The deciding factor is a single official list.</p>
+  <p class="art-verified"><span class="art-yeartag" data-i18n="art_pos_taxyear">Tax year 2026</span> <span data-i18n="art_pos_verifiedNote">Every rate and amount below is for this tax year.</span></p>
+
+  <h2 data-i18n="art_pos_h2_what">What the positivliste actually is</h2>
+  <p data-i18n="art_pos_what_p1">SKAT keeps an official list of equity-based investment funds, formally the ABIS list (aktiebaserede investeringsselskaber). In everyday language people call it the positivliste, the "positive list". Whether a given fund is on it or off it decides which kind of income its gains are taxed as, and the list is refreshed every year.</p>
+  <p data-i18n="art_pos_what_p2">That single yes-or-no fact ripples through everything else: the tax rate you pay, whether you can hold the fund inside an Aktiesparekonto (ASK), and whether it is a smart pick for an adult or for a child. None of it is about the fund being "good" or "bad" as an investment; it is purely about how Denmark labels it for tax.</p>
+
+  <h2 data-i18n="art_pos_h2_rate">On the list vs off the list: the tax flips</h2>
+  <p data-i18n="art_pos_rate_intro">Here is the core of it. The same gain is taxed under one of two regimes, depending on the list:</p>
+  <div class="art-note on">
+    <span class="nt" data-i18n="art_pos_on_t">On the list -&gt; aktieindkomst (share income)</span>
+    <span data-i18n="art_pos_on_d">Gains are taxed as share income at 27% up to 79,400 kr per person (158,800 kr for a married couple) and 42% above that. On-list funds are allowed inside an ASK. For most adults this is the cheaper outcome.</span>
+  </div>
+  <div class="art-note off">
+    <span class="nt" data-i18n="art_pos_off_t">Off the list -&gt; kapitalindkomst (capital income)</span>
+    <span data-i18n="art_pos_off_d">Gains are taxed as capital income at roughly 37-42%, calculated yearly on the change in value (lager). Off-list funds cannot sit inside an ASK. For a child using the frikort, this is often the better outcome.</span>
+  </div>
+  <p data-i18n="art_pos_rate_p">So an on-list and an off-list fund holding nearly the same shares can land in different income types with different rates. That is why checking the list is worth the two minutes it takes.</p>
+
+  <h2 data-i18n="art_pos_h2_ac">What it means for an adult vs a child</h2>
+  <p data-i18n="art_pos_ac_p1">For an adult, on-list share income is usually the goal. The 27% rate is low, the ASK wrapper (which only accepts on-list funds) is taxed even more gently at a flat 17% a year, and the step up to 42% only begins above 79,400 kr of share income in a year.</p>
+  <p data-i18n="art_pos_ac_p2">For a child the logic often flips. A child has a personal allowance (personfradrag) of 54,100 kr for 2026, and it is capital income that this allowance, used as a frikort, soaks up. An off-list fund's kapitalindkomst can therefore be taxed at very little, or nothing, inside the allowance. An on-list fund taxed as aktieindkomst gets no personfradrag relief, so the child pays 27% from the very first krone and the frikort trick stops working for it.</p>
+
+  <h2 data-i18n="art_pos_h2_isin">It is per-ISIN, not per-fund</h2>
+  <p data-i18n="art_pos_isin_p1">The list works per ISIN, the unique identifier of one specific share class, not per fund family. A single fund can have several share classes: accumulating (ACC) and distributing (DIST), currency-hedged and unhedged, and each has its own ISIN. The unhedged class being on the list tells you nothing about the hedged class.</p>
+  <p data-i18n="art_pos_isin_p2">Always check the exact ISIN of the share class you actually intend to buy, before you buy. You can paste it straight into the ISIN checker on the Plan page.</p>
+
+  <h2 data-i18n="art_pos_h2_timing">How and when the list changes</h2>
+  <p data-i18n="art_pos_timing_p">SKAT publishes the list around 15 December for the coming year, and can amend it during the year. Funds are added and removed, which flips a fund's tax from one January to the next. A fund you bought as on-list share income can become off-list capital income the next year, or the other way around, without you doing anything.</p>
+
+  <h2 data-i18n="art_pos_h2_scen">Two quick scenarios</h2>
+  <p style="font-style:italic;color:var(--muted);font-size:.92rem" data-i18n="art_pos_scen_note">Illustration only. These describe the mechanism, not a claim that any specific fund changed status. Always verify the current list yourself.</p>
+  <h3 data-i18n="art_pos_scen1_t">A fund drops off the list</h3>
+  <p data-i18n="art_pos_scen1_p">Suppose a world ETF you hold is on the list this year and SKAT drops it next December. From 1 January, in a normal depot, its yearly gain switches from share income to capital income, and it can no longer sit in an ASK. An adult holding it inside an ASK would typically sell it there and buy a still-listed world ETF instead (an internal ASK trade does not use up your deposit ceiling). For a child's frikort depot the drop is often fine, even better, because capital income is exactly what the allowance absorbs.</p>
+  <h3 data-i18n="art_pos_scen2_t">A fund is added to the list</h3>
+  <p data-i18n="art_pos_scen2_p">Now the reverse: an off-list accumulating world ETF that a child holds for the frikort gets added next December. From January its gain becomes share income with no personfradrag relief, so the child pays 27% from the first krone. The fix is to point the child's new contributions at a fund that is still off the list. For an adult the same change is good news: the fund is now cheaper and can go inside an ASK.</p>
+
+  <div class="takeaways">
+    <h2 data-i18n="art_pos_ta_h">Key takeaways</h2>
+    <ul>
+      <li data-i18n="art_pos_ta1">The positivliste (ABIS list) decides whether a fund's gains are share income (27/42%) or capital income (~37-42%).</li>
+      <li data-i18n="art_pos_ta2">On-list is usually best for an adult and can go in an ASK; off-list is often best for a child's frikort and cannot.</li>
+      <li data-i18n="art_pos_ta3">It works per ISIN, so every share class differs - check the exact one.</li>
+      <li data-i18n="art_pos_ta4">The list changes around 15 December and can change mid-year, so re-check before every purchase.</li>
+    </ul>
+  </div>
+
+  <div class="art-cta">
+    <a class="primary" href="index.html#positivliste" data-i18n="art_pos_cta_check">Check a fund's ISIN</a>
+    <a href="index.html#router" data-i18n="art_pos_cta_router">See the routed order</a>
+  </div>
+
+  <p style="margin:1.2em 0 0"><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener" data-i18n="art_pos_skat">Open the current positivliste on skat.dk -&gt;</a></p>
+
+  <div class="art-foot">
+    <span data-i18n="art_pos_disc">This is an educational explainer written by a private individual, not tax, legal or investment advice. Amounts are for tax year 2026 and change as the law and the list change. Verify the current positivliste on skat.dk, and ask an advokat or revisor before acting on anything here.</span>
+    <a class="back" href="learn.html" data-i18n="art_pos_back">&larr; Back to Learn</a>
+  </div>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</article>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js; the article interpolates its
+     year-tagged numbers. No tax engine (js/tax.js) is needed on this page. -->
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/article-positivliste.js"></script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Learn - Tax-smart investing in Denmark</title>
-<meta name="description" content="Short, plain-language guides to Danish retail investment taxation. Educational only, not advice.">
+<meta name="description" content="Short, plain-language guides to Danish retail investment taxation: the positivliste, account wrappers, lager vs realisation, gifts to children. Educational only, not advice.">
 <meta name="theme-color" content="#EEF2F6">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,8 @@
 <style>
   /* Page-specific design tokens (same Nordic-fintech token set as index/play, so the
      shared chrome in css/styles.css resolves to identical values). Shared shell rules
-     (header/footer/sticky/skip-link/focus) live in css/styles.css, linked LAST. */
+     (header/footer/sticky/skip-link/focus) and the Learn library/article styles live
+     in css/styles.css, linked LAST. */
   :root{
     --bg:#EEF2F6; --card:#FFFFFF;
     --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
@@ -63,12 +64,12 @@
   .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
   .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
   h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
-  .lead{color:var(--muted);font-size:1.08rem;line-height:1.55;max-width:33em}
+  .lead{color:var(--muted);font-size:1.08rem;line-height:1.55;max-width:36em}
   .testbadge{font-size:.75rem;color:var(--muted);margin-top:18px}
   .testbadge.fail{color:var(--danger);font-weight:700}
   main{min-height:46vh}
 </style>
-<!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
+<!-- Shared site-shell chrome + Learn library/article styles. Linked LAST so the cascade order is preserved exactly. -->
 <link rel="stylesheet" href="css/styles.css">
 <!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
 <script src="js/shell.js"></script>
@@ -79,20 +80,71 @@
 <main class="wrap" id="main" tabindex="-1" role="main">
   <p class="kicker" data-i18n="learnKicker">Learn</p>
   <h1 data-i18n="learnTitle">Learn</h1>
-  <p class="lead" data-i18n="learnSoon">Short, plain-language guides to Danish investment tax are coming soon.</p>
+  <p class="lead" data-i18n="learnIntro">Short, plain-language guides to how Denmark taxes everyday investing. Read one, then jump straight into the tools to try it on your own numbers.</p>
+
+  <div class="lib-grid">
+    <!-- LIVE: positivliste explainer -->
+    <a class="lib-card live" href="learn-positivliste.html">
+      <div class="lc-top">
+        <span class="lc-tag" data-i18n="lib_tagArticle">Article</span>
+      </div>
+      <h2 data-i18n="lib_pos_title">The positivliste: the list that sets your fund's tax</h2>
+      <p class="lc-desc" data-i18n="lib_pos_desc">Why one ETF is taxed as share income and an almost identical one as capital income, and the yearly habit that keeps you on the right side of it.</p>
+      <span class="lc-go" data-i18n="lib_goRead">Read the explainer →</span>
+    </a>
+
+    <!-- COMING SOON: account wrappers -->
+    <div class="lib-card soon">
+      <div class="lc-top">
+        <span class="lc-tag" data-i18n="lib_tagArticle">Article</span>
+        <span class="lc-soon" data-i18n="lib_soon">Coming soon</span>
+      </div>
+      <h2 data-i18n="lib_ask_title">ASK vs depot vs børneopsparing</h2>
+      <p class="lc-desc" data-i18n="lib_ask_desc">The four tax homes for your money, what each one is for, and the order that usually costs the least tax.</p>
+    </div>
+
+    <!-- COMING SOON: lager vs realisation -->
+    <div class="lib-card soon">
+      <div class="lc-top">
+        <span class="lc-tag" data-i18n="lib_tagArticle">Article</span>
+        <span class="lc-soon" data-i18n="lib_soon">Coming soon</span>
+      </div>
+      <h2 data-i18n="lib_lager_title">Lager vs realisation: when the tax bill lands</h2>
+      <p class="lc-desc" data-i18n="lib_lager_desc">Paying tax on paper gains every year versus only when you sell, and why the difference matters for compounding.</p>
+    </div>
+
+    <!-- COMING SOON: gifts to children -->
+    <div class="lib-card soon">
+      <div class="lc-top">
+        <span class="lc-tag" data-i18n="lib_tagArticle">Article</span>
+        <span class="lc-soon" data-i18n="lib_soon">Coming soon</span>
+      </div>
+      <h2 data-i18n="lib_gift_title">Gifts to children, the tax-free way</h2>
+      <p class="lc-desc" data-i18n="lib_gift_desc">The yearly gift cap, who counts as a giver, and the attribution rule that decides whether the child or the parent is taxed.</p>
+    </div>
+
+    <!-- COMING SOON: quiz / trap gallery -->
+    <div class="lib-card soon">
+      <div class="lc-top">
+        <span class="lc-tag quiz" data-i18n="lib_tagQuiz">Quiz</span>
+        <span class="lc-soon" data-i18n="lib_soon">Coming soon</span>
+      </div>
+      <h2 data-i18n="lib_quiz_title">Test yourself: the Trap Gallery</h2>
+      <p class="lc-desc" data-i18n="lib_quiz_desc">A short, interactive run through the most common Danish investment-tax mistakes, so you can spot them before they cost you.</p>
+    </div>
+  </div>
+
   <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
 </main>
 
 <div id="site-footer"></div><script>Shell.footer()</script>
 
-<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with index/play). -->
-<script src="js/config.js"></script>
-<script src="js/tax.js"></script>
+<!-- This landing page carries no tax numbers, so it loads only the shell + i18n. -->
 <script src="js/i18n.js"></script>
 <script>
 /* Minimal page controller: language (shared with the tools via GLOBAL_KEY), the shared
    i18n render pass for the injected header/footer + this page's copy, and an i18n
-   completeness self-check. No tax logic on this placeholder page. */
+   completeness self-check. No tax logic on the library landing. */
 const GLOBAL_KEY = "dkie_global_v1";   // lang shared across pages
 const PAGE_I18N = {
   en: {
@@ -103,8 +155,22 @@ const PAGE_I18N = {
     "bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT’s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
     "stickyBar":"Educational only, not tax, legal or investment advice.",
     "learnKicker":"Learn",
-    "learnTitle":"Learn",
-    "learnSoon":"Short, plain-language guides to Danish investment tax are on the way. In the meantime, use Plan to map where each krone goes first, and Play to race the four tax wrappers.",
+    "learnTitle":"The Learn library",
+    "learnIntro":"Short, plain-language guides to how Denmark taxes everyday investing. Read one, then jump straight into the tools to try it on your own numbers.",
+    "lib_tagArticle":"Article",
+    "lib_tagQuiz":"Quiz",
+    "lib_soon":"Coming soon",
+    "lib_goRead":"Read the explainer →",
+    "lib_pos_title":"The positivliste: the list that sets your fund's tax",
+    "lib_pos_desc":"Why one ETF is taxed as share income and an almost identical one as capital income, and the yearly habit that keeps you on the right side of it.",
+    "lib_ask_title":"ASK vs depot vs børneopsparing",
+    "lib_ask_desc":"The four tax homes for your money, what each one is for, and the order that usually costs the least tax.",
+    "lib_lager_title":"Lager vs realisation: when the tax bill lands",
+    "lib_lager_desc":"Paying tax on paper gains every year versus only when you sell, and why the difference matters for compounding.",
+    "lib_gift_title":"Gifts to children, the tax-free way",
+    "lib_gift_desc":"The yearly gift cap, who counts as a giver, and the attribution rule that decides whether the child or the parent is taxed.",
+    "lib_quiz_title":"Test yourself: the Trap Gallery",
+    "lib_quiz_desc":"A short, interactive run through the most common Danish investment-tax mistakes, so you can spot them before they cost you.",
     "i18nReady":"i18n complete"
   },
   da: {
@@ -115,8 +181,22 @@ const PAGE_I18N = {
     "bigDisclaimer":"Dette site er et undervisningsværktøj lavet af en privatperson. Det er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det angivne skatteår og reguleres hver januar; positivlisten [SKATs godkendte fonde] ændres hver december. Bekræft på skat.dk eller spørg en advokat/revisor før du handler.",
     "stickyBar":"Kun til undervisning – ikke skatte-, juridisk eller investeringsrådgivning.",
     "learnKicker":"Lær",
-    "learnTitle":"Lær",
-    "learnSoon":"Korte, letforståelige guides til dansk investeringsskat er på vej. Brug indtil da Planlæg til at se, hvor hver krone skal hen først, og Leg til at lade de fire skatteindpakninger dyste.",
+    "learnTitle":"Lær-biblioteket",
+    "learnIntro":"Korte, letforståelige guides til, hvordan Danmark beskatter helt almindelig investering. Læs én, og hop direkte videre til værktøjerne og prøv den på dine egne tal.",
+    "lib_tagArticle":"Artikel",
+    "lib_tagQuiz":"Quiz",
+    "lib_soon":"På vej",
+    "lib_goRead":"Læs forklaringen →",
+    "lib_pos_title":"Positivlisten: listen der afgør din fonds skat",
+    "lib_pos_desc":"Hvorfor én ETF beskattes som aktieindkomst og en næsten identisk som kapitalindkomst – og den årlige vane, der holder dig på den rigtige side af det.",
+    "lib_ask_title":"ASK vs depot vs børneopsparing",
+    "lib_ask_desc":"De fire skattemæssige hjem for dine penge, hvad hver enkelt er til, og rækkefølgen der oftest koster mindst i skat.",
+    "lib_lager_title":"Lager vs realisation: hvornår skatteregningen falder",
+    "lib_lager_desc":"At betale skat af papirgevinster hvert år kontra først når du sælger – og hvorfor forskellen betyder noget for renters rente.",
+    "lib_gift_title":"Gaver til børn – den skattefri måde",
+    "lib_gift_desc":"Det årlige gaveloft, hvem der tæller som giver, og attributionsreglen der afgør, om barnet eller forælderen beskattes.",
+    "lib_quiz_title":"Test dig selv: Fælde-galleriet",
+    "lib_quiz_desc":"En kort, interaktiv gennemgang af de mest almindelige danske investeringsskat-fejl, så du kan spotte dem, før de koster dig.",
     "i18nReady":"i18n komplet"
   }
 };
