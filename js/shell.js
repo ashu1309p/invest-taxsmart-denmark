@@ -30,7 +30,7 @@
       '<a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>' +
       '<header class="site">' +
         '<div class="site-inner">' +
-          '<a class="brand" href="index.html"><span class="dot"></span><span data-i18n="brand">Tax-smart investing in Denmark</span></a>' +
+          '<a class="brand" href="index.html" data-i18n-aria="ariaBackTop" aria-label="Back to top"><span class="dot"></span><span data-i18n="brand">Tax-smart investing in Denmark</span></a>' +
           '<nav class="tabs">' +
             tab("plan", "index.html", "tabPlan", "Plan") +
             tab("play", "play.html", "tabPlay", "Play") +
@@ -67,9 +67,26 @@
      it runs on EVERY page that uses the shell (it previously lived inline in
      index.html and so only worked there). The context pill (#ctxPill) only
      exists on the Plan tool page; when absent that part is simply skipped. */
+  function scrollToTop() {
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  }
+
   function initHeaderScroll() {
     var header = document.querySelector("header.site");
     if (!header) return;
+
+    /* Brand acts as a "back to top" control on every page. The href stays as a
+       no-JS fallback (home), but with JS we intercept and smooth-scroll to top.
+       Keyboard: Enter fires click on the anchor; Space is handled explicitly. */
+    var brand = header.querySelector(".brand");
+    if (brand) {
+      brand.addEventListener("click", function (e) { e.preventDefault(); scrollToTop(); });
+      brand.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); scrollToTop(); }
+      });
+    }
+
     var pill = document.getElementById("ctxPill");
     var se = document.scrollingElement || document.documentElement;
     function sy() { return se.scrollTop || 0; }
