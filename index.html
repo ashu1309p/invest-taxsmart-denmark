@@ -1124,25 +1124,18 @@ function updateCtxPill(){
   pill.setAttribute("aria-label", `${t("ctxPillLabel")} - ${t("ctlBudget")}: ${kr(S.budget)}, ${S.years} ${t("yearsUnit")}`);
   pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlBudget")}: <b>${kr(S.budget)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yearsUnit")}`;
 }
+/* Header hide/show on scroll (and lifting this pill when the header hides) now
+   lives once in js/shell.js so it works on every page. This block keeps only
+   the Plan-tool-specific pill behavior: reveal it past the tool, scroll back. */
 (function navAndPill(){
   const pill = $("ctxPill"),
-        tool = document.querySelector(".panel.tool"),
-        header = document.querySelector("header.site");
+        tool = document.querySelector(".panel.tool");
   if(!pill || !tool) return;
-  const sy = ()=> (document.scrollingElement||document.documentElement).scrollTop || 0;
-  let lastY = sy();
   function check(){
-    const y = sy(), past = tool.getBoundingClientRect().bottom < 72;
-    if(header){
-      if(y <= 90) header.classList.remove("header-hidden");        // always show near the top
-      else if(y > lastY) header.classList.add("header-hidden");    // scrolling down -> hide
-      else if(y < lastY) header.classList.remove("header-hidden"); // scrolling up -> reveal
-    }
+    const past = tool.getBoundingClientRect().bottom < 72;
     pill.classList.toggle("show", past);
-    pill.classList.toggle("lifted", !!header && header.classList.contains("header-hidden"));
     pill.tabIndex = past ? 0 : -1;
     pill.setAttribute("aria-hidden", past ? "false" : "true");
-    lastY = y;
   }
   function toTool(){
     const top = tool.getBoundingClientRect().top + ((document.scrollingElement||document.documentElement).scrollTop) - 64;

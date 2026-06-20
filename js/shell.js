@@ -62,6 +62,31 @@
     return (document.body && document.body.getAttribute("data-page")) || "";
   }
 
+  /* Hide-on-scroll-down / reveal-on-scroll-up for the shared header, plus
+     lifting the context pill when the header is hidden. Authored once here so
+     it runs on EVERY page that uses the shell (it previously lived inline in
+     index.html and so only worked there). The context pill (#ctxPill) only
+     exists on the Plan tool page; when absent that part is simply skipped. */
+  function initHeaderScroll() {
+    var header = document.querySelector("header.site");
+    if (!header) return;
+    var pill = document.getElementById("ctxPill");
+    var se = document.scrollingElement || document.documentElement;
+    function sy() { return se.scrollTop || 0; }
+    var lastY = sy();
+    function check() {
+      var y = sy();
+      if (y <= 90) header.classList.remove("header-hidden");          // always show near the top
+      else if (y > lastY) header.classList.add("header-hidden");      // scrolling down -> hide
+      else if (y < lastY) header.classList.remove("header-hidden");   // scrolling up -> reveal
+      if (pill) pill.classList.toggle("lifted", header.classList.contains("header-hidden"));
+      lastY = y;
+    }
+    addEventListener("scroll", check, { passive: true });
+    addEventListener("resize", check, { passive: true });
+    check();
+  }
+
   window.Shell = {
     header: function () {
       var el = document.getElementById("site-header");
@@ -70,6 +95,15 @@
     footer: function () {
       var el = document.getElementById("site-footer");
       if (el) el.innerHTML = footerHTML();
-    }
+    },
+    initHeaderScroll: initHeaderScroll
   };
+
+  /* The header is injected synchronously mid-parse, but wait for DOMContentLoaded
+     so the element (and the page's #ctxPill, if any) are guaranteed present. */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeaderScroll);
+  } else {
+    initHeaderScroll();
+  }
 })();
