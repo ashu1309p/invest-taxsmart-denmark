@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>About - Tax-smart investing in Denmark</title>
+<meta name="description" content="Who made this site, what it assumes, and the official SKAT / SKM sources behind every number. A personal, non-commercial, educational project. Not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://ashu1309p.github.io/invest-taxsmart-denmark/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="About / methodology">
+<meta property="og:description" content="Who made this site, what it assumes, and where every number comes from. A personal, non-commercial, educational project.">
+<meta property="og:url" content="https://ashu1309p.github.io/invest-taxsmart-denmark/about.html">
+<meta property="og:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About / methodology">
+<meta name="twitter:description" content="Who made this site, what it assumes, and where every number comes from.">
+<meta name="twitter:image" content="https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About / methodology","inLanguage":["en","da"],"isAccessibleForFree":true,"mainEntityOfPage":"https://ashu1309p.github.io/invest-taxsmart-denmark/about.html","image":"https://ashu1309p.github.io/invest-taxsmart-denmark/og-image.png","publisher":{"@type":"Organization","name":"Tax-smart investing in Denmark"},"description":"Who made this site, what it assumes, and the official SKAT / SKM sources behind every number. Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens (same Nordic-fintech token set as index/play/learn, so the
+     shared chrome + Learn article styles in css/styles.css resolve to identical values).
+     Shared rules live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:24px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+</style>
+<!-- Shared site-shell chrome + Learn article styles. Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css?v=7">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js?v=7"></script>
+</head>
+<body data-page="about">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+<article class="article">
+  <p class="kicker" data-i18n="about_kicker">About</p>
+  <h1 data-i18n="about_h1">About / methodology</h1>
+  <p class="art-lead" data-i18n="about_lead">Who made this, what it assumes, and where every number comes from.</p>
+  <p class="art-verified"><span class="art-yeartag" data-i18n="about_taxyear">Tax year 2026</span> <span data-i18n="about_verifiedNote">Every figure here is tagged to this tax year and read from TAX_YEAR_CONFIG, the same single source the tools use.</span></p>
+
+  <h2 data-i18n="about_who_h2">Who made this</h2>
+  <p data-i18n="about_who_p1">I'm Ashutosh Pathak, a technology and delivery professional based in Copenhagen. I've spent close to two decades building and shipping complex software platforms, and I built this site the same way I approach that work: carefully, with every number checked against the source and every claim something I could point to.</p>
+  <p data-i18n="about_who_p2">It started as my own problem. Like a lot of people investing in Denmark, I kept re-deriving the same questions (which account to use, whether a fund sits on SKAT's positivliste, how gifts to children are taxed) from scattered, often Danish-only sources. I wanted one plain place that just showed the answer, in English and Dansk. So I made it.</p>
+  <p data-i18n="about_who_p3">A few honest things: this is a personal, non-commercial project. There are no ads, no login, and nothing for sale. I'm not a tax advisor, accountant, or lawyer; I'm an investor who reads the rules carefully. Everything here is educational, every figure is dated to its tax year, and every page points you back to skat.dk so you can verify it yourself.</p>
+  <p style="margin:1.2em 0 0"><a href="https://www.linkedin.com/in/ashu13p/" target="_blank" rel="noopener" data-i18n="about_who_linkedin">Connect on LinkedIn →</a></p>
+  <p style="margin:.4em 0 0"><a href="https://tally.so/r/7RPVv0" target="_blank" rel="noopener" data-i18n="about_who_feedback">Send feedback (a 1-minute form) →</a></p>
+
+  <h2 data-i18n="about_assume_h2">What this site assumes (and what it doesn't)</h2>
+  <p data-i18n="about_assume_p1">Every amount on this site is tagged to a single tax year. Right now that is tax year 2026, taken from one place in the code (TAX_YEAR_CONFIG), so the Plan and Play tools and these articles can never quietly disagree.</p>
+  <p data-i18n="about_assume_p2">The figures are SKAT and Skatteministeriet (SKM) published values for that year. Indexed amounts such as allowances and thresholds are adjusted every January, so a number that is correct this year can change next year.</p>
+  <p data-i18n="about_assume_p3">Whether a fund's gains count as share income or capital income depends on SKAT's positivliste. What this site refers to is a periodic snapshot of that official list, and a snapshot can lag a change by a while, so confirm the current list before you act.</p>
+  <p style="margin:.4em 0 0"><a href="learn-positivliste.html" data-i18n="about_assume_pos_link">Read how the positivliste works →</a></p>
+  <p data-i18n="about_assume_p4">The simulators illustrate generic scenarios to show how the rules interact. They are not personalized advice, they do not know your situation, and rates or thresholds can change with new law.</p>
+
+  <h2 id="sources" data-i18n="srcTitle">Sources &amp; legal references</h2>
+  <p data-i18n="about_src_intro">Everything here traces back to official sources. Where a page makes a specific claim, it links the exact reference.</p>
+  <ul>
+    <li><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener">Positivliste (ABIS list) - skat.dk</a></li>
+    <li><a href="https://info.skat.dk/data.aspx?oid=2234529" target="_blank" rel="noopener">Parent attribution - Den juridiske vejledning C.A.9.3 (kildeskatteloven § 5, stk. 2)</a></li>
+    <li><a href="https://info.skat.dk/data.aspx?oid=2234739" target="_blank" rel="noopener">Børneopsparing - Den juridiske vejledning C.A.10.4.1.4</a></li>
+    <li><a href="https://skat.dk/borger/aktier-og-andre-vaerdipapirer/aktiesparekonto" target="_blank" rel="noopener">Aktiesparekonto - skat.dk (aktiesparekontoloven)</a></li>
+    <li><a href="https://www.retsinformation.dk/eli/lta/2021/11" target="_blank" rel="noopener">Gift caps - boafgiftsloven § 22</a></li>
+    <li><a href="https://skm.dk/tal-og-metode/satser" target="_blank" rel="noopener">Annual indexed amounts - Skatteministeriet satser</a></li>
+  </ul>
+  <p class="art-verified" data-i18n="verifiedLine">All amounts are for tax year 2026, verified against skat.dk / skm.dk.</p>
+
+  <div class="art-foot">
+    <span data-i18n="about_disc">This is a personal, educational project by a private individual, not tax, legal or investment advice. Amounts are for tax year 2026 and change as the law changes. Verify on skat.dk, and consult an advokat or revisor for advice about your own situation.</span>
+    <a class="back" href="index.html" data-i18n="about_back">← Back to home</a>
+  </div>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</article>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js; this page interpolates its
+     year-tagged values ({yr}, {date}). No tax engine (js/tax.js) is needed here. -->
+<script src="js/config.js?v=7"></script>
+<script src="js/i18n.js?v=7"></script>
+<script src="js/page-about.js?v=7"></script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
