@@ -69,7 +69,7 @@
 <!-- Shared site-shell chrome + Learn library/article styles. Linked LAST so the cascade order is preserved exactly. -->
 <link rel="stylesheet" href="css/styles.css">
 <!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
-<script src="js/shell.js"></script>
+<script src="js/shell.js?v=5"></script>
 </head>
 <body data-page="learn">
 <div id="site-header"></div><script>Shell.header()</script>
@@ -158,9 +158,9 @@
 
 <!-- TAX_YEAR_CONFIG is single-sourced in js/config.js; the article interpolates its
      year-tagged numbers. No tax engine (js/tax.js) is needed on this page. -->
-<script src="js/config.js"></script>
-<script src="js/i18n.js"></script>
-<script src="js/article-lager-vs-realisation.js"></script>
+<script src="js/config.js?v=5"></script>
+<script src="js/i18n.js?v=5"></script>
+<script src="js/article-lager-vs-realisation.js?v=5"></script>
 <script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

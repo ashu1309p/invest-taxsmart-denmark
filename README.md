@@ -31,6 +31,9 @@ To avoid drift, the chrome is single-sourced:
   that differ per page (`bigDisclaimer`, `stickyBar`, aria labels, `skipLink`) stay in each page's
   `PAGE_I18N`. **Edit the header/footer once in `js/shell.js`; edit shared chrome styling once in
   `css/styles.css`.**
+- **Cache-busting:** local `<script src="js/*.js?v=N">` includes carry a shared version token (currently
+  `v=5`). When you change any `js/*.js`, bump that token everywhere so browsers and the GitHub Pages CDN
+  fetch the new file instead of a stale cached copy.
 
 ## File layout
 ```
