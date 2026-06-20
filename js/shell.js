@@ -49,11 +49,12 @@
         '<footer class="big">' +
           '<p data-i18n="bigDisclaimer">This site is an educational tool built by a private individual. It is not tax, legal or investment advice.</p>' +
           '<p style="margin-top:8px" data-i18n="privacyNote">Privacy: anonymous visit counts via GoatCounter (cookieless, no personal data).</p>' +
+          '<p style="margin-top:10px"><a href="about.html" data-i18n="footerAbout">About</a></p>' +
         '</footer>' +
       '</div>' +
       '<aside class="stickybar" aria-label="Important disclaimer" data-i18n-aria="ariaDisclaimer">' +
         '<span data-i18n="stickyBar">Educational only, not tax, legal or investment advice.</span> ' +
-        '<a href="#sources" data-i18n="stickyLink">Sources</a>' +
+        '<a href="about.html#sources" data-i18n="stickyLink">Sources</a>' +
         '<button class="sb-x" type="button" onclick="this.closest(\'.stickybar\').remove()" aria-label="Dismiss" data-i18n-aria="ariaDismiss">&times;</button>' +
       '</aside>';
   }
