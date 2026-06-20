@@ -90,14 +90,22 @@ header.site{ background:rgba(248,250,252,.78); backdrop-filter:saturate(180%) bl
 @media(max-width:600px){ .ctx-pill{ top:96px } }
 
 /* ---------- nav polish: auto-hiding header, clickable pill, home brand (v4) ---------- */
-/* The visible state keeps an explicit translateZ(0) (never transform:none) so the
-   header always has a persistent compositing layer. Without this, toggling between
-   transform:none and translateY(-100%) on a backdrop-filtered element makes Chrome
-   tear down and fail to repaint the frosted layer on reveal (the header stays blank
-   even though .header-hidden is removed). The hidden state keeps translateZ(0) too,
-   so the same 3D layer is reused throughout the transition. */
-header.site{ transition:transform .28s var(--ease); will-change:transform; transform:translateZ(0); backface-visibility:hidden; -webkit-backface-visibility:hidden }
-header.site.header-hidden{ transform:translateY(-100%) translateZ(0) }
+/* The header is backdrop-filtered AND hides via transform. transform and opacity are
+   compositor-only properties, so Chrome animates them against a STALE cached snapshot of
+   the frosted layer and never repaints it: on scroll-up the header slid back but stayed
+   blank. The reliable fix is to force an actual repaint of the frosted layer on reveal.
+   While hidden we drop backdrop-filter (and set visibility:hidden); on reveal both are
+   restored, which makes Chrome recompute and repaint the blur every time the header
+   returns. Both are toggled only AFTER the slide-out finishes (0s transition + .28s delay),
+   so the frosted look is unchanged on screen and there is no flicker; the blur is only
+   absent while the header is parked off-screen. */
+header.site{ transition:transform .28s var(--ease); will-change:transform }
+header.site.header-hidden{
+  transform:translateY(-100%); visibility:hidden;
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+  transition:transform .28s var(--ease), visibility 0s linear .28s,
+             backdrop-filter 0s linear .28s, -webkit-backdrop-filter 0s linear .28s;
+}
 .ctx-pill{ cursor:pointer; transition:opacity .25s var(--ease), transform .2s var(--ease), top .28s var(--ease) }
 .ctx-pill .ctx-up{ color:var(--accent); font-weight:800; margin-right:7px; display:inline-block }
 .ctx-pill.lifted{ top:12px }
