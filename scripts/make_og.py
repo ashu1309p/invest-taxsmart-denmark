@@ -63,7 +63,7 @@ for label,col in DOTS:
 # footer
 rr((0,H-70,W,H),0,fill=hx("#F2F5F9"))
 tx((74,H-47),"Educational only, not tax or investment advice",font(False,22),MUT)
-tx((W-74,H-47),"skattesmart · 2026",font(True,22),ACC,anchor="ra")
+tx((W-74,H-47),"taxsmart · 2026",font(True,22),ACC,anchor="ra")
 
 img.resize((W,H),Image.LANCZOS).save(OUT)
 print("wrote",OUT,round(os.path.getsize(OUT)/1024),"KB")
