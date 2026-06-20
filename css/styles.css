@@ -143,9 +143,9 @@ a.lib-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow); border-c
 .article h2{ font-size:1.4rem; font-weight:800; letter-spacing:-.015em; color:var(--ink); line-height:1.2; margin:1.7em 0 .45em }
 .article h2:first-of-type{ margin-top:1.1em }
 .article h3{ font-size:1.08rem; font-weight:700; color:var(--ink); margin:1.3em 0 .35em }
-.article p{ color:var(--ink-2); font-size:1.05rem; line-height:1.72; margin:0 0 1.05em }
+.article p{ color:var(--ink-2); font-size:1.02rem; line-height:1.72; margin:0 0 1.05em }
 .article ul,.article ol{ margin:0 0 1.05em; padding-left:1.35em }
-.article li{ color:var(--ink-2); font-size:1.05rem; line-height:1.65; margin:.4em 0 }
+.article li{ color:var(--ink-2); font-size:1.02rem; line-height:1.65; margin:.4em 0 }
 .article a{ color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1px }
 .article a:hover{ color:var(--accent-strong) }
 .article strong,.article b{ color:var(--ink); font-weight:700 }
