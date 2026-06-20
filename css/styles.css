@@ -90,8 +90,14 @@ header.site{ background:rgba(248,250,252,.78); backdrop-filter:saturate(180%) bl
 @media(max-width:600px){ .ctx-pill{ top:96px } }
 
 /* ---------- nav polish: auto-hiding header, clickable pill, home brand (v4) ---------- */
-header.site{ transition:transform .28s var(--ease); will-change:transform }
-header.site.header-hidden{ transform:translateY(-100%) }
+/* The visible state keeps an explicit translateZ(0) (never transform:none) so the
+   header always has a persistent compositing layer. Without this, toggling between
+   transform:none and translateY(-100%) on a backdrop-filtered element makes Chrome
+   tear down and fail to repaint the frosted layer on reveal (the header stays blank
+   even though .header-hidden is removed). The hidden state keeps translateZ(0) too,
+   so the same 3D layer is reused throughout the transition. */
+header.site{ transition:transform .28s var(--ease); will-change:transform; transform:translateZ(0); backface-visibility:hidden; -webkit-backface-visibility:hidden }
+header.site.header-hidden{ transform:translateY(-100%) translateZ(0) }
 .ctx-pill{ cursor:pointer; transition:opacity .25s var(--ease), transform .2s var(--ease), top .28s var(--ease) }
 .ctx-pill .ctx-up{ color:var(--accent); font-weight:800; margin-right:7px; display:inline-block }
 .ctx-pill.lifted{ top:12px }
