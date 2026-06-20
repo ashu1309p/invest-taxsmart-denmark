@@ -32,7 +32,7 @@ To avoid drift, the chrome is single-sourced:
   `PAGE_I18N`. **Edit the header/footer once in `js/shell.js`; edit shared chrome styling once in
   `css/styles.css`.**
 - **Cache-busting:** local asset URLs (`<script src="js/*.js?v=N">` and `<link href="css/styles.css?v=N">`)
-  carry a shared version token (currently `v=6`). When you change any `js/*.js` **or** `css/styles.css`,
+  carry a shared version token (currently `v=7`). When you change any `js/*.js` **or** `css/styles.css`,
   bump that token everywhere so browsers and the GitHub Pages CDN fetch the new file instead of a stale
   cached copy.
 
