@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ashu1309p.github.io/invest-taxsmart-denmark/sitemap.xml
+Sitemap: https://invest-taxsmart-denmark.vercel.app/sitemap.xml

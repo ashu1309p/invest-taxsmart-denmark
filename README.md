@@ -33,7 +33,7 @@ To avoid drift, the chrome is single-sourced:
   `css/styles.css`.**
 - **Cache-busting:** local asset URLs (`<script src="js/*.js?v=N">` and `<link href="css/styles.css?v=N">`)
   carry a shared version token (currently `v=7`). When you change any `js/*.js` **or** `css/styles.css`,
-  bump that token everywhere so browsers and the GitHub Pages CDN fetch the new file instead of a stale
+  bump that token everywhere so browsers and Vercel's CDN fetch the new file instead of a stale
   cached copy.
 
 ## File layout
@@ -64,9 +64,11 @@ The two tool pages run a self-test suite at load and show the result in a small 
 "✓ i18n complete" badge.
 
 ## Deploy
-Hosted on GitHub Pages from the repo root (`main`). Push the files above to root; `index.html` is the
-landing page. The OpenGraph/canonical URLs are absolute — if the repo/Pages URL changes, update them in
-both HTML `<head>`s and re-generate `og-image.png`.
+Hosted on Vercel, deployed automatically from `main`: the GitHub repo is connected via Vercel's Git
+integration, so every push to `main` publishes. The site serves from the domain root
+(`https://invest-taxsmart-denmark.vercel.app/`). The OpenGraph/canonical URLs are absolute — if the
+domain changes, update them across every page `<head>`, `sitemap.xml`, and `robots.txt`, and
+re-generate `og-image.png`.
 
 ## Keeping it correct
 Numbers change every January and the positivliste every December. See **[MAINTENANCE.md](MAINTENANCE.md)**
