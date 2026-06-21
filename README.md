@@ -32,7 +32,7 @@ To avoid drift, the chrome is single-sourced:
   `PAGE_I18N`. **Edit the header/footer once in `js/shell.js`; edit shared chrome styling once in
   `css/styles.css`.**
 - **Cache-busting:** local asset URLs (`<script src="js/*.js?v=N">` and `<link href="css/styles.css?v=N">`)
-  carry a shared version token (currently `v=7`). When you change any `js/*.js` **or** `css/styles.css`,
+  carry a shared version token (currently `v=8`). When you change any `js/*.js` **or** `css/styles.css`,
   bump that token everywhere so browsers and Vercel's CDN fetch the new file instead of a stale
   cached copy.
 
@@ -66,7 +66,7 @@ The two tool pages run a self-test suite at load and show the result in a small 
 ## Deploy
 Hosted on Vercel, deployed automatically from `main`: the GitHub repo is connected via Vercel's Git
 integration, so every push to `main` publishes. The site serves from the domain root
-(`https://invest-taxsmart-denmark.vercel.app/`). The OpenGraph/canonical URLs are absolute — if the
+(`https://taxsmart-invest-denmark.vercel.app/`). The OpenGraph/canonical URLs are absolute — if the
 domain changes, update them across every page `<head>`, `sitemap.xml`, and `robots.txt`, and
 re-generate `og-image.png`.
 

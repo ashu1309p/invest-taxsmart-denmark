@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://invest-taxsmart-denmark.vercel.app/sitemap.xml
+Sitemap: https://taxsmart-invest-denmark.vercel.app/sitemap.xml
