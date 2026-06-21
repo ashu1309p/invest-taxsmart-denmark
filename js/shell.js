@@ -21,6 +21,14 @@
    the prior static markup; the real text comes from js/i18n.js.
    ============================================================ */
 (function () {
+  /* GoatCounter: prefix every recorded path with the hostname so hits from
+     different domains (e.g. the live Vercel URL vs any older URL) are
+     distinguishable in the dashboard instead of all collapsing onto the same
+     path. shell.js loads synchronously in <head>, so this is set before the
+     gc count.js snippet (at the end of <body>) reads it. */
+  window.goatcounter = window.goatcounter || {};
+  window.goatcounter.path = function (p) { return location.host + p; };
+
   function headerHTML(active) {
     function tab(page, href, key, fallback) {
       var cls = "tab" + (page === active ? " active" : "");
