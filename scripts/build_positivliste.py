@@ -21,6 +21,7 @@ import json
 import os
 import re
 import sys
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -31,9 +32,36 @@ OUT = os.path.join(os.path.dirname(__file__), "..", "data", "positivliste.json")
 DROP_THRESHOLD = 0.25          # refuse to overwrite if the new list is >25% smaller
 ISIN_RE = re.compile(r"^[A-Z]{2}[A-Z0-9]{9}[0-9]$")
 
+# SKAT (and many gov sites) 403 or hang on the bare python-requests user-agent, so send
+# browser-like headers and retry transient failures before giving up.
+HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+    "Accept": ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,"
+               "application/octet-stream,*/*"),
+    "Accept-Language": "da,en;q=0.8",
+}
+RETRIES = 4
+RETRY_BACKOFF = 5              # seconds, multiplied by attempt number
+
 def fail(msg):
     print("ERROR:", msg, file=sys.stderr)
     sys.exit(1)
+
+def download(url):
+    """GET the file with browser headers, retrying transient errors with backoff."""
+    last_err = None
+    for attempt in range(1, RETRIES + 1):
+        try:
+            resp = requests.get(url, headers=HEADERS, timeout=60)
+            resp.raise_for_status()
+            return resp
+        except Exception as e:
+            last_err = e
+            print(f"AUDIT download attempt {attempt}/{RETRIES} failed: {e}", file=sys.stderr)
+            if attempt < RETRIES:
+                time.sleep(RETRY_BACKOFF * attempt)
+    fail(f"Download failed after {RETRIES} attempts: {last_err}")
 
 def load_existing_count():
     try:
@@ -78,13 +106,16 @@ def main():
         fail("No POSITIVLISTE_URL set and DEFAULT_URL is empty. Provide SKAT's .xlsx link.")
 
     print(f"AUDIT source URL: {url}")
-    try:
-        resp = requests.get(url, timeout=60)
-        resp.raise_for_status()
-    except Exception as e:
-        fail(f"Download failed: {e}")
-    print(f"AUDIT HTTP {resp.status_code}, {len(resp.content)} bytes, "
-          f"content-type {resp.headers.get('Content-Type','?')!r}")
+    resp = download(url)
+    ctype = resp.headers.get("Content-Type", "?")
+    print(f"AUDIT HTTP {resp.status_code}, {len(resp.content)} bytes, content-type {ctype!r}")
+
+    # A 200 that returns HTML (login/error page) instead of the xlsx is the other common
+    # silent failure — surface it clearly rather than letting openpyxl throw a vague error.
+    head = resp.content[:4]
+    if head[:2] != b"PK":
+        fail(f"Response is not an .xlsx (zip) file — first bytes {head!r}, content-type {ctype!r}. "
+             "The POSITIVLISTE_URL link likely changed or returned an error page.")
 
     try:
         wb = load_workbook(io.BytesIO(resp.content), read_only=True, data_only=True)
