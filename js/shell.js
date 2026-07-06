@@ -40,7 +40,8 @@
         '<div class="site-inner">' +
           '<a class="brand" href="index.html" data-i18n-aria="ariaBackTop" aria-label="Back to top"><span class="dot"></span><span data-i18n="brand">Tax-smart investing in Denmark</span></a>' +
           '<nav class="tabs">' +
-            tab("plan", "index.html", "tabPlan", "Plan") +
+            tab("home", "index.html", "tabHome", "Home") +
+            tab("plan", "plan.html", "tabPlan", "Plan") +
             tab("play", "play.html", "tabPlay", "Play") +
             tab("learn", "learn.html", "tabLearn", "Learn") +
           '</nav>' +
@@ -113,6 +114,81 @@
     check();
   }
 
+  /* ------------------------------------------------------------
+     Swipe navigation between the four TAB pages (additive to the
+     tab clicks; every existing click/tap target is untouched).
+     Only the four real tab files swipe - the current page's index
+     is derived from the URL basename, so Learn ARTICLE pages and
+     the check/quiz utility pages (which also carry data-page) are
+     naturally excluded. Desktop mouse drags never fire touch events,
+     so they do nothing, as required.
+     ------------------------------------------------------------ */
+  var SWIPE_PAGES = ["index.html", "plan.html", "play.html", "learn.html"];
+
+  function currentBasename() {
+    var p = location.pathname, b = p.substring(p.lastIndexOf("/") + 1);
+    return b === "" ? "index.html" : b;
+  }
+
+  function slideAndGo(dir, href) {
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { location.href = href; return; }
+    var el = document.querySelector(".wrap") || document.body;
+    el.style.transition = "transform .18s ease, opacity .18s ease";
+    el.style.transform = "translateX(" + (dir < 0 ? "-6%" : "6%") + ")";
+    el.style.opacity = "0.55";
+    setTimeout(function () { location.href = href; }, 170);
+  }
+
+  function initSwipeNav() {
+    var curIdx = SWIPE_PAGES.indexOf(currentBasename());
+    if (curIdx < 0) return;   // article / utility pages: no swipe
+
+    // Elements the gesture must NOT start from (sliders, charts, disclosures, controls, links).
+    var BLOCK = "input[type=range], svg.race, #yc-svg, .yc-chart, summary, button, a," +
+                " input, textarea, select, [contenteditable], [role='button']";
+
+    function startsInScroller(node) {
+      var depth = 0;
+      while (node && node.nodeType === 1 && depth < 8) {
+        try {
+          var st = getComputedStyle(node);
+          if ((st.overflowX === "auto" || st.overflowX === "scroll") &&
+              node.scrollWidth > node.clientWidth + 4) return true;
+        } catch (e) { }
+        node = node.parentElement; depth++;
+      }
+      return false;
+    }
+
+    var startX = 0, startY = 0, startT = 0, ignore = false;
+
+    document.addEventListener("touchstart", function (e) {
+      if (e.touches && e.touches.length > 1) { ignore = true; return; }   // multi-touch / pinch
+      var tp = e.touches ? e.touches[0] : e;
+      startX = tp.clientX; startY = tp.clientY; startT = Date.now(); ignore = false;
+      var tgt = e.target;
+      if (tgt && tgt.closest && tgt.closest(BLOCK)) { ignore = true; return; }
+      if (startsInScroller(tgt)) { ignore = true; return; }
+    }, { passive: true });
+
+    document.addEventListener("touchend", function (e) {
+      if (ignore) return;
+      if (e.touches && e.touches.length > 0) return;                       // fingers still down
+      var sel = window.getSelection && window.getSelection();
+      if (sel && String(sel).length > 0) return;                          // was selecting text
+      var tp = e.changedTouches ? e.changedTouches[0] : e;
+      var dx = tp.clientX - startX, dy = tp.clientY - startY, dt = Date.now() - startT;
+      if (dt >= 600) return;                                              // too slow
+      if (Math.abs(dx) < 70) return;                                      // too short
+      if (Math.abs(dx) <= 2 * Math.abs(dy)) return;                       // too vertical
+      var dir = dx < 0 ? 1 : -1;                                          // swipe left => next tab
+      var target = curIdx + dir;
+      if (target < 0 || target >= SWIPE_PAGES.length) return;             // ends do not wrap
+      slideAndGo(dir, SWIPE_PAGES[target]);
+    }, { passive: true });
+  }
+
   window.Shell = {
     header: function () {
       var el = document.getElementById("site-header");
@@ -122,14 +198,16 @@
       var el = document.getElementById("site-footer");
       if (el) el.innerHTML = footerHTML();
     },
-    initHeaderScroll: initHeaderScroll
+    initHeaderScroll: initHeaderScroll,
+    initSwipeNav: initSwipeNav
   };
 
   /* The header is injected synchronously mid-parse, but wait for DOMContentLoaded
      so the element (and the page's #ctxPill, if any) are guaranteed present. */
+  function initShell() { initHeaderScroll(); initSwipeNav(); }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHeaderScroll);
+    document.addEventListener("DOMContentLoaded", initShell);
   } else {
-    initHeaderScroll();
+    initShell();
   }
 })();

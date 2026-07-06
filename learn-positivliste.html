@@ -68,9 +68,9 @@
   .testbadge.fail{color:var(--danger);font-weight:700}
 </style>
 <!-- Shared site-shell chrome + Learn library/article styles. Linked LAST so the cascade order is preserved exactly. -->
-<link rel="stylesheet" href="css/styles.css?v=9">
+<link rel="stylesheet" href="css/styles.css?v=10">
 <!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
-<script src="js/shell.js?v=9"></script>
+<script src="js/shell.js?v=10"></script>
 </head>
 <body data-page="learn">
 <div id="site-header"></div><script>Shell.header()</script>
@@ -104,7 +104,7 @@
 
   <h2 data-i18n="art_pos_h2_isin">It is per-ISIN, not per-fund</h2>
   <p data-i18n="art_pos_isin_p1">The list works per ISIN, the unique identifier of one specific share class, not per fund family. A single fund can have several share classes: accumulating (ACC) and distributing (DIST), currency-hedged and unhedged, and each has its own ISIN. The unhedged class being on the list tells you nothing about the hedged class.</p>
-  <p data-i18n="art_pos_isin_p2">Always check the exact ISIN of the share class you actually intend to buy, before you buy. You can paste it straight into the ISIN checker on the Plan page.</p>
+  <p data-i18n="art_pos_isin_p2">Always check the exact ISIN of the share class you actually intend to buy, before you buy. You can paste it straight into the ISIN checker on the Check a fund page.</p>
 
   <h2 data-i18n="art_pos_h2_timing">How and when the list changes</h2>
   <p data-i18n="art_pos_timing_p">SKAT publishes the list around 15 December for the coming year, and can amend it during the year. Funds are added and removed, which flips a fund's tax from one January to the next. A fund you bought as on-list share income can become off-list capital income the next year, or the other way around, without you doing anything.</p>
@@ -115,6 +115,9 @@
   <p data-i18n="art_pos_scen1_p">Suppose a world ETF you hold is on the list this year and SKAT drops it next December. From 1 January, in a normal depot, its yearly gain switches from share income to capital income, and it can no longer sit in an ASK. An adult holding it inside an ASK would typically sell it there and buy a still-listed world ETF instead (an internal ASK trade does not use up your deposit ceiling). For a child's frikort depot the drop is often fine, even better, because capital income is exactly what the allowance absorbs.</p>
   <h3 data-i18n="art_pos_scen2_t">A fund is added to the list</h3>
   <p data-i18n="art_pos_scen2_p">Now the reverse: an off-list accumulating world ETF that a child holds for the frikort gets added next December. From January its gain becomes share income with no personfradrag relief, so the child pays 27% from the first krone. The fix is to point the child's new contributions at a fund that is still off the list. For an adult the same change is good news: the fund is now cheaper and can go inside an ASK.</p>
+
+  <h2 data-i18n="art_pos_h2_habit">Your yearly habit</h2>
+  <p data-i18n="art_pos_habit_p">Every December or January, and before any new purchase, look up the exact ISIN of each fund you hold or plan to buy on skat.dk. If a holding has changed status, note its new tax and ask an advokat or revisor before any sizeable move.</p>
 
   <div class="takeaways">
     <h2 data-i18n="art_pos_ta_h">Key takeaways</h2>
@@ -127,8 +130,8 @@
   </div>
 
   <div class="art-cta">
-    <a class="primary" href="index.html#positivliste" data-i18n="art_pos_cta_check">Check a fund's ISIN</a>
-    <a href="index.html#router" data-i18n="art_pos_cta_router">See the routed order</a>
+    <a class="primary" href="check.html" data-i18n="art_pos_cta_check">Check a fund's ISIN</a>
+    <a href="plan.html#router" data-i18n="art_pos_cta_router">See the routed order</a>
   </div>
 
   <p style="margin:1.2em 0 0"><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener" data-i18n="art_pos_skat">Open the current positivliste on skat.dk -&gt;</a></p>
@@ -146,9 +149,9 @@
 
 <!-- TAX_YEAR_CONFIG is single-sourced in js/config.js; the article interpolates its
      year-tagged numbers. No tax engine (js/tax.js) is needed on this page. -->
-<script src="js/config.js?v=9"></script>
-<script src="js/i18n.js?v=9"></script>
-<script src="js/article-positivliste.js?v=9"></script>
+<script src="js/config.js?v=10"></script>
+<script src="js/i18n.js?v=10"></script>
+<script src="js/article-positivliste.js?v=10"></script>
 <script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

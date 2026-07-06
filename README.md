@@ -5,15 +5,20 @@ by letting you play with sliders and see the tax outcome. Static and stateless: 
 no cookies (only `localStorage` for your language and slider choices). **Educational only, not advice.**
 
 ## The pages
-- **`index.html` — Plan / The Money Router** (the landing page): set a yearly target and see the
-  cheapest-tax order to fill Danish accounts (børneopsparing → off-list fund + frikort → ASK → depot),
-  with a "why" for each step, a keep-vs-tax comparison, a year-by-year chart, and a **positivliste ISIN
-  checker**.
-- **`play.html` — Play / The Wrapper Race + Gift Planner**: race the same savings across the four tax
-  wrappers, and plan tax-free gifts to children (per-giver caps, the two-parent doubling, the
-  parent-attribution trap, a gavebrev checklist).
-- **`learn.html` — Learn** (placeholder): the slot for short plain-language guides. Shares the same
-  shell/CSS and passes the i18n completeness check; real content comes later.
+- **`index.html` - Home** (light landing): hero poster + "where are you starting from?" path
+  chooser (never invested / for my child / know the basics) + four teaser cards + trust strip.
+  No simulator, no video: small first paint.
+- **`plan.html` - Plan / The Money Router** (moved from index): the router, the "four tax homes"
+  primer and the hero video. Deep links `?mode=child` / `?mode=adult` preselect the mode.
+- **`check.html` - Check a fund**: the positivliste ISIN checker as its own utility page.
+- **`play.html` - Play / The Wrapper Race + Gift Planner**: race chart has end-of-line labels,
+  tap-to-isolate, a "show the gap" view and colour-blind dash patterns.
+- **`learn.html` - Learn hub**: six guides + the Trap Gallery quiz - `learn-start-here.html`
+  (Beginner 101), `learn-choosing-funds.html` (ACC/DIST/hedged + asset map),
+  `learn-positivliste.html`, `learn-ask-depot-bo.html`, `learn-lager-vs-realisation.html`,
+  `learn-gifts-to-children.html`, `quiz.html`.
+- Nav tabs are **Home · Plan · Play · Learn**, single-sourced in `js/shell.js`, with additive
+  left/right swipe navigation between the four tab pages on touch screens.
 
 ## Shared site shell (header / footer / chrome CSS)
 To avoid drift, the chrome is single-sourced:

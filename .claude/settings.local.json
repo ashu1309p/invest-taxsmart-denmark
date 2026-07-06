@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python --version)",
+      "PowerShell(node --version)",
+      "PowerShell(python -m http.server 8124 --directory \"C:\\\\Users\\\\ashu1\\\\Claude\\\\Projects\\\\with video+ updates\\\\redesign\")",
+      "PowerShell(node \"C:\\\\Users\\\\ashu1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-ashu1-Claude-Projects-with-video--updates\\\\e7955f8a-c3a0-4b62-8ccd-b80eae95316e\\\\scratchpad\\\\check_i18n.js\" plan.html)",
+      "PowerShell(node \"C:\\\\Users\\\\ashu1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-ashu1-Claude-Projects-with-video--updates\\\\e7955f8a-c3a0-4b62-8ccd-b80eae95316e\\\\scratchpad\\\\check_i18n.js\" plan.html; Write-Host \"exit=$LASTEXITCODE\")",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

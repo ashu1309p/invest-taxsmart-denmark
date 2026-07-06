@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="google-site-verification" content="POEGT4Xgr1Z1dqoTiFgU0qpSLAWRngIMXFTod5jhnN0">
+<title>Choosing funds: ACC vs DIST, hedged, and what goes where - Tax-smart investing in Denmark</title>
+<meta name="description" content="How to read the switches in a fund's name (ACC vs DIST, hedged vs unhedged) and which assets fit which Danish account: core, satellite, bonds, single stocks. Educational only, not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://taxsmart-invest-denmark.vercel.app/learn-choosing-funds.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="Choosing funds: ACC vs DIST, hedged, and what goes where">
+<meta property="og:description" content="How to read the switches in a fund's name, and which assets fit which Danish account. Educational, not advice.">
+<meta property="og:url" content="https://taxsmart-invest-denmark.vercel.app/learn-choosing-funds.html">
+<meta property="og:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Choosing funds: ACC vs DIST, hedged, and what goes where">
+<meta name="twitter:description" content="How to read the switches in a fund's name, and which assets fit which Danish account.">
+<meta name="twitter:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Choosing funds: ACC vs DIST, hedged, and what goes where","inLanguage":["en","da"],"isAccessibleForFree":true,"mainEntityOfPage":"https://taxsmart-invest-denmark.vercel.app/learn-choosing-funds.html","image":"https://taxsmart-invest-denmark.vercel.app/og-image.png","author":{"@type":"Person","name":"Tax-smart investing in Denmark"},"publisher":{"@type":"Organization","name":"Tax-smart investing in Denmark"},"description":"How to read a fund name's switches (ACC/DIST, hedged) and which assets fit which Danish account. Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens (the ONE site-wide cool palette). Shared chrome + article
+     styles live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --c-bo:#157F70; --c-fri:#5E7E3F; --c-ask:#4361EE; --c-on:#C0427C;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:24px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+  section{scroll-margin-top:88px}
+  :target{scroll-margin-top:88px}
+
+  /* ---------- fund-name switch cards (details.acct recipe from the old index) ---------- */
+  .primer{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
+  @media(max-width:520px){.primer{grid-template-columns:1fr}}
+  details.acct{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;transition:border-color .18s var(--ease),box-shadow .18s var(--ease)}
+  details.acct:hover{border-color:#C4CFDC;box-shadow:var(--shadow-sm)}
+  details.acct[open]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  details.acct summary{list-style:none;cursor:pointer;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:96px}
+  details.acct summary::-webkit-details-marker{display:none}
+  details.acct summary b{font-size:.9rem;line-height:1.25}
+  details.acct summary .one{font-size:.78rem;color:var(--muted);line-height:1.4}
+  details.acct .more{padding:10px 12px 12px;font-size:.84rem;color:var(--ink-2);border-top:1px dashed var(--line);line-height:1.55}
+  details.acct .ftex{margin:0 12px 12px;font-size:.8rem;color:var(--ink-2);background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:8px 10px;line-height:1.5}
+
+  /* ---------- worked-example disclosures ---------- */
+  details.adv{border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;margin-top:14px;overflow:hidden;transition:border-color .18s var(--ease)}
+  details.adv:hover{border-color:#CDD7E2}
+  details.adv>summary{list-style:none;cursor:pointer;padding:12px 14px;font-size:.92rem;font-weight:700;color:var(--accent);position:relative;padding-right:28px}
+  details.adv>summary::-webkit-details-marker{display:none}
+  details.adv>summary::after{content:"";position:absolute;right:13px;top:calc(50% - 5px);width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .2s;opacity:.7}
+  details.adv[open]>summary::after{transform:rotate(-135deg)}
+  details.adv[open]>summary{border-bottom:1px solid var(--line)}
+  .adv-body{padding:8px 14px 14px}
+  .fxex .fxs{font-size:.9rem;color:var(--muted);margin:6px 0 8px}
+  .fxrow{padding:9px 0;border-top:1px dashed var(--line)}
+  .fxrow:first-of-type{border-top:0}
+  .fxrow .fxcase{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px;color:var(--ink)}
+  .fxouts{display:flex;flex-wrap:wrap;gap:8px}
+  .fxouts .fxout{flex:1;min-width:200px;font-size:.88rem;background:var(--sunken);border-radius:8px;padding:8px 10px;color:var(--ink-2)}
+  .fxouts .fxout b{display:block;color:var(--accent);font-size:.8rem;letter-spacing:.02em;margin-bottom:2px}
+  .fxnote{font-size:.88rem;color:var(--muted);margin-top:10px;line-height:1.55}
+
+  /* ---------- trap warnings ---------- */
+  .ftwarn{background:var(--warn-soft);border:1px solid var(--warn-line);border-left:4px solid var(--warn);border-radius:12px;color:var(--warn-ink);padding:12px 14px;line-height:1.5;font-size:.88rem;margin-top:14px}
+
+  /* ---------- concept explainers ---------- */
+  .concept-grid{display:grid;grid-template-columns:1fr;gap:8px;margin:12px 0}
+  @media(min-width:560px){.concept-grid{grid-template-columns:1fr 1fr}}
+  .concept{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;box-shadow:var(--shadow-sm)}
+  .concept .defhead{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px}
+  .concept .defhead b{font-size:.92rem;color:var(--ink)}
+  .concept .one{font-size:.84rem;color:var(--ink-2);margin:0 0 5px;line-height:1.5}
+  .concept .ex{font-size:.8rem;color:var(--muted);line-height:1.5;margin:0}
+  .rbadge{font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap;flex:none}
+  .rbadge.r-low{background:var(--success-soft);color:var(--success-ink);border:1px solid var(--success-line)}
+  .rbadge.r-med{background:var(--warn-soft);color:var(--warn-ink);border:1px solid var(--warn-line)}
+  .rbadge.r-high{background:var(--danger-soft);color:var(--danger-ink);border:1px solid var(--danger-line)}
+
+  /* ---------- asset map cards ---------- */
+  .assets{display:flex;flex-direction:column;gap:10px;margin:12px 0}
+  .asset{border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 16px;box-shadow:var(--shadow-sm)}
+  .asset .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+  .asset .nm{font-weight:700;font-size:.95rem;flex:1;min-width:140px;color:var(--ink)}
+  .asset .fitbands{display:flex;gap:4px;flex-wrap:wrap}
+  .asset .wholab{display:block;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin:10px 0 5px}
+  .asset .homes{display:flex;gap:6px;flex-wrap:wrap;font-size:.8rem}
+  .asset .homes span.home{background:var(--sunken);border:1px solid var(--line);color:var(--ink-2);border-radius:8px;padding:3px 8px;font-weight:600}
+  .asset .homes .home.h-warn{background:var(--danger-soft);border:1px solid var(--danger-line);border-left:3px solid var(--danger);color:var(--danger-ink)}
+  .asset .why{font-size:.84rem;color:var(--muted);margin:6px 0 0;line-height:1.55}
+  .asset .warn{font-size:.8rem;color:var(--warn-ink);background:var(--warn-soft);border:1px solid var(--warn-line);border-radius:8px;padding:6px 9px;margin-top:10px}
+  .atag{display:inline-block;padding:1px 7px;border-radius:6px;color:#fff;font-weight:700;font-size:.7rem;line-height:1.5;font-style:normal;box-shadow:0 1px 2px rgba(15,23,42,.12)}
+  .atag.t-bo{background:var(--c-bo)} .atag.t-fri{background:var(--c-fri)} .atag.t-ask{background:var(--c-ask)} .atag.t-on{background:var(--c-on)}
+  .amLegend{font-size:.84rem;color:var(--muted);line-height:1.6;margin:0 0 4px}
+</style>
+<!-- Shared site-shell chrome + Learn article styles. Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css?v=10">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js?v=10"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+<article class="article">
+  <p class="kicker" data-i18n="art_cf_kicker">Learn</p>
+  <h1 data-i18n="art_cf_h1">Choosing funds: reading the name, and what goes where</h1>
+  <p class="art-lead" data-i18n="art_cf_lead">Every ETF name carries switches like ACC, DIST and hedged. In Denmark one of them changes the tax story. Once you can read the name, the next question is what belongs where: core, satellite, bonds, single stocks.</p>
+  <p class="art-verified"><span class="art-yeartag" data-i18n="art_cf_taxyear">Tax year 2026</span> <span data-i18n="art_cf_verifiedNote">Rules described here are for this tax year.</span></p>
+
+  <!-- ====== FUND NAME TERMS (first: a beginner meets the name before the portfolio) ====== -->
+  <section id="fundterms" aria-labelledby="ftTitle">
+    <h2 id="ftTitle" data-i18n="ftTitle">Reading a fund's name: ACC vs DIST, hedged vs unhedged</h2>
+    <p data-i18n="ftSub">Every ETF name carries these switches. In Denmark one of them changes the tax story, the other mostly doesn't.</p>
+    <div class="primer">
+      <details class="acct">
+        <summary><b data-i18n="ft_accT">ACC [accumulating]</b><span class="one" data-i18n="ft_acc1">Dividends stay inside the fund and compound automatically.</span></summary>
+        <div class="more" data-i18n="ft_accM">Nothing is paid out, so there is no dividend to tax separately: everything lands in the yearly value gain (lager). For children this is the safe construction: no payout means nothing for the parent-attribution rule to catch.</div>
+        <div class="ftex" data-i18n="ft_accEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_distT">DIST [distributing, udloddende]</b><span class="one" data-i18n="ft_dist1">Dividends are paid out in cash, typically 1-4 times a year.</span></summary>
+        <div class="more" data-i18n="ft_distM">For adults the dividend is just part of the same income type, but you must reinvest it yourself. For children, dividends on parent-gifted money are taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2). Special case: Danish distributing equity funds (IMB) are realisation-taxed aktieindkomst [share income], a different regime from ETFs.</div>
+        <div class="ftex" data-i18n="ft_distEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_unhT">Unhedged</b><span class="one" data-i18n="ft_unh1">You hold the fund's currencies as they are; exchange rates move your return.</span></summary>
+        <div class="more" data-i18n="ft_unhM">For long equity horizons many investors accept currency swings: they tend to even out over decades, and DKK is pegged to EUR, so EUR exposure behaves almost like DKK. Hedging or not has no effect on the Danish tax regime.</div>
+        <div class="ftex" data-i18n="ft_unhEx"></div>
+      </details>
+      <details class="acct">
+        <summary><b data-i18n="ft_hedT">Hedged [valutaafdækket]</b><span class="one" data-i18n="ft_hed1">Built-in currency insurance smooths exchange-rate swings, for a small ongoing cost.</span></summary>
+        <div class="more" data-i18n="ft_hedM">Mostly relevant for bond funds, where currency noise can swamp the modest return. Hedging costs roughly 0.1-0.3% per year on top of the ÅOP. It does NOT change the tax regime, but see the ISIN warning below.</div>
+        <div class="ftex" data-i18n="ft_hedEx"></div>
+      </details>
+    </div>
+
+    <details class="adv">
+      <summary data-i18n="adExH">📈 Worked example: ACC vs DIST on the same fund</summary>
+      <div class="adv-body fxex">
+        <p class="fxs" data-i18n="adExS">A world fund returns about 7% in a year: roughly 5% price growth and 2% dividends. Say you hold 100,000 kr.</p>
+        <div class="fxouts">
+          <div class="fxout"><b>ACC (accumulating)</b><span data-i18n="adAcc">Nothing is paid out. The full ~7,000 kr (5,000 growth + 2,000 dividends) stays in the fund and compounds. A child is taxed on the yearly gain as the child, so the frikort can absorb it; nothing to reinvest, nothing to self-declare.</span></div>
+          <div class="fxout"><b>DIST (distributing)</b><span data-i18n="adDist">About 2,000 kr is paid to you as cash. For an adult it is the same tax, but you must reinvest the 2,000 kr yourself or it sits idle. For a child whose money was gifted by a parent, that 2,000 kr is taxed at the PARENT until age 18 (kildeskatteloven § 5, stk. 2), and the bank does not report it, so you must self-declare.</span></div>
+        </div>
+        <p class="fxnote" data-i18n="adExNote">For a child, accumulating avoids a parent tax bill and the paperwork; for an adult it saves the manual reinvesting. That is why children's accounts use accumulating funds only.</p>
+      </div>
+    </details>
+    <details class="adv">
+      <summary data-i18n="fxExH">📈 Worked example: shares flat, the dollar moves 5%</summary>
+      <div class="adv-body fxex">
+        <p class="fxs" data-i18n="fxExS">You put 10,000 kr in a world fund and over the year the shares themselves go nowhere (0%). Only the dollar moves against the krone.</p>
+        <div class="fxrow">
+          <span class="fxcase" data-i18n="fxCase1">If the dollar rises 5%</span>
+          <div class="fxouts">
+            <div class="fxout"><b>Unhedged</b><span data-i18n="fxU1">+5%, ends at 10,500 kr (you ride the currency up)</span></div>
+            <div class="fxout"><b>Hedged</b><span data-i18n="fxH1">about 0% minus the hedge fee, 9,980 kr</span></div>
+          </div>
+        </div>
+        <div class="fxrow">
+          <span class="fxcase" data-i18n="fxCase2">If the dollar falls 5%</span>
+          <div class="fxouts">
+            <div class="fxout"><b>Unhedged</b><span data-i18n="fxU2">-5%, ends at 9,500 kr (you ride the currency down)</span></div>
+            <div class="fxout"><b>Hedged</b><span data-i18n="fxH2">about 0% minus the hedge fee, 9,980 kr</span></div>
+          </div>
+        </div>
+        <p class="fxnote" data-i18n="fxExNote">Hedged hands you the same result either way: it removes the swing, up and down, for a small certain cost (~0.1-0.3% a year, about 0.2% here). Over a long stock horizon these moves tend to even out, so many investors skip hedging on shares. On bonds, where the return is small, currency noise can swamp it, so hedging is more common there.</p>
+      </div>
+    </details>
+    <div class="ftwarn" data-i18n="ftTrap1">⚠ Child trap: a distributing fund bought with parent-gifted money leaks parent-taxed dividends, even small ones, and the bank does not report this for you. Children's accounts: accumulating only.</div>
+    <div class="ftwarn" data-i18n="ftTrap2">⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.</div>
+    <p style="margin-top:12px"><a href="check.html" data-i18n="art_cf_checkLink">Check a fund's exact ISIN against the positivliste →</a></p>
+  </section>
+
+  <!-- ====== ASSET MAP ====== -->
+  <section id="assetmap" aria-labelledby="amTitle">
+    <h2 id="amTitle" data-i18n="amTitle">What goes where? Core, satellite, stocks</h2>
+    <p data-i18n="art_cf_amSub">The account decides the tax. The asset decides the risk. Each card below shows where an asset typically lives for a child and for an adult, and which risk profiles it fits.</p>
+    <h3 data-i18n="defTitle">New to these words? Core, satellite, bond, single stocks</h3>
+    <div class="concept-grid" id="concepts"></div>
+    <p class="amLegend" id="amLegend"></p>
+    <div class="assets" id="assets"></div>
+  </section>
+
+  <div class="takeaways">
+    <h2 data-i18n="art_cf_ta_h">Key takeaways</h2>
+    <ul>
+      <li data-i18n="art_cf_ta1">ACC vs DIST is the switch that matters for children: accumulating only, so no parent-taxed dividends leak.</li>
+      <li data-i18n="art_cf_ta2">Hedged vs unhedged changes currency risk and cost, not the Danish tax regime - but the hedged class has its own ISIN with its own list status.</li>
+      <li data-i18n="art_cf_ta3">A broad, boring core fund does the heavy lifting; satellites and single stocks stay a small slice in wrappers that absorb swings.</li>
+      <li data-i18n="art_cf_ta4">Bonds are never on the positivliste and not ASK-eligible; for a child the frikort absorbs their modest gains.</li>
+    </ul>
+  </div>
+
+  <div class="art-cta">
+    <a class="primary" href="plan.html" data-i18n="art_cf_cta_router">Route your money in order</a>
+    <a href="check.html" data-i18n="art_cf_cta_check">Check a fund's ISIN</a>
+  </div>
+
+  <div class="art-foot">
+    <span data-i18n="art_cf_disc">This is an educational explainer written by a private individual, not tax, legal or investment advice - and never a fund recommendation. Fund names and ISINs appear as illustrations only. Rules change; verify with skat.dk and ask an advokat or revisor before acting on anything here.</span>
+    <a class="back" href="learn.html" data-i18n="art_cf_back">← Back to Learn</a>
+  </div>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</article>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG supplies the year tag; no tax engine (js/tax.js) is needed on this page. -->
+<script src="js/config.js?v=10"></script>
+<script src="js/i18n.js?v=10"></script>
+<script src="js/article-choosing-funds.js?v=10"></script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="google-site-verification" content="POEGT4Xgr1Z1dqoTiFgU0qpSLAWRngIMXFTod5jhnN0">
+<title>The Money Router - where should each krone go first?</title>
+<meta name="description" content="Set a target amount and see the typical tax-efficient order for filling Danish investment accounts, with the reasoning. Educational only.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://taxsmart-invest-denmark.vercel.app/plan.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="The Money Router: where should each krone go first?">
+<meta property="og:description" content="A free, no-login tool that shows the cheapest-tax order to fill your Danish investment accounts (ASK, depot, børneopsparing). Educational, not advice.">
+<meta property="og:url" content="https://taxsmart-invest-denmark.vercel.app/plan.html">
+<meta property="og:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Money Router: where should each krone go first?">
+<meta name="twitter:description" content="Free, no-login tool: the cheapest-tax order to fill your Danish accounts. Educational, not advice.">
+<meta name="twitter:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"The Money Router: where should each krone go first?","url":"https://taxsmart-invest-denmark.vercel.app/plan.html","inLanguage":["en","da"],"description":"Free educational tool for Danish retail investment taxation. Not advice."}</script>
+<style>
+  /* Page-specific design tokens: the ONE site-wide cool palette (same set as learn.html /
+     about.html), plus this page's account/data colours. Shared shell rules live in
+     css/styles.css, linked LAST. */
+  :root{
+    /* cool, airy page chrome */
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    /* trust accent (teal) */
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    /* semantic */
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --tax-red:#DC2626;
+    /* account / data palette (mirrors the JS hex values) */
+    --c-bo:#157F70; --c-fri:#5E7E3F; --c-ask:#4361EE; --c-on:#C0427C; --c-kap:#E08A00;
+    /* shape + depth */
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  /* primitives, top bar, footer, sticky bar, ctx-pill, skip-link, focus + reduced-motion live in css/styles.css (shared, linked last) */
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;padding-bottom:64px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent)}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:26px 0 0}
+  h1{font-size:1.65rem;line-height:1.2;letter-spacing:-.02em;margin:26px 0 8px}
+  @media(min-width:560px){h1{font-size:2.05rem}}
+  .tagline{color:var(--muted);font-size:1rem;margin-bottom:18px}
+  /* HERO video (decorative, play-once narrative, rests on final frame = poster). The clip lives
+     on THIS page now (the router is its narrative); the home page uses only the static poster.
+     Reference by filename only so a clean re-export can drop in over the same names. */
+  .hero{position:relative;margin:18px 0 6px}
+  .hero-frame{position:relative;width:100%;aspect-ratio:1080/608;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#0b0b0b;line-height:0}
+  .hero-video,.hero-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-still{display:none}
+  @media(prefers-reduced-motion:reduce){ .hero-video{display:none} .hero-still{display:block} }
+  /* mobile-first: headline sits BELOW the video in normal theme colours */
+  .hero-copy{padding:14px 2px 0}
+  .hero-copy .kicker{margin-top:0}
+  .hero-copy h1{margin-top:6px}
+  .hero-copy .tagline{margin-bottom:0}
+  /* >=700px: overlay the headline on the composed upper area with a deep scrim (clip has a bright window upper-left) */
+  @media(min-width:700px){
+    .hero-copy{position:absolute;top:0;left:0;right:0;padding:22px 26px 74px;color:#fff;
+      background:linear-gradient(180deg,rgba(15,14,12,.86) 0%,rgba(15,14,12,.74) 38%,rgba(15,14,12,.58) 70%,rgba(15,14,12,.32) 88%,rgba(15,14,12,0) 100%);
+      border-radius:var(--radius) var(--radius) 0 0}
+    .hero-copy .kicker{color:var(--accent-soft);margin-top:0}
+    .hero-copy h1{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);margin:6px 0 8px}
+    .hero-copy .tagline{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.55)}
+    .hero-copy .yeartag{color:#fff;background:rgba(255,255,255,.22)}
+  }
+  .yeartag{display:inline-block;font-size:.7rem;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:1px 6px;white-space:nowrap}
+  section{margin:24px 0}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+  h2.sec{font-size:1.2rem;margin-bottom:4px}
+  p.sub{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+  /* tax chips */
+  .chip{display:inline-flex;align-items:center;font-weight:800;font-size:.78rem;border-radius:8px;padding:3px 9px;color:#fff;white-space:nowrap;letter-spacing:.01em}
+  .chip.c0{background:var(--c-bo)} .chip.cF{background:var(--c-fri)}
+  .chip.c17{background:var(--c-ask)} .chip.c27{background:var(--c-on)}
+  .chip.big{font-size:.95rem;padding:5px 12px;border-radius:10px}
+  /* primer cards */
+  .primer{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:560px){.primer{grid-template-columns:repeat(4,1fr)}}
+  details.acct{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+  details.acct summary{list-style:none;cursor:pointer;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:96px}
+  details.acct summary::-webkit-details-marker{display:none}
+  details.acct summary b{font-size:.85rem;line-height:1.25}
+  details.acct summary .one{font-size:.74rem;color:var(--muted);line-height:1.35}
+  details.acct .more{padding:0 12px 12px;font-size:.8rem;color:var(--ink);border-top:1px dashed var(--line);padding-top:10px}
+  details.acct .more p{margin:6px 0}
+  details.acct[open]{border-color:var(--accent)}
+  /* controls */
+  .mode{display:flex;background:#E7ECF3;border-radius:14px;padding:4px;margin:6px 0 14px}
+  .mode button{flex:1;border:0;border-radius:11px;background:transparent;font-size:.95rem;font-weight:700;padding:11px 8px;color:var(--muted);cursor:pointer}
+  .mode button.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .ctl{margin:14px 0}
+  .ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem;font-weight:600;margin-bottom:6px;gap:8px}
+  .ctl label .lab{flex:1}
+  .ctl output{font-variant-numeric:tabular-nums;font-weight:800;color:var(--accent);font-size:1.02rem;white-space:nowrap}
+  .ctl .equiv{font-size:.76rem;color:var(--muted);text-align:right;margin-top:2px}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;touch-action:pan-y}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--accent) var(--fill,50%),#DBE2EB var(--fill,50%))}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--accent);margin-top:-10px;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:grab}
+  input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#DBE2EB}
+  input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--accent)}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .riskrow{display:flex;gap:8px;margin:10px 0 4px;flex-wrap:wrap}
+  .riskrow button{flex:1;min-width:100px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px;cursor:pointer;font-weight:700;font-size:.84rem;color:var(--muted);line-height:1.3}
+  .riskrow button small{display:block;font-weight:600;font-size:.72rem;color:var(--muted)}
+  .riskrow button.active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  /* waterfall */
+  .falls{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .fall{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;border-left:5px solid var(--bc,#999)}
+  .fall .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .fall .rank{width:24px;height:24px;border-radius:50%;background:var(--bc,#999);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex:none}
+  .fall .nm{font-weight:700;font-size:.92rem;flex:1;min-width:120px}
+  .fall .amts{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-top:8px;gap:8px;flex-wrap:wrap}
+  .fall .amts b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .fall .bar{height:10px;border-radius:5px;background:#E9EEF4;margin-top:8px;overflow:hidden}
+  .fall .bar i{display:block;height:100%;border-radius:5px;background:var(--bc,#999);width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .fall .note{font-size:.76rem;color:var(--muted);margin-top:6px;font-style:italic}
+  .fall details.why{margin-top:8px;border:0;background:transparent}
+  .fall details.why summary{list-style:none;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--accent);padding:2px 0}
+  .fall details.why summary::-webkit-details-marker{display:none}
+  .fall details.why .body{font-size:.82rem;color:var(--ink);padding:6px 0 2px}
+  .fall.empty{opacity:.45}
+  /* year-by-year chart */
+  .yearchart{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
+  .yc-title{font-weight:800;font-size:1.02rem}
+  .yc-sub{font-size:.8rem;color:var(--muted);margin:2px 0 10px}
+  .yc-toggle{display:flex;background:#E7ECF3;border-radius:12px;padding:3px;margin-bottom:12px}
+  .yc-toggle button{flex:1;border:0;border-radius:9px;background:transparent;font-size:.8rem;font-weight:700;padding:9px 6px;color:var(--muted);cursor:pointer;line-height:1.2}
+  .yc-toggle button.active{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .yc-chart{width:100%}
+  .yc-chart svg{width:100%;height:auto;display:block;touch-action:manipulation}
+  .yc-chart rect.col-seg{transition:y .5s ease,height .5s ease}
+  .yc-chart rect.col-hit{cursor:pointer;fill:transparent}
+  .yc-chart rect.col-sel{fill:rgba(15,118,110,.09)}
+  .yc-readout{font-size:.82rem;margin:10px 0 2px;padding:9px 11px;background:var(--accent-soft);border-radius:10px;line-height:1.55}
+  .yc-readout b{font-variant-numeric:tabular-nums;color:var(--ink)}
+  .yc-legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.74rem;color:var(--muted);margin-top:9px}
+  .yc-legend span{display:inline-flex;align-items:center;gap:5px}
+  .yc-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+  /* smart vs naive */
+  .versus{margin-top:20px;border-top:1px dashed var(--line);padding-top:16px}
+  .headline{font-size:1.02rem;font-weight:800;margin-bottom:2px}
+  .headline .pos{color:var(--success-ink)}
+  .vsub{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+  .vrow{margin:10px 0}
+  .vrow .vlab{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;margin-bottom:4px}
+  .vrow .vlab span:last-child{color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+  .vbar{display:flex;height:26px;border-radius:8px;overflow:hidden;background:#E5EAF1}
+  .vbar .keep{background:#2A9D8F;transition:width .8s}
+  .vbar .tax{background:var(--tax-red);transition:width .8s}
+  .vlegend{display:flex;gap:14px;font-size:.74rem;color:var(--muted);margin-top:6px}
+  .vlegend i{width:12px;height:12px;border-radius:3px;display:inline-block;vertical-align:-2px;margin-right:4px}
+  /* link card, sources, footer */
+  .linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px;font-weight:700}
+  .linkcard small{display:block;font-weight:600;color:var(--muted);margin-top:2px}
+  .linkcard.fb{background:var(--sunken)}
+  .sources ul{margin:8px 0 0 18px;font-size:.88rem}
+  .sources li{margin:6px 0}
+  .sources a{color:var(--accent)}
+  .verified{font-size:.8rem;color:var(--muted);margin-top:10px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:10px}
+  .testbadge.fail{color:#B4231F;font-weight:700}
+
+  /* ============================================================
+     REDESIGN v1 - overrides (cascade wins by source order).
+     Direction: quiet editorial fintech. Stronger type ramp,
+     tiered spacing, 3 surfaces, account colour = data only,
+     one dominant tool panel, payoff-first, progressive disclosure.
+     ============================================================ */
+  body{ line-height:1.62 }
+  .wrap{ max-width:716px }
+  /* type ramp */
+  .kicker{ font-size:.8rem; font-weight:700; letter-spacing:.09em; margin:var(--space-sec) 0 6px }
+  h1{ font-size:clamp(2.05rem,6vw,2.6rem); font-weight:700; line-height:1.08; letter-spacing:-.02em; margin:0 0 14px!important; text-wrap:balance }
+  .tagline{ font-size:1.07rem; line-height:1.55; color:var(--ink); max-width:33em; margin-bottom:16px }
+  h2.sec{ font-size:clamp(1.32rem,3.6vw,1.55rem); font-weight:700; line-height:1.2; letter-spacing:-.01em; text-wrap:balance; margin-bottom:6px }
+  p.sub{ font-size:.96rem; line-height:1.5 }
+  /* spacing + surfaces */
+  section{ margin:var(--space-sec) 0; scroll-margin-top:84px }
+  :target{ scroll-margin-top:84px }
+  .panel{ padding:22px; border-radius:18px }
+  @media(min-width:560px){ .panel{ padding:26px } }
+  .panel.ref{ box-shadow:none; background:var(--sunken); border-color:transparent }
+  .panel.ref h2.sec{ font-size:1.28rem }
+  /* the one dominant tool */
+  .panel.tool{ border-color:#D9E1EB; box-shadow:0 2px 8px rgba(15,23,42,.09),0 22px 50px rgba(15,23,42,.11) }
+  .tool-head{ margin:-22px -22px 20px; padding:16px 22px; background:var(--accent); color:#fff; border-radius:18px 18px 0 0 }
+  @media(min-width:560px){ .tool-head{ margin:-26px -26px 22px; padding:18px 26px } }
+  .tool-head .h{ font-size:1.28rem; font-weight:700; line-height:1.2 }
+  .tool-head .s{ font-size:.86rem; color:#D7EFEA; margin-top:3px }
+  /* payoff-first result block */
+  .versus{ margin:0 0 20px; border-top:0; padding:16px 16px 14px; background:var(--sunken); border-radius:14px }
+  .headline{ font-size:1.22rem; font-weight:700; line-height:1.25 }
+  .headline .pos{ color:var(--accent); font-weight:800 }
+  /* zone labels inside the tool */
+  .zone{ font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:24px 0 10px }
+  /* progressive-disclosure blocks */
+  details.adv,details.ycwrap{ border:1px solid var(--line); border-radius:12px; background:var(--card); margin-top:16px; overflow:hidden }
+  details.adv>summary,details.ycwrap>summary{ list-style:none; cursor:pointer; padding:12px 14px; font-size:.88rem; font-weight:700; color:var(--accent) }
+  details.adv>summary::-webkit-details-marker,details.ycwrap>summary::-webkit-details-marker{ display:none }
+  details.adv[open]>summary,details.ycwrap[open]>summary{ border-bottom:1px solid var(--line) }
+  .adv-body{ padding:8px 14px 14px }
+  .yearchart{ margin-top:0; border-top:0; padding-top:8px }
+  /* dial back the 800-weight everywhere */
+  .chip,.ctl output,.yc-title,.fall .rank{ font-weight:700 }
+  /* hover + focus states (a11y) */
+  .mode button,.riskrow button,.yc-toggle button,.tabs .tab,.lang-toggle button{ transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s }
+  .mode button:hover,.riskrow button:hover,.yc-toggle button:hover,.tabs .tab:hover{ color:var(--ink) }
+  .riskrow button:hover{ border-color:#C4CFDC }
+  .linkcard:hover{ background:#D5ECE7 }
+  .sources a:hover{ text-decoration:underline }
+  /* one rotating chevron for every disclosure (replaces text arrows) */
+  details.adv>summary,details.ycwrap>summary,.fall details.why>summary{ position:relative; padding-right:28px }
+  details.adv>summary::after,details.ycwrap>summary::after,.fall details.why>summary::after{ content:""; position:absolute; right:13px; top:calc(50% - 5px); width:8px; height:8px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); transition:transform .2s; opacity:.7 }
+  details.adv[open]>summary::after,details.ycwrap[open]>summary::after,.fall details.why[open]>summary::after{ transform:rotate(-135deg) }
+  /* subtler waterfall meter (amounts already carry the number) */
+  .fall .bar{ height:6px; opacity:.65 }
+  /* chip legibility: darken the light account colours for white text */
+  .chip.cF{ background:#5E7E3F }
+  /* keep the account colour as a left rule on demoted homes section cards too */
+  .panel.ref details.acct[open]{ border-color:var(--accent) }
+
+  /* ============================================================
+     REDESIGN v2 - NORDIC FINTECH DASHBOARD
+     Pure visual layer on the cool token set above. Elevates each
+     component to a clean, trustworthy SaaS-dashboard aesthetic.
+     No class/id renamed, no logic touched. Account colours kept
+     as the data palette.
+     ============================================================ */
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{ max-width:744px }
+  /* numerals: tabular everywhere they carry data */
+  .ctl output,.fall .amts b,.headline,.headline .pos,.vrow .vlab span:last-child,.yc-readout b,
+  .yeartag,.vbar,output,.chip,.amts,.testbadge{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1,"cv01" 1 }
+
+  /* ---------- hero ---------- */
+  .kicker{ color:var(--accent); display:inline-flex; align-items:center; gap:9px; font-weight:700; font-size:.76rem; letter-spacing:.12em }
+  .kicker::before{ content:""; width:22px; height:2px; border-radius:2px; background:var(--accent); display:inline-block }
+  h1{ font-size:clamp(2.1rem,6vw,2.75rem); font-weight:800; line-height:1.06; letter-spacing:-.028em; color:var(--ink) }
+  .tagline{ color:var(--muted); font-size:1.08rem }
+  .yeartag{ background:var(--accent-soft); color:var(--accent-ink); border:1px solid var(--accent-line); font-weight:700; padding:1px 8px; border-radius:7px }
+
+  /* ---------- cards / surfaces ---------- */
+  section{ scroll-margin-top:88px }
+  .panel{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:24px }
+  @media(min-width:560px){ .panel{ padding:30px } }
+  .panel.ref{ background:var(--sunken); border:1px solid #E7ECF2; box-shadow:none }
+  .panel.tool{ border-color:#D9E1EB; box-shadow:var(--shadow-lg); padding-top:0 }
+  .tool-head{ margin:0 -24px 22px; padding:20px 24px; background:linear-gradient(135deg,#127c73 0%,#0F766E 45%,#0B5D56 100%); color:#fff; border-radius:18px 18px 0 0; position:relative; overflow:hidden }
+  .tool-head::after{ content:""; position:absolute; right:-40px; top:-60px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.10),transparent 70%) }
+  @media(min-width:560px){ .tool-head{ margin:0 -30px 24px; padding:22px 30px } }
+  .tool-head .h{ font-size:1.32rem; font-weight:800; letter-spacing:-.01em }
+  .tool-head .s{ color:rgba(233,247,244,.92); margin-top:4px; font-size:.9rem }
+  h2.sec{ color:var(--ink); font-weight:800; letter-spacing:-.015em }
+  p.sub{ color:var(--muted) }
+  .zone{ color:var(--muted-2); font-weight:700; letter-spacing:.1em }
+
+  /* ---------- chips ---------- */
+  .chip{ box-shadow:0 1px 2px rgba(15,23,42,.14); letter-spacing:.02em; border-radius:7px }
+  .chip.c0{ background:var(--c-bo) } .chip.cF{ background:#5E7E3F } .chip.c17{ background:var(--c-ask) }
+  .chip.c27{ background:var(--c-on) }
+
+  /* ---------- segmented controls (mode / yc-toggle) ---------- */
+  .mode,.yc-toggle{ background:#E7ECF3; border:1px solid var(--line); border-radius:14px }
+  .mode button,.yc-toggle button{ color:var(--muted); transition:color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease) }
+  .mode button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.16),0 1px 1px rgba(15,23,42,.06) }
+  .yc-toggle button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.14) }
+
+  /* ---------- inputs / sliders ---------- */
+  .ctl label{ color:var(--ink-2) }
+  .ctl output{ color:var(--accent); font-weight:800 }
+  input[type=range]::-webkit-slider-runnable-track{ background:linear-gradient(to right,var(--accent) var(--fill,50%),#DBE2EB var(--fill,50%)); height:8px; border-radius:6px }
+  input[type=range]::-webkit-slider-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28),0 0 0 6px rgba(15,118,110,.10); transition:box-shadow .18s var(--ease),transform .1s var(--ease) }
+  input[type=range]:hover::-webkit-slider-thumb{ box-shadow:0 2px 6px rgba(15,23,42,.30),0 0 0 9px rgba(15,118,110,.14) }
+  input[type=range]:active::-webkit-slider-thumb{ transform:scale(1.06) }
+  input[type=range]::-moz-range-track{ background:#DBE2EB; height:8px; border-radius:6px }
+  input[type=range]::-moz-range-progress{ background:var(--accent); height:8px; border-radius:6px }
+  input[type=range]::-moz-range-thumb{ border:3px solid var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.28) }
+  .riskrow button{ border:1.5px solid var(--line); background:#fff; color:var(--muted); border-radius:12px; transition:border-color .18s var(--ease),background .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease) }
+  .riskrow button small{ color:var(--muted-2) }
+  .riskrow button:hover{ border-color:#C4CFDC; background:#FAFCFE }
+  .riskrow button.active{ border-color:var(--accent); background:var(--accent-soft); color:var(--accent-ink); box-shadow:inset 0 0 0 1px var(--accent) }
+  .riskrow button.active small{ color:var(--accent) }
+
+  /* ---------- progressive-disclosure blocks ---------- */
+  details.adv,details.ycwrap{ border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; transition:border-color .18s var(--ease),box-shadow .18s var(--ease) }
+  details.adv:hover,details.ycwrap:hover{ border-color:#CDD7E2 }
+  details.adv>summary,details.ycwrap>summary{ color:var(--accent); font-weight:700 }
+  details.acct{ border:1px solid var(--line); border-radius:14px; transition:border-color .18s var(--ease),box-shadow .18s var(--ease) }
+  details.acct:hover{ border-color:#C4CFDC; box-shadow:var(--shadow-sm) }
+  details.acct[open]{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent) }
+  .panel.ref details.acct{ background:#fff }
+
+  /* ---------- payoff module (smart vs naive) ---------- */
+  .versus{ background:linear-gradient(180deg,#FBFEFD,#EFF7F5); border:1px solid var(--accent-line); border-radius:16px; padding:18px 18px 16px }
+  .headline{ font-size:1.18rem; font-weight:800; color:var(--ink); line-height:1.3 }
+  .headline .pos{ color:var(--accent); font-weight:900; font-size:1.34em; letter-spacing:-.01em }
+  .vsub{ color:var(--muted) }
+  .vrow .vlab{ color:var(--ink-2) }
+  .vrow .vlab span:last-child{ color:var(--muted) }
+  .vbar{ height:28px; border-radius:9px; background:#E5EAF1; box-shadow:inset 0 1px 2px rgba(15,23,42,.05) }
+  .vbar .keep{ background:linear-gradient(90deg,#2FA597,#23897C) }
+  .vbar .tax{ background:linear-gradient(90deg,#EF4D4D,#DC2626) }
+  .vlegend{ color:var(--muted) }
+
+  /* ---------- waterfall: dashboard metric modules ---------- */
+  .falls{ gap:12px }
+  .fall{ border:1px solid var(--line); border-left:4px solid var(--bc,#999); border-radius:16px; background:#fff; padding:15px 16px; box-shadow:var(--shadow-sm); transition:box-shadow .2s var(--ease),transform .2s var(--ease),border-color .2s var(--ease) }
+  .fall:hover{ box-shadow:var(--shadow); transform:translateY(-1px) }
+  .fall.empty{ opacity:.55; box-shadow:none }
+  .fall .rank{ width:26px; height:26px; background:var(--bc,#999); box-shadow:0 2px 5px rgba(15,23,42,.16) }
+  .fall .nm{ color:var(--ink); font-weight:700; font-size:.95rem }
+  .fall .amts{ color:var(--muted); margin-top:10px; gap:10px 16px }
+  .fall .amts b{ color:var(--ink); font-weight:700; font-size:.95rem }
+  .fall .bar{ height:6px; background:#E9EEF4; border-radius:99px; opacity:1 }
+  .fall .bar i{ background:linear-gradient(90deg,var(--bc,#999),color-mix(in srgb,var(--bc,#999) 78%,#000)) }
+  .fall details.why summary{ color:var(--accent) }
+  .fall .note{ color:var(--muted) }
+
+  /* ---------- year-by-year chart ---------- */
+  .yearchart{ background:transparent }
+  .yc-title{ color:var(--ink); font-weight:800 }
+  .yc-sub{ color:var(--muted) }
+  .yc-chart svg{ overflow:visible }
+  .yc-chart rect.col-seg{ transition:y .55s var(--ease),height .55s var(--ease) }
+  .yc-chart rect.col-sel{ fill:rgba(15,118,110,.08) }
+  .yc-readout{ background:var(--accent-soft); border:1px solid var(--accent-line); border-radius:10px; color:var(--ink-2) }
+  .yc-readout b{ color:var(--ink) }
+  .yc-legend{ color:var(--muted) }
+  .yc-legend i{ border-radius:4px }
+
+  /* ---------- link cards / sources / footer / sticky ---------- */
+  .linkcard{ background:var(--accent-soft); border:1.5px solid var(--accent-line); color:var(--ink); box-shadow:var(--shadow-sm); transition:background .18s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease) }
+  .linkcard:hover{ background:#D8ECE8; box-shadow:var(--shadow); transform:translateY(-2px) }
+  .linkcard small{ color:var(--muted) }
+  .linkcard.fb{ background:var(--sunken); border-color:var(--line) }
+  .linkcard.fb:hover{ background:#E8EDF3 }
+
+  /* ---------- focus / motion ---------- */
+  a,button,summary,.linkcard,.tabs .tab,.lang-toggle button{ transition:color .18s var(--ease),background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease) }
+
+  /* ============================================================
+     UX POLISH v3 - cause-and-effect flash, tax-home icons,
+     sticky context pill. Visual/feedback only.
+     ============================================================ */
+  /* 2. tax-home icons (monochromatic, inherit account colour) */
+  .fall .top .nm{ display:inline-flex; align-items:center; gap:8px }
+  .fall .top .nm .ti{ color:var(--bc) }
+  .yc-legend .legic{ display:inline-flex }
+  .yc-legend .ti{ width:14px; height:14px; vertical-align:-2px }
+
+  /* ---------- mobile fix: tax chip must not collide with a long bucket name ---------- */
+  @media(max-width:600px){
+    .fall .top{ display:grid; grid-template-columns:auto 1fr; align-items:center; column-gap:9px; row-gap:8px; flex-wrap:initial }
+    .fall .top .rank{ grid-column:1; grid-row:1 }
+    .fall .top .nm{ grid-column:2; grid-row:1; min-width:0 }
+    .fall .top .chip{ grid-column:2; grid-row:2; justify-self:start }
+  }
+
+  /* non-colour cue: the "tax" bar (and its legend swatch) gets diagonal stripes so it reads differently
+     from "keep" without relying on red/green alone */
+  .vbar .tax{ background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.30) 0 5px,transparent 5px 10px),linear-gradient(90deg,#EF4D4D,#DC2626) }
+  .vlegend i.sw-tax{ background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.7) 0 2px,transparent 2px 4px) }
+  /* empty (unfunded) waterfall rows: opacity:.55 crushed every label below AA contrast.
+     Use an explicit muted "not used" treatment where rank/chip/text all clear 4.5:1. */
+  .fall.empty{ opacity:1; background:var(--sunken); border-left-color:var(--muted-2); box-shadow:none }
+  .fall.empty .rank{ background:var(--muted); box-shadow:none }
+  .fall.empty .nm,.fall.empty .amts,.fall.empty .amts b,.fall.empty .note,.fall.empty .nm .ti{ color:var(--muted) }
+  .fall.empty .chip{ background:var(--muted); box-shadow:none }
+</style>
+<!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css?v=10">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js?v=10"></script>
+</head>
+<body data-page="plan">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<div id="ctxPill" class="ctx-pill" role="button" tabindex="-1" aria-hidden="true"></div>
+
+<div class="wrap" id="main" tabindex="-1" role="main">
+  <!-- HERO START (the play-once narrative clip lives HERE; the home page uses only the poster) -->
+  <div class="hero">
+    <div class="hero-frame">
+      <video class="hero-video" autoplay muted playsinline preload="metadata" poster="media/hero-poster.webp" aria-hidden="true">
+        <source src="media/hero.webm" type="video/webm">
+        <source src="media/hero.mp4" type="video/mp4">
+      </video>
+      <img class="hero-still" src="media/hero-poster.webp" alt="" aria-hidden="true">
+    </div>
+    <div class="hero-copy">
+      <p class="kicker" data-i18n="heroKicker">Every krone counts</p>
+      <h1 data-i18n="heroTitle">Where should each krone go first?</h1>
+      <p class="tagline" id="heroTag"></p>
+    </div>
+  </div>
+  <!-- HERO END -->
+
+  <!-- ====== THE TOOL: Money Router (payoff-first) ====== -->
+  <section class="panel tool" id="router">
+    <div class="tool-head">
+      <div class="h" data-i18n="routTitle">The Money Router</div>
+      <div class="s" data-i18n="routSub">Set a target. See the cheapest-tax order to fill your accounts, and why.</div>
+    </div>
+
+    <div class="mode" role="group" aria-label="Who you are investing for" data-i18n-aria="ariaMode">
+      <button id="mode-child" class="active" data-i18n="modeChild">Investing for a child</button>
+      <button id="mode-adult" data-i18n="modeAdult">For myself (adult)</button>
+    </div>
+
+    <div class="ctl">
+      <label><span class="lab" data-i18n="ctlBudget">Target per year</span><output id="out-budget" aria-live="polite">24,000 kr</output></label>
+      <input type="range" id="in-budget" min="3000" max="600000" step="3000" value="24000" aria-label="Yearly amount" data-i18n-aria="ariaBudget">
+      <div class="equiv" id="equivMonthly"></div>
+    </div>
+
+    <!-- the reward, up top -->
+    <div class="versus">
+      <p class="headline" id="vsHeadline" aria-live="polite"></p>
+      <p class="vsub" id="vsSub"></p>
+      <div class="vrow">
+        <div class="vlab"><span data-i18n="vsSmart">Routed in this order</span><span id="vsSmartNum"></span></div>
+        <div class="vbar" id="vbarSmart"><div class="keep"></div><div class="tax"></div></div>
+      </div>
+      <div class="vrow">
+        <div class="vlab"><span data-i18n="vsNaive">Everything in one on-list depot</span><span id="vsNaiveNum"></span></div>
+        <div class="vbar" id="vbarNaive"><div class="keep"></div><div class="tax"></div></div>
+      </div>
+      <div class="vlegend">
+        <span><i class="sw" style="background-color:#2A9D8F"></i><span data-i18n="legKeep">You keep</span></span>
+        <span><i class="sw sw-tax" style="background-color:#DC2626"></i><span data-i18n="legTax">Tax paid</span></span>
+      </div>
+    </div>
+
+    <details class="adv">
+      <summary data-i18n="advTitle">Adjust assumptions: horizon &amp; risk</summary>
+      <div class="adv-body">
+        <div class="ctl">
+          <label><span class="lab" data-i18n="ctlYears">Horizon</span><output id="out-years">15</output></label>
+          <input type="range" id="in-years" min="5" max="30" step="1" value="15" aria-label="Years" data-i18n-aria="ariaYears">
+        </div>
+        <p style="font-size:.9rem;font-weight:600;margin-top:12px" data-i18n="riskLabel">Risk appetite (sets the assumed average return)</p>
+        <div class="riskrow">
+          <button id="risk-cautious"><span data-i18n="riskC">Steady</span><small>~4%/yr</small></button>
+          <button id="risk-balanced" class="active"><span data-i18n="riskB">Mixed</span><small>~6.5%/yr</small></button>
+          <button id="risk-adventurous"><span data-i18n="riskA">Mostly stocks</span><small>~8.5%/yr</small></button>
+        </div>
+      </div>
+    </details>
+
+    <p class="zone" data-i18n="zoneOrder">The order, cheapest tax first</p>
+    <div class="falls" id="falls"></div>
+
+    <details class="ycwrap">
+      <summary data-i18n="ycWrapTitle">See it year by year</summary>
+      <div class="yearchart" id="yearchart">
+        <p class="yc-title" data-i18n="ycTitle">Year by year: where your money lands</p>
+        <p class="yc-sub" data-i18n="ycSub">Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.</p>
+        <div class="yc-toggle">
+          <button id="yc-contrib" class="active" data-i18n="ycViewContrib">Where each year's money goes</button>
+          <button id="yc-value" data-i18n="ycViewValue">Total pot value</button>
+        </div>
+        <div class="yc-chart" id="yc-svg"></div>
+        <div class="visually-hidden" id="yc-table"></div>
+        <div class="yc-readout" id="yc-readout"></div>
+        <div class="yc-legend" id="yc-legend"></div>
+      </div>
+    </details>
+
+    <p class="testbadge" id="testbadge"></p>
+    <p class="verified" data-i18n="simDisclaimer">Generic, simplified model: flat average return, yearly tax paid from each account, no fees or inflation, no other income. A typical ordering for a generic situation, never personal advice.</p>
+  </section>
+
+  <!-- ====== UNDERSTAND THE ACCOUNTS (demoted reference) ====== -->
+  <section class="panel ref" id="homes">
+    <h2 class="sec" data-i18n="primTitle">Meet the four tax homes</h2>
+    <p class="sub" data-i18n="primSub">A 20-second skim. Tap any card for the detail.</p>
+    <div class="primer" id="primer"></div>
+    <p style="margin-top:14px"><a href="learn-ask-depot-bo.html" data-i18n="plLearnMore" style="color:var(--accent);font-weight:700;text-decoration:none">Read the full explainer →</a></p>
+  </section>
+
+  <!-- ====== GIFT LINK ====== -->
+  <section>
+    <a class="linkcard" href="play.html#gifts">
+      <span data-i18n="giftLink">🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page</span>
+      <small data-i18n="giftLinkSub">Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.</small>
+    </a>
+  </section>
+
+  <!-- ====== FEEDBACK ====== -->
+  <section>
+    <a class="linkcard fb" href="https://tally.so/r/7RPVv0" target="_blank" rel="noopener">
+      <span data-i18n="feedbackTitle">💬 Found a mistake or have feedback? Tell me</span>
+      <small data-i18n="feedbackSub">A 1-minute form. This is a personal project and your input shapes it.</small>
+    </a>
+  </section>
+
+  <!-- ====== SOURCES ====== -->
+  <section class="panel ref sources" id="sources">
+    <h2 class="sec" data-i18n="srcTitle">Sources & legal references</h2>
+    <ul>
+      <li><a href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener">Positivliste (ABIS list) - skat.dk</a></li>
+      <li><a href="https://info.skat.dk/data.aspx?oid=2234529" target="_blank" rel="noopener">Parent attribution - Den juridiske vejledning C.A.9.3 (kildeskatteloven § 5, stk. 2)</a></li>
+      <li><a href="https://info.skat.dk/data.aspx?oid=2234739" target="_blank" rel="noopener">Børneopsparing - Den juridiske vejledning C.A.10.4.1.4</a></li>
+      <li><a href="https://skat.dk/borger/aktier-og-andre-vaerdipapirer/aktiesparekonto" target="_blank" rel="noopener">Aktiesparekonto - skat.dk (aktiesparekontoloven)</a></li>
+      <li><a href="https://www.retsinformation.dk/eli/lta/2021/11" target="_blank" rel="noopener">Gift caps - boafgiftsloven § 22</a></li>
+      <li><a href="https://skm.dk/tal-og-metode/satser" target="_blank" rel="noopener">Annual indexed amounts - Skatteministeriet satser</a></li>
+    </ul>
+    <p class="verified" id="verifiedLine"></p>
+  </section>
+</div>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with play.html). Update it there each January. -->
+<script src="js/config.js?v=10"></script>
+<script src="js/tax.js?v=10"></script>
+<script src="js/i18n.js?v=10"></script>
+<script>
+/* TAX_YEAR_CONFIG -> js/config.js, pure tax engine -> js/tax.js (both loaded above, shared with play.html). */
+
+/* Pure tax engine (aktieTax, kapTaxChild, askTax, RISK_PRESETS,
+   simulateRouted / simulateNaive / compareSmartVsNaive) is in js/tax.js, loaded above. */
+
+/* ============ SELF-TESTS (hand-computed) ============ */
+function approx(a,b,eps=0.01){return Math.abs(a-b)<eps}
+function runRouterTests(cfg){
+  const t=[]; const ok=(n,c)=>t.push({name:n,pass:!!c});
+  const r1=simulateRouted({annualBudget:20000,years:1,returnRate:.05,isChild:true},cfg);
+  ok('R1 child route y1', r1.firstYearRoute[0].amount===6000 && r1.firstYearRoute[1].amount===14000
+    && r1.firstYearRoute[2].amount===0 && approx(r1.endValue,21000) && approx(r1.totalTax,0));
+  const r2=simulateRouted({annualBudget:200000,years:1,returnRate:0,isChild:false},cfg);
+  ok('R2 adult ceiling split', r2.buckets.ask.value===174200 && r2.buckets.onlist.value===25800 && r2.totalTax===0);
+  const r3=simulateRouted({annualBudget:200000,years:1,returnRate:.10,isChild:false},cfg);
+  ok('R3 adult tax math', approx(r3.totalTax,3658) && approx(r3.endValue,216342));
+  const r4=simulateRouted({annualBudget:6000,years:13,returnRate:0,isChild:true},cfg);
+  ok('R4 BO lifetime stop', r4.buckets.bo.value===72000 && r4.buckets.frikort.value===6000);
+  const r5=simulateRouted({annualBudget:2000000,years:1,returnRate:.05,isChild:true},cfg);
+  ok('R5 full waterfall', approx(r5.buckets.frikort.deposited,1082000)
+    && approx(r5.buckets.ask.deposited,174200) && approx(r5.buckets.onlist.deposited,737800)
+    && approx(r5.totalTax,11441));
+  const r6=simulateNaive({annualBudget:100000,years:1,returnRate:.10},cfg);
+  ok('R6 naive', approx(r6.endValue,107300) && approx(r6.totalTax,2700));
+  const r7=compareSmartVsNaive({annualBudget:20000,years:15,returnRate:.065,isChild:true},cfg);
+  ok('R7 smart beats naive (child)', r7.taxSaved>0 && r7.endDiff>0);
+  const r8=compareSmartVsNaive({annualBudget:50000,years:15,returnRate:.065,isChild:false},cfg);
+  ok('R8 smart beats naive (adult)', r8.taxSaved>0 && r8.endDiff>0);
+  const r9=simulateRouted({annualBudget:10000,years:5,returnRate:0,isChild:true},cfg);
+  ok('R9 zero return', r9.totalTax===0 && approx(r9.endValue,50000));
+  return {tests:t, failed:t.filter(x=>!x.pass)};
+}
+
+/* ============ I18N ============ */
+/* Keys kept to exactly what this page renders (hero, router, homes primer, linkcards,
+   sources, shell strings). The positivliste checker / asset map / fund-terms keys moved
+   with their sections to check.html and learn-choosing-funds.html. */
+const PAGE_I18N = {
+  en: {
+    "heroKicker":"Every krone counts",
+    "heroTitle":"Where should each krone go first?",
+    "heroTag":"Same investment, different tax. The order you fill your accounts decides how much you keep. Slide to see what comes first, and why.",
+    "primTitle":"Meet the four tax homes",
+    "primSub":"Start here: each account is taxed differently. Tap a card to learn it before you plan.",
+    "routTitle":"The Money Router",
+    "routSub":"Set a target. See the cheapest-tax order to fill your accounts, and why.",
+    "modeChild":"Investing for a child",
+    "modeAdult":"For myself (adult)",
+    "ctlBudget":"Target per year",
+    "ctlYears":"Horizon",
+    "equivMonthly":"≈ {m} kr per month",
+    "riskLabel":"Risk appetite (sets the assumed average return)",
+    "riskC":"Steady","riskB":"Mixed","riskA":"Mostly stocks",
+    "advTitle":"Adjust assumptions: horizon & risk",
+    "zoneOrder":"The order, cheapest tax first",
+    "ycWrapTitle":"See it year by year",
+    "yearsUnit":"years",
+    "ycTitle":"Year by year: where your money lands",
+    "ycSub":"Each column is one year. The colour shows which account holds that money. Tap a column for the exact split.",
+    "ycViewContrib":"Where each year's money goes",
+    "ycViewValue":"Total pot value",
+    "ycReadout":"Year {y} - {kind}",
+    "ycKindDep":"new money this year",
+    "ycKindVal":"total value",
+    "ycNm_bo":"Børneopsparing","ycNm_frikort":"frikort depot","ycNm_ask":"ASK","ycNm_onlist":"depot (AKT)",
+    "nm_bo":"Børneopsparing [child savings]",
+    "nm_frikort":"Depot (AKT): off-list fund + frikort [tax-free allowance]",
+    "nm_ask":"Aktiesparekonto (ASK)",
+    "nm_onlist":"Depot (AKT): fund ON the positivliste",
+    "chip_bo":"0% TAX","chip_frikort":"0% → ~37-42%","chip_ask":"17% FLAT","chip_onlist":"27 / 42%","chip_offAdult":"~37-42%",
+    "why_bo":"0% on every krone of return, forever. The catch: max {boY} kr per year and {boL} kr in total. Cheapest tax home in Denmark, so it fills first.",
+    "why_frikort":"An accumulating fund OFF the <a href='learn-positivliste.html'>positivliste</a> [SKAT’s approved-fund list] is kapitalindkomst [capital income], and a child's personfradrag [tax-free personal allowance] ({pf} kr, {yr}) absorbs that yearly gain. Effectively 0% until the depot is so big that the gain outgrows the allowance: at this return roughly {vstar} kr. New money stops here before that point; gains above it would cost ~37-42%. <a href='check.html'>Check any fund's list status by ISIN →</a>",
+    "why_ask":"Flat {askR}% of each year's gain. Pricier than the buckets above, cheaper than every unlimited alternative (27/42% or ~37/42%). Deposit ceiling {askC} kr ({yr}).",
+    "why_ask_adult":"Flat {askR}% of each year's gain, the cheapest tax an adult can get on stock funds. That is why it fills before the depot. Ceiling {askC} kr ({yr}).",
+    "why_onlist":"A fund ON the <a href='learn-positivliste.html'>positivliste</a> [SKAT’s approved-fund list] in a normal depot (AKT): 27% up to {aktieT} kr of yearly aktieindkomst [share income], 42% above; married couples share a doubled band of {aktieTM} kr combined. No ceiling, so it takes everything that is left. <a href='check.html'>Check any fund's list status by ISIN →</a>",
+    "why_onlist_child":"A fund ON the <a href='learn-positivliste.html'>positivliste</a> [SKAT’s approved-fund list] in the child's depot (AKT): taxed as aktieindkomst [share income], 27% up to {aktieT} kr of yearly gain, 42% above. The personfradrag [tax-free allowance] does NOT offset this, so the child pays 27% from the very first krone, which is why this bucket fills only after the cheaper ones. No ceiling, so it absorbs whatever is left. <a href='check.html'>Check any fund's list status by ISIN →</a>",
+    "adultNote":"Why no børneopsparing [child savings] or frikort bucket here? Both are child-only tricks: BO is per child, and an adult's personfradrag [tax-free personal allowance] is normally consumed by salary. Off-list funds are also skipped: ~37-42% kapitalindkomst [capital income] loses to 27/42% aktieindkomst [share income].",
+    "whyBtn":"Why this bucket, why now?",
+    "y1":"Year 1","depTotal":"Total deposited","endsAt":"Ends at","taxPaid":"tax",
+    "fullNote":"Full after year {n}: new money flows to the next bucket.",
+    "emptyNote":"Not needed at this amount. It would fill only after the buckets above.",
+    "vsHeadline":"This order keeps ≈ {diff} kr more after {n} years",
+    "vsSub":"Total tax: {st} kr routed vs {nt} kr if everything had gone into one on-list fund in a normal depot ({yr} rules, generic assumptions).",
+    "vsSmart":"Routed in this order",
+    "vsNaive":"Everything in one on-list depot",
+    "legKeep":"You keep","legTax":"Tax paid",
+    "simDisclaimer":"Generic, simplified model: flat average return, yearly tax paid from each account, no fees or inflation, no other income, single person. A typical ordering for a generic situation, never personal advice.",
+    "p_bo_one":"0% tax on all returns. Tiny caps. One per child.",
+    "p_bo_more":"<p>Deposit max {boY} kr/yr, {boL} kr lifetime. Opened before age 14, paid out between 14 and 21. Can hold funds and stocks at some banks; the positivliste [SKAT’s approved-fund list] does not matter inside it.</p><p><i>Ref: C.A.10.4.1.4</i></p>",
+    "p_ask_one":"17% flat on each year's gain. Ceiling {askC} kr.",
+    "p_ask_more":"<p>Lager [mark-to-market]: taxed on the value increase each year, sold or not, paid from the account. Only stocks and funds on the <a href='learn-positivliste.html'>positivliste</a> [SKAT’s approved-fund list] are allowed. Children can have one too. Internal trades do not consume the ceiling.</p><p><i>Ref: aktiesparekontoloven</i></p>",
+    "p_off_one":"Depot (AKT), fund OFF the positivliste [SKAT’s approved-fund list]: kapitalindkomst [capital income].",
+    "p_off_one_adult":"Depot (AKT), fund OFF the list: kapitalindkomst [capital income] ~37-42% - adults usually skip it.",
+    "p_off_more_child":"<p>An ordinary brokerage account (aktiedepot, AKT): the fund you pick decides the tax.</p><p>An off-list accumulating fund is taxed yearly (lager [mark-to-market]) as kapitalindkomst [capital income]. The child superpower: the personfradrag [tax-free personal allowance] ({pf} kr) absorbs that gain, so the child pays 0% until the yearly gain outgrows it. The core of most children's setups.</p><p><i>Ref: personskatteloven (kapitalindkomst).</i></p>",
+    "p_off_more_adult":"<p>An ordinary brokerage account (aktiedepot, AKT): the fund you pick decides the tax.</p><p>An off-list fund is taxed yearly (lager [mark-to-market]) as kapitalindkomst [capital income] at ~37-42% for an adult. That loses to the 27/42% aktieindkomst [share income] of an on-list fund, so for an adult this account is usually the wrong choice.</p><p><i>Ref: personskatteloven (kapitalindkomst). Approx. rates; depend on municipality and total capital income.</i></p>",
+    "p_on_one":"Depot (AKT), fund ON the positivliste [SKAT’s approved-fund list]: aktieindkomst [share income].",
+    "p_on_more_child":"<p>An ordinary depot (aktiedepot, AKT): the fund decides the tax.</p><p>An on-list fund is taxed yearly (lager) as aktieindkomst [share income]: 27% up to {aktieT} kr, 42% above. The personfradrag [tax-free allowance] does NOT offset it, so the child pays 27% from the first krone - fine once the cheaper buckets are full, but not where a child starts.</p><p><i>Ref: <a href='check.html'>check an ISIN</a> · ABIS list on skat.dk</i></p>",
+    "p_on_more_adult":"<p>An ordinary depot (aktiedepot, AKT): the fund decides the tax.</p><p>Taxed yearly (lager) as aktieindkomst [share income]: 27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples). The personfradrag does NOT offset it. This is the adult workhorse beyond the ASK ceiling.</p><p><i>Ref: <a href='check.html'>check an ISIN</a> · ABIS list on skat.dk</i></p>",
+    "giftLink":"🎁 Planning gifts to a child? The Gift Planner + gavebrev [gift letter] checklist live on the play page",
+    "giftLinkSub":"Per-giver caps, the doubled joint capacity, parent attribution trap, witnesses.",
+    "bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT’s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
+    "stickyBar":"Educational only, not tax, legal or investment advice.",
+    "testsFail":"SELF-CHECKS FAILING, do not trust the numbers",
+    "skipLink":"Skip to content",
+    "a11yYear":"Year",
+    "ycTakeaway":"By year {n}, most money sits in {lead}; full year-by-year figures are in the data table below.",
+    "ariaLangGroup":"Language",
+    "ariaMode":"Who you are investing for",
+    "ariaBudget":"Yearly amount",
+    "ariaYears":"Years",
+    "ariaDismiss":"Dismiss",
+    "ariaDisclaimer":"Important disclaimer",
+    "ctxPillLabel":"Back to the calculator"
+  },
+  da: {
+    "heroKicker":"Hver krone tæller",
+    "heroTitle":"Hvor skal hver krone hen først?",
+    "heroTag":"Samme investering, forskellig skat. Rækkefølgen, du fylder dine konti i, afgør, hvor meget du beholder. Skub for at se, hvad der kommer først, og hvorfor.",
+    "primTitle":"Mød de fire skattemiljøer",
+    "primSub":"Start her: hver konto beskattes forskelligt. Tryk på et kort og lær den at kende, før du planlægger.",
+    "routTitle":"Pengerouteren",
+    "routSub":"Sæt et mål. Se den billigste skatterækkefølge at fylde dine konti i, og hvorfor.",
+    "modeChild":"Investerer for et barn",
+    "modeAdult":"Til mig selv (voksen)",
+    "ctlBudget":"Mål pr. år",
+    "ctlYears":"Horisont",
+    "equivMonthly":"≈ {m} kr pr. måned",
+    "riskLabel":"Risikovillighed (sætter det antagne gennemsnitsafkast)",
+    "riskC":"Rolig","riskB":"Blandet","riskA":"Mest aktier",
+    "advTitle":"Justér antagelser: horisont & risiko",
+    "zoneOrder":"Rækkefølgen, billigste skat først",
+    "ycWrapTitle":"Se det år for år",
+    "yearsUnit":"år",
+    "ycTitle":"År for år: hvor dine penge lander",
+    "ycSub":"Hver søjle er ét år. Farven viser, hvilken konto pengene ligger på. Tryk på en søjle for den præcise fordeling.",
+    "ycViewContrib":"Hvor årets penge går hen",
+    "ycViewValue":"Samlet værdi",
+    "ycReadout":"År {y} - {kind}",
+    "ycKindDep":"nye penge i år",
+    "ycKindVal":"samlet værdi",
+    "ycNm_bo":"Børneopsparing","ycNm_frikort":"frikort-depot","ycNm_ask":"ASK","ycNm_onlist":"depot (AKT)",
+    "nm_bo":"Børneopsparing",
+    "nm_frikort":"Depot (AKT): fond uden for listen + frikort",
+    "nm_ask":"Aktiesparekonto (ASK)",
+    "nm_onlist":"Depot (AKT): fond PÅ positivlisten",
+    "chip_bo":"0% SKAT","chip_frikort":"0% → ~37-42%","chip_ask":"17% FLAD","chip_onlist":"27 / 42%","chip_offAdult":"~37-42%",
+    "why_bo":"0% skat af alt afkast, altid. Hagen: maks {boY} kr pr. år og {boL} kr i alt. Danmarks billigste skattemiljø, så det fyldes først.",
+    "why_frikort":"En akkumulerende fond UDEN FOR <a href='learn-positivliste.html'>positivlisten</a> er kapitalindkomst, og barnets personfradrag ({pf} kr, {yr}) opsuger årets gevinst. Reelt 0%, indtil depotet er så stort, at gevinsten overstiger fradraget: ved dette afkast cirka {vstar} kr. Nye penge stopper her inden da; gevinster derover ville koste ~37-42%. <a href='check.html'>Tjek en fonds listestatus på ISIN →</a>",
+    "why_ask":"Flad {askR}% af årets gevinst. Dyrere end spandene ovenfor, billigere end alle ubegrænsede alternativer (27/42% eller ~37/42%). Indskudsloft {askC} kr ({yr}).",
+    "why_ask_adult":"Flad {askR}% af årets gevinst, den billigste skat en voksen kan få på aktiefonde. Derfor fyldes den før depotet. Loft {askC} kr ({yr}).",
+    "why_onlist":"En fond PÅ <a href='learn-positivliste.html'>positivlisten</a> i et almindeligt depot (AKT): 27% op til {aktieT} kr årlig aktieindkomst, 42% derover; ægtefæller deler en fordoblet grænse på {aktieTM} kr samlet. Intet loft, så den tager resten. <a href='check.html'>Tjek en fonds listestatus på ISIN →</a>",
+    "why_onlist_child":"En fond PÅ <a href='learn-positivliste.html'>positivlisten</a> i barnets depot (AKT): beskattes som aktieindkomst, 27% op til {aktieT} kr af årets gevinst, 42% derover. Personfradraget modregnes IKKE, så barnet betaler 27% fra første krone, derfor fyldes denne spand først efter de billigere. Intet loft, så den opsuger resten. <a href='check.html'>Tjek en fonds listestatus på ISIN →</a>",
+    "adultNote":"Hvorfor ingen børneopsparing eller frikort-spand her? Begge er barne-tricks: BO er pr. barn, og en voksens personfradrag bruges normalt af lønnen. Fonde uden for listen springes også over: ~37-42% kapitalindkomst taber til 27/42% aktieindkomst.",
+    "whyBtn":"Hvorfor denne spand, hvorfor nu?",
+    "y1":"År 1","depTotal":"Indbetalt i alt","endsAt":"Ender på","taxPaid":"skat",
+    "fullNote":"Fuld efter år {n}: nye penge løber videre til næste spand.",
+    "emptyNote":"Ikke nødvendig ved dette beløb. Den ville først fyldes efter spandene ovenfor.",
+    "vsHeadline":"Denne rækkefølge beholder ≈ {diff} kr mere efter {n} år",
+    "vsSub":"Samlet skat: {st} kr routet mod {nt} kr, hvis alt var gået i én fond på listen i et almindeligt depot ({yr}-regler, generiske antagelser).",
+    "vsSmart":"Routet i denne rækkefølge",
+    "vsNaive":"Alt i ét depot på listen",
+    "legKeep":"Du beholder","legTax":"Betalt skat",
+    "simDisclaimer":"Generisk, forenklet model: fast gennemsnitsafkast, årlig skat betalt fra hver konto, ingen gebyrer eller inflation, ingen anden indkomst, enlig person. En typisk rækkefølge for en generisk situation, aldrig personlig rådgivning.",
+    "p_bo_one":"0% skat af alt afkast. Små lofter. Én pr. barn.",
+    "p_bo_more":"<p>Indskud maks {boY} kr/år, {boL} kr i alt. Oprettes før 14 år, udbetales mellem 14 og 21. Kan holde fonde og aktier i nogle banker; positivlisten er ligegyldig indeni.</p><p><i>Ref: C.A.10.4.1.4</i></p>",
+    "p_ask_one":"17% flad af årets gevinst. Loft {askC} kr.",
+    "p_ask_more":"<p>Lagerbeskatning: skat af årets værdistigning, solgt eller ej, betalt fra kontoen. Kun aktier og fonde på <a href='learn-positivliste.html'>positivlisten</a>. Børn kan også have en. Interne handler bruger ikke loftet.</p><p><i>Ref: aktiesparekontoloven</i></p>",
+    "p_off_one":"Depot (AKT), fond UDEN FOR positivlisten: kapitalindkomst.",
+    "p_off_one_adult":"Depot (AKT), fond uden for listen: kapitalindkomst ~37-42% - voksne springer den oftest over.",
+    "p_off_more_child":"<p>En almindelig depotkonto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p><p>En akkumulerende fond uden for listen beskattes årligt (lager) som kapitalindkomst. Barnets superkraft: personfradraget ({pf} kr) opsuger gevinsten, så barnet betaler 0%, indtil årets gevinst overstiger det. Kernen i de fleste børneopsætninger.</p><p><i>Ref: personskatteloven (kapitalindkomst).</i></p>",
+    "p_off_more_adult":"<p>En almindelig depotkonto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p><p>En fond uden for listen beskattes årligt (lager) som kapitalindkomst på ~37-42% for en voksen. Det taber til de 27/42% aktieindkomst i en fond på listen, så for en voksen er denne konto oftest det forkerte valg.</p><p><i>Ref: personskatteloven (kapitalindkomst). Ca.-satser; afhænger af kommune og samlet kapitalindkomst.</i></p>",
+    "p_on_one":"Depot (AKT), fond PÅ positivlisten: aktieindkomst.",
+    "p_on_more_child":"<p>Et almindeligt depot (aktiedepot, AKT): fonden afgør skatten.</p><p>En fond på listen beskattes årligt (lager) som aktieindkomst: 27% op til {aktieT} kr, 42% derover. Personfradraget modregnes IKKE, så barnet betaler 27% fra første krone - fint, når de billigere spande er fyldt, men ikke der, et barn starter.</p><p><i>Ref: <a href='check.html'>tjek en ISIN</a> · ABIS-listen på skat.dk</i></p>",
+    "p_on_more_adult":"<p>Et almindeligt depot (aktiedepot, AKT): fonden afgør skatten.</p><p>Beskattes årligt (lager) som aktieindkomst: 27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller). Personfradraget modregnes IKKE. Det er voksnes arbejdshest ud over ASK-loftet.</p><p><i>Ref: <a href='check.html'>tjek en ISIN</a> · ABIS-listen på skat.dk</i></p>",
+    "giftLink":"🎁 Planlægger du gaver til et barn? Gaveplanlæggeren + gavebrev-tjeklisten ligger på legepladsen",
+    "giftLinkSub":"Beløbsgrænser pr. giver, den fordoblede fælleskapacitet, forældrebeskatningsfælden, vidner.",
+    "bigDisclaimer":"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek skat.dk eller spørg en advokat/revisor, før du handler.",
+    "stickyBar":"Kun undervisning, ikke skatte-, juridisk eller investeringsrådgivning.",
+    "testsFail":"SELVTEST FEJLER, stol ikke på tallene",
+    "skipLink":"Spring til indhold",
+    "a11yYear":"År",
+    "ycTakeaway":"I år {n} ligger størstedelen i {lead}; de fulde tal år for år står i datatabellen nedenfor.",
+    "ariaLangGroup":"Sprog",
+    "ariaMode":"Hvem du investerer for",
+    "ariaBudget":"Beløb pr. år",
+    "ariaYears":"År",
+    "ariaDismiss":"Luk",
+    "ariaDisclaimer":"Vigtig ansvarsfraskrivelse",
+    "ctxPillLabel":"Tilbage til beregneren"
+  }
+};
+const I18N = mergeI18n(I18N_BASE, PAGE_I18N);
+
+/* ============ STATE ============ */
+const LS_KEY = "dkie_planner_v1";
+const GLOBAL_KEY = "dkie_global_v1";   // lang + mode shared across pages
+let S = { lang:"en", mode:"child", budget:24000, years:15, risk:"balanced", chartView:"contrib" };
+try { Object.assign(S, JSON.parse(localStorage.getItem(LS_KEY) || "{}")); } catch(e){}
+try { const g=JSON.parse(localStorage.getItem(GLOBAL_KEY)||"{}"); if(g.lang)S.lang=g.lang; if(g.mode)S.mode=g.mode; } catch(e){}
+// harden against corrupt / hand-edited storage so a stray value can't yield NaN or a broken UI
+(function sanitizeState(){
+  const num=(v,min,max,def)=>{ v=+v; return Number.isFinite(v)?Math.min(max,Math.max(min,v)):def; };
+  S.lang      = S.lang==="da" ? "da" : "en";
+  S.mode      = S.mode==="adult" ? "adult" : "child";
+  S.risk      = RISK_PRESETS[S.risk] ? S.risk : "balanced";
+  S.chartView = S.chartView==="value" ? "value" : "contrib";
+  S.budget    = num(S.budget, 3000, 600000, 24000);
+  S.years     = num(S.years, 5, 30, 15);
+})();
+// Deep link from the home page path chooser: ?mode=child|adult preselects the router mode
+// (overrides the remembered mode for this visit; persisted only when the user interacts).
+(function modeFromURL(){
+  try {
+    const m = new URLSearchParams(location.search).get("mode");
+    if (m==="child" || m==="adult") S.mode = m;
+  } catch(e){}
+})();
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
+function saveGlobal(){ try{ localStorage.setItem(GLOBAL_KEY, JSON.stringify({lang:S.lang,mode:S.mode})); }catch(e){} }
+
+const cfg = TAX_YEAR_CONFIG;
+const $ = id => document.getElementById(id);
+function t(key){
+  if(I18N[S.lang] && I18N[S.lang][key]!==undefined) return I18N[S.lang][key];
+  if(I18N.en[key]!==undefined) return I18N.en[key];
+  return key;
+}
+function fmt(n){ return new Intl.NumberFormat(S.lang==="da"?"da-DK":"en-GB",{maximumFractionDigits:0}).format(Math.round(n)); }
+function kr(n){ return fmt(n)+" "+t("kr"); }
+function fill(str, map){ return String(str).replace(/\{(\w+)\}/g,(_,k)=> map[k]!==undefined?map[k]:"{"+k+"}"); }
+const CFGFILL = ()=>({ boY:fmt(cfg.boYearlyCap), boL:fmt(cfg.boLifetimeCap), pf:fmt(cfg.personfradrag),
+  askR:Math.round(cfg.askRate*100), askC:fmt(cfg.askCeiling), aktieT:fmt(cfg.aktieThreshold), aktieTM:fmt(cfg.aktieThresholdMarried), kapTM:fmt(cfg.kapThresholdMarriedApprox), yr:cfg.taxYear });
+
+/* ============ BUCKET METADATA ============ */
+const ICONS = {
+  shield:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/><path d="M9.3 12l1.8 1.8 3.7-3.8"/></svg>`,
+  trend:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7"/><path d="M17 8h4v4"/></svg>`,
+  caseCheck:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"/><path d="M9 13.5l2 2 4-4"/></svg>`,
+  folder:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
+};
+const BUCKET_META = {
+  bo:      { hex:"#157F70", chip:"c0",  chipKey:"chip_bo",      icon:ICONS.shield },
+  frikort: { hex:"#5E7E3F", chip:"cF",  chipKey:"chip_frikort", icon:ICONS.folder },
+  ask:     { hex:"#4361EE", chip:"c17", chipKey:"chip_ask",     icon:ICONS.trend },
+  onlist:  { hex:"#C0427C", chip:"c27", chipKey:"chip_onlist",  icon:ICONS.caseCheck },
+};
+
+/* ============ RENDER: primer ============ */
+function renderPrimer(){
+  const F = CFGFILL();
+  const isChild = S.mode==="child";
+  const cards = [];
+  if (isChild) cards.push({ meta:BUCKET_META.bo, nameKey:"nm_bo", oneKey:"p_bo_one", moreKey:"p_bo_more" });
+  cards.push({ meta:BUCKET_META.ask, nameKey:"nm_ask", oneKey:"p_ask_one", moreKey:"p_ask_more" });
+  cards.push({ meta:BUCKET_META.frikort, nameKey:"p_off_title",
+    chipKey: isChild?"chip_frikort":"chip_offAdult",
+    oneKey: isChild?"p_off_one":"p_off_one_adult", moreKey: isChild?"p_off_more_child":"p_off_more_adult" });
+  cards.push({ meta:BUCKET_META.onlist, nameKey:"p_on_title", oneKey:"p_on_one",
+    moreKey: isChild?"p_on_more_child":"p_on_more_adult" });
+  const names = { p_off_title:{en:"Depot (AKT), OFF-list fund",da:"Depot (AKT), fond uden for listen"},
+                  p_on_title:{en:"Depot (AKT), ON-list fund",da:"Depot (AKT), fond på listen"} };
+  $("primer").innerHTML = cards.map(c=>{
+    const nm = names[c.nameKey] ? names[c.nameKey][S.lang] : t(c.nameKey);
+    const chipKey = c.chipKey || c.meta.chipKey;
+    return `<details class="acct">
+      <summary><span class="chip ${c.meta.chip}">${chipKey?t(chipKey):""}</span>
+        <b>${nm}</b><span class="one">${fill(t(c.oneKey),F)}</span></summary>
+      <div class="more">${fill(t(c.moreKey),F)}</div>
+    </details>`;
+  }).join("");
+}
+
+/* ============ RENDER: router ============ */
+function renderRouter(){
+  const returnRate = RISK_PRESETS[S.risk];
+  const params = { annualBudget:S.budget, years:S.years, returnRate, isChild:S.mode==="child" };
+  const cmp = compareSmartVsNaive(params, cfg);
+  const sim = cmp.smart;
+  const F = Object.assign(CFGFILL(), { vstar: fmt(sim.Vstar===Infinity?0:sim.Vstar) });
+
+  $("falls").innerHTML = sim.order.map((id,i)=>{
+    const m = BUCKET_META[id], b = sim.buckets[id];
+    const y1 = sim.firstYearRoute.find(r=>r.id===id).amount;
+    const share = sim.order.reduce((s,k)=>s+sim.buckets[k].deposited,0);
+    const pct = share>0 ? b.deposited/share*100 : 0;
+    let whyKey = "why_"+id;
+    if (id==="ask" && S.mode==="adult") whyKey = "why_ask_adult";
+    else if (id==="onlist" && S.mode==="child") whyKey = "why_onlist_child";
+    let note = "";
+    if (b.deposited<=0) note = `<p class="note">${t("emptyNote")}</p>`;
+    else if (b.lastDepYear < S.years) note = `<p class="note">${fill(t("fullNote"),{n:b.lastDepYear})}</p>`;
+    return `<div class="fall ${b.deposited<=0?"empty":""}" style="--bc:${m.hex}">
+      <div class="top"><span class="rank">${i+1}</span><span class="nm">${m.icon||""}${t("nm_"+id)}</span>
+        <span class="chip ${m.chip}">${t(m.chipKey)}</span></div>
+      <div class="amts">
+        <span>${t("y1")}: <b>${kr(y1)}</b></span>
+        <span>${t("depTotal")}: <b>${kr(b.deposited)}</b></span>
+        <span>${t("endsAt")}: <b>${kr(b.value)}</b> (${t("taxPaid")}: ${kr(b.tax)})</span>
+      </div>
+      <div class="bar"><i data-w="${pct.toFixed(1)}"></i></div>
+      ${note}
+      <details class="why"><summary>${t("whyBtn")}</summary>
+        <div class="body">${fill(t(whyKey),F)}</div></details>
+    </div>`;
+  }).join("") + (S.mode==="adult" ? `<p class="note" style="font-size:.8rem;color:var(--muted);padding:0 4px">${t("adultNote")}</p>` : "");
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll(".fall .bar i").forEach(el=> el.style.width = el.dataset.w+"%");
+  }));
+
+  // smart vs naive
+  $("vsHeadline").innerHTML = fill(t("vsHeadline"),{diff:"<span class='pos'>"+fmt(cmp.endDiff)+"</span>", n:S.years});
+  $("vsSub").textContent = fill(t("vsSub"),{st:fmt(sim.totalTax), nt:fmt(cmp.naive.totalTax), yr:cfg.taxYear});
+  const maxBar = Math.max(sim.endValue+sim.totalTax, cmp.naive.endValue+cmp.naive.totalTax) || 1;
+  const set = (barId,numId,endV,taxV)=>{
+    const bar = $(barId);
+    bar.querySelector(".keep").style.width = (endV/maxBar*100)+"%";
+    bar.querySelector(".tax").style.width = (taxV/maxBar*100)+"%";
+    bar.setAttribute("role","img");
+    bar.setAttribute("aria-label", `${t("legKeep")}: ${kr(endV)}. ${t("legTax")}: ${kr(taxV)}.`);
+    $(numId).textContent = kr(endV)+" / "+kr(taxV);
+  };
+  set("vbarSmart","vsSmartNum",sim.endValue,sim.totalTax);
+  set("vbarNaive","vsNaiveNum",cmp.naive.endValue,cmp.naive.totalTax);
+
+  renderYearChart(sim);
+}
+
+/* ============ RENDER: year-by-year chart ============ */
+const YC_ORDER = ['bo','frikort','ask','onlist'];
+let lastSim = null, chartSelYear = 1;
+function ycName(id){ return t("ycNm_"+id); }
+function renderYearChart(sim){
+  if(sim) lastSim = sim;
+  sim = lastSim; if(!sim) return;
+  const years = sim.series.length - 1;            // series[0] is year 0
+  chartSelYear = Math.max(1, Math.min(chartSelYear, years));
+  const view = S.chartView==="value" ? "val" : "dep";
+
+  const W=640,H=240, padL=10,padR=10,padT=22,padB=28;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const step=plotW/years, colW=Math.max(3, step*0.66);
+  const maxVal = (view==="dep") ? (S.budget||1)
+               : (Math.max(...sim.series.slice(1).map(s=>s.total)) || 1);
+  const topLabel = (view==="dep") ? kr(S.budget) : kr(maxVal);
+
+  let bars="";
+  for(let y=1;y<=years;y++){
+    const data=sim.series[y][view];
+    const cx=padL+(y-0.5)*step, x=cx-colW/2;
+    if(y===chartSelYear)
+      bars+=`<rect class="col-sel" x="${(cx-step/2).toFixed(1)}" y="${padT}" width="${step.toFixed(1)}" height="${plotH}" rx="2"></rect>`;
+    let acc=0;
+    for(const id of YC_ORDER){
+      const v=data[id]||0; if(v<=0) continue;
+      const h=v/maxVal*plotH, yTop=padT+plotH-acc-h;
+      bars+=`<rect class="col-seg" x="${x.toFixed(1)}" y="${yTop.toFixed(1)}" width="${colW.toFixed(1)}" height="${Math.max(0,h).toFixed(1)}" fill="${BUCKET_META[id].hex}" rx="1"></rect>`;
+      acc+=h;
+    }
+    if(years<=16 || y===1 || y===years || y%5===0)
+      bars+=`<text x="${cx.toFixed(1)}" y="${H-9}" text-anchor="middle" font-size="10" fill="#64748B">${y}</text>`;
+    bars+=`<rect class="col-hit" data-year="${y}" x="${(cx-step/2).toFixed(1)}" y="${padT}" width="${step.toFixed(1)}" height="${plotH}"></rect>`;
+  }
+  const axis=`<line x1="${padL}" y1="${padT+plotH}" x2="${W-padR}" y2="${padT+plotH}" stroke="#DBE2EB" stroke-width="1"></line>`+
+    `<text x="${padL}" y="${padT-7}" font-size="10" fill="#64748B">${topLabel}</text>`;
+  // a11y: takeaway label names the account holding the most by the final year
+  const finalSplit = sim.series[years][view];
+  const leadId = sim.order.slice().sort((a,b)=>(finalSplit[b]||0)-(finalSplit[a]||0))[0];
+  const takeaway = fill(t("ycTakeaway"), { n:years, lead:ycName(leadId) });
+  $("yc-svg").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${t("ycTitle")} - ${takeaway}" aria-describedby="yc-table">${axis}${bars}</svg>`;
+
+  // a11y: visually-hidden data table mirroring the chart, one row per year
+  const cols = sim.order;
+  const thead = `<tr><th scope="col">${t("a11yYear")}</th>${cols.map(id=>`<th scope="col">${ycName(id)}</th>`).join("")}</tr>`;
+  let trows = "";
+  for(let y=1;y<=years;y++){
+    const d=sim.series[y][view];
+    trows += `<tr><th scope="row">${y}</th>${cols.map(id=>`<td>${kr(d[id]||0)}</td>`).join("")}</tr>`;
+  }
+  $("yc-table").innerHTML = `<table><caption>${t("ycTitle")} - ${t(view==="dep"?"ycKindDep":"ycKindVal")}</caption><thead>${thead}</thead><tbody>${trows}</tbody></table>`;
+
+  $("yc-legend").innerHTML = sim.order.map(id=>
+    `<span><span class="legic" style="color:${BUCKET_META[id].hex}">${BUCKET_META[id].icon||""}</span>${ycName(id)}</span>`).join("");
+
+  updateYcReadout();
+  // pointer drill-in only: the SVG is role="img" (no interactive descendants allowed); keyboard/SR
+  // users get the same per-year figures from the visually-hidden #yc-table mirrored above.
+  $("yc-svg").querySelectorAll(".col-hit").forEach(el=>
+    el.addEventListener("click",()=>{ chartSelYear=+el.dataset.year; renderYearChart(); }));
+}
+function updateYcReadout(){
+  if(!lastSim) return;
+  const view=S.chartView==="value"?"val":"dep";
+  const data=lastSim.series[chartSelYear][view];
+  const parts=lastSim.order.map(id=>`${ycName(id)} <b>${kr(data[id]||0)}</b>`).join(" · ");
+  const head=fill(t("ycReadout"),{y:chartSelYear, kind:t(view==="dep"?"ycKindDep":"ycKindVal")});
+  $("yc-readout").innerHTML = `${head}: ${parts}`;
+}
+
+/* ============ RENDER: strings ============ */
+function renderStrings(){
+  document.documentElement.lang = S.lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    const v = t(k);
+    if (typeof v === "string") el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria"))); });
+  $("heroTag").innerHTML = "";
+  $("heroTag").appendChild(document.createTextNode(t("heroTag")+" "));
+  const tag = document.createElement("span"); tag.className="yeartag";
+  tag.textContent = (S.lang==="da"?"skatteår ":"tax year ")+cfg.taxYear;
+  $("heroTag").appendChild(tag);
+  $("verifiedLine").textContent = fill(t("verifiedLine"),{yr:cfg.taxYear,date:cfg.verifiedDate});
+  $("lang-en").classList.toggle("active",S.lang==="en");
+  $("lang-da").classList.toggle("active",S.lang==="da");
+}
+
+function refreshOutputs(){
+  $("out-budget").textContent = kr(S.budget);
+  $("equivMonthly").textContent = fill(t("equivMonthly"),{m:fmt(S.budget/12)});
+  $("out-years").textContent = S.years+" "+t("yearsUnit");
+  updateCtxPill();
+}
+function syncSliderFill(el){ el.style.setProperty("--fill",((el.value-el.min)/(el.max-el.min)*100)+"%"); }
+function renderAll(){ renderStrings(); refreshOutputs(); renderPrimer(); renderRouter(); }
+
+/* ============ WIRING ============ */
+let timer=null;
+function onInput(){
+  refreshOutputs();
+  flash([$("out-budget"),$("out-years"),$("equivMonthly")]);
+  save(); clearTimeout(timer);
+  timer=setTimeout(()=>{ renderRouter(); flash(document.querySelectorAll("#falls .amts b, #vsSmartNum, #vsNaiveNum, #vsHeadline .pos")); },160);
+}
+$("in-budget").addEventListener("input",e=>{ S.budget=+e.target.value; syncSliderFill(e.target); onInput(); });
+$("in-years").addEventListener("input",e=>{ S.years=+e.target.value; syncSliderFill(e.target); onInput(); });
+$("mode-child").onclick=()=>{ S.mode="child"; setMode(); };
+$("mode-adult").onclick=()=>{ S.mode="adult"; setMode(); };
+function setMode(){
+  $("mode-child").classList.toggle("active",S.mode==="child");
+  $("mode-adult").classList.toggle("active",S.mode==="adult");
+  saveGlobal(); save(); renderPrimer(); renderRouter();
+}
+["cautious","balanced","adventurous"].forEach(r=>{
+  $("risk-"+r).onclick=()=>{ S.risk=r; ["cautious","balanced","adventurous"].forEach(x=>$("risk-"+x).classList.toggle("active",x===S.risk)); save(); renderRouter(); };
+});
+function setChartView(v){ S.chartView=v;
+  $("yc-contrib").classList.toggle("active",v==="contrib");
+  $("yc-value").classList.toggle("active",v==="value");
+  saveGlobal(); save(); renderYearChart(); }
+$("yc-contrib").onclick=()=>setChartView("contrib");
+$("yc-value").onclick=()=>setChartView("value");
+$("lang-en").onclick=()=>{ S.lang="en"; saveGlobal(); save(); renderAll(); };
+$("lang-da").onclick=()=>{ S.lang="da"; saveGlobal(); save(); renderAll(); };
+
+/* ============ UX POLISH: data flash + sticky context pill ============ */
+function flash(els){
+  (els && els.length!==undefined ? els : [els]).forEach(el=>{
+    if(!el) return; el.classList.remove("flash-update"); void el.offsetWidth; el.classList.add("flash-update");
+  });
+}
+function updateCtxPill(){
+  const pill = $("ctxPill"); if(!pill) return;
+  pill.setAttribute("aria-label", `${t("ctxPillLabel")} - ${t("ctlBudget")}: ${kr(S.budget)}, ${S.years} ${t("yearsUnit")}`);
+  pill.innerHTML = `<span class="ctx-up" aria-hidden="true">↑</span>${t("ctlBudget")}: <b>${kr(S.budget)}</b><span class="sep">|</span><b>${S.years}</b> ${t("yearsUnit")}`;
+}
+/* Header hide/show on scroll (and lifting this pill when the header hides) now
+   lives once in js/shell.js so it works on every page. This block keeps only
+   the Plan-tool-specific pill behavior: reveal it past the tool, scroll back. */
+(function navAndPill(){
+  const pill = $("ctxPill"),
+        tool = document.querySelector(".panel.tool");
+  if(!pill || !tool) return;
+  function check(){
+    const past = tool.getBoundingClientRect().bottom < 72;
+    pill.classList.toggle("show", past);
+    pill.tabIndex = past ? 0 : -1;
+    pill.setAttribute("aria-hidden", past ? "false" : "true");
+  }
+  function toTool(){
+    const top = tool.getBoundingClientRect().top + ((document.scrollingElement||document.documentElement).scrollTop) - 64;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: Math.max(0, top), behavior: reduce?"auto":"smooth" });
+  }
+  pill.addEventListener("click", toTool);
+  pill.addEventListener("keydown", e=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); toTool(); } });
+  addEventListener("scroll", check, {passive:true});
+  addEventListener("resize", check, {passive:true});
+  check();
+})();
+
+/* ============ INIT ============ */
+(function init(){
+  $("in-budget").value=S.budget; $("in-years").value=S.years;
+  ["in-budget","in-years"].forEach(id=>syncSliderFill($(id)));
+  ["cautious","balanced","adventurous"].forEach(x=>$("risk-"+x).classList.toggle("active",x===S.risk));
+  $("mode-child").classList.toggle("active",S.mode==="child");
+  $("mode-adult").classList.toggle("active",S.mode==="adult");
+  $("yc-contrib").classList.toggle("active",S.chartView!=="value");
+  $("yc-value").classList.toggle("active",S.chartView==="value");
+  const res = runRouterTests(cfg);
+  const i18nC = checkI18nComplete(I18N);
+  const badge = $("testbadge");
+  if(res.failed.length===0 && i18nC.ok){ badge.textContent="✓ "+res.tests.length+"/"+res.tests.length+" "+t("tests")+" · i18n ✓"; }
+  else { badge.textContent="✗ "+t("testsFail"); badge.classList.add("fail"); if(res.failed.length) console.error(res.failed); }
+  if(!i18nC.ok) console.error("i18n incomplete:", {missingInDa:i18nC.missingInDa, missingInEn:i18nC.missingInEn});
+  if(i18nC.identical.length) console.warn("i18n EN==DA (review):", i18nC.identical);
+  console.table(res.tests.map(x=>({test:x.name,pass:x.pass})));
+  renderAll();
+})();
+
+</script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="google-site-verification" content="POEGT4Xgr1Z1dqoTiFgU0qpSLAWRngIMXFTod5jhnN0">
+<title>The Trap Gallery: spot the Danish investment-tax mistakes - Tax-smart investing in Denmark</title>
+<meta name="description" content="A short, interactive quiz through the most common Danish investment-tax traps: distributing funds in a child's depot, on-list funds and the frikort, ASK eligibility, gifts and gavebreve, lager and stop-losses. Educational only, not advice.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://taxsmart-invest-denmark.vercel.app/quiz.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="The Trap Gallery: spot the Danish investment-tax mistakes">
+<meta property="og:description" content="Eight everyday setups, each with one quiet Danish-tax trap. Spot the right call, then see the rule and the fix. Free, no login. Educational, not advice.">
+<meta property="og:url" content="https://taxsmart-invest-denmark.vercel.app/quiz.html">
+<meta property="og:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Trap Gallery: spot the Danish investment-tax mistakes">
+<meta name="twitter:description" content="Eight everyday setups, each with one quiet Danish-tax trap. Free, no login. Educational, not advice.">
+<meta name="twitter:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Quiz","name":"The Trap Gallery","url":"https://taxsmart-invest-denmark.vercel.app/quiz.html","inLanguage":["en","da"],"isAccessibleForFree":true,"about":"Danish retail investment taxation","description":"An interactive quiz on common Danish investment-tax mistakes. Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens (the ONE site-wide cool palette). Shared chrome lives in
+     css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 12px}
+  .lead{color:var(--muted);font-size:1.08rem;line-height:1.55;max-width:36em;margin:0 0 24px}
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:22px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+
+  /* ---------- progress dots ---------- */
+  .quiz-dots{display:flex;gap:7px;justify-content:center;margin:0 0 16px}
+  .qdot{width:9px;height:9px;border-radius:50%;background:var(--line);transition:background .2s var(--ease),transform .2s var(--ease)}
+  .qdot.done{background:var(--accent-line)}
+  .qdot.current{background:var(--accent);transform:scale(1.35)}
+
+  /* ---------- quiz card ---------- */
+  .quiz-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+  @media(min-width:560px){.quiz-card{padding:26px}}
+  .qcount{font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-2);margin:0 0 10px}
+  .qscenario{font-size:1.12rem;font-weight:700;line-height:1.4;color:var(--ink);margin:0 0 14px;text-wrap:pretty}
+  .qask{font-size:.9rem;font-weight:600;color:var(--ink-2);margin:0 0 12px}
+  .qopts{display:flex;flex-direction:column;gap:10px}
+  .qopt{display:flex;align-items:flex-start;gap:11px;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 15px;font:inherit;font-size:.96rem;line-height:1.45;color:var(--ink-2);cursor:pointer;min-height:56px;transition:border-color .16s var(--ease),background .16s var(--ease),box-shadow .16s var(--ease),transform .12s var(--ease)}
+  .qopt:hover{border-color:var(--accent-line);background:#FAFDFC}
+  .qopt:active{transform:scale(.99)}
+  .qopt:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+  .qopt .qmark{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line-soft);margin-top:1px;position:relative;transition:border-color .16s var(--ease),background .16s var(--ease)}
+  .qopt .qtx{flex:1}
+  .qopt[disabled]{cursor:default}
+  .qopt.correct{border-color:var(--success-line);background:var(--success-soft);color:var(--success-ink)}
+  .qopt.correct .qmark{border-color:var(--success);background:var(--success)}
+  .qopt.correct .qmark::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .qopt.wrong{border-color:var(--danger-line);background:var(--danger-soft);color:var(--danger-ink)}
+  .qopt.wrong .qmark{border-color:var(--danger);background:var(--danger)}
+  .qopt.wrong .qmark::after{content:"";position:absolute;left:5px;top:4px;width:9px;height:9px;background:linear-gradient(45deg,transparent 43%,#fff 43% 57%,transparent 57%),linear-gradient(-45deg,transparent 43%,#fff 43% 57%,transparent 57%)}
+  .qopt.dim{opacity:.5}
+  .qhint{font-size:.8rem;color:var(--muted);text-align:center;margin:12px 0 0}
+
+  /* ---------- reveal ---------- */
+  .qreveal{margin-top:16px;border-radius:14px;padding:14px 16px;border:1px solid;border-left-width:4px}
+  .qreveal.ok{background:var(--success-soft);border-color:var(--success-line);border-left-color:var(--success)}
+  .qreveal.no{background:var(--warn-soft);border-color:var(--warn-line);border-left-color:var(--warn)}
+  .qverdict{font-weight:800;font-size:1rem;margin-bottom:5px}
+  .qreveal.ok .qverdict{color:var(--success-ink)}
+  .qreveal.no .qverdict{color:var(--warn-ink)}
+  .qexpl{font-size:.92rem;line-height:1.6;color:var(--ink-2);margin:0 0 10px}
+  .qlink{font-weight:700;font-size:.9rem;color:var(--accent);text-decoration:none}
+  .qlink:hover{text-decoration:underline}
+
+  /* ---------- nav / buttons ---------- */
+  .qnav{margin-top:16px;display:flex;justify-content:flex-end}
+  .qnav-wrap{flex-wrap:wrap;gap:10px;justify-content:center}
+  .qbtn{font:inherit;font-weight:700;font-size:.95rem;padding:13px 22px;border:0;border-radius:12px;background:var(--accent);color:#fff;cursor:pointer;min-height:48px;transition:background .16s var(--ease),box-shadow .16s var(--ease)}
+  .qbtn:hover{background:var(--accent-strong)}
+  .qbtn:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+  .qbtn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent-line)}
+  .qbtn.ghost:hover{background:var(--accent-soft)}
+
+  /* ---------- result ---------- */
+  .qresult{text-align:center}
+  .qscore{font-size:2rem;font-weight:900;letter-spacing:-.02em;color:var(--accent);margin:6px 0 4px;font-variant-numeric:tabular-nums}
+  .qmsg{font-size:1rem;color:var(--ink-2);margin:0 0 18px;line-height:1.5}
+  .qshared{font-size:.82rem;color:var(--success-ink);min-height:1.2em;margin:10px 0 0}
+  .qplan{display:inline-block;margin-top:14px;font-weight:700;font-size:.92rem;color:var(--accent);text-decoration:none}
+  .qplan:hover{text-decoration:underline}
+</style>
+<!-- Shared site-shell chrome. Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css?v=10">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js?v=10"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+  <p class="kicker" data-i18n="quizKicker">Learn · Quiz</p>
+  <h1 data-i18n="quizH1">The Trap Gallery</h1>
+  <p class="lead" data-i18n="quizLead">Eight everyday setups, each with one quiet Danish-tax trap. Spot the right call, then see the rule and the fix. No score is stored anywhere.</p>
+
+  <div class="quiz-dots" id="quiz-dots" role="img"></div>
+  <div class="quiz-card" id="quiz-card"><!-- rendered by js/article-quiz.js --></div>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- No tax numbers on this page; it loads only the shell + i18n + the quiz controller. -->
+<script src="js/i18n.js?v=10"></script>
+<script src="js/article-quiz.js?v=10"></script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

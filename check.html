@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="google-site-verification" content="POEGT4Xgr1Z1dqoTiFgU0qpSLAWRngIMXFTod5jhnN0">
+<title>Check a fund against the positivliste - Tax-smart investing in Denmark</title>
+<meta name="description" content="Paste a fund's ISIN and see whether it is on SKAT's positivliste (ABIS list) - the list that decides if its gains are share income or capital income in Denmark. Free, no login. Educational only.">
+<meta name="theme-color" content="#EEF2F6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230F766E'/><text x='50' y='66' font-size='44' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>kr</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<!-- P0.3 social / SEO meta. If the repo/Pages URL differs, update these absolute URLs + og-image path. -->
+<link rel="canonical" href="https://taxsmart-invest-denmark.vercel.app/check.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tax-smart investing in Denmark">
+<meta property="og:title" content="Check a fund against the positivliste">
+<meta property="og:description" content="Paste an ISIN, see whether the fund is on SKAT's positivliste and what that means for its Danish tax. Free, no login. Educational, not advice.">
+<meta property="og:url" content="https://taxsmart-invest-denmark.vercel.app/check.html">
+<meta property="og:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en">
+<meta property="og:locale:alternate" content="da">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Check a fund against the positivliste">
+<meta name="twitter:description" content="Paste an ISIN, see whether the fund is on SKAT's positivliste. Free, no login. Educational, not advice.">
+<meta name="twitter:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Check a fund against the positivliste","url":"https://taxsmart-invest-denmark.vercel.app/check.html","inLanguage":["en","da"],"description":"Free ISIN checker for SKAT's positivliste (ABIS list). Educational, not advice."}</script>
+<style>
+  /* Page-specific design tokens: the ONE site-wide cool palette (same set as learn.html /
+     plan.html / index.html). Shared shell rules live in css/styles.css, linked LAST. */
+  :root{
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  .site-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;max-width:680px;margin:0 auto;gap:8px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;white-space:nowrap}
+  .brand .dot{width:11px;height:11px;border-radius:50%}
+  .lang-toggle button{border:0;background:transparent;color:var(--accent);font-weight:700;font-size:.85rem;padding:7px 12px;cursor:pointer;min-width:42px}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:
+      radial-gradient(1200px 480px at 50% -260px, rgba(15,118,110,.07), transparent 70%),
+      linear-gradient(180deg,#F3F6FA 0%, #EEF2F6 320px) fixed;
+    color:var(--ink); line-height:1.6; letter-spacing:-.003em; padding-bottom:64px;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:744px;margin:0 auto;padding:0 16px}
+  .kicker{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;margin:var(--space-sec) 0 6px}
+  .kicker::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--accent);display:inline-block}
+  h1{font-size:clamp(2.1rem,6vw,2.75rem);font-weight:800;line-height:1.06;letter-spacing:-.028em;color:var(--ink);margin:0 0 14px;text-wrap:balance}
+  .lead{color:var(--muted);font-size:1.08rem;line-height:1.55;max-width:36em}
+  section{margin:28px 0;scroll-margin-top:88px}
+
+  /* ---------- ON / OFF explainer cards ---------- */
+  .onoff{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 4px}
+  .onoff>div{flex:1;min-width:210px;border-radius:12px;padding:12px 14px}
+  .onoff .on{background:var(--success-soft);border:1px solid var(--success-line);border-left:4px solid var(--success)}
+  .onoff .off{background:var(--warn-soft);border:1px solid var(--warn-line);border-left:4px solid var(--warn)}
+  .onoff .tt{font-weight:700;margin-bottom:3px}
+  .onoff .on .tt{color:var(--success-ink)}
+  .onoff .off .tt{color:var(--warn-ink)}
+  .onoff .dd{font-size:.84rem}
+
+  /* ---------- ISIN checker widget (same recipe as old index) ---------- */
+  .plcheck{ margin:14px 0 4px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--card); box-shadow:var(--shadow-sm) }
+  .plc-lab{ display:block; font-weight:700; color:var(--ink); font-size:.98rem }
+  .plc-sub{ font-size:.82rem; color:var(--muted); margin:3px 0 10px }
+  .plc-row{ display:flex; gap:8px; flex-wrap:wrap }
+  .plc-row input{ flex:1; min-width:170px; font:inherit; font-size:1rem; letter-spacing:.04em; text-transform:uppercase; padding:11px 13px; border:1.5px solid var(--line); border-radius:11px; background:#fff; color:var(--ink) }
+  .plc-row input::placeholder{ text-transform:none; letter-spacing:0; color:var(--muted-2) }
+  .plc-row input:focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px; border-color:var(--accent) }
+  .plc-row button{ flex:none; font:inherit; font-weight:700; font-size:.95rem; padding:11px 22px; border:0; border-radius:11px; background:var(--accent); color:#fff; cursor:pointer; transition:background .18s var(--ease) }
+  .plc-row button:hover{ background:var(--accent-strong) }
+  .plc-result{ margin-top:12px; border-radius:12px; line-height:1.5 }
+  .plc-result:empty{ margin-top:0 }
+  .plc-result.tone-on,.plc-result.tone-off,.plc-result.tone-nf,.plc-result.tone-warn{ padding:12px 14px; border:1px solid; border-left:4px solid }
+  .plc-result.tone-on{ background:var(--success-soft); border-color:var(--success-line); border-left-color:var(--success); color:var(--success-ink) }
+  .plc-result.tone-off{ background:var(--warn-soft); border-color:var(--warn-line); border-left-color:var(--warn); color:var(--warn-ink) }
+  .plc-result.tone-nf{ background:var(--sunken); border-color:var(--line); border-left-color:var(--muted-2); color:var(--ink-2) }
+  .plc-result.tone-warn{ background:var(--danger-soft); border-color:var(--danger-line); border-left-color:var(--danger); color:var(--danger-ink) }
+  .plc-result .plc-msg{ font-size:.88rem; font-weight:600 }
+  .plc-head{ font-size:.9rem } .plc-head b{ letter-spacing:.04em }
+  .plc-nm{ color:var(--muted) }
+  .plc-state{ font-weight:800; font-size:1.02rem; margin:2px 0 4px }
+  .plc-exp{ font-size:.86rem }
+  .plc-links{ font-size:.84rem; margin-top:9px; padding-top:8px; border-top:1px dashed currentColor }
+  .plc-links a{ color:var(--accent); font-weight:700; text-decoration:none }
+  .plc-links a:hover{ text-decoration:underline }
+  .plc-fresh{ font-size:.78rem; color:var(--muted); margin-top:9px; line-height:1.5 }
+  .plc-fresh a{ color:var(--accent); font-weight:600 }
+  .plc-flag{ display:inline; font-weight:700; color:var(--warn-ink) }
+
+  /* ---------- per-ISIN warning ---------- */
+  .ftwarn{ background:var(--warn-soft); border:1px solid var(--warn-line); border-left:4px solid var(--warn); border-radius:12px; color:var(--warn-ink); padding:12px 14px; line-height:1.5; font-size:.86rem; margin-top:14px }
+
+  .extlink{ color:var(--accent); font-weight:700; text-decoration:none }
+  .extlink:hover{ text-decoration:underline }
+  .testbadge{font-size:.75rem;color:var(--muted);margin-top:18px}
+  .testbadge.fail{color:var(--danger);font-weight:700}
+  a,button{ transition:color .18s var(--ease),background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease) }
+</style>
+<!-- Shared site-shell chrome (header/footer/sticky/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
+<link rel="stylesheet" href="css/styles.css?v=10">
+<!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
+<script src="js/shell.js?v=10"></script>
+</head>
+<body data-page="learn">
+<div id="site-header"></div><script>Shell.header()</script>
+
+<main class="wrap" id="main" tabindex="-1" role="main">
+  <p class="kicker" data-i18n="plKicker">Check a fund</p>
+  <h1 data-i18n="plTitle">Check a fund against the positivliste</h1>
+  <p class="lead" data-i18n="plWhat">SKAT keeps an official list of equity-based funds (the ABIS list). Whether your fund is on it or off it decides which tax it gets, and the list is refreshed every year.</p>
+
+  <section aria-labelledby="plTitle">
+    <div class="onoff">
+      <div class="on">
+        <div class="tt" data-i18n="plOnT">✓ ON the list</div>
+        <div class="dd" data-i18n="plOnD">aktieindkomst [share income], 27% / 42%. Allowed inside an ASK. Usually the win for an adult.</div>
+      </div>
+      <div class="off">
+        <div class="tt" data-i18n="plOffT">OFF the list</div>
+        <div class="dd" data-i18n="plOffD">kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.</div>
+      </div>
+    </div>
+
+    <!-- P0.1: interactive ISIN checker (moved verbatim from the old index page) -->
+    <div class="plcheck">
+      <label class="plc-lab" for="isin-input" data-i18n="plcLabel">Check a fund by its ISIN</label>
+      <p class="plc-sub" data-i18n="plcSub">Paste the exact ISIN. Each share class (ACC, DIST, hedged) has its own.</p>
+      <div class="plc-row">
+        <input id="isin-input" type="text" autocomplete="off" spellcheck="false" maxlength="14"
+               placeholder="IE00B4L5Y983" aria-label="ISIN" aria-describedby="plcResult plcFresh">
+        <button id="isin-btn" type="button" data-i18n="plcBtn">Check</button>
+      </div>
+      <div class="plc-result" id="plcResult" role="status" aria-live="polite"></div>
+      <p class="plc-fresh" id="plcFresh"></p>
+    </div>
+
+    <div class="ftwarn" data-i18n="ftTrap2">⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.</div>
+
+    <p style="margin-top:14px"><a class="extlink" href="https://skat.dk/erhverv/ekapital/vaerdipapirer" target="_blank" rel="noopener" data-i18n="plLink">Open the current positivliste on skat.dk →</a></p>
+    <p style="margin-top:6px"><a class="extlink" href="learn-positivliste.html" data-i18n="plLearnMore">Read the full explainer →</a></p>
+  </section>
+
+  <p class="testbadge" id="testbadge" role="status" aria-live="polite"></p>
+</main>
+
+<div id="site-footer"></div><script>Shell.footer()</script>
+
+<!-- Utility page: shell + i18n + config (for the rate/threshold placeholders) only. No tax.js.
+     NOTE: the checker fetches data/positivliste.json, so this page must be served over HTTP
+     (python -m http.server locally), never opened as a file:// URL. -->
+<script src="js/config.js?v=10"></script>
+<script src="js/i18n.js?v=10"></script>
+<script>
+/* Page controller: language + i18n render pass + the positivliste ISIN checker
+   (states: empty / invalid / loading / on / off / not-found, plus stale & sample flags). */
+const GLOBAL_KEY = "dkie_global_v1";   // lang shared across pages
+const PAGE_I18N = {
+  en: {
+    "skipLink":"Skip to content",
+    "ariaLangGroup":"Language",
+    "ariaDisclaimer":"Important disclaimer",
+    "ariaDismiss":"Dismiss",
+    "bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts are for the tagged tax year, adjusted every January; the positivliste [SKAT’s fund list] changes every December. Verify with skat.dk or ask an advokat/revisor before acting.",
+    "stickyBar":"Educational only, not tax, legal or investment advice.",
+    "plKicker":"Check a fund",
+    "plTitle":"Check a fund against SKAT's positivliste [approved-fund list]",
+    "plWhat":"SKAT keeps an official list of equity-based funds (the ABIS list). Whether your fund is on it or off it decides which tax it gets, and the list is refreshed every year.",
+    "plOnT":"✓ ON the list",
+    "plOnD":"aktieindkomst [share income], 27% / 42%. Allowed inside an ASK. Usually the win for an adult.",
+    "plOffT":"OFF the list",
+    "plOffD":"kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). Not allowed in an ASK. Usually the win for a child's frikort.",
+    "plcLabel":"Check a fund by its ISIN",
+    "plcSub":"Paste the exact ISIN. Each share class (ACC, DIST, hedged) has its own.",
+    "plcBtn":"Check",
+    "plcEmpty":"Type an ISIN, for example IE00B4L5Y983.",
+    "plcLoading":"Loading the list…",
+    "plcInvalid":"That does not look like an ISIN (2 letters, then 10 letters or digits).",
+    "plcOnT":"ON the positivliste",
+    "plcOnD":"Taxed as aktieindkomst [share income]: 27% up to {aktieT} kr of yearly gain, 42% above ({yr}). ASK-eligible. For a child the frikort does NOT help, so it fills after the cheaper buckets.",
+    "plcOffT":"OFF the positivliste",
+    "plcOffD":"Off-list means kapitalindkomst [capital income], ~37-42%, taxed yearly (lager). NOT ASK-eligible. For a child the frikort absorbs the gain, so it can be the cheapest home.",
+    "plcNfT":"Not found in this snapshot",
+    "plcNfD":"If this is a foreign ETF or investeringsselskab [investment company], not being on the list means its gain is kapitalindkomst [capital income], roughly 37-42%, taxed every year (lager [mark-to-market]) and not ASK-eligible: the common case for off-list foreign ETFs. But an ISIN can be missing for other reasons too: it could be a single stock, a bond, a brand-new fund still being added, or a Danish fund taxed under different rules. Verify the exact ISIN on skat.dk.",
+    "plcWhy":"Why this matters →",
+    "plcOrder":"What order to fill accounts →",
+    "plcFresh":"List snapshot: {date}. SKAT can change the list at any time, sometimes mid-year without notice. Always confirm the exact ISIN {link}.",
+    "plcFreshLink":"on skat.dk",
+    "plcStale":"This snapshot is more than {days} days old and may be out of date.",
+    "plcSample":"Sample data for demonstration, not SKAT's official list. Verify every ISIN on skat.dk.",
+    "ftTrap2":"⚠ Check the exact ISIN: every share class (ACC, DIST, hedged, unhedged) has its OWN ISIN, and the positivliste [SKAT's approved-fund list] works per ISIN. The unhedged class being on the list says nothing about the hedged class. Verify your exact ISIN before buying.",
+    "plLink":"Open the current positivliste on skat.dk →",
+    "i18nReady":"i18n complete"
+  },
+  da: {
+    "skipLink":"Spring til indhold",
+    "ariaLangGroup":"Sprog",
+    "ariaDisclaimer":"Vigtig ansvarsfraskrivelse",
+    "ariaDismiss":"Luk",
+    "bigDisclaimer":"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek skat.dk eller spørg en advokat/revisor, før du handler.",
+    "stickyBar":"Kun undervisning, ikke skatte-, juridisk eller investeringsrådgivning.",
+    "plKicker":"Tjek en fond",
+    "plTitle":"Tjek en fond mod positivlisten",
+    "plWhat":"SKAT fører en officiel liste over aktiebaserede fonde (ABIS-listen). Om din fond er på eller uden for den afgør, hvilken skat den får, og listen opdateres hvert år.",
+    "plOnT":"✓ PÅ listen",
+    "plOnD":"aktieindkomst, 27% / 42%. Tilladt i en ASK. Som regel det bedste for en voksen.",
+    "plOffT":"UDEN FOR listen",
+    "plOffD":"kapitalindkomst, ~37-42%, beskattet årligt (lager). Ikke tilladt i en ASK. Som regel det bedste for et barns frikort.",
+    "plcLabel":"Tjek en fond på dens ISIN",
+    "plcSub":"Indsæt den præcise ISIN. Hver andelsklasse (ACC, DIST, hedged) har sin egen.",
+    "plcBtn":"Tjek",
+    "plcEmpty":"Skriv en ISIN, for eksempel IE00B4L5Y983.",
+    "plcLoading":"Henter listen…",
+    "plcInvalid":"Det ligner ikke en ISIN (2 bogstaver og derefter 10 bogstaver eller tal).",
+    "plcOnT":"PÅ positivlisten",
+    "plcOnD":"Beskattes som aktieindkomst: 27% op til {aktieT} kr af årets gevinst, 42% derover ({yr}). ASK-egnet. For et barn hjælper frikortet IKKE, så den fyldes efter de billigere spande.",
+    "plcOffT":"UDEN FOR positivlisten",
+    "plcOffD":"Uden for listen betyder kapitalindkomst, ~37-42%, beskattet årligt (lager). IKKE ASK-egnet. For et barn opsuger frikortet gevinsten, så den kan være det billigste hjem.",
+    "plcNfT":"Ikke fundet i dette øjebliksbillede",
+    "plcNfD":"Hvis det er en udenlandsk ETF eller et investeringsselskab, betyder fraværet på listen, at gevinsten er kapitalindkomst, cirka 37-42%, beskattet hvert år (lager), og ikke ASK-egnet: det almindelige tilfælde for udenlandske ETF'er uden for listen. Men en ISIN kan også mangle af andre grunde: det kan være en enkeltaktie, en obligation, en helt ny fond, der stadig er ved at blive tilføjet, eller en dansk fond med andre skatteregler. Bekræft den præcise ISIN på skat.dk.",
+    "plcWhy":"Hvorfor det betyder noget →",
+    "plcOrder":"Hvilken rækkefølge du fylder konti i →",
+    "plcFresh":"Liste-øjebliksbillede: {date}. SKAT kan ændre listen når som helst, nogle gange midt på året uden varsel. Bekræft altid den præcise ISIN {link}.",
+    "plcFreshLink":"på skat.dk",
+    "plcStale":"Dette øjebliksbillede er mere end {days} dage gammelt og kan være forældet.",
+    "plcSample":"Eksempeldata til demonstration, ikke SKATs officielle liste. Bekræft hver ISIN på skat.dk.",
+    "ftTrap2":"⚠ Tjek den præcise ISIN: hver andelsklasse (ACC, DIST, hedged, unhedged) har sin EGEN ISIN, og positivlisten virker pr. ISIN. At den uafdækkede klasse er på listen, siger intet om den afdækkede. Tjek din præcise ISIN, før du køber.",
+    "plLink":"Åbn den aktuelle positivliste på skat.dk →",
+    "i18nReady":"i18n komplet"
+  }
+};
+const I18N = mergeI18n(I18N_BASE, PAGE_I18N);
+const cfg = TAX_YEAR_CONFIG;
+const $ = id => document.getElementById(id);
+let lang = "en";
+try { const g = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "{}"); if (g.lang === "da" || g.lang === "en") lang = g.lang; } catch (e) {}
+
+function t(key){
+  if (I18N[lang] && I18N[lang][key] !== undefined) return I18N[lang][key];
+  if (I18N.en[key] !== undefined) return I18N.en[key];
+  return key;
+}
+function esc(s){ return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function fmt(n){ return new Intl.NumberFormat(lang==="da"?"da-DK":"en-GB",{maximumFractionDigits:0}).format(Math.round(n)); }
+function fill(str, map){ return String(str).replace(/\{(\w+)\}/g,(_,k)=> map[k]!==undefined?map[k]:"{"+k+"}"); }
+const CFGFILL = ()=>({ aktieT:fmt(cfg.aktieThreshold), aktieTM:fmt(cfg.aktieThresholdMarried), yr:cfg.taxYear });
+
+function renderStrings(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria"))); });
+  const en = $("lang-en"), da = $("lang-da");
+  if (en) en.classList.toggle("active", lang === "en");
+  if (da) da.classList.toggle("active", lang === "da");
+  renderPlCheck();
+}
+function setLang(l){
+  lang = l;
+  try { const g = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "{}"); g.lang = l; localStorage.setItem(GLOBAL_KEY, JSON.stringify(g)); } catch (e) {}
+  renderStrings();
+}
+if ($("lang-en")) $("lang-en").onclick = () => setLang("en");
+if ($("lang-da")) $("lang-da").onclick = () => setLang("da");
+
+/* ============ P0.1: positivliste ISIN checker (moved from the old index page) ============ */
+const PL_FALLBACK = { listDate:"SAMPLE", fetchedAt:"2026-06-15T00:00:00Z", sample:true, count:4,
+  isins:{ "IE00B4L5Y983":{name:"iShares Core MSCI World UCITS ETF (Acc)",status:"on"},
+          "IE00B5BMR087":{name:"iShares Core S&P 500 UCITS ETF (Acc)",status:"on"},
+          "IE00BK5BQT80":{name:"Vanguard FTSE All-World UCITS ETF (Acc)",status:"off"},
+          "IE00B3RBWM25":{name:"Vanguard FTSE All-World UCITS ETF (Dist)",status:"off"} } };
+const PL_SKAT = "https://skat.dk/erhverv/ekapital/vaerdipapirer";
+const PL_ISIN_RE = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/;
+let PL_DATA = null, PL_LAST = null, PL_LOADING = false;
+
+// Lazy: the real snapshot is ~0.5 MB, so we fetch it on first interaction (focus/Enter/Check)
+// rather than on every page view, and rely on normal HTTP caching for repeat visits.
+function plLoad(){
+  if(PL_DATA || PL_LOADING) return;
+  PL_LOADING = true;
+  fetch("data/positivliste.json")
+    .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+    .then(d=>{ PL_DATA=d; })
+    .catch(()=>{ PL_DATA=PL_FALLBACK; })   // visible degrade to the sample warning, never silent 4 funds
+    .finally(()=>{
+      PL_LOADING=false; renderPlCheck();
+      if(PL_LAST && PL_LAST.state==="loading") plLookup();   // resolve a lookup queued before data arrived
+    });
+}
+function plLookup(){
+  const inp=$("isin-input"); if(!inp) return;
+  const raw=(inp.value||"").toUpperCase().replace(/[^A-Z0-9]/g,""); inp.value=raw;
+  if(!raw){ PL_LAST={state:"empty"}; return renderPlCheck(); }
+  if(!PL_ISIN_RE.test(raw)){ PL_LAST={state:"invalid"}; return renderPlCheck(); }
+  if(!PL_DATA){ PL_LAST={state:"loading"}; renderPlCheck(); return plLoad(); }  // never answer from no data
+  const rec=PL_DATA.isins?PL_DATA.isins[raw]:null;
+  let state="nf";
+  if(rec && rec.status==="on") state="on";
+  else if(rec && rec.status==="off") state="off";
+  PL_LAST={state, isin:raw, name:rec?rec.name:""};
+  renderPlCheck();
+}
+function renderPlCheck(){
+  const fresh=$("plcFresh"); if(!fresh) return;
+  if(!PL_DATA){ fresh.innerHTML=""; }   // nothing loaded yet: no premature date or sample flag
+  else {
+    const data=PL_DATA;
+    const link=`<a href="${PL_SKAT}" target="_blank" rel="noopener">${t("plcFreshLink")}</a>`;
+    let fh="";
+    if(data.sample){ fh=`<span class="plc-flag warn">${t("plcSample")}</span>`; }
+    else {
+      const ageDays=(Date.now()-Date.parse(data.fetchedAt||0))/86400000;
+      if(isFinite(ageDays) && ageDays>14) fh=`<span class="plc-flag warn">${fill(t("plcStale"),{days:14})}</span> `;
+      fh+=fill(t("plcFresh"),{date:esc(data.listDate||"?"), link});
+    }
+    fresh.innerHTML=fh;
+  }
+  const box=$("plcResult"); if(!box) return;
+  const L=PL_LAST;
+  if(!L){ box.className="plc-result"; box.innerHTML=""; return; }
+  if(L.state==="loading"){ box.className="plc-result"; box.innerHTML=`<span class="plc-msg">${t("plcLoading")}</span>`; return; }
+  if(L.state==="empty"){ box.className="plc-result"; box.innerHTML=`<span class="plc-msg">${t("plcEmpty")}</span>`; return; }
+  if(L.state==="invalid"){ box.className="plc-result tone-warn"; box.innerHTML=`<span class="plc-msg">${t("plcInvalid")}</span>`; return; }
+  const map={ on:["tone-on","plcOnT","plcOnD"], off:["tone-off","plcOffT","plcOffD"], nf:["tone-nf","plcNfT","plcNfD"] };
+  const [cls,tk,dk]=map[L.state]; const F=CFGFILL();
+  box.className="plc-result "+cls;
+  // trusted parts (i18n copy + numbers) via innerHTML; untrusted JSON-derived isin/name via textContent.
+  // The links row cross-references the explainer ("why this matters") and the router ("what order").
+  box.innerHTML=`<div class="plc-head"></div><div class="plc-state">${t(tk)}</div><div class="plc-exp">${fill(t(dk),F)}</div>`+
+    `<div class="plc-links"><a href="learn-positivliste.html">${t("plcWhy")}</a> · <a href="plan.html">${t("plcOrder")}</a></div>`;
+  const head=box.querySelector(".plc-head");
+  const b=document.createElement("b"); b.textContent=L.isin; head.appendChild(b);
+  if(L.name){ const sp=document.createElement("span"); sp.className="plc-nm"; sp.textContent=" "+L.name; head.appendChild(sp); }
+}
+(function plInit(){
+  const btn=$("isin-btn"), inp=$("isin-input");
+  if(btn) btn.addEventListener("click", ()=>{ plLoad(); plLookup(); });
+  if(inp){
+    inp.addEventListener("focus", plLoad, {once:true});   // lazy-load on first focus
+    inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); plLoad(); plLookup(); } });
+  }
+})();
+
+renderStrings();
+
+/* i18n completeness self-check (mirrors the tools' badge) */
+(function(){
+  const r = checkI18nComplete(I18N);
+  const b = $("testbadge");
+  if (!b) return;
+  if (r.ok) { b.textContent = "✓ " + t("i18nReady"); }
+  else { b.textContent = "⚠ i18n: " + r.missingInDa.concat(r.missingInEn).join(", "); b.classList.add("fail"); }
+})();
+</script>
+<script data-goatcounter="https://ashu1309p.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

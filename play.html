@@ -29,12 +29,25 @@
 <meta name="twitter:image" content="https://taxsmart-invest-denmark.vercel.app/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Tax-smart investing in Denmark","url":"https://taxsmart-invest-denmark.vercel.app/","inLanguage":["en","da"],"description":"Free educational tool for Danish retail investment taxation. Not advice."}</script>
 <style>
+  /* ONE consolidated cool palette (same token set as learn.html / plan.html / index.html).
+     Previously play.html stacked a warm :root here plus two override :root blocks below;
+     they are merged into this single source so the old cream palette is fully gone. */
   :root{
-    --bg:#FAF6EF; --card:#FFFFFF; --ink:#27272E; --muted:#6B6B76;
-    --line:#E8E2D6; --accent:#0F766E; --accent-soft:#E0F0EE;
-    --warn-bg:#FDF1E7; --warn-line:#E8A968;
+    --bg:#EEF2F6; --card:#FFFFFF;
+    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
+    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
+    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
+    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
+    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
+    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08; --warn-bg:#FFFBEB;
+    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
+    --info:#3B5BDB; --info-soft:#EEF3FC; --info-line:#C6D4EE; --info-ink:#27324D;
     --c-bo:#157F70; --c-ask:#4361EE; --c-off:#A86200; --c-on:#C0427C;
-    --radius:16px; --shadow:0 1px 3px rgba(40,35,25,.08),0 8px 24px rgba(40,35,25,.06);
+    --radius:18px; --radius-sm:12px; --radius-lg:22px;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
+    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
+    --space-sec:64px; --ease:cubic-bezier(.4,0,.2,1);
   }
   /* primitives, top bar, footer, sticky bar, ctx-pill, skip-link, focus + reduced-motion live in css/styles.css (shared, linked last) */
   body{
@@ -60,7 +73,7 @@
   section{margin:26px 0}
   .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
   /* mode toggle */
-  .mode{display:flex;background:#F1ECE1;border-radius:14px;padding:4px;margin-bottom:16px}
+  .mode{display:flex;background:#E7ECF3;border-radius:14px;padding:4px;margin-bottom:16px}
   .mode button{
     flex:1;border:0;border-radius:11px;background:transparent;font-size:1rem;font-weight:700;
     padding:12px 8px;color:var(--muted);cursor:pointer;transition:all .15s;
@@ -73,12 +86,12 @@
   input[type=range]{
     -webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;touch-action:pan-y;
   }
-  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--accent) var(--fill,50%),#E4DDCE var(--fill,50%))}
+  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,var(--accent) var(--fill,50%),#DBE2EB var(--fill,50%))}
   input[type=range]::-webkit-slider-thumb{
     -webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;
     border:3px solid var(--accent);margin-top:-10px;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:grab;
   }
-  input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#E4DDCE}
+  input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#DBE2EB}
   input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--accent)}
   input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 2px 6px rgba(0,0,0,.25)}
   /* chart */
@@ -108,13 +121,13 @@
   }
   .tipbox{
     display:none;position:absolute;z-index:30;left:8px;right:8px;top:calc(100% + 6px);
-    background:#2B2B33;color:#F5F2EA;font-size:.8rem;line-height:1.45;border-radius:10px;padding:10px 12px;
+    background:#0F172A;color:#E2E8F0;font-size:.8rem;line-height:1.45;border-radius:10px;padding:10px 12px;
     box-shadow:0 6px 20px rgba(0,0,0,.3);font-weight:400;
   }
   .tipbox .ref{display:block;margin-top:5px;font-size:.72rem;color:#B9C5C2;font-style:italic}
   .tipbox.open{display:block}
   /* explainer accordion */
-  details.why{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:#FFFDF8}
+  details.why{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:#fff}
   details.why summary{padding:12px 14px;font-weight:700;cursor:pointer;font-size:.95rem;color:var(--accent)}
   details.why .body{padding:0 14px 14px;font-size:.9rem}
   details.why .body p{margin:8px 0}
@@ -134,7 +147,7 @@
   .capbar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin:12px 0 4px;border:1px solid var(--line)}
   .capbar div{transition:width .3s}
   .capbar .seg-ok{background:var(--c-bo)}
-  .capbar .seg-ok:nth-child(2n){background:#3D8B80}
+  .capbar .seg-ok:nth-child(2n){background:#23897C}
   .capbar .seg-over{background:#D64545}
   .caplegend{font-size:.78rem;color:var(--muted);margin-bottom:10px}
   .verdict{border-radius:12px;padding:12px 14px;font-size:.95rem;font-weight:600;margin:10px 0}
@@ -158,23 +171,22 @@
 
   /* ============================================================
      REDESIGN v1 - shared design system (matches Plan page).
+     (Its :root tokens are now folded into the single cool :root above.)
      ============================================================ */
-  :root{ --sunken:#F2ECE0; --space-sec:56px; --shadow:0 1px 2px rgba(40,35,25,.05),0 10px 30px rgba(40,35,25,.07); }
   body{ line-height:1.62 }
   .wrap{ max-width:716px }
   h1{ font-size:clamp(2.05rem,6vw,2.6rem)!important; font-weight:700; line-height:1.08; letter-spacing:-.02em; text-wrap:balance }
   .tagline{ font-size:1.07rem; line-height:1.55; color:var(--ink); max-width:33em }
-  h2.sec,#gifts h2,#race h2{ font-size:clamp(1.32rem,3.6vw,1.5rem); font-weight:700; line-height:1.2; letter-spacing:-.01em; text-wrap:balance }
+  h2.sec,#gifts h2,#race h2{ font-size:clamp(1.32rem,3.6vw,1.55rem); font-weight:700; line-height:1.2; letter-spacing:-.01em; text-wrap:balance }
   section{ margin:var(--space-sec) 0; scroll-margin-top:84px }
   :target{ scroll-margin-top:84px }
   .panel{ padding:22px; border-radius:18px }
   @media(min-width:560px){ .panel{ padding:26px } }
   .panel.ref{ box-shadow:none; background:var(--sunken); border-color:transparent }
-  .panel.tool{ border-color:#DBD2C1; box-shadow:0 2px 8px rgba(40,35,25,.09),0 22px 50px rgba(40,35,25,.11) }
+  .panel.tool{ border-color:#D9E1EB; box-shadow:0 2px 8px rgba(15,23,42,.09),0 22px 50px rgba(15,23,42,.11) }
   /* hover + focus (a11y) */
   .mode button,.tabs .tab,.lang-toggle button,.chips button,details.why>summary{ transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s }
   .mode button:hover,.tabs .tab:hover{ color:var(--ink) }
-  .linkcard:hover{ background:#D5ECE7 }
   .sources a:hover{ text-decoration:underline }
   /* one rotating chevron on the disclosure */
   details.why>summary{ position:relative; padding-right:28px; list-style:none }
@@ -186,24 +198,8 @@
      REDESIGN v2 - NORDIC FINTECH DASHBOARD (matches Plan page)
      Pure visual layer. Redefines tokens + elevates each component.
      No class/id renamed, no logic touched.
+     (Its :root tokens are now folded into the single cool :root at the top.)
      ============================================================ */
-  :root{
-    --bg:#EEF2F6; --card:#FFFFFF;
-    --ink:#0F172A; --ink-2:#334155; --muted:#586577; --muted-2:#64748B;
-    --line:#E3E8EF; --line-soft:#EDF1F6; --sunken:#F2F5F9;
-    --accent:#0F766E; --accent-strong:#0B5D56; --accent-ink:#0B5D56;
-    --accent-soft:#E6F3F1; --accent-line:#C7E6E1;
-    --success:#15803D; --success-soft:#ECFDF5; --success-line:#A7F3D0; --success-ink:#166534;
-    --warn:#B45309; --warn-soft:#FFFBEB; --warn-line:#FCE3A6; --warn-ink:#8A4B08; --warn-bg:#FFFBEB;
-    --danger:#DC2626; --danger-soft:#FEF2F2; --danger-line:#FBD0D0; --danger-ink:#9F1D1D;
-    --info:#3B5BDB; --info-soft:#EEF3FC; --info-line:#C6D4EE; --info-ink:#27324D;
-    --c-bo:#157F70; --c-ask:#4361EE; --c-off:#A86200; --c-on:#C0427C;
-    --radius:18px; --radius-sm:12px; --radius-lg:22px;
-    --shadow-sm:0 1px 2px rgba(15,23,42,.05);
-    --shadow:0 1px 2px rgba(15,23,42,.04), 0 6px 16px rgba(15,23,42,.06), 0 14px 34px rgba(15,23,42,.05);
-    --shadow-lg:0 2px 4px rgba(15,23,42,.05), 0 14px 30px rgba(15,23,42,.10), 0 30px 64px rgba(15,23,42,.10);
-    --space-sec:64px; --ease:cubic-bezier(.4,0,.2,1);
-  }
   body{
     font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     background:
@@ -250,6 +246,30 @@
   /* ---------- race chart + legend ---------- */
   .legend{ color:var(--ink-2) }
   .legend i{ border-radius:99px; height:5px }
+
+  /* ---------- P7: chart readability (end labels, isolate, gap view, dashes) ---------- */
+  /* gridlines + axis text as tokens (previously hardcoded warm greys in the SVG builder) */
+  svg.race .grid{ stroke:var(--line) }
+  svg.race .axtx{ fill:var(--muted-2) }
+  /* each strategy (curve + end dot + label) is grouped so isolate can dim non-selected ones */
+  svg.race .strat{ transition:opacity .2s var(--ease) }
+  svg.race.has-iso .strat:not(.iso){ opacity:.22 }
+  svg.race .curve{ cursor:pointer }
+  svg.race .lbl-name{ font-weight:700 }
+  svg.race .lbl-val{ font-variant-numeric:tabular-nums }
+  svg.race .leader{ stroke-width:1; opacity:.55 }
+  /* "show the gap" segmented toggle (same shape language as the mode control) */
+  .rv-toggle{ display:flex; background:#E7ECF3; border:1px solid var(--line); border-radius:12px; padding:3px; margin:2px 0 4px }
+  .rv-toggle button{ flex:1; border:0; border-radius:9px; background:transparent; font:inherit; font-size:.82rem; font-weight:700; padding:9px 6px; color:var(--muted); cursor:pointer; line-height:1.2; transition:color .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease) }
+  .rv-toggle button.active{ background:#fff; color:var(--accent); box-shadow:0 1px 3px rgba(15,23,42,.14) }
+  .rv-hint{ font-size:.76rem; color:var(--muted); margin:2px 0 0; text-align:center }
+  /* legend chips become buttons (click/keyboard to isolate) */
+  .legend{ gap:6px 8px }
+  .legend button.legchip{ display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:#fff; border-radius:999px; padding:5px 11px 5px 8px; font:inherit; font-size:.8rem; font-weight:600; color:var(--ink-2); cursor:pointer; transition:border-color .16s var(--ease),background .16s var(--ease),box-shadow .16s var(--ease) }
+  .legend button.legchip:hover{ border-color:var(--accent-line); background:#FAFDFC }
+  .legend button.legchip[aria-pressed="true"]{ border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); background:var(--accent-soft) }
+  .legend button.legchip svg{ display:block; flex:none }
+  .legend button.legchip:focus-visible{ outline:2.5px solid var(--accent); outline-offset:2px }
 
   /* ---------- result metric cards ---------- */
   .rcard{ border:1px solid var(--line); border-top:4px solid var(--cc,#999); border-radius:14px; background:#fff; box-shadow:var(--shadow-sm); transition:box-shadow .2s var(--ease),transform .2s var(--ease) }
@@ -316,9 +336,9 @@
   .capbar .seg-over{ background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 5px,transparent 5px 10px) }
 </style>
 <!-- Shared site-shell chrome (header/footer/sticky/ctx-pill/skip-link/focus). Linked LAST so the cascade order is preserved exactly. -->
-<link rel="stylesheet" href="css/styles.css?v=9">
+<link rel="stylesheet" href="css/styles.css?v=10">
 <!-- Shared header/footer markup, single-sourced in js/shell.js. Loaded synchronously so the placeholders below inject during parse (no layout shift / FOUC). -->
-<script src="js/shell.js?v=9"></script>
+<script src="js/shell.js?v=10"></script>
 </head>
 <body data-page="play">
 <div id="site-header"></div><script>Shell.header()</script>
@@ -362,7 +382,12 @@
     </div>
 
     <div class="chart-box">
+      <div class="rv-toggle" role="group" aria-label="Chart view" data-i18n-aria="ariaRaceView">
+        <button id="rv-abs" class="active" data-i18n="raceViewAbs">Total value</button>
+        <button id="rv-gap" data-i18n="raceViewGap">Show the gap</button>
+      </div>
       <svg class="race" id="chart" viewBox="0 0 640 360" role="img" aria-label="Compound growth race between wrappers" aria-describedby="chart-table"></svg>
+      <p class="rv-hint" id="rv-hint" data-i18n="raceIsoHint">Tap a line or legend chip to isolate it.</p>
       <div class="visually-hidden" id="chart-table"></div>
       <div class="legend" id="legend"></div>
     </div>
@@ -453,9 +478,9 @@
 <div id="site-footer"></div><script>Shell.footer()</script>
 
 <!-- TAX_YEAR_CONFIG is single-sourced in js/config.js (shared with index.html). Update it there each January. -->
-<script src="js/config.js?v=9"></script>
-<script src="js/tax.js?v=9"></script>
-<script src="js/i18n.js?v=9"></script>
+<script src="js/config.js?v=10"></script>
+<script src="js/tax.js?v=10"></script>
+<script src="js/i18n.js?v=10"></script>
 <script>
 /* TAX_YEAR_CONFIG -> js/config.js, pure tax engine -> js/tax.js (both loaded above, shared with index.html). */
 
@@ -496,15 +521,17 @@ function runTests(cfg){
 }
 
 /* ============ I18N ============ */
-const PAGE_I18N = {"en":{"heroTitle":"Same money. Four tax homes. Watch the gap grow.","heroTag":"Denmark taxes the same investment completely differently depending on the “wrapper” it sits in. Drag the sliders - the race replays instantly.","modeChild":"For a child","modeAdult":"For an adult","ctlMonthly":"Monthly amount","ctlYears":"Years","ctlReturn":"Expected yearly return (gross)","ctlFee":"Yearly costs [ÅOP]","netNote":"Net return used in the race: {n}%","ctlSwing":"Yearly swings (volatility)","swingNote":"Pattern: one good year, one bad year around the average (simplified). Losses carry forward against later gains; a child’s unused frikort [tax-free allowance] is lost each year.","wrapBo":"Børneopsparing [child savings]","wrapAsk":"Aktiesparekonto [share savings account]","wrapOff":"Depot (AKT), off-list fund","wrapOn":"Depot (AKT), on-list fund","cardEnd":"End value","cardTax":"tax paid","spillNote":"incl. overflow in a regular depot","boAdultNote":"Per child only - shown in child mode","whyTitle":"Why the difference?","whyBody_child":"<p><b style=\"color:var(--c-bo)\">Børneopsparing [child savings account]</b> - 0% tax on everything, but deposits are capped at {boY} kr/year and {boL} kr in total, so the rest of your stream overflows into a regular depot in this simulation.</p>\n<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - a flat {askR}% every year on that year's gain (<span class=\"term\">lager taxation<span class=\"tipbox\">Mark-to-market: tax on the value INCREASE each year, realised or not. The tax payment shrinks the base that compounds.<span class=\"ref\">aktiesparekontoloven</span></span></span>), paid from the account. Deposit ceiling {askC} kr <span class=\"yeartag\">{yr}</span>; overflow goes to a depot here.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fund OFF the positivliste [SKAT’s approved-fund list]</b> - taxed yearly as <span class=\"term\">kapitalindkomst [capital income]<span class=\"tipbox\">Roughly 37-42% for adults depending on municipality and total capital income. For children the personfradrag [tax-free personal allowance] absorbs it first.<span class=\"ref\">personskatteloven; approx. rates</span></span></span>. The child superpower: a child's personfradrag [tax-free personal allowance] ({pf} kr <span class=\"yeartag\">{yr}</span>) absorbs the yearly gain, so it compounds tax-free until the gain outgrows the allowance.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fund ON the positivliste</b> - taxed yearly as <span class=\"term\">aktieindkomst [share income]<span class=\"tipbox\">27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples). The personfradrag [tax-free personal allowance] does NOT offset share income - children pay 27% from the first krone.<span class=\"ref\">aktieavancebeskatningsloven; ABIS list</span></span></span>. Great for adults via ASK, but it switches OFF the child’s frikort [tax-free allowance] trick.</p>\n<p>Both depot rows are the SAME ordinary account (aktiedepot, AKT): the fund you pick decides which tax regime applies.</p>","whyBody_adult":"<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - a flat {askR}% every year on that year's gain (<span class=\"term\">lager taxation<span class=\"tipbox\">Mark-to-market: tax on the value INCREASE each year, realised or not. The tax payment shrinks the base that compounds.<span class=\"ref\">aktiesparekontoloven</span></span></span>), paid from the account. Deposit ceiling {askC} kr <span class=\"yeartag\">{yr}</span>; overflow goes to a depot here. This is the cheapest tax an adult gets on stock funds, which is why it fills first.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fund OFF the positivliste [SKAT’s approved-fund list]</b> - taxed yearly as <span class=\"term\">kapitalindkomst [capital income]<span class=\"tipbox\">Roughly 37-42% for an adult depending on municipality and total capital income.<span class=\"ref\">personskatteloven; approx. rates</span></span></span>, about 37-42% for an adult. That loses to share income, so adults usually skip off-list funds.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fund ON the positivliste</b> - taxed yearly as <span class=\"term\">aktieindkomst [share income]<span class=\"tipbox\">27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples).<span class=\"ref\">aktieavancebeskatningsloven; ABIS list</span></span></span>: 27% up to {aktieT} kr, 42% above, with a doubled band of {aktieTM} kr for married couples. The adult workhorse, cheapest inside ASK and in a depot beyond the ceiling.</p>\n<p>Both depot rows are the SAME ordinary account (aktiedepot, AKT): the fund you pick decides which tax regime applies.</p>","simDisclaimer":"Simplified educational model - flat return, yearly tax paid from the account, no fees or inflation. Not advice; verify with skat.dk or an advisor.","giftTitle":"The Gift Planner","giftTag":"Each giver has their OWN tax-free annual cap - most families forget the second parent doubles the pipe.","oneParent":"One parent","bothParents":"Both parents","gpLabel":"Grandparents giving:","ctlPlan":"Planned gifts this year (total, per child)","capLegend":"Each green block = one giver's tax-free cap of {cap} kr {yrTag}. Red = above the caps.","verdictOk":"✓ Within the caps - no gift tax. Capacity left: {left} kr.","verdictOver":"⚠ {excess} kr above the combined caps → 15% gift tax ≈ {tax} kr. Fix: split across more givers or across calendar years.","trapTitle":"⚠ The interest trap (parent attribution)","trapBody":"Interest and dividends on money gifted by a parent are taxed at the PARENT until the year the child turns 18 - and banks do not report this automatically; you must self-declare. Annual value gains on accumulating fund units are taxed at the child instead. That is why children's gifted savings go into accumulating funds, never idle cash or distributing funds.","gpTitle":"🎁 The grandparent exception","gpBody":"Gifts from grandparents are NOT covered by parent attribution: all returns are taxed at the child immediately. Same annual cap per giver applies.","gavebrevTitle":"Gavebrev [gift letter] checklist","gavebrevTag":"No notary or special form is required, but conditions only count if they exist at or before the gift - never retroactively.","cl1":"One letter per giver, per child, per year - signed BEFORE the first transfer","cl2":"Transfer from the giver's OWN account (never a joint account), labelled with giver + recipient + year","cl3":"Consider a fuldstændigt særeje [full separate property] clause - protects against the child's future divorce, and the child cannot undo it","cl4":"Båndlæggelse [lock-up until 21/25] requires a godkendt forvaltningsafdeling - ordinary brokers hand full control to the child at 18","cl5":"Two adult, non-beneficiary witnesses with name + address (proves the date)","cl6":"Scan it and email it to yourself - a timestamp you cannot lose","proAdvice":"For gavebreve with conditions, båndlæggelse, or large amounts: have an advokat [lawyer] or revisor [accountant] review before you transfer. This page teaches the mechanics - it cannot check your situation.","bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts shown are for the tagged tax year and are adjusted every January; the positivliste [SKAT’s fund list] changes every December. Always verify against skat.dk or ask an advokat/revisor before acting.","stickyBar":"Educational only - not tax, legal or investment advice.","testsFail":"SELF-CHECKS FAILING - do not trust the numbers","yrShort":"y","skipLink":"Skip to content","a11yWrapper":"Account","raceTableCap":"Final results by account (data table)","raceTakeaway":"After {y} years, {win} ends highest at {winv} and {lose} lowest at {losev}; full figures are in the data table below.","capBarLabel":"Gift capacity bar: {givers} giver(s), tax-free cap {cap} kr each, total capacity {capacity} kr. Planned {plan} kr, over the caps by {excess} kr.","ariaLangGroup":"Language","ariaMode":"Who you are investing for","ariaMonthly":"Monthly amount","ariaYears":"Years","ariaRet":"Expected yearly return","ariaFee":"Yearly fund costs","ariaSwing":"Yearly swings","ariaFewer":"Fewer givers","ariaMore":"More givers","ariaPlan":"Planned total gift","ariaDisclaimer":"Important disclaimer","ariaDismiss":"Dismiss","ctxPillLabel":"Back to the calculator"},"da":{"heroTitle":"Samme penge. Fire skattemiljøer. Se forskellen vokse.","heroTag":"Danmark beskatter den samme investering vidt forskelligt alt efter, hvilken “indpakning” den ligger i. Træk i skyderne - løbet starter forfra med det samme.","modeChild":"Til et barn","modeAdult":"Til en voksen","ctlMonthly":"Månedligt beløb","ctlYears":"År","ctlReturn":"Forventet årligt afkast (brutto)","ctlFee":"Årlige omkostninger [ÅOP]","netNote":"Anvendt nettoafkast i løbet: {n}%","ctlSwing":"Årlige udsving (volatilitet)","swingNote":"Mønster: ét godt år, ét dårligt år omkring gennemsnittet (forenklet). Tab fremføres mod senere gevinster; barnets ubrugte frikort tabes hvert år.","wrapBo":"Børneopsparing","wrapAsk":"Aktiesparekonto","wrapOff":"Depot (AKT), fond uden for listen","wrapOn":"Depot (AKT), fond på listen","cardEnd":"Slutværdi","cardTax":"betalt skat","spillNote":"inkl. overløb i alm. depot","boAdultNote":"Kun pr. barn - vises i barnetilstand","whyTitle":"Hvorfor forskellen?","whyBody_child":"<p><b style=\"color:var(--c-bo)\">Børneopsparing</b> - 0% skat på alt, men indskud er begrænset til {boY} kr/år og {boL} kr i alt, så resten af din opsparing løber over i et almindeligt depot i denne simulering.</p>\n<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - flad {askR}% hvert år af årets gevinst (<span class=\"term\">lagerbeskatning<span class=\"tipbox\">Skat af årets værdiSTIGNING, uanset om du sælger. Skattebetalingen formindsker det beløb, der forrentes.<span class=\"ref\">aktiesparekontoloven</span></span></span>), betalt fra kontoen. Indskudsloft {askC} kr <span class=\"yeartag\">{yr}</span>; overløb går til et depot her.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fond uden for positivlisten</b> - beskattes årligt som <span class=\"term\">kapitalindkomst<span class=\"tipbox\">Cirka 37-42% for voksne afhængigt af kommune og samlet kapitalindkomst. For børn absorberer personfradraget først.<span class=\"ref\">personskatteloven; ca.-satser</span></span></span>. Barnets superkraft: personfradraget ({pf} kr <span class=\"yeartag\">{yr}</span>) opsuger årets gevinst, så den vokser skattefrit, indtil gevinsten overstiger fradraget.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fond på positivlisten</b> - beskattes årligt som <span class=\"term\">aktieindkomst<span class=\"tipbox\">27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller). Personfradraget modregnes IKKE i aktieindkomst - børn betaler 27% fra første krone.<span class=\"ref\">aktieavancebeskatningsloven; ABIS-listen</span></span></span>. Godt for voksne via ASK, men slukker frikort-tricket for børn.</p>\n<p>Begge depot-rækker er den SAMME almindelige konto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p>","whyBody_adult":"<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - flad {askR}% hvert år af årets gevinst (<span class=\"term\">lagerbeskatning<span class=\"tipbox\">Skat af årets værdiSTIGNING, uanset om du sælger. Skattebetalingen formindsker det beløb, der forrentes.<span class=\"ref\">aktiesparekontoloven</span></span></span>), betalt fra kontoen. Indskudsloft {askC} kr <span class=\"yeartag\">{yr}</span>; overløb går til et depot her. Det er den billigste skat, en voksen får på aktiefonde, derfor fyldes den først.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fond uden for positivlisten</b> - beskattes årligt som <span class=\"term\">kapitalindkomst<span class=\"tipbox\">Cirka 37-42% for en voksen afhængigt af kommune og samlet kapitalindkomst.<span class=\"ref\">personskatteloven; ca.-satser</span></span></span>, cirka 37-42% for en voksen. Det taber til aktieindkomst, så voksne springer oftest fonde uden for listen over.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fond på positivlisten</b> - beskattes årligt som <span class=\"term\">aktieindkomst<span class=\"tipbox\">27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller).<span class=\"ref\">aktieavancebeskatningsloven; ABIS-listen</span></span></span>: 27% op til {aktieT} kr, 42% derover, med en fordoblet grænse på {aktieTM} kr for ægtefæller. Voksnes arbejdshest, billigst i ASK og i et depot ud over loftet.</p>\n<p>Begge depot-rækker er den SAMME almindelige konto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p>","simDisclaimer":"Forenklet undervisningsmodel - fast afkast, årlig skat betalt fra kontoen, ingen gebyrer eller inflation. Ikke rådgivning; tjek skat.dk eller en rådgiver.","giftTitle":"Gaveplanlæggeren","giftTag":"Hver giver har sit EGET afgiftsfrie årlige beløb - mange familier glemmer, at den anden forælder fordobler kapaciteten.","oneParent":"Én forælder","bothParents":"Begge forældre","gpLabel":"Bedsteforældre der giver:","ctlPlan":"Planlagte gaver i år (i alt, pr. barn)","capLegend":"Hver grøn blok = én givers afgiftsfrie beløb på {cap} kr {yrTag}. Rød = over grænserne.","verdictOk":"✓ Inden for grænserne - ingen gaveafgift. Resterende kapacitet: {left} kr.","verdictOver":"⚠ {excess} kr over de samlede grænser → 15% gaveafgift ≈ {tax} kr. Løsning: fordel på flere givere eller over flere kalenderår.","trapTitle":"⚠ Rentefælden (forældrebeskatning)","trapBody":"Renter og udbytter af penge, som en forælder har givet, beskattes hos FORÆLDEREN indtil det år, barnet fylder 18 - og banken indberetter det ikke automatisk; du skal selv oplyse det. Årlige kursgevinster på akkumulerende fondsandele beskattes derimod hos barnet. Derfor: akkumulerende fonde til børns gavemidler, aldrig kontanter eller udloddende fonde.","gpTitle":"🎁 Bedsteforældre-undtagelsen","gpBody":"Gaver fra bedsteforældre er IKKE omfattet af forældrebeskatning: alt afkast beskattes hos barnet med det samme. Samme årlige beløbsgrænse pr. giver gælder.","gavebrevTitle":"Gavebrev-tjekliste","gavebrevTag":"Intet krav om notar eller særlig form, men betingelser gælder kun, hvis de findes ved eller før gaven - aldrig med tilbagevirkende kraft.","cl1":"Ét brev pr. giver, pr. barn, pr. år - underskrevet FØR første overførsel","cl2":"Overførsel fra giverens EGEN konto (aldrig fælleskonto), mærket med giver + modtager + år","cl3":"Overvej en klausul om fuldstændigt særeje - beskytter mod barnets fremtidige skilsmisse, og barnet kan ikke ophæve den","cl4":"Båndlæggelse (til 21/25 år) kræver en godkendt forvaltningsafdeling - almindelige mæglere giver barnet fuld kontrol ved 18","cl5":"To myndige vidner uden interesse i gaven, med navn + adresse (beviser datoen)","cl6":"Scan brevet og send det til dig selv på e-mail - et tidsstempel, du ikke kan miste","proAdvice":"Ved gavebreve med betingelser, båndlæggelse eller store beløb: lad en advokat eller revisor gennemgå det, før du overfører. Denne side lærer dig mekanikken - den kan ikke vurdere din situation.","bigDisclaimer":"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek altid skat.dk eller spørg en advokat/revisor, før du handler.","stickyBar":"Kun undervisning - ikke skatte-, juridisk eller investeringsrådgivning.","testsFail":"SELVTEST FEJLER - stol ikke på tallene","yrShort":"år","skipLink":"Spring til indhold","a11yWrapper":"Konto","raceTableCap":"Slutresultater pr. konto (datatabel)","raceTakeaway":"Efter {y} år ender {win} højest med {winv} og {lose} lavest med {losev}; de fulde tal står i datatabellen nedenfor.","capBarLabel":"Gavekapacitet: {givers} giver(e), afgiftsfrit beløb {cap} kr hver, samlet kapacitet {capacity} kr. Planlagt {plan} kr, over grænserne med {excess} kr.","ariaLangGroup":"Sprog","ariaMode":"Hvem du investerer for","ariaMonthly":"Månedligt beløb","ariaYears":"År","ariaRet":"Forventet årligt afkast","ariaFee":"Årlige fondsomkostninger","ariaSwing":"Årlige udsving","ariaFewer":"Færre givere","ariaMore":"Flere givere","ariaPlan":"Planlagt samlet gave","ariaDisclaimer":"Vigtig ansvarsfraskrivelse","ariaDismiss":"Luk","ctxPillLabel":"Tilbage til beregneren"}};
+const PAGE_I18N = {"en":{"heroTitle":"Same money. Four tax homes. Watch the gap grow.","heroTag":"Denmark taxes the same investment completely differently depending on the “wrapper” it sits in. Drag the sliders - the race replays instantly.","modeChild":"For a child","modeAdult":"For an adult","ctlMonthly":"Monthly amount","ctlYears":"Years","ctlReturn":"Expected yearly return (gross)","ctlFee":"Yearly costs [ÅOP]","netNote":"Net return used in the race: {n}%","ctlSwing":"Yearly swings (volatility)","swingNote":"Pattern: one good year, one bad year around the average (simplified). Losses carry forward against later gains; a child’s unused frikort [tax-free allowance] is lost each year.","wrapBo":"Børneopsparing [child savings]","wrapAsk":"Aktiesparekonto [share savings account]","wrapOff":"Depot (AKT), off-list fund","wrapOn":"Depot (AKT), on-list fund","wrapBoShort":"BO","wrapAskShort":"ASK","wrapOffShort":"Off-list","wrapOnShort":"On-list","raceViewAbs":"Total value","raceViewGap":"Show the gap","gapAxis":"extra kr vs deposits","raceIsoHint":"Tap a line or legend chip to isolate it.","raceIsoCap":"Isolated: {w}.","ariaRaceView":"Chart view: total value or the gap versus deposits","cardEnd":"End value","cardTax":"tax paid","spillNote":"incl. overflow in a regular depot","boAdultNote":"Per child only - shown in child mode","whyTitle":"Why the difference?","whyBody_child":"<p><b style=\"color:var(--c-bo)\">Børneopsparing [child savings account]</b> - 0% tax on everything, but deposits are capped at {boY} kr/year and {boL} kr in total, so the rest of your stream overflows into a regular depot in this simulation.</p>\n<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - a flat {askR}% every year on that year's gain (<span class=\"term\">lager taxation<span class=\"tipbox\">Mark-to-market: tax on the value INCREASE each year, realised or not. The tax payment shrinks the base that compounds.<span class=\"ref\">aktiesparekontoloven</span></span></span>), paid from the account. Deposit ceiling {askC} kr <span class=\"yeartag\">{yr}</span>; overflow goes to a depot here.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fund OFF the positivliste [SKAT’s approved-fund list]</b> - taxed yearly as <span class=\"term\">kapitalindkomst [capital income]<span class=\"tipbox\">Roughly 37-42% for adults depending on municipality and total capital income. For children the personfradrag [tax-free personal allowance] absorbs it first.<span class=\"ref\">personskatteloven; approx. rates</span></span></span>. The child superpower: a child's personfradrag [tax-free personal allowance] ({pf} kr <span class=\"yeartag\">{yr}</span>) absorbs the yearly gain, so it compounds tax-free until the gain outgrows the allowance.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fund ON the positivliste</b> - taxed yearly as <span class=\"term\">aktieindkomst [share income]<span class=\"tipbox\">27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples). The personfradrag [tax-free personal allowance] does NOT offset share income - children pay 27% from the first krone.<span class=\"ref\">aktieavancebeskatningsloven; ABIS list</span></span></span>. Great for adults via ASK, but it switches OFF the child’s frikort [tax-free allowance] trick.</p>\n<p>Both depot rows are the SAME ordinary account (aktiedepot, AKT): the fund you pick decides which tax regime applies.</p>","whyBody_adult":"<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - a flat {askR}% every year on that year's gain (<span class=\"term\">lager taxation<span class=\"tipbox\">Mark-to-market: tax on the value INCREASE each year, realised or not. The tax payment shrinks the base that compounds.<span class=\"ref\">aktiesparekontoloven</span></span></span>), paid from the account. Deposit ceiling {askC} kr <span class=\"yeartag\">{yr}</span>; overflow goes to a depot here. This is the cheapest tax an adult gets on stock funds, which is why it fills first.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fund OFF the positivliste [SKAT’s approved-fund list]</b> - taxed yearly as <span class=\"term\">kapitalindkomst [capital income]<span class=\"tipbox\">Roughly 37-42% for an adult depending on municipality and total capital income.<span class=\"ref\">personskatteloven; approx. rates</span></span></span>, about 37-42% for an adult. That loses to share income, so adults usually skip off-list funds.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fund ON the positivliste</b> - taxed yearly as <span class=\"term\">aktieindkomst [share income]<span class=\"tipbox\">27% up to {aktieT} kr, 42% above ({aktieTM} kr combined for married couples).<span class=\"ref\">aktieavancebeskatningsloven; ABIS list</span></span></span>: 27% up to {aktieT} kr, 42% above, with a doubled band of {aktieTM} kr for married couples. The adult workhorse, cheapest inside ASK and in a depot beyond the ceiling.</p>\n<p>Both depot rows are the SAME ordinary account (aktiedepot, AKT): the fund you pick decides which tax regime applies.</p>","simDisclaimer":"Simplified educational model - flat return, yearly tax paid from the account, no fees or inflation. Not advice; verify with skat.dk or an advisor.","giftTitle":"The Gift Planner","giftTag":"Each giver has their OWN tax-free annual cap - most families forget the second parent doubles the pipe.","oneParent":"One parent","bothParents":"Both parents","gpLabel":"Grandparents giving:","ctlPlan":"Planned gifts this year (total, per child)","capLegend":"Each green block = one giver's tax-free cap of {cap} kr {yrTag}. Red = above the caps.","verdictOk":"✓ Within the caps - no gift tax. Capacity left: {left} kr.","verdictOver":"⚠ {excess} kr above the combined caps → 15% gift tax ≈ {tax} kr. Fix: split across more givers or across calendar years.","trapTitle":"⚠ The interest trap (parent attribution)","trapBody":"Interest and dividends on money gifted by a parent are taxed at the PARENT until the year the child turns 18 - and banks do not report this automatically; you must self-declare. Annual value gains on accumulating fund units are taxed at the child instead. That is why children's gifted savings go into accumulating funds, never idle cash or distributing funds.","gpTitle":"🎁 The grandparent exception","gpBody":"Gifts from grandparents are NOT covered by parent attribution: all returns are taxed at the child immediately. Same annual cap per giver applies.","gavebrevTitle":"Gavebrev [gift letter] checklist","gavebrevTag":"No notary or special form is required, but conditions only count if they exist at or before the gift - never retroactively.","cl1":"One letter per giver, per child, per year - signed BEFORE the first transfer","cl2":"Transfer from the giver's OWN account (never a joint account), labelled with giver + recipient + year","cl3":"Consider a fuldstændigt særeje [full separate property] clause - protects against the child's future divorce, and the child cannot undo it","cl4":"Båndlæggelse [lock-up until 21/25] requires a godkendt forvaltningsafdeling - ordinary brokers hand full control to the child at 18","cl5":"Two adult, non-beneficiary witnesses with name + address (proves the date)","cl6":"Scan it and email it to yourself - a timestamp you cannot lose","proAdvice":"For gavebreve with conditions, båndlæggelse, or large amounts: have an advokat [lawyer] or revisor [accountant] review before you transfer. This page teaches the mechanics - it cannot check your situation.","bigDisclaimer":"This site is an educational tool built by a private individual. It is not tax, legal or investment advice, it stores no personal data, and it can be outdated the day after a law changes. Amounts shown are for the tagged tax year and are adjusted every January; the positivliste [SKAT’s fund list] changes every December. Always verify against skat.dk or ask an advokat/revisor before acting.","stickyBar":"Educational only - not tax, legal or investment advice.","testsFail":"SELF-CHECKS FAILING - do not trust the numbers","yrShort":"y","skipLink":"Skip to content","a11yWrapper":"Account","raceTableCap":"Final results by account (data table)","raceTakeaway":"After {y} years, {win} ends highest at {winv} and {lose} lowest at {losev}; full figures are in the data table below.","capBarLabel":"Gift capacity bar: {givers} giver(s), tax-free cap {cap} kr each, total capacity {capacity} kr. Planned {plan} kr, over the caps by {excess} kr.","ariaLangGroup":"Language","ariaMode":"Who you are investing for","ariaMonthly":"Monthly amount","ariaYears":"Years","ariaRet":"Expected yearly return","ariaFee":"Yearly fund costs","ariaSwing":"Yearly swings","ariaFewer":"Fewer givers","ariaMore":"More givers","ariaPlan":"Planned total gift","ariaDisclaimer":"Important disclaimer","ariaDismiss":"Dismiss","ctxPillLabel":"Back to the calculator"},"da":{"heroTitle":"Samme penge. Fire skattemiljøer. Se forskellen vokse.","heroTag":"Danmark beskatter den samme investering vidt forskelligt alt efter, hvilken “indpakning” den ligger i. Træk i skyderne - løbet starter forfra med det samme.","modeChild":"Til et barn","modeAdult":"Til en voksen","ctlMonthly":"Månedligt beløb","ctlYears":"År","ctlReturn":"Forventet årligt afkast (brutto)","ctlFee":"Årlige omkostninger [ÅOP]","netNote":"Anvendt nettoafkast i løbet: {n}%","ctlSwing":"Årlige udsving (volatilitet)","swingNote":"Mønster: ét godt år, ét dårligt år omkring gennemsnittet (forenklet). Tab fremføres mod senere gevinster; barnets ubrugte frikort tabes hvert år.","wrapBo":"Børneopsparing","wrapAsk":"Aktiesparekonto","wrapOff":"Depot (AKT), fond uden for listen","wrapOn":"Depot (AKT), fond på listen","wrapBoShort":"BO","wrapAskShort":"ASK","wrapOffShort":"Uden for","wrapOnShort":"På listen","raceViewAbs":"Samlet værdi","raceViewGap":"Vis forskellen","gapAxis":"ekstra kr vs indbetalt","raceIsoHint":"Tryk på en linje eller et chip for at fremhæve den.","raceIsoCap":"Fremhævet: {w}.","ariaRaceView":"Diagramvisning: samlet værdi eller forskellen mod indbetalt","cardEnd":"Slutværdi","cardTax":"betalt skat","spillNote":"inkl. overløb i alm. depot","boAdultNote":"Kun pr. barn - vises i barnetilstand","whyTitle":"Hvorfor forskellen?","whyBody_child":"<p><b style=\"color:var(--c-bo)\">Børneopsparing</b> - 0% skat på alt, men indskud er begrænset til {boY} kr/år og {boL} kr i alt, så resten af din opsparing løber over i et almindeligt depot i denne simulering.</p>\n<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - flad {askR}% hvert år af årets gevinst (<span class=\"term\">lagerbeskatning<span class=\"tipbox\">Skat af årets værdiSTIGNING, uanset om du sælger. Skattebetalingen formindsker det beløb, der forrentes.<span class=\"ref\">aktiesparekontoloven</span></span></span>), betalt fra kontoen. Indskudsloft {askC} kr <span class=\"yeartag\">{yr}</span>; overløb går til et depot her.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fond uden for positivlisten</b> - beskattes årligt som <span class=\"term\">kapitalindkomst<span class=\"tipbox\">Cirka 37-42% for voksne afhængigt af kommune og samlet kapitalindkomst. For børn absorberer personfradraget først.<span class=\"ref\">personskatteloven; ca.-satser</span></span></span>. Barnets superkraft: personfradraget ({pf} kr <span class=\"yeartag\">{yr}</span>) opsuger årets gevinst, så den vokser skattefrit, indtil gevinsten overstiger fradraget.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fond på positivlisten</b> - beskattes årligt som <span class=\"term\">aktieindkomst<span class=\"tipbox\">27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller). Personfradraget modregnes IKKE i aktieindkomst - børn betaler 27% fra første krone.<span class=\"ref\">aktieavancebeskatningsloven; ABIS-listen</span></span></span>. Godt for voksne via ASK, men slukker frikort-tricket for børn.</p>\n<p>Begge depot-rækker er den SAMME almindelige konto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p>","whyBody_adult":"<p><b style=\"color:var(--c-ask)\">Aktiesparekonto (ASK)</b> - flad {askR}% hvert år af årets gevinst (<span class=\"term\">lagerbeskatning<span class=\"tipbox\">Skat af årets værdiSTIGNING, uanset om du sælger. Skattebetalingen formindsker det beløb, der forrentes.<span class=\"ref\">aktiesparekontoloven</span></span></span>), betalt fra kontoen. Indskudsloft {askC} kr <span class=\"yeartag\">{yr}</span>; overløb går til et depot her. Det er den billigste skat, en voksen får på aktiefonde, derfor fyldes den først.</p>\n<p><b style=\"color:var(--c-off)\">Depot (AKT), fond uden for positivlisten</b> - beskattes årligt som <span class=\"term\">kapitalindkomst<span class=\"tipbox\">Cirka 37-42% for en voksen afhængigt af kommune og samlet kapitalindkomst.<span class=\"ref\">personskatteloven; ca.-satser</span></span></span>, cirka 37-42% for en voksen. Det taber til aktieindkomst, så voksne springer oftest fonde uden for listen over.</p>\n<p><b style=\"color:var(--c-on)\">Depot (AKT), fond på positivlisten</b> - beskattes årligt som <span class=\"term\">aktieindkomst<span class=\"tipbox\">27% op til {aktieT} kr, 42% derover ({aktieTM} kr samlet for ægtefæller).<span class=\"ref\">aktieavancebeskatningsloven; ABIS-listen</span></span></span>: 27% op til {aktieT} kr, 42% derover, med en fordoblet grænse på {aktieTM} kr for ægtefæller. Voksnes arbejdshest, billigst i ASK og i et depot ud over loftet.</p>\n<p>Begge depot-rækker er den SAMME almindelige konto (aktiedepot, AKT): fonden, du vælger, afgør skatten.</p>","simDisclaimer":"Forenklet undervisningsmodel - fast afkast, årlig skat betalt fra kontoen, ingen gebyrer eller inflation. Ikke rådgivning; tjek skat.dk eller en rådgiver.","giftTitle":"Gaveplanlæggeren","giftTag":"Hver giver har sit EGET afgiftsfrie årlige beløb - mange familier glemmer, at den anden forælder fordobler kapaciteten.","oneParent":"Én forælder","bothParents":"Begge forældre","gpLabel":"Bedsteforældre der giver:","ctlPlan":"Planlagte gaver i år (i alt, pr. barn)","capLegend":"Hver grøn blok = én givers afgiftsfrie beløb på {cap} kr {yrTag}. Rød = over grænserne.","verdictOk":"✓ Inden for grænserne - ingen gaveafgift. Resterende kapacitet: {left} kr.","verdictOver":"⚠ {excess} kr over de samlede grænser → 15% gaveafgift ≈ {tax} kr. Løsning: fordel på flere givere eller over flere kalenderår.","trapTitle":"⚠ Rentefælden (forældrebeskatning)","trapBody":"Renter og udbytter af penge, som en forælder har givet, beskattes hos FORÆLDEREN indtil det år, barnet fylder 18 - og banken indberetter det ikke automatisk; du skal selv oplyse det. Årlige kursgevinster på akkumulerende fondsandele beskattes derimod hos barnet. Derfor: akkumulerende fonde til børns gavemidler, aldrig kontanter eller udloddende fonde.","gpTitle":"🎁 Bedsteforældre-undtagelsen","gpBody":"Gaver fra bedsteforældre er IKKE omfattet af forældrebeskatning: alt afkast beskattes hos barnet med det samme. Samme årlige beløbsgrænse pr. giver gælder.","gavebrevTitle":"Gavebrev-tjekliste","gavebrevTag":"Intet krav om notar eller særlig form, men betingelser gælder kun, hvis de findes ved eller før gaven - aldrig med tilbagevirkende kraft.","cl1":"Ét brev pr. giver, pr. barn, pr. år - underskrevet FØR første overførsel","cl2":"Overførsel fra giverens EGEN konto (aldrig fælleskonto), mærket med giver + modtager + år","cl3":"Overvej en klausul om fuldstændigt særeje - beskytter mod barnets fremtidige skilsmisse, og barnet kan ikke ophæve den","cl4":"Båndlæggelse (til 21/25 år) kræver en godkendt forvaltningsafdeling - almindelige mæglere giver barnet fuld kontrol ved 18","cl5":"To myndige vidner uden interesse i gaven, med navn + adresse (beviser datoen)","cl6":"Scan brevet og send det til dig selv på e-mail - et tidsstempel, du ikke kan miste","proAdvice":"Ved gavebreve med betingelser, båndlæggelse eller store beløb: lad en advokat eller revisor gennemgå det, før du overfører. Denne side lærer dig mekanikken - den kan ikke vurdere din situation.","bigDisclaimer":"Denne side er et undervisningsværktøj lavet af en privatperson. Den er ikke skatte-, juridisk eller investeringsrådgivning, gemmer ingen persondata og kan være forældet dagen efter en lovændring. Beløb gælder det viste skatteår og reguleres hver januar; positivlisten ændres hver december. Tjek altid skat.dk eller spørg en advokat/revisor, før du handler.","stickyBar":"Kun undervisning - ikke skatte-, juridisk eller investeringsrådgivning.","testsFail":"SELVTEST FEJLER - stol ikke på tallene","yrShort":"år","skipLink":"Spring til indhold","a11yWrapper":"Konto","raceTableCap":"Slutresultater pr. konto (datatabel)","raceTakeaway":"Efter {y} år ender {win} højest med {winv} og {lose} lavest med {losev}; de fulde tal står i datatabellen nedenfor.","capBarLabel":"Gavekapacitet: {givers} giver(e), afgiftsfrit beløb {cap} kr hver, samlet kapacitet {capacity} kr. Planlagt {plan} kr, over grænserne med {excess} kr.","ariaLangGroup":"Sprog","ariaMode":"Hvem du investerer for","ariaMonthly":"Månedligt beløb","ariaYears":"År","ariaRet":"Forventet årligt afkast","ariaFee":"Årlige fondsomkostninger","ariaSwing":"Årlige udsving","ariaFewer":"Færre givere","ariaMore":"Flere givere","ariaPlan":"Planlagt samlet gave","ariaDisclaimer":"Vigtig ansvarsfraskrivelse","ariaDismiss":"Luk","ctxPillLabel":"Tilbage til beregneren"}};
 const I18N = mergeI18n(I18N_BASE, PAGE_I18N);
 
 /* ============ STATE (localStorage: language + sliders only) ============ */
 const LS_KEY = "dkie_state_v1";
 const GLOBAL_KEY = "dkie_global_v1";   // lang + mode shared across pages
-let S = { lang:"en", mode:"child", monthly:1000, years:15, ret:7, fee:0.3, swing:0, parents:2, gp:0, plan:100000 };
+let S = { lang:"en", mode:"child", monthly:1000, years:15, ret:7, fee:0.3, swing:0, parents:2, gp:0, plan:100000, raceView:"abs" };
 try { Object.assign(S, JSON.parse(localStorage.getItem(LS_KEY) || "{}")); } catch(e){}
 try { const g=JSON.parse(localStorage.getItem(GLOBAL_KEY)||"{}"); if(g.lang)S.lang=g.lang; if(g.mode)S.mode=g.mode; } catch(e){}
+// Deep link (parity with plan.html): ?mode=child|adult preselects the mode for this visit.
+try { const m=new URLSearchParams(location.search).get("mode"); if(m==="child"||m==="adult") S.mode=m; } catch(e){}
 // harden against corrupt / hand-edited storage so a stray value can't yield NaN or a broken UI
 (function sanitizeState(){
   const num=(v,min,max,def)=>{ v=+v; return Number.isFinite(v)?Math.min(max,Math.max(min,v)):def; };
@@ -518,6 +545,7 @@ try { const g=JSON.parse(localStorage.getItem(GLOBAL_KEY)||"{}"); if(g.lang)S.la
   S.parents = S.parents===1 ? 1 : 2;
   S.gp      = Math.round(num(S.gp, 0, 4, 0));
   S.plan    = num(S.plan, 0, 500000, 100000);
+  S.raceView = S.raceView==="gap" ? "gap" : "abs";
 })();
 function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
 function saveGlobal(){ try{ localStorage.setItem(GLOBAL_KEY, JSON.stringify({lang:S.lang,mode:S.mode})); }catch(e){} }
@@ -568,62 +596,117 @@ const ICONS = {
   caseCheck:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"/><path d="M9 13.5l2 2 4-4"/></svg>`,
   folder:`<svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2.5H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`,
 };
+/* dash: colour-blind aid - two of the four curves carry a stroke pattern (kept identical in
+   the legend swatch). Colours are unchanged. bo/offlist stay solid; ask dashed, onlist dash-dot. */
 const STRATS = [
-  {id:"bo",  color:"var(--c-bo)",  hex:"#157F70", nameKey:"wrapBo",  icon:ICONS.shield},
-  {id:"ask", color:"var(--c-ask)", hex:"#4361EE", nameKey:"wrapAsk", icon:ICONS.trend},
-  {id:"offlist", color:"var(--c-off)", hex:"#A86200", nameKey:"wrapOff", icon:ICONS.folder},
-  {id:"onlist",  color:"var(--c-on)",  hex:"#C0427C", nameKey:"wrapOn",  icon:ICONS.caseCheck},
+  {id:"bo",  color:"var(--c-bo)",  hex:"#157F70", nameKey:"wrapBo",  shortKey:"wrapBoShort",  icon:ICONS.shield,    dash:""},
+  {id:"ask", color:"var(--c-ask)", hex:"#4361EE", nameKey:"wrapAsk", shortKey:"wrapAskShort", icon:ICONS.trend,     dash:"6 3"},
+  {id:"offlist", color:"var(--c-off)", hex:"#A86200", nameKey:"wrapOff", shortKey:"wrapOffShort", icon:ICONS.folder, dash:""},
+  {id:"onlist",  color:"var(--c-on)",  hex:"#C0427C", nameKey:"wrapOn",  shortKey:"wrapOnShort",  icon:ICONS.caseCheck, dash:"7 3 1 3"},
 ];
+let raceIso = null;   // isolate state (strategy id or null); in-memory only, not persisted
+function applyRaceIso(){
+  const svg = $("chart"); if(!svg) return;
+  svg.classList.toggle("has-iso", !!raceIso);
+  svg.querySelectorAll(".strat").forEach(g=> g.classList.toggle("iso", g.dataset.id===raceIso));
+  document.querySelectorAll("#legend .legchip").forEach(b=> b.setAttribute("aria-pressed", b.dataset.id===raceIso ? "true" : "false"));
+}
+function toggleRaceIso(id){ raceIso = (raceIso===id ? null : id); applyRaceIso(); }
 
 function renderRace(){
   const params = { annualDeposit:S.monthly*12, years:S.years, returnRate:Math.max(0,S.ret-S.fee)/100, swing:S.swing/100, isChild:S.mode==="child" };
   const res = simulateRace(params, cfg);
   const svg = $("chart");
-  const W=640,H=360,P={l:10,r:74,t:14,b:26};
-  const maxV = Math.max(...Object.values(res).flatMap(r=>r.series.map(p=>p.total)))*1.04 || 1;
+  const gap = S.raceView==="gap";
+  const W=640,H=360,P={l:10,r:92,t:14,b:26};
+  // deposits-only baseline (same contributions for every wrapper); in gap view we plot
+  // each wrapper's value MINUS this baseline, zooming into where the wrappers actually diverge.
+  const dep = yr => params.annualDeposit * yr;
+  const plot = (id,p) => gap ? (p.total - dep(p.year)) : p.total;
+  const active = STRATS.filter(s=>res[s.id]);
+  const allPlot = active.flatMap(s=>res[s.id].series.map(p=>plot(s.id,p)));
+  const rawHi = allPlot.length ? Math.max(...allPlot) : 1;
+  const lo = gap ? Math.min(0, ...allPlot) : 0;
+  const hi = (rawHi>lo ? rawHi : lo+1) * 1.04;
   const x = yr => P.l + (W-P.l-P.r)*(yr/S.years);
-  const y = v  => H-P.b - (H-P.t-P.b)*(v/maxV);
+  const y = v  => H-P.b - (H-P.t-P.b)*((v-lo)/(hi-lo));
   let g = "";
-  // gridlines (4)
+  // y-axis caption (gap view only names what the axis now means)
+  if(gap) g += `<text class="axtx" x="${P.l}" y="10" font-size="10">${t("gapAxis")}</text>`;
+  // gridlines (4) + value labels (tokens via .grid / .axtx classes)
   for(let i=1;i<=4;i++){
-    const vy = y(maxV*i/4*0.96);
-    g += `<line x1="${P.l}" y1="${vy}" x2="${W-P.r}" y2="${vy}" stroke="#EDE7DA" stroke-width="1"/>`;
-    g += `<text x="${P.l+2}" y="${vy-4}" font-size="10" fill="#A09A8C">${fmt(maxV*i/4*0.96)}</text>`;
+    const gv = lo + (hi-lo)*(i/4);
+    const vy = y(gv);
+    g += `<line class="grid" x1="${P.l}" y1="${vy.toFixed(1)}" x2="${W-P.r}" y2="${vy.toFixed(1)}" stroke-width="1"/>`;
+    g += `<text class="axtx" x="${P.l+2}" y="${Math.max(P.t+9,vy-4).toFixed(1)}" font-size="10">${fmt(gv)}</text>`;
   }
   // x axis labels
   for(let yr=0; yr<=S.years; yr+= Math.ceil(S.years/5)){
-    g += `<text x="${x(yr)}" y="${H-8}" font-size="10" fill="#A09A8C" text-anchor="middle">${yr}${t("yrShort")==="år"?" år":"y"}</text>`;
+    g += `<text class="axtx" x="${x(yr)}" y="${H-8}" font-size="10" text-anchor="middle">${yr}${t("yrShort")==="år"?" år":"y"}</text>`;
   }
-  // curves
-  const active = STRATS.filter(s=>res[s.id]);
-  active.forEach((s,i)=>{
-    const pts = res[s.id].series.map(p=>`${x(p.year).toFixed(1)},${y(p.total).toFixed(1)}`).join(" ");
-    g += `<polyline class="curve" data-i="${i}" points="${pts}" fill="none" stroke="${s.hex}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // curves, each grouped with its end dot + collision-avoided end label
+  // pass 1: compute end labels + greedy vertical de-collide (min 14px apart, clamp, lift if overflow)
+  const ends = active.map((s,i)=>{
     const last = res[s.id].series[res[s.id].series.length-1];
-    g += `<circle cx="${x(last.year)}" cy="${y(last.total)}" r="4" fill="${s.hex}"/>`;
-    g += `<text x="${x(last.year)+7}" y="${y(last.total)+4}" font-size="11" font-weight="700" fill="${s.hex}">${fmt(last.total/1000)}k</text>`;
+    const pv = plot(s.id,last);
+    return { s, i, endYear:last.year, pv, trueY:y(pv), labelY:0 };
+  });
+  const MIN=15;
+  ends.slice().sort((a,b)=>a.trueY-b.trueY).reduce((prev,e)=>{ e.labelY = Math.max(e.trueY, prev+MIN); return e.labelY; }, -Infinity);
+  const sortedDesc = ends.slice().sort((a,b)=>b.labelY-a.labelY);
+  const bottom = H-P.b, overflow = sortedDesc.length ? sortedDesc[0].labelY - bottom : 0;
+  if(overflow>0) ends.forEach(e=> e.labelY = Math.max(P.t+8, e.labelY - overflow));
+  active.forEach((s,i)=>{
+    const e = ends[i];
+    const pts = res[s.id].series.map(p=>`${x(p.year).toFixed(1)},${y(plot(s.id,p)).toFixed(1)}`).join(" ");
+    const xe = x(e.endYear);
+    let grp = `<g class="strat" data-id="${s.id}">`;
+    grp += `<polyline class="curve" data-i="${i}" data-id="${s.id}" data-dash="${s.dash}" points="${pts}" fill="none" stroke="${s.hex}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    grp += `<circle cx="${xe.toFixed(1)}" cy="${e.trueY.toFixed(1)}" r="4" fill="${s.hex}"/>`;
+    if(Math.abs(e.labelY-e.trueY)>0.6)
+      grp += `<line class="leader" x1="${(xe+4).toFixed(1)}" y1="${e.trueY.toFixed(1)}" x2="${(xe+12).toFixed(1)}" y2="${e.labelY.toFixed(1)}" stroke="${s.hex}"/>`;
+    grp += `<text x="${(xe+15).toFixed(1)}" y="${(e.labelY+3.5).toFixed(1)}" font-size="10" fill="${s.hex}">`+
+           `<tspan class="lbl-name">${t(s.shortKey)}</tspan> <tspan class="lbl-val">${fmt(e.pv/1000)}k</tspan></text>`;
+    grp += `</g>`;
+    g += grp;
   });
   svg.innerHTML = g;
-  // a11y: takeaway label (winner/loser by end value) + visually-hidden data table
+  // a11y: takeaway label (winner/loser by end value) + visually-hidden data table.
+  // The table always carries the ABSOLUTE end value + tax (the full data), regardless of view.
   if(active.length){
     const ranked = active.slice().sort((a,b)=>res[b.id].endValue-res[a.id].endValue);
     const win=ranked[0], lose=ranked[ranked.length-1];
-    svg.setAttribute("aria-label", fill(t("raceTakeaway"),
-      {y:S.years, win:t(win.nameKey), winv:kr(res[win.id].endValue), lose:t(lose.nameKey), losev:kr(res[lose.id].endValue)}));
+    let aria = fill(t("raceTakeaway"),
+      {y:S.years, win:t(win.nameKey), winv:kr(res[win.id].endValue), lose:t(lose.nameKey), losev:kr(res[lose.id].endValue)});
+    if(gap) aria = t("gapAxis") + ". " + aria;
+    svg.setAttribute("aria-label", aria);
     const rows = active.map(s=>`<tr><th scope="row">${t(s.nameKey)}</th><td>${kr(res[s.id].endValue)}</td><td>${kr(res[s.id].totalTax)}</td></tr>`).join("");
-    $("chart-table").innerHTML = `<table><caption>${t("raceTableCap")}</caption><thead><tr><th scope="col">${t("a11yWrapper")}</th><th scope="col">${t("cardEnd")}</th><th scope="col">${t("cardTax")}</th></tr></thead><tbody>${rows}</tbody></table>`;
+    const isoNote = raceIso && res[raceIso] ? " " + fill(t("raceIsoCap"), {w:t(STRATS.find(x=>x.id===raceIso).nameKey)}) : "";
+    $("chart-table").innerHTML = `<table><caption>${t("raceTableCap")}${isoNote}</caption><thead><tr><th scope="col">${t("a11yWrapper")}</th><th scope="col">${t("cardEnd")}</th><th scope="col">${t("cardTax")}</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
-  // animate draw
+  // animate draw (respect reduced motion) then settle to any colour-blind dash pattern
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   svg.querySelectorAll(".curve").forEach(c=>{
+    const dash = c.dataset.dash || "";
+    if(reduce){ if(dash) c.style.strokeDasharray = dash; return; }
     const len = c.getTotalLength();
     c.style.strokeDasharray = len;
     c.style.strokeDashoffset = len;
     c.getBoundingClientRect();
     c.style.transition = `stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1) ${+c.dataset.i*0.12}s`;
     c.style.strokeDashoffset = 0;
+    if(dash) c.addEventListener("transitionend", ()=>{ c.style.transition="none"; c.style.strokeDasharray = dash; c.style.strokeDashoffset = 0; }, {once:true});
+    // isolate by clicking the curve itself
+    c.addEventListener("click", ()=> toggleRaceIso(c.dataset.id));
   });
-  // legend
-  $("legend").innerHTML = active.map(s=>`<span><span class="legic" style="color:${s.hex}">${s.icon||""}</span>${t(s.nameKey)}</span>`).join("");
+  // legend chips are buttons: click / keyboard to isolate a wrapper; the swatch mirrors the
+  // curve's colour AND dash so it doubles as a colour-blind key.
+  $("legend").innerHTML = active.map(s=>
+    `<button type="button" class="legchip" data-id="${s.id}" aria-pressed="false">`+
+      `<svg width="22" height="8" viewBox="0 0 22 8" aria-hidden="true"><line x1="1" y1="4" x2="21" y2="4" stroke="${s.hex}" stroke-width="3" stroke-linecap="round"${s.dash?` stroke-dasharray="${s.dash}"`:""}/></svg>`+
+      `${t(s.nameKey)}</button>`).join("");
+  document.querySelectorAll("#legend .legchip").forEach(b=> b.addEventListener("click", ()=> toggleRaceIso(b.dataset.id)));
+  applyRaceIso();
   // cards
   $("cards").innerHTML = STRATS.map(s=>{
     if(!res[s.id]) return `<div class="rcard dim" style="--cc:${s.hex}"><h3><span class="legic" style="color:${s.hex}">${s.icon||""}</span>${t(s.nameKey)}</h3><p class="tax">${t("boAdultNote")}</p></div>`;
@@ -734,6 +817,15 @@ $("chip-2p").onclick = ()=>{ S.parents=2; save(); renderGifts(); };
 $("gp-minus").onclick = ()=>{ S.gp=Math.max(0,S.gp-1); save(); renderGifts(); };
 $("gp-plus").onclick  = ()=>{ S.gp=Math.min(4,S.gp+1); save(); renderGifts(); };
 
+function setRaceView(v){
+  S.raceView = v==="gap" ? "gap" : "abs";
+  $("rv-abs").classList.toggle("active", S.raceView==="abs");
+  $("rv-gap").classList.toggle("active", S.raceView==="gap");
+  save(); renderRace();   // raceIso persists across the redraw
+}
+$("rv-abs").onclick = ()=> setRaceView("abs");
+$("rv-gap").onclick = ()=> setRaceView("gap");
+
 /* ============ UX POLISH: data flash + sticky context pill ============ */
 function flash(els){
   (els && els.length!==undefined ? els : [els]).forEach(el=>{
@@ -783,6 +875,8 @@ function updateCtxPill(){
   ["in-monthly","in-years","in-ret","in-fee","in-swing","in-plan"].forEach(id=>syncSliderFill($(id)));
   $("mode-child").classList.toggle("active", S.mode==="child");
   $("mode-adult").classList.toggle("active", S.mode==="adult");
+  $("rv-abs").classList.toggle("active", S.raceView==="abs");
+  $("rv-gap").classList.toggle("active", S.raceView==="gap");
   const res = runTests(cfg);
   const i18nC = checkI18nComplete(I18N);
   const badge = $("testbadge");

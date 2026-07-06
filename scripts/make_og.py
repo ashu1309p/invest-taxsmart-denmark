@@ -48,11 +48,11 @@ rr((0,0,16,H),0,fill=ACC)
 d.ellipse([(74-9)*S,(70-9)*S,(74+9)*S,(70+9)*S],fill=ACC)
 tx((92,58),"Tax-smart investing in Denmark",font(True,26),INK)
 # headline
-tx((72,150),"Where should each",font(True,68),INK)
-tx((72,228),"krone go first?",font(True,68),INK)
+tx((72,150),"Investing in Denmark,",font(True,58),INK)
+tx((72,220),"without the tax surprises",font(True,58),INK)
 # subhead
-tx((74,330),"A free, no-login tool that shows the cheapest-tax order",font(False,30),MUT)
-tx((74,372),"to fill your Danish accounts. English + Dansk.",font(False,30),MUT)
+tx((74,320),"Free, plain-language tools that show how Danish tax",font(False,30),MUT)
+tx((74,362),"treats your savings. English + Dansk.",font(False,30),MUT)
 # account tax chips
 x=74
 for label,col in DOTS:
