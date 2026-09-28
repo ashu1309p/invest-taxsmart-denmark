@@ -1,6 +1,6 @@
 {
 "count": 5219,
-"fetchedAt": "2026-09-21T10:00:42+00:00",
+"fetchedAt": "2026-09-28T10:59:58+00:00",
 "isins": {
 "DE0002635273": {
 "name": "iShares DivDAX® UCITS ETF (DE)",
@@ -20879,7 +20879,7 @@
 "status": "on"
 }
 },
-"listDate": "2026-09-21",
+"listDate": "2026-09-28",
 "sample": false,
 "source": "skat.dk positivliste (ABIS)"
 }
